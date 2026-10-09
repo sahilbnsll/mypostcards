@@ -1,0 +1,243 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(var(--header-h) + var(--s-5));
+  overflow: clip;
+}
+
+.grid {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "table"
+    "title"
+    "intro";
+  align-content: start;
+  gap: var(--s-5);
+  padding-bottom: var(--s-7);
+}
+
+/* The wordmark. Big, tight, lowercase: the one loud thing on the page. */
+.title {
+  grid-area: title;
+  font-size: var(--step-hero);
+  font-weight: 800;
+  font-stretch: 85%;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
+  margin-inline: -0.04em;
+}
+
+.titleLine {
+  display: block;
+}
+
+.intro {
+  grid-area: intro;
+  display: grid;
+  gap: var(--s-4);
+  align-content: end;
+  max-width: 34rem;
+}
+
+.lede {
+  font-size: var(--step-1);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.counts {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.cue {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4) var(--s-3) var(--s-5);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step--1);
+  transition: background-color var(--d-fast), color var(--d-fast);
+}
+
+.cue svg {
+  animation: cue-bob 2.4s var(--ease-in-out) infinite;
+}
+
+.cue:hover {
+  background: var(--ink);
+  color: var(--card);
+}
+
+/* The table: a container so every length below scales with it */
+.table {
+  grid-area: table;
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 0.92;
+}
+
+.deck {
+  position: absolute;
+  inset: 0;
+}
+
+.slot {
+  position: absolute;
+  left: var(--l);
+  top: var(--t);
+  width: var(--w);
+  rotate: var(--r);
+  transform-origin: 50% 60%;
+  animation: deal var(--d-hero) var(--ease-out) both;
+  animation-delay: calc(var(--k) * 120ms);
+  transition:
+    rotate var(--d-slow) var(--ease-out),
+    translate var(--d-slow) var(--ease-out);
+}
+
+.slot:hover,
+.slot:focus-within {
+  z-index: 2;
+  rotate: calc(var(--r) * 0.3);
+  translate: 0 -1.2cqw;
+}
+
+.card {
+  position: relative;
+  display: block;
+  padding: 2.4cqw;
+  background: var(--card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+  transition: box-shadow var(--d-slow) var(--ease-out);
+}
+
+.slot:hover .card,
+.slot:focus-within .card {
+  box-shadow: var(--shadow-lift);
+}
+
+.stamp {
+  position: absolute;
+  top: -2.2cqw;
+  right: -1.6cqw;
+  width: 7.5cqw;
+  height: auto;
+  rotate: 7deg;
+  filter: drop-shadow(0 2px 2px rgb(15 26 43 / 0.28));
+}
+
+.postmark {
+  position: absolute;
+  bottom: -3cqw;
+  left: -3.2cqw;
+  width: 12cqw;
+  height: auto;
+  color: var(--ink);
+  opacity: 0.62;
+  rotate: -14deg;
+  mix-blend-mode: multiply;
+}
+
+.empty {
+  grid-area: table;
+  align-self: center;
+  font-size: var(--step-1);
+  font-style: italic;
+  color: var(--muted);
+}
+
+.edge {
+  margin-top: auto;
+}
+
+@keyframes deal {
+  from {
+    opacity: 0;
+    translate: calc((50cqw - var(--l)) * 0.6) 24cqw;
+    rotate: calc(var(--r) * -2.4);
+    scale: 0.88;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+@keyframes cue-bob {
+  0%,
+  100% {
+    transform: translateY(-1px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes table-drift {
+  to {
+    transform: translate3d(0, 7svh, 0);
+  }
+}
+
+/* Desktop: text left, table right, wordmark across the foot */
+@media (min-width: 62rem) {
+  .hero {
+    padding-top: calc(var(--header-h) + var(--s-6));
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-areas:
+      "intro table"
+      "title title";
+    align-items: stretch;
+    gap: var(--s-6) var(--s-7);
+  }
+
+  .table {
+    aspect-ratio: 1 / 0.8;
+    align-self: start;
+    margin-top: calc(var(--s-4) * -1);
+  }
+
+  .titleLine {
+    display: inline;
+  }
+
+  .title {
+    font-size: clamp(5rem, 18.6vw, 26rem);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cue svg {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 62rem) {
+  @supports (animation-timeline: scroll()) {
+    .deck {
+      animation: table-drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 90svh;
+    }
+  }
+}

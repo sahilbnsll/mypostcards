@@ -1,0 +1,12 @@
+.frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--photo-ratio);
+  overflow: hidden;
+  background-color: var(--paper-deep);
+}
+
+.image {
+  object-fit: cover;
+}

@@ -1,0 +1,305 @@
+.dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.dialog::backdrop {
+  background: rgb(12 20 36 / 0.94);
+  animation: fade-in var(--d-base) var(--ease-out) both;
+}
+
+.dialog[data-closing]::backdrop {
+  animation: fade-out 200ms var(--ease-in-out) both;
+}
+
+.shell {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100%;
+}
+
+.dialog[data-closing] .shell {
+  animation: fade-out 200ms var(--ease-in-out) both;
+}
+
+/* The photo ------------------------------------------------------------------------------- */
+
+.stage {
+  container-type: size;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: var(--s-6) var(--s-4) var(--s-4);
+  touch-action: pan-y;
+}
+
+.slide {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.slide[data-entering] {
+  animation: slide-in var(--d-slow) var(--ease-out) both;
+}
+
+.print {
+  --pad: clamp(6px, 1.1vw, 14px);
+  width: min(100cqw, calc((100cqh - 2 * var(--pad)) * var(--ratio) + 2 * var(--pad)));
+  padding: var(--pad);
+  background: var(--card);
+  border-radius: var(--radius-card);
+  box-shadow: 0 30px 60px -24px rgb(0 0 0 / 0.7);
+  will-change: transform;
+}
+
+/* The back of the card ---------------------------------------------------------------------- */
+
+.back {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 46svh;
+  background: var(--card);
+  overflow: hidden;
+}
+
+.backInner {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  padding: var(--s-5) var(--gutter) var(--s-4);
+  overflow-y: auto;
+  animation: fade-up var(--d-slow) var(--ease-out) both;
+}
+
+.marks {
+  position: absolute;
+  top: var(--s-4);
+  right: var(--gutter);
+  width: 6.5rem;
+  height: 5.5rem;
+  pointer-events: none;
+}
+
+.stamp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: auto;
+  rotate: 4deg;
+}
+
+.postmark {
+  position: absolute;
+  top: 0.9rem;
+  right: 1.9rem;
+  width: 4.4rem;
+  height: auto;
+  color: var(--ink);
+  opacity: 0.6;
+  rotate: -12deg;
+  mix-blend-mode: multiply;
+}
+
+.title {
+  max-width: 14ch;
+  padding-right: 6rem;
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.caption {
+  margin-top: var(--s-3);
+  max-width: 42ch;
+  font-size: var(--step-0);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.note {
+  margin-top: var(--s-4);
+  max-width: 24ch;
+  font-family: var(--font-hand);
+  font-size: 1.9rem;
+  line-height: 1.05;
+  color: var(--air-blue);
+  rotate: -1.5deg;
+}
+
+.facts {
+  margin-top: var(--s-5);
+  border-top: 1px solid var(--rule);
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: var(--s-3);
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--step--1);
+  line-height: 1.4;
+}
+
+.fact dt {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.fact dd {
+  font-family: var(--font-display);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.credit {
+  margin-top: var(--s-4);
+  font-size: var(--step--1);
+  font-style: italic;
+  color: var(--muted);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-3) var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+
+.count {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.count b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.buttons {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.round {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color var(--d-fast), color var(--d-fast), border-color var(--d-fast);
+}
+
+.round:hover:not(:disabled) {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--card);
+}
+
+.round:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.edge {
+  height: 8px;
+  flex: none;
+  background: var(--air-stripe);
+  background-size: 62px 62px;
+}
+
+.close {
+  position: absolute;
+  top: var(--s-3);
+  right: var(--s-3);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgb(251 251 248 / 0.4);
+  border-radius: 50%;
+  background: rgb(12 20 36 / 0.55);
+  color: var(--card);
+  transition: background-color var(--d-fast), color var(--d-fast);
+}
+
+.close:hover {
+  background: var(--card);
+  color: var(--ink);
+}
+
+/* Wide screens: photo left, the back of the card on the right ----------------------------- */
+
+@media (min-width: 62rem) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr) 27rem;
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .stage {
+    padding: var(--s-7) var(--s-6);
+  }
+
+  .back {
+    max-height: none;
+    height: 100%;
+  }
+
+  .backInner {
+    padding-top: var(--s-7);
+  }
+
+  .close {
+    right: calc(27rem + var(--s-4));
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translate3d(calc(var(--dir) * 28px), 0, 0);
+  }
+}

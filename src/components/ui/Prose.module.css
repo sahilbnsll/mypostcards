@@ -1,0 +1,24 @@
+.prose {
+  max-width: var(--measure);
+  font-size: var(--step-1);
+  line-height: 1.7;
+}
+
+.prose p + p {
+  margin-top: 1.2em;
+}
+
+.prose h2 {
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* A drop-shadowed opening line sets the first paragraph apart without a decorative initial */
+.prose > p:first-child {
+  font-size: calc(var(--step-1) * 1.08);
+  line-height: 1.55;
+  color: var(--ink);
+}

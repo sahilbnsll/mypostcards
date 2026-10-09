@@ -1,0 +1,51 @@
+.card {
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+}
+
+.media {
+  display: block;
+  margin-bottom: var(--s-2);
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+}
+
+.img {
+  transition: scale 900ms var(--ease-out);
+}
+
+.card:hover .img {
+  scale: 1.04;
+}
+
+.title {
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.title a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0 2px;
+  background-position: 0 100%;
+  transition: background-size var(--d-base) var(--ease-out);
+}
+
+.card:hover .title a {
+  background-size: 100% 2px;
+}
+
+.excerpt {
+  max-width: 48ch;
+  color: var(--ink-soft);
+}
+
+.meta {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}

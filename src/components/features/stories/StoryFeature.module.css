@@ -1,0 +1,65 @@
+.feature {
+  display: grid;
+  gap: var(--s-6);
+}
+
+.media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+}
+
+/* Taller than its frame, so the scroll-linked drift never reveals an edge */
+.drift {
+  display: block;
+  margin-block: -6%;
+}
+
+.text {
+  display: grid;
+  gap: var(--s-4);
+  align-content: center;
+  justify-items: start;
+}
+
+.title {
+  font-size: var(--step-3);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  max-width: 14ch;
+}
+
+.subtitle {
+  font-size: var(--step-1);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.excerpt {
+  max-width: 44ch;
+}
+
+.meta {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.more {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+@media (min-width: 62rem) {
+  .feature {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--s-9);
+    align-items: center;
+  }
+
+  .media {
+    margin-block: var(--s-4);
+  }
+}

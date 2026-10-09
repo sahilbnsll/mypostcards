@@ -1,0 +1,82 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-7) var(--gutter);
+}
+
+@media (min-width: 40rem) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 62rem) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid[data-feature] > .cell:first-child {
+    grid-column: span 2;
+  }
+}
+
+.card {
+  display: grid;
+  gap: var(--s-4);
+  transition:
+    filter 400ms var(--ease-out),
+    opacity 400ms var(--ease-out),
+    scale 400ms var(--ease-out);
+}
+
+.photo {
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+}
+
+.img {
+  transition: scale 900ms var(--ease-out);
+}
+
+.card:hover .img {
+  scale: 1.045;
+}
+
+.text {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.summary {
+  max-width: 44ch;
+  color: var(--ink-soft);
+}
+
+.meta {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Focus: everything except the card in hand steps back */
+@media (hover: hover) {
+  .grid:has(.card:hover) .card:not(:hover) {
+    filter: blur(2.5px) saturate(0.55);
+    opacity: 0.7;
+    scale: 0.985;
+  }
+}
+
+.grid:has(.card:focus-visible) .card:not(:focus-visible) {
+  filter: saturate(0.55);
+  opacity: 0.7;
+}

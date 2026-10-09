@@ -1,0 +1,81 @@
+.list {
+  border-top: 1px solid var(--ink);
+}
+
+.list > li {
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "name thumb"
+    "where thumb"
+    "count thumb";
+  align-items: center;
+  gap: 0 var(--s-5);
+  padding-block: var(--s-5);
+  transition: padding-left var(--d-slow) var(--ease-out), color var(--d-fast);
+}
+
+.name {
+  grid-area: name;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.where {
+  grid-area: where;
+  margin-top: var(--s-2);
+  color: var(--ink-soft);
+}
+
+.count {
+  grid-area: count;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Small at rest, so touch screens still see a print per row */
+.thumb {
+  grid-area: thumb;
+  width: clamp(5rem, 22vw, 8rem);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+  rotate: 2deg;
+  transform-origin: 100% 50%;
+  transition:
+    scale var(--d-slow) var(--ease-out),
+    rotate var(--d-slow) var(--ease-out);
+}
+
+@media (min-width: 62rem) {
+  .row {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto 8rem;
+    grid-template-areas: "name where count thumb";
+    padding-block: var(--s-4);
+  }
+
+  .where {
+    margin-top: 0;
+  }
+
+  .row:hover,
+  .row:focus-visible {
+    padding-left: var(--s-4);
+  }
+
+  .row:hover .thumb,
+  .row:focus-visible .thumb {
+    scale: 1.75;
+    rotate: -3deg;
+    z-index: 2;
+  }
+}

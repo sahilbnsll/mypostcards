@@ -1,0 +1,31 @@
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+  margin-top: var(--s-5);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.meta :global(a) {
+  color: var(--ink);
+}
+
+.cover {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+}
+
+.drift {
+  display: block;
+  margin-block: -5%;
+}
+
+@media (max-width: 40rem) {
+  .cover .photo {
+    aspect-ratio: 4 / 3;
+  }
+}

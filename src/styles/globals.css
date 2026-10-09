@@ -1,0 +1,245 @@
+@import "./tokens.css";
+@import "./motion.css";
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+  scroll-padding-top: calc(var(--header-h) + var(--s-4));
+}
+
+body {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+::selection {
+  background: var(--air-blue);
+  color: var(--card);
+}
+
+/* Focus: visible everywhere, two-tone so it works on photos and paper alike */
+:focus-visible {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgb(251 251 248 / 0.9);
+  border-radius: 2px;
+}
+
+/* Layout helpers */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.measure {
+  max-width: var(--measure);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: var(--s-3);
+  left: var(--s-3);
+  z-index: 100;
+  padding: var(--s-3) var(--s-4);
+  background: var(--ink);
+  color: var(--card);
+  font-family: var(--font-display);
+  font-weight: 500;
+  border-radius: var(--radius-card);
+  transform: translateY(-200%);
+  transition: transform var(--d-fast) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* The airmail edge: used for a handful of structural borders, nowhere else */
+.airmail-edge {
+  height: 8px;
+  background: var(--air-stripe);
+  background-size: 62px 62px;
+}
+
+/* Text link with a drawn underline */
+.text-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  padding-bottom: 2px;
+  transition: background-size var(--d-base) var(--ease-out), color var(--d-fast);
+}
+
+.text-link:hover {
+  background-size: 100% 2px;
+  color: var(--air-blue);
+}
+
+/* Page scaffolding shared by every inner route */
+.page {
+  flex: 1;
+}
+
+.page-head {
+  padding-block: calc(var(--header-h) + var(--s-8)) var(--s-7);
+}
+
+.page-head h1 {
+  font-size: var(--step-4);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  max-width: 16ch;
+}
+
+.page-head .lede {
+  margin-top: var(--s-5);
+  max-width: 48ch;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-bottom: var(--s-5);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.back-link:hover {
+  color: var(--ink);
+}
+
+.section {
+  padding-block: var(--section);
+}
+
+.section--tight {
+  padding-block: var(--s-8);
+}
+
+/* Reduced motion: anything that moves on its own or on scroll is off */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Responsive card grid for cafés and stories */
+.card-grid {
+  display: grid;
+  gap: var(--s-7) var(--gutter);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+}
+
+.sample-note {
+  max-width: var(--measure);
+  margin-bottom: var(--s-6);
+  padding: var(--s-3) var(--s-4);
+  border-left: 3px solid var(--air-red);
+  background: var(--card);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--ink-soft);
+}

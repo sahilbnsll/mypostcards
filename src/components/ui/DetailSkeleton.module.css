@@ -1,0 +1,44 @@
+.head {
+  display: grid;
+  gap: var(--s-4);
+  padding-block: calc(var(--header-h) + var(--s-8)) var(--s-7);
+}
+
+.bar,
+.cover {
+  display: block;
+  background: var(--paper-deep);
+  border-radius: var(--radius-card);
+  animation: pulse 1.6s var(--ease-in-out) infinite;
+}
+
+.small {
+  width: 5rem;
+  height: 1rem;
+}
+
+.title {
+  width: min(24rem, 80%);
+  height: clamp(2.75rem, 6vw, 5rem);
+}
+
+.lede {
+  width: min(32rem, 90%);
+  height: 1.5rem;
+}
+
+.cover {
+  aspect-ratio: 21 / 9;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 40rem) {
+  .cover {
+    aspect-ratio: 4 / 3;
+  }
+}

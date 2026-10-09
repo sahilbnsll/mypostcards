@@ -1,0 +1,93 @@
+/**
+ * Design tokens: My Postcards
+ *
+ * Concept: the postcard as an object. Cool paper and card stock, navy ink, and the red and blue
+ * of airmail edging used only as structure (borders, stamps, rules), never as decoration.
+ * Photographs carry all the colour.
+ */
+
+:root {
+  /* Surfaces */
+  --paper: #eceeea;          /* page ground: cool, slightly green grey */
+  --paper-deep: #e0e4df;     /* wells, skeletons */
+  --card: #fbfbf8;           /* postcard stock and print borders */
+  --night: #0c1424;          /* footer, lightbox backdrop */
+
+  /* Ink */
+  --ink: #0f1a2b;
+  --ink-soft: #2b3648;
+  --muted: #526075;          /* 5.6:1 on --paper */
+  --faint: #7d8896;
+  --on-night: #e9ece7;
+  --on-night-muted: #a4adbb;
+
+  /* Lines */
+  --rule: #c7cdc7;
+  --rule-strong: #9aa4a0;
+
+  /* Airmail */
+  --air-red: #d8362b;
+  --air-blue: #1f4da6;       /* 7.4:1 on --paper, safe for text */
+  --air-stripe: repeating-linear-gradient(
+    -45deg,
+    var(--air-red) 0 11px,
+    var(--card) 11px 22px,
+    var(--air-blue) 22px 33px,
+    var(--card) 33px 44px
+  );
+
+  /* Type families (set by next/font in layout.tsx) */
+  --font-display: var(--f-display, "Bricolage Grotesque"), ui-sans-serif, system-ui, sans-serif;
+  --font-text: var(--f-text, "Newsreader"), ui-serif, Georgia, serif;
+  --font-hand: var(--f-hand, "Reenie Beanie"), "Segoe Print", cursive;
+
+  /* Type scale (fluid, 360px to 1440px) */
+  --step--1: 0.875rem;
+  --step-0: clamp(1.0625rem, 1.03rem + 0.15vw, 1.1875rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
+  --step-2: clamp(1.625rem, 1.4rem + 1vw, 2.25rem);
+  --step-3: clamp(2.125rem, 1.6rem + 2.2vw, 3.5rem);
+  --step-4: clamp(2.75rem, 1.8rem + 4.2vw, 5.75rem);
+  --step-hero: clamp(3.9rem, 1.2rem + 12.4vw, 12.5rem);
+
+  /* Space (4px base) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 7rem;
+  --section: clamp(3.5rem, 2.25rem + 6vw, 9rem);
+
+  /* Layout */
+  --gutter: clamp(1rem, 0.4rem + 3vw, 3rem);
+  --wrap: 1400px;
+  --measure: 62ch;
+  --header-h: 4.25rem;
+
+  /* Shape: postcards have almost-square corners; only controls are round */
+  --radius-card: 3px;
+  --radius-pill: 999px;
+
+  /* Depth: a card resting on a table */
+  --shadow-print:
+    0 1px 1px rgb(15 26 43 / 0.1),
+    0 12px 24px -12px rgb(15 26 43 / 0.38);
+  --shadow-lift:
+    0 2px 2px rgb(15 26 43 / 0.1),
+    0 28px 48px -20px rgb(15 26 43 / 0.5);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+  --d-fast: 160ms;
+  --d-base: 280ms;
+  --d-slow: 640ms;
+  --d-hero: 1000ms;
+
+  color-scheme: light;
+}

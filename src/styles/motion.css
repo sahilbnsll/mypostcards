@@ -1,0 +1,55 @@
+/**
+ * Motion system
+ *
+ * Three ideas, used sparingly:
+ *   1. Entrance (hero): postcards are dealt onto the table, once, on load.
+ *   2. Reveal (scroll): photographs "develop" into colour as they arrive; text just settles.
+ *   3. Response (interaction): hovers, filter blooms and the lightbox answer something the
+ *      visitor did.
+ *
+ * Reveals are progressive enhancement. Content is visible in the server HTML. The
+ * MotionController hides only elements that start below the fold, then releases them as they
+ * enter view. With reduced motion, or no JS, nothing is ever hidden.
+ */
+
+/* ---- Scroll reveals ------------------------------------------------------------------- */
+
+[data-reveal][data-reveal-state="pending"] {
+  opacity: 0;
+}
+
+[data-reveal="text"][data-reveal-state="pending"] {
+  transform: translate3d(0, 14px, 0);
+}
+
+[data-reveal="photo"][data-reveal-state="pending"] {
+  filter: grayscale(1) brightness(1.08) contrast(0.92);
+}
+
+[data-reveal][data-reveal-state="in"] {
+  transition:
+    opacity 700ms var(--ease-out) calc(var(--i, 0) * 70ms),
+    transform 700ms var(--ease-out) calc(var(--i, 0) * 70ms),
+    filter 1100ms var(--ease-out) calc(var(--i, 0) * 70ms);
+}
+
+/* ---- Scroll-linked drift (Chromium/Safari 26+; elsewhere the image simply stays put) ------ */
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, calc(var(--drift, 36px) * -1), 0);
+  }
+  to {
+    transform: translate3d(0, var(--drift, 36px), 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 900px) {
+  @supports (animation-timeline: view()) {
+    [data-drift] {
+      animation: drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
