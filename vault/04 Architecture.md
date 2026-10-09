@@ -8,7 +8,7 @@ updated: 2026-10-09
 
 ## Stack
 
-Next.js **16.4** (App Router, React 19.3, **Cache Components** + Partial Prefetching on), TypeScript strict, **CSS Modules** with global design tokens, `next/image`, `next/font`. Only runtime dependency added: `@supabase/supabase-js` (server-side only). No Tailwind, no animation library. `AGENTS.md` warns this Next has breaking changes: read `node_modules/next/dist/docs/` before changing framework-level code.
+Next.js **16.4** (App Router, React 19.3, **Cache Components** + Partial Prefetching on), TypeScript strict, **CSS Modules** with global design tokens, `next/image`, `next/font`. Runtime dependencies added: `@supabase/supabase-js` (server-side only) and `cobe` (19 KB WebGL globe, MIT, no dependencies, client-only). No Tailwind, no animation library. `AGENTS.md` warns this Next has breaking changes: read `node_modules/next/dist/docs/` before changing framework-level code.
 
 ## Folders
 
@@ -19,7 +19,8 @@ src/components/
   layout/                Header (client), Footer (server)
   ui/                    Photo, Stamp/Postmark, PageHead, CollectionHero, SectionHeader, Prose, EmptyState,
                          DetailSkeleton, MotionController
-  features/              hero, gallery (BloomGallery), lightbox, carousel, trips, places, stories, cafes
+  features/              hero (+ DeckDrag), gallery (BloomGallery), lightbox, carousel, trips (TripCards, TripStack),
+                         places, globe (GlobePostcards, PlacesGlobe), zoom (ZoomGallery), stories, cafes
 src/content/             types, categories, mappers (row to domain), selectors (pure slicing), data/sample.ts, index.ts
 src/lib/                 utils (formatting), reveal (scroll-reveal props)
 src/styles/              tokens.css, globals.css, motion.css
@@ -38,7 +39,7 @@ Supabase (or sample.ts)
 ```
 
 - One cached call loads **everything** (five small queries in parallel). Right for a single-creator journal up to a few hundred postcards. Revisit past ~1,000 (see [[10 Backlog]]).
-- Source choice (`src/content/index.ts`): Supabase if `SUPABASE_URL` and `SUPABASE_ANON_KEY` are set, else the bundled sample journal. `CONTENT_SOURCE=local` forces samples. If Supabase is configured but a query fails, the error **throws** (shown by `error.tsx`) instead of silently falling back, so a broken connection is never hidden.
+- Source choice (`src/content/index.ts`): Supabase if `SUPABASE_URL` and `SUPABASE_ANON_KEY` are set, else the bundled sample journal. `CONTENT_SOURCE=local` forces samples. If Supabase is configured but a query fails (bad key, permissions, network), the error **throws** (shown by `error.tsx`, and it fails the build) instead of silently falling back, so a broken connection is never hidden. The one exception is a **missing table** (`PGRST205` / `42P01`): that is a setup step, so it logs a warning, serves an empty journal and uses a 60-second cache lifetime until the tables exist. See [[09 Decisions]] D13.
 - Freshness: content refreshes at most hourly, or immediately via `POST /api/revalidate` (header `x-revalidate-secret`, constant-time compare, 503 when no secret is configured).
 - The Supabase key is **server-only** (not `NEXT_PUBLIC_`), so it never ships to the browser.
 

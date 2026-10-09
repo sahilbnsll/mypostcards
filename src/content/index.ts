@@ -29,7 +29,18 @@ function supabaseConfig() {
   return url && key ? { url, key } : null;
 }
 
-async function readFromSupabase(url: string, key: string): Promise<Journal> {
+/** PostgREST and Postgres codes for "this table does not exist (yet)". */
+const MISSING_TABLE_CODES = new Set(["PGRST205", "42P01"]);
+
+interface Loaded {
+  journal: Journal;
+  /** True when the tables have not been created in Supabase yet (schema.sql not run). */
+  setupMissing: boolean;
+}
+
+const EMPTY_JOURNAL: Journal = { postcards: [], trips: [], destinations: [], cafes: [], stories: [] };
+
+async function readFromSupabase(url: string, key: string): Promise<Loaded> {
   const supabase = createClient(url, key, { auth: { persistSession: false } });
   const order = { ascending: true } as const;
 
@@ -41,29 +52,48 @@ async function readFromSupabase(url: string, key: string): Promise<Journal> {
     supabase.from("stories").select("*").order("sort_order", order).order("created_at", { ascending: false }),
   ]);
 
-  for (const [name, result] of Object.entries({ postcards, trips, destinations, cafes, stories })) {
-    if (result.error) {
-      throw new Error(
-        `Supabase query for "${name}" failed: ${result.error.message}` +
-          (result.error.code === "42P01" ? " (run supabase/schema.sql first)" : ""),
-      );
-    }
+  const results = { postcards, trips, destinations, cafes, stories };
+
+  // A fresh project has no tables yet. That is a setup step, not an outage: build and serve an
+  // empty journal (with a loud warning) instead of failing the deploy.
+  const missing = Object.entries(results).filter(([, r]) => r.error && MISSING_TABLE_CODES.has(r.error.code));
+  if (missing.length > 0) {
+    console.warn(
+      `[my-postcards] Supabase tables not found (${missing.map(([n]) => n).join(", ")}). Run supabase/schema.sql in the SQL editor. Serving an empty journal.`,
+    );
+    return { journal: EMPTY_JOURNAL, setupMissing: true };
   }
 
-  return mapJournal({
-    postcards: postcards.data ?? [],
-    trips: trips.data ?? [],
-    destinations: destinations.data ?? [],
-    cafes: cafes.data ?? [],
-    stories: stories.data ?? [],
-  });
+  // Anything else (bad key, permissions, network) is a real problem: fail loudly.
+  for (const [name, result] of Object.entries(results)) {
+    if (result.error) throw new Error(`Supabase query for "${name}" failed: ${result.error.message}`);
+  }
+
+  return {
+    journal: mapJournal({
+      postcards: postcards.data ?? [],
+      trips: trips.data ?? [],
+      destinations: destinations.data ?? [],
+      cafes: cafes.data ?? [],
+      stories: stories.data ?? [],
+    }),
+    setupMissing: false,
+  };
 }
 
 export async function getJournal(): Promise<Journal> {
   "use cache";
-  cacheLife("hours");
   cacheTag(JOURNAL_TAG);
 
   const config = supabaseConfig();
-  return config ? readFromSupabase(config.url, config.key) : sampleJournal;
+  const { journal, setupMissing } = config
+    ? await readFromSupabase(config.url, config.key)
+    : { journal: sampleJournal, setupMissing: false };
+
+  // Normal content refreshes hourly. While the tables are missing, look again every minute so the
+  // site fills in shortly after schema.sql is run. (Kept above 5 minutes of expiry so it still
+  // prerenders rather than becoming a request-time hole.)
+  if (setupMissing) cacheLife({ stale: 60, revalidate: 60, expire: 900 });
+  else cacheLife("hours");
+  return journal;
 }

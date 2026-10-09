@@ -93,3 +93,49 @@ export function balancedSample(postcards: readonly Postcard[], n: number): Postc
   }
   return out;
 }
+
+export interface GlobePin {
+  /** The postcard's slug, also the anchor id on the globe. */
+  id: string;
+  lat: number;
+  lng: number;
+  label: string;
+  title: string;
+  image: Postcard["image"];
+  /** Small fixed tilt so the polaroids do not look machine-set. */
+  rotate: number;
+}
+
+/** Great-circle distance in radians between two lat/lng points. */
+function angularDistance(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+  const rad = Math.PI / 180;
+  const h =
+    Math.sin(((b.lat - a.lat) * rad) / 2) ** 2 +
+    Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(((b.lng - a.lng) * rad) / 2) ** 2;
+  return 2 * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+
+/**
+ * Up to `max` postcards with coordinates, spread around the world so pins and polaroids do not
+ * pile on top of each other (each at least `minSeparationDeg` from the others). Featured first.
+ */
+export function globePins(postcards: readonly Postcard[], max = 7, minSeparationDeg = 20): GlobePin[] {
+  const tilts = [-5, 4, -3, 6, -4, 3, -6, 5];
+  const chosen: GlobePin[] = [];
+  for (const card of featuredFirst(postcards)) {
+    const point = card.location.coordinates;
+    if (!point || chosen.length >= max) continue;
+    const tooClose = chosen.some((pin) => angularDistance(pin, point) < (minSeparationDeg * Math.PI) / 180);
+    if (tooClose) continue;
+    chosen.push({
+      id: card.slug,
+      lat: point.lat,
+      lng: point.lng,
+      label: [card.location.city ?? card.location.placeName, card.location.country].filter(Boolean).join(", "),
+      title: card.title,
+      image: card.image,
+      rotate: tilts[chosen.length % tilts.length],
+    });
+  }
+  return chosen;
+}

@@ -102,6 +102,7 @@
   width: var(--w);
   rotate: var(--r);
   transform-origin: 50% 60%;
+  transform: translate(var(--dx, 0px), var(--dy, 0px));
   animation: deal var(--d-hero) var(--ease-out) both;
   animation-delay: calc(var(--k) * 120ms);
   transition:
@@ -114,6 +115,14 @@
   z-index: 2;
   rotate: calc(var(--r) * 0.3);
   translate: 0 -1.2cqw;
+}
+
+.hint {
+  display: none;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
 }
 
 .card {
@@ -221,7 +230,8 @@
   }
 
   .title {
-    font-size: clamp(5rem, 18.6vw, 26rem);
+    /* The wordmark is about 5.3em wide, so this fills the content width without overflowing */
+    font-size: clamp(5rem, calc((min(100vw, var(--wrap)) - 2 * var(--gutter)) / 5.45), 24rem);
     white-space: nowrap;
   }
 }
@@ -239,5 +249,25 @@
       animation-timeline: scroll(root);
       animation-range: 0 90svh;
     }
+  }
+}
+
+/* Mouse and pen can pick cards up (see DeckDrag); touch keeps scrolling and tapping */
+@media (hover: hover) and (pointer: fine) {
+  .hint {
+    display: block;
+  }
+
+  .slot {
+    cursor: grab;
+  }
+
+  .slot[data-dragging] {
+    cursor: grabbing;
+    transition: none;
+  }
+
+  .slot[data-dragging] .card {
+    box-shadow: var(--shadow-lift);
   }
 }

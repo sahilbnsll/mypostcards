@@ -2,13 +2,16 @@ import { getJournal } from "@/content";
 import {
   balancedSample,
   featuredFirst,
+  globePins,
   postcardCount,
   toViews,
 } from "@/content/selectors";
 import { Hero } from "@/components/features/hero/Hero";
 import { PrintCarousel } from "@/components/features/carousel/PrintCarousel";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
-import { TripCards } from "@/components/features/trips/TripCards";
+import { TripStack } from "@/components/features/trips/TripStack";
+import { ZoomGallery } from "@/components/features/zoom/ZoomGallery";
+import { PlacesGlobe } from "@/components/features/globe/PlacesGlobe";
 import { StoryFeature } from "@/components/features/stories/StoryFeature";
 import { PlacesIndex } from "@/components/features/places/PlacesIndex";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -24,6 +27,8 @@ export default async function HomePage() {
   const heroCards = featuredFirst(postcards).slice(0, 5);
   const recent = toViews(journal, postcards.slice(0, CAROUSEL_COUNT));
   const preview = toViews(journal, balancedSample(postcards, GALLERY_PREVIEW));
+  const zoomCards = featuredFirst(postcards).slice(5, 12);
+  const pins = globePins(postcards);
   const featuredTrips = featuredFirst(trips).slice(0, 3);
   const featuredStory = featuredFirst(stories)[0];
 
@@ -40,7 +45,7 @@ export default async function HomePage() {
         <section className="wrap section" aria-labelledby="empty-title">
           <EmptyState
             title="No postcards yet"
-            body="The journal is connected but empty. Add rows to the postcards table in Supabase, or run the seed script to load sample content."
+            body="The journal is connected but empty. If you have not yet, run supabase/schema.sql in the Supabase SQL editor; then add rows to the postcards table or load the sample content."
           />
         </section>
       ) : (
@@ -55,6 +60,15 @@ export default async function HomePage() {
                 />
               </div>
               <PrintCarousel items={recent} label="Recent postcards" />
+            </section>
+          )}
+
+          {zoomCards.length === 7 && (
+            <section aria-labelledby="zoom-title">
+              <div className="wrap section-top">
+                <SectionHeader id="zoom-title" title="Look closer" intro="Seven photographs from the collection." />
+              </div>
+              <ZoomGallery postcards={zoomCards} />
             </section>
           )}
 
@@ -79,7 +93,7 @@ export default async function HomePage() {
                   intro="Photographs grouped around a journey, a place or a weekend."
                   action={{ href: "/trips", label: "All trips" }}
                 />
-                <TripCards trips={featuredTrips} counts={tripCounts} feature={featuredTrips.length === 3} />
+                <TripStack trips={featuredTrips} counts={tripCounts} />
               </div>
             </section>
           )}
@@ -102,6 +116,7 @@ export default async function HomePage() {
                   intro="Where the postcards were sent from."
                   action={{ href: "/destinations", label: "All places" }}
                 />
+                <PlacesGlobe pins={pins} />
                 <PlacesIndex places={destinations.slice(0, 6)} counts={placeCounts} />
               </div>
             </section>

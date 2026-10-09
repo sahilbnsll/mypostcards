@@ -14,10 +14,6 @@
   .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
-  .grid[data-feature] > .cell:first-child {
-    grid-column: span 2;
-  }
 }
 
 .card {

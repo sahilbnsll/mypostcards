@@ -243,3 +243,9 @@ ol[role="list"] {
   font-weight: 500;
   color: var(--ink-soft);
 }
+
+/* Heading block that sits above a full-bleed feature */
+.section-top {
+  padding-top: var(--section);
+  padding-bottom: var(--s-6);
+}

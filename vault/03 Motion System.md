@@ -13,7 +13,7 @@ Tokens: `--ease-out` (entrances, most things), `--ease-in-out`, `--ease-spring`;
 1. **Three kinds only**: one *entrance* (hero), *reveals* on scroll, and *responses* to what the visitor does.
 2. **No scroll hijacking.** Browser scrolling is never intercepted.
 3. **Never animate layout.** Only `transform`, `opacity`, `filter`, `clip-path`. Image space is reserved from known ratios (CLS measured 0).
-4. **No autoplay** carousels, no idle sway. The only unprompted motion is the hero deal-in (once) and a small bobbing arrow on the scroll cue.
+4. **No autoplay** carousels, no idle sway. The unprompted motion is the hero deal-in (once), a small bobbing arrow on the scroll cue, and the slowly turning globe, which has a visible hold button, stops with reduced motion, and only runs while on screen.
 5. **Everything works without animation.** Reveals are progressive enhancement.
 
 ## Inventory
@@ -31,6 +31,10 @@ Tokens: `--ease-out` (entrances, most things), `--ease-in-out`, `--ease-spring`;
 | Carousel | Prints swing on their pegs by scroll velocity and settle with overshoot | rAF pendulum, writes one CSS variable; stops when at rest | Scroll/drag |
 | Trip cards | Neighbours recede (blur + desaturate) | `:has()`, only with hover capability | Hover, focus |
 | Places | Print slides out and scales on the hovered row | CSS | Hover, focus |
+| Hero | Cards can be dragged with a mouse or pen; the picked-up card comes to the front | Pointer events writing `--dx/--dy`; clamped to the table | Press and move (not touch) |
+| Look closer | Collage scales up so the centre photo fills the viewport, others fly outward (about 250svh of scroll) | `view-timeline` on the section, tiles scale by `--to`; stage is `position: sticky` | Scroll, wide screens, motion allowed, supported browsers only |
+| Trips | Cards stack: each sticks a little lower and the next slides over | `position: sticky` | Scroll |
+| Places globe | Globe turns slowly and can be dragged; polaroids fade and blur as their pin goes behind the globe | cobe (WebGL) + rAF only while visible; CSS variable `--cobe-visible-id` drives opacity | On while on screen unless held, paused, or reduced motion |
 | Lightbox | Photo grows out of the clicked thumbnail (FLIP, uniform scale); backdrop fades; back-of-card fades up; slide direction follows prev/next; exit fade | WAAPI + CSS | Open, step, close |
 
 ## Reduced motion
@@ -39,7 +43,7 @@ Tokens: `--ease-out` (entrances, most things), `--ease-in-out`, `--ease-spring`;
 
 ## Mobile
 
-Scroll-linked drift is desktop-only (`min-width: 900px`). The hero deal-in and swing are cheap transforms and stay. Hover effects only exist under `(hover: hover)`.
+Scroll-linked drift and the zoom parallax are desktop-only (the zoom falls back to a grid). Card dragging is not offered on touch. The hero deal-in and swing are cheap transforms and stay. Hover effects only exist under `(hover: hover)`.
 
 ## Performance guardrails
 

@@ -34,6 +34,13 @@ Everything below was actually run on 2026-10-09. Anything not listed was **not**
 - **axe-core 4.10.2**: no violations on home, gallery with lightbox open, story, about. Two findings were fixed (an `aside` nested in the dialog; heading order on café/story indexes). Trip, place and café detail pages were scanned but their final scan did not complete in the hidden pane (see the testing caveat in [[03 Motion System]]).
 - Production build probe: **CLS 0**, CSS 9 KB, JS about 150 KB encoded, fonts about 200 KB after trimming axes. Header, nav, footer and page content are in the initial HTML, with no pending Suspense boundaries on index pages. Security headers present.
 
+## Added with the second batch of references (2026-10-09)
+
+- Typecheck, lint, production build and `npm audit --omit=dev` (0 vulnerabilities with `cobe`) pass; secret scan clean.
+- Globe: renders, pins and polaroids anchor to the right places, correct orientation after calibration, works at 375px. Zoom: start collage, mid-zoom and fully zoomed states seen; falls back to a 2-column grid at 375px (no overflow). Trip stack: the next card slides over the previous. Hero drag: a real mouse drag moved the card (clamped to the table), raised it, and neither navigated nor opened the lightbox. Wordmark fits at 1024, 1280 and 1920 wide.
+- **Vercel failure reproduced and fixed**: a stand-in server answering like Supabase with no tables made the old build fail exactly as reported; the new build succeeds with a warning. A stand-in answering "Invalid API key" still fails the build.
+- Not verified: Safari and Firefox behaviour of CSS Anchor Positioning and scroll-linked animation (both are progressive: polaroids and the zoom simply do not appear), WebGL on low-end phones, long-run globe memory, `cobe` marker anchoring on iOS.
+
 ## Not verified (be honest)
 
 - **LCP, INP and Lighthouse scores**: the embedded browser exposed no LCP entries. Run Lighthouse on the deployed site.

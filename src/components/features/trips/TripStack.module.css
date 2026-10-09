@@ -1,0 +1,89 @@
+.stack {
+  display: grid;
+  gap: var(--s-6);
+}
+
+/* Every card sticks a little lower than the previous one, so the stack stays visible */
+.item {
+  position: sticky;
+  top: calc(var(--header-h) + var(--i) * 1.1rem);
+}
+
+.card {
+  position: relative;
+  display: grid;
+  align-items: end;
+  height: min(74svh, 40rem);
+  min-height: 22rem;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--night);
+  box-shadow: var(--shadow-lift);
+  color: var(--card);
+}
+
+.card .photo {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(12 20 36 / 0.88) 0%, rgb(12 20 36 / 0.55) 38%, rgb(12 20 36 / 0.05) 70%);
+}
+
+.text {
+  position: relative;
+  display: grid;
+  gap: var(--s-3);
+  max-width: 40rem;
+  padding: var(--s-6) clamp(var(--s-4), 4vw, var(--s-8));
+  padding-bottom: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+.title {
+  font-size: var(--step-4);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+/* The whole card is the link */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.card:has(.link:focus-visible) {
+  outline: 3px solid var(--card);
+  outline-offset: -6px;
+}
+
+.summary {
+  max-width: 38ch;
+  font-size: var(--step-1);
+  line-height: 1.4;
+}
+
+.meta {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.card:hover .photo img {
+  scale: 1.03;
+}
+
+.card .photo img {
+  transition: scale 900ms var(--ease-out);
+}

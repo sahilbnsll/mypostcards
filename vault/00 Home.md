@@ -29,8 +29,8 @@ Personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal
 
 ## Status (2026-10-09)
 
-- Site is built and verified locally: 35 prerendered routes, typecheck, lint and production build pass.
-- Content comes from `src/content/data/sample.ts` (48 sample postcards) until Supabase is connected. Supabase schema and seed are written and tested in an embedded Postgres, **not yet applied to the live project** (needs the user's credentials).
+- Site is built and verified locally: 35 prerendered routes, typecheck, lint and production build pass. Pushed to GitHub earlier; the work since (globe, drag cards, trip stack, zoom, Vercel fix) is **not committed yet**.
+- Content comes from `src/content/data/sample.ts` (48 sample postcards) until Supabase is connected. Supabase schema and seed are written and tested in an embedded Postgres, **not yet applied to the live project**. Vercel has the Supabase env vars, so until `schema.sql` is run the deployed site is empty (it builds, with a warning).
 - Lighthouse and real-device testing have **not** been run. See [[08 Quality and Verification]].
 
 ## Commands

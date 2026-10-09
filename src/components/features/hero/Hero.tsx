@@ -5,6 +5,7 @@ import type { Postcard } from "@/content/types";
 import { Photo } from "@/components/ui/Photo";
 import { Postmark, Stamp } from "@/components/ui/Stamp";
 import { plural } from "@/lib/utils";
+import { DeckDrag } from "./DeckDrag";
 import styles from "./Hero.module.css";
 
 /**
@@ -36,6 +37,7 @@ export function Hero({ cards, totalPostcards, totalPlaces }: HeroProps) {
           <p className={styles.counts}>
             {plural(totalPostcards, "postcard")} from {plural(totalPlaces, "place")}, and counting.
           </p>
+          <p className={styles.hint}>Move the cards around if you like, or click one to open it.</p>
           <a href="#collection" className={styles.cue}>
             <span>See the collection</span>
             <svg width="14" height="18" viewBox="0 0 14 18" fill="none" aria-hidden>
@@ -46,13 +48,14 @@ export function Hero({ cards, totalPostcards, totalPlaces }: HeroProps) {
 
         {dealt.length > 0 ? (
           <div className={styles.table}>
-            <ul role="list" className={styles.deck}>
+            <ul role="list" id="hero-deck" className={styles.deck}>
               {dealt.map((card, index) => {
                 const slot = SLOTS[index];
                 return (
                   <li
                     key={card.slug}
                     className={styles.slot}
+                    data-slot
                     style={
                       {
                         "--l": `${slot.left}%`,
@@ -76,6 +79,8 @@ export function Hero({ cards, totalPostcards, totalPlaces }: HeroProps) {
         ) : (
           <p className={styles.empty}>The first postcards are on their way.</p>
         )}
+
+        <DeckDrag targetId="hero-deck" />
 
         <h1 id="hero-title" className={styles.title}>
           <span className={styles.titleLine}>my</span> <span className={styles.titleLine}>postcards</span>

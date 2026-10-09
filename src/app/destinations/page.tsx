@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getJournal } from "@/content";
-import { postcardCount } from "@/content/selectors";
+import { globePins, postcardCount } from "@/content/selectors";
+import { PlacesGlobe } from "@/components/features/globe/PlacesGlobe";
 import { PlacesIndex } from "@/components/features/places/PlacesIndex";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PageHead } from "@/components/ui/PageHead";
@@ -22,7 +23,10 @@ export default async function DestinationsPage() {
       <PageHead title="Places" lede="Where the postcards were sent from. Point at a name to see a print." />
       <section className="wrap" aria-label="Places">
         {journal.destinations.length > 0 ? (
-          <PlacesIndex places={journal.destinations} counts={counts} />
+          <>
+            <PlacesGlobe pins={globePins(journal.postcards)} />
+            <PlacesIndex places={journal.destinations} counts={counts} />
+          </>
         ) : (
           <EmptyState title="No places yet" body="Places collect postcards by destination. The first will appear here." />
         )}

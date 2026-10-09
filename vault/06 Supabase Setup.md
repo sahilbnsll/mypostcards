@@ -78,8 +78,15 @@ Set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `REVALIDATE_SECRET`. Not the service-ro
 | Symptom | Cause |
 |---|---|
 | Site shows sample content | `SUPABASE_URL` or `SUPABASE_ANON_KEY` missing, or `CONTENT_SOURCE=local` |
-| Error page: `Supabase query for "postcards" failed ... (run supabase/schema.sql first)` | Tables not created yet |
+| Build log: `[my-postcards] Supabase tables not found ... Run supabase/schema.sql` and an empty home page | Tables not created yet. Run step 1; the site fills in within about a minute (or redeploy) |
+| Build fails with `Supabase query for "postcards" failed: Invalid API key` (or another message) | Wrong URL or key in the environment, or an RLS/grant problem. Fix the env var and redeploy |
 | Home says "No postcards yet" | Connected and empty: add rows or seed |
 | Row exists but not on site | `published = false`, or cache not refreshed yet (wait or call the revalidate route) |
 | Image blank or 400 from `/_next/image` | Host not allow-listed (Storage host is derived from `SUPABASE_URL` at build/dev start: restart), or bad URL |
 | Insert fails on `slug` | Must match `^[a-z0-9]+(-[a-z0-9]+)*$` |
+
+## The Vercel and GitHub connections do not create the database
+
+Connecting Supabase to Vercel only copies environment variables (URL and keys) into the Vercel project. Connecting Vercel to GitHub only builds and deploys the code. Neither runs SQL, so **tables, policies and the storage bucket are created only by running `supabase/schema.sql`** (step 1). Order that avoids a confusing first deploy: run the schema, seed or add rows, then deploy. If the env vars exist before the tables do, the build still succeeds but the site is empty.
+
+Optional automation: Supabase's own GitHub integration (Project Settings > Integrations > GitHub) can apply SQL files in `supabase/migrations/` whenever the production branch changes. That needs the schema stored as a migration file and the integration enabled in the Supabase dashboard. Not set up yet; see [[10 Backlog]].

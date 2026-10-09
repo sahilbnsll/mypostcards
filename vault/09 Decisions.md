@@ -8,6 +8,18 @@ updated: 2026-10-09
 
 Newest first. Format: decision, why, trade-off.
 
+### D15. Zoom parallax uses CSS scroll-linked animation, not framer-motion and Lenis
+- **Why:** Lenis replaces native scrolling with a smoothed version, which conflicts with the no-scroll-hijack rule; framer-motion would be a heavy dependency for one effect. `view-timeline` does the same job with no JS.
+- **Trade-off:** wide screens with motion allowed in supporting browsers only; elsewhere a static grid. The animation range assumes a 250svh section (28.57% to 71.43% of the cover range); change both together.
+
+### D14. Globe is a client island with a visible place list beside it
+- **Why:** the globe is a picture of the same information as the list; the list is the accessible and no-WebGL version. Auto-rotation has a pause button and honours reduced motion.
+- **Trade-off:** CSS Anchor Positioning is not everywhere, so polaroids are hidden where unsupported (pins and list remain). Adds the `cobe` dependency.
+
+### D13. A missing Supabase table is a setup state, not a build failure
+- **Why:** Vercel's first deploy failed because env vars were set before `schema.sql` was run, and the data layer threw. Treating `PGRST205`/`42P01` as "empty journal, warn loudly, re-check every minute" lets the deploy succeed and the site fill in once the tables exist.
+- **Trade-off:** a forgotten schema now yields a live but empty site instead of a failed deploy; the build-log warning and the empty-state copy point at the fix. Every other error still fails loudly.
+
 ### D12. `[slug]` pages use Suspense with a skeleton; header and footer do not
 - **Why:** with Cache Components, unknown slugs get an app shell. Without a Suspense boundary the shell was empty and the page rendered only in the browser, which defeats adding rows in Supabase without a rebuild. With it, new slugs server-render and stream.
 - **Trade-off:** React moves large boundaries out of line, so on big detail pages the content arrives in a `<template>` swapped by a script. Known pages are fully in the HTML; nothing relies on the swap for metadata. Header and footer were taken out of Suspense after we saw large pages hide them in templates.

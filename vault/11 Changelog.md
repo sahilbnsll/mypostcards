@@ -8,6 +8,14 @@ updated: 2026-10-09
 
 Newest first.
 
+## 2026-10-09: Second batch of references, and a deploy fix
+
+- New from the updated reference file: places **globe** (`cobe`), draggable **hero cards**, **sticky trip stack**, **zoom parallax** interlude. See [[02 Design System]] for how each was adapted.
+- Fix: the Vercel deploy failed with `Could not find the table 'public.postcards'` because the tables had not been created. A missing table now builds with a warning and an empty state ([[09 Decisions]] D13). Run `supabase/schema.sql`, then redeploy or wait a minute.
+- Wordmark sized from the content width so it can never overflow; fonts trimmed (optical-size axes dropped).
+- Pushed to GitHub (`origin/master`), merged with the repository's initial commit.
+- Added dependency: `cobe`.
+
 ## 2026-10-09: First complete version
 
 - Replaced the placeholder scaffold with the full site: hero, pegged-prints carousel, bloom-filter gallery, lightbox, trips, places, cafés, stories, about.

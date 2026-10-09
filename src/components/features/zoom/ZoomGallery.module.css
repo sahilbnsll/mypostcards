@@ -1,0 +1,109 @@
+/*
+ * Default (small screens, reduced motion, or no scroll-linked animation): a calm grid of the
+ * same photographs, each at its own ratio.
+ */
+.zoom {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-bottom: var(--section);
+}
+
+.tiles {
+  column-count: 2;
+  column-gap: var(--s-4);
+}
+
+@media (min-width: 40rem) {
+  .tiles {
+    column-count: 3;
+  }
+}
+
+.tile {
+  break-inside: avoid;
+  margin-bottom: var(--s-4);
+}
+
+.frame {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+}
+
+/*
+ * Enhanced: wide screen, motion allowed, scroll-linked animation supported. The section is tall;
+ * a viewport-sized stage sticks while the tiles scale up. The animation range covers exactly the
+ * stretch where the stage is stuck: with a 250svh section and a 100svh viewport that is
+ * 100/350 to 250/350 of the way through the element's "cover" range.
+ */
+@media (min-width: 62rem) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .zoom {
+      max-width: none;
+      padding: 0;
+      height: 250svh;
+      view-timeline-name: --zoom;
+      view-timeline-axis: block;
+    }
+
+    .stage {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      overflow: hidden;
+    }
+
+    .tiles {
+      position: absolute;
+      inset: 0;
+      column-count: auto;
+    }
+
+    .tile {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      margin: 0;
+      animation: zoom linear both;
+      animation-timeline: --zoom;
+      animation-range: cover 28.57% cover 71.43%;
+      will-change: transform;
+    }
+
+    .frame {
+      position: relative;
+      width: 25vw;
+      height: 25vh;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .frame .photo {
+      height: 100%;
+      aspect-ratio: auto;
+    }
+
+    .tile[data-tile="0"] { --to: 4; }
+    .tile[data-tile="1"] { --to: 5; }
+    .tile[data-tile="2"] { --to: 6; }
+    .tile[data-tile="3"] { --to: 5; }
+    .tile[data-tile="4"] { --to: 6; }
+    .tile[data-tile="5"] { --to: 8; }
+    .tile[data-tile="6"] { --to: 9; }
+
+    .tile[data-tile="1"] .frame { top: -30vh; left: 5vw; width: 35vw; height: 30vh; }
+    .tile[data-tile="2"] .frame { top: -10vh; left: -25vw; width: 20vw; height: 45vh; }
+    .tile[data-tile="3"] .frame { left: 27.5vw; width: 25vw; height: 25vh; }
+    .tile[data-tile="4"] .frame { top: 27.5vh; left: 5vw; width: 20vw; height: 25vh; }
+    .tile[data-tile="5"] .frame { top: 27.5vh; left: -22.5vw; width: 30vw; height: 25vh; }
+    .tile[data-tile="6"] .frame { top: 22.5vh; left: 25vw; width: 15vw; height: 15vh; }
+  }
+}
+
+@keyframes zoom {
+  to {
+    transform: scale(var(--to, 1));
+  }
+}

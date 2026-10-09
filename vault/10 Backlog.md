@@ -8,7 +8,8 @@ updated: 2026-10-09
 
 ## Do next
 
-- [ ] **Apply the schema to the live Supabase project** and seed it ([[06 Supabase Setup]]). Needs the user to run the SQL and set `.env.local`.
+- [ ] **Apply the schema to the live Supabase project** and seed it ([[06 Supabase Setup]]). Needs the user to run the SQL. **Vercel already has the env vars**, so until this is done the deployed site is empty.
+- [ ] Optional: store the schema as `supabase/migrations/<timestamp>_init.sql` and enable Supabase's GitHub integration so schema changes apply on push (avoids two sources of truth by making the migration the source and generating `schema.sql` from it).
 - [ ] Run Lighthouse and a real-device pass on the deployed site; record results in [[08 Quality and Verification]].
 - [ ] Replace sample content with real postcards, then remove the sample rows.
 - [ ] Add photographer names and links for any Unsplash photographs kept ([[12 Sample Content and Credits]]).
@@ -24,7 +25,9 @@ updated: 2026-10-09
 - No Content-Security-Policy yet (inline styles from Next and the `<style>` pattern need nonce work).
 - Category list is in code and in a SQL `check`: adding one is a code change plus an `alter table`.
 - The home gallery preview shows 16 postcards balanced across categories; the full set is on `/gallery`.
-- Scroll-linked drift only runs where `animation-timeline` is supported.
+- Scroll-linked drift and the zoom parallax only run where `animation-timeline` is supported; the globe's polaroids need CSS Anchor Positioning (Chromium, Safari 26+). Both degrade to a plain grid or a bare globe.
+- The zoom parallax needs exactly seven postcards (else it is skipped); the globe needs postcards with coordinates.
+- Hero card dragging is mouse and pen only, by design.
 
 ## Ideas, not committed
 
