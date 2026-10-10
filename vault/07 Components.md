@@ -54,8 +54,17 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 - `SvgMap`: server-drawn flat map (world or fit-to-pins). Pins are real links drawn as small postcards (`MapPin.image`), spread apart server-side with a thread to the true spot; `route` numbers them and draws the route.
 - `Itinerary`: day-by-day timeline plus sticky route map. `CafeGuide`: usual order, price, seat, wifi, map link (only if given).
 - `PostcardBack` / `RelatedPostcards`: shared by the lightbox and `/postcards/[slug]`.
-- `SearchPalette`, `ThemeToggle`, `Cursor` (header actions and layout).
+- `SearchPalette`, `ThemeToggle`, `Cursor`. `Header`: plain links with a sweeping underline (CSS only) and `NavIcon` line icons from 75rem, frosted bar when scrolled, mobile menu with page hints (`siteConfig.navLinks[].icon` and `.hint`).
 - Visitors: `CardComposer`, `DrawingPad` (marked `data-native-cursor`), `VisitorWall` / `VisitorCardView`, `DrawingSvg`.
+
+## Brand
+
+- `StampMark` (header), `LogoMark` (footer, mask-based), `Seal` (About), all in `src/components/brand/`. Colours from the `--logo-*` tokens.
+- Share images: `src/app/opengraph-image.tsx` (site default) and the postcard one use `src/lib/brand.ts` (brand colours, logo and stamp as data URIs). Icons: `src/app/icon.svg`, `src/app/apple-icon.png`, `public/icons/*` (192, 512, maskable), listed in `manifest.ts`.
+
+## The 404 page
+
+`src/app/not-found.tsx` with `LostPostcard` (`features/not-found/`): a postcard that came back "return to sender" (the first wide featured photograph, linking to its own page), a slowly turning ring seal with the small stamp inside, clay cancellation waves, the heading "Lost in the post", an "Error 404" line, a back button, a link to the gallery and a hint that "/" opens search. Built from the 21st.dev "pixelated 404" reference but rebuilt: the pixel font, shadcn button and hard-coded colours were replaced by the project's fonts, tokens and logo. CSS-only motion (the ring turns, the print straightens on hover), both off for reduced motion. `noindex`.
 
 ## Routes
 

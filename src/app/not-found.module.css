@@ -1,0 +1,92 @@
+.page {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-8);
+  padding-block: calc(var(--header-h) + var(--s-9)) 0;
+  text-align: center;
+}
+
+.mark {
+  width: min(14rem, 60%);
+}
+
+.text {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+  max-width: 38rem;
+}
+
+.title {
+  font-size: var(--step-4);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.lede {
+  max-width: 42ch;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.code {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-4) var(--s-6);
+  margin-top: var(--s-3);
+}
+
+.primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-5);
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 600;
+  transition: gap var(--d-base) var(--ease-out), background-color var(--d-fast);
+}
+
+.primary:hover {
+  gap: var(--s-4);
+  background: var(--logo-main);
+  color: var(--logo-paper);
+}
+
+.hint {
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+.key {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  margin-inline: 0.1rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary {
+    transition: none;
+  }
+}

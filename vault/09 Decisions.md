@@ -8,6 +8,18 @@ updated: 2026-10-10
 
 Newest first. Format: decision, why, trade-off.
 
+### D28. The logo is traced to vectors in two theme-aware layers; the site palette is unchanged
+- **Why:** the author's logo sheet is a raster image (1024px, cream paper texture). Cropping it would blur on retina screens, show a cream box on the dark theme and ship a large PNG. Tracing the stamp into green and clay layers gives sharp vectors, themed colours (sage and light clay on dark) and about 16 KB as cached static files used as masks. Thin camera lines vanish below about 60px, so the header and favicon use a bolder hand-built stamp from the same design (the sheet's own "small stamp" and "app icon" variants). The round seal is rebuilt as live SVG text.
+- **Trade-off:** the logo's green and clay sit beside a blue-grey, airmail-red site. Re-theming the whole site to the logo palette is a bigger, separate decision ([[10 Backlog]]). The giant hero wordmark is still the sans display face.
+
+### D27. Header: plain links with a sweeping underline, small line icons, quiet actions, frosted bar
+- **Why:** from the navigation reference (`navigation-menu-05`): icon and label, generous spacing, nothing boxed, a 2px underline that scales in on hover and focus and stays under the current page. A first attempt (links in a tray with a sliding pill, an outlined Search button with a key hint) looked busy and was rejected. Now: the underline sweeps in from the left and leaves to the right; icons (a set of seven thin-line drawings, no icon library) show from 75rem up, where there is room; Search and theme are quiet icon buttons; the bar turns to frosted glass once the page moves; the mobile menu gives each page a few words of context. The sliding-highlight script was removed, so the desktop nav is pure CSS.
+- **Trade-off:** no animated highlight travelling between links; the "/" shortcut is not advertised in the header (it still works and is announced to assistive tech).
+
+### D26. Visitor cards are public immediately; the owner hides, not approves
+- **Why:** the owner will not check the dashboard regularly, so an approval queue would leave visitors' cards invisible forever. `approved` became `hidden` (default false). A sent card expires the wall's cache so it shows at once.
+- **Trade-off:** nothing is reviewed first. The only gates are the honeypot, minimum time, link rejection, plain-text/SVG rendering and the database rate limits (3 per hour and 8 per day per visitor, 40 per hour overall). A determined person could still post something unpleasant for a while; the fix is to tick `hidden` or delete the row. If that becomes a problem, restore approval or add a report button ([[10 Backlog]]).
+
 ### D25. A custom round cursor, for a mouse only
 - **Why:** from the cursor reference: a white circle with `mix-blend-mode: difference` that eases after the pointer. Built ref-driven (no re-render per move). The blend sits on the fixed outer layer (on an inner element it does not blend and shows as a solid white disc). Over buttons and links the circle becomes a ring, so the control and its hover colours stay visible in light and dark; it shrinks on press.
 - **Guard rails:** only when `(hover: hover) and (pointer: fine)`; reduced motion removes the trailing; the real cursor stays over form fields, the drawing pad and any open dialog (the top layer sits above the circle); keyboard focus is untouched.
@@ -28,9 +40,9 @@ Newest first. Format: decision, why, trade-off.
 ### D21. Itineraries and café guide fields are optional data, shown only when provided
 - **Why:** nothing is invented. A stop shows only what was filled in; a café shows price, seat, wifi or a map link only when given.
 
-### D20. The guest desk: visitor cards, moderated, protected in the database
-- **Why:** visitors can draw or type a card. All writes go through `submit_visitor_card()` with validation and rate limits; RLS lets the anon key read only approved rows and public columns; nothing is public until approved in the dashboard. Drawings are stroke data rendered as SVG paths, never HTML. The page works without Supabase as a preview ("being set up").
-- **Trade-off:** requires moderating; Supabase Free pauses after a week idle ([[10 Backlog]]).
+### D20. The guest desk: visitor cards, protected in the database (approval removed by D26)
+- **Why:** visitors can draw or type a card. All writes go through `submit_visitor_card()` with validation and rate limits; RLS lets the anon key read only visible rows and public columns. Drawings are stroke data rendered as SVG paths, never HTML. The page works without Supabase as a preview ("being set up").
+- **Trade-off:** Supabase Free pauses after a week idle ([[10 Backlog]]).
 
 ### D19. Content moved from Supabase into the repository; Supabase is for visitor cards only
 - **Why:** the author edits the gallery by committing files, photos live in the repo, nothing needs an upload script, no keys are needed to build, and the free-plan limits (storage, pausing) stop mattering for content. Validation moved into `scripts/build-content.mjs`, with clear errors.

@@ -8,7 +8,27 @@ updated: 2026-10-10
 
 Newest first.
 
+## 2026-10-10 (night): New 404 page
+
+- The "page not found" screen is redesigned from the 404 reference: tilted postcard, turning seal, cancellation waves, personal copy, back button and search hint. Works in light and dark and on phones. [[07 Components]].
+
+## 2026-10-10 (evening): The logo
+
+- The author's logo is now the brand across the site: header stamp and serif wordmark, footer lockup, About-page seal, favicon, Apple icon, installable-app icons, a default share image and the postcard share image. Dark theme gets its own light colours. [[09 Decisions]] D28, [[02 Design System]].
+- Descriptor changed from "A travel photo journal" to "Postcards from Sahil" (`siteConfig.descriptor`: footer, About seal ring, default share image).
+- The red decorative stamp on the hero cards and the blue one on postcard backs are now the logo stamp, drawn like a real one (paper edge, graded window, inset line, sun-and-peaks lens, cancellation waves), with a light and a dark palette (`--stamp-*` tokens). The "page not found" screen shows the full mark.
+- Postcard postmark: a stand-in photograph now says "someday" instead of "sample" (the line under the facts still says it is a sample and not from my travels); real ones show the year or "kept". The postmark sits clear of the stamp.
+- Dark mode: the hero postmark was invisible over the cream print and the photo; it is now brown ink in light mode and a deep-green seal with sage ink in dark mode.
+- Privacy line under the card form no longer says cards are read before they appear.
+
+## 2026-10-10 (later): No approval step, new header
+
+- Visitor cards go live straight away; `approved` is replaced by `hidden` (take one down in the dashboard). A new card refreshes the wall at once. Schema upgrades an earlier table safely. [[09 Decisions]] D26, [[06 Supabase Setup]].
+- Header redesigned after the navigation reference: plain links with a thin underline that sweeps in, small line icons on wide screens, quiet search and theme buttons, frosted bar on scroll, wordmark never wraps, mobile menu with a hint under each page. (A first tray-and-pill version was rejected and replaced.) D27, [[07 Components]].
+
 ## 2026-10-10: Dark colours, postcard map pins, round cursor, visitors always visible
+
+- Dark page background now matches the footer (`#070b14`); wells and cards re-stepped (`#101827`, `#1a2338`).
 
 - Dark theme palette lifted (clear page, well and card levels, brighter accents); prints, polaroids and stamps stay light via `--print`, text over photos uses `--on-photo`. See [[02 Design System]], [[09 Decisions]] D23.
 - Flat map pins are small tilted postcards showing the place's photo (numbered with photos on itinerary maps, dashed "?" for planned places). Overlapping cards are spread apart with a thread to the real spot; labels no longer clip at the top. D24.

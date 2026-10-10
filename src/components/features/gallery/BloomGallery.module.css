@@ -63,7 +63,8 @@
 }
 
 .chip[aria-checked="true"] .count {
-  color: var(--on-night-muted);
+  /* A little softer than the label, in both themes (the chip is dark in light mode and light in dark mode) */
+  color: color-mix(in srgb, var(--card) 74%, var(--ink));
 }
 
 .status {

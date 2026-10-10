@@ -20,7 +20,7 @@ Personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal
 | Know how the app is built and cached | [[04 Architecture]] |
 | Know the data model | [[05 Content Model]] |
 | Add postcards, trips, cafés (content guide) | `content/README.md`, [[05 Content Model]] |
-| Connect the visitor guest desk, moderate cards | [[06 Supabase Setup]] |
+| Connect the visitor guest desk, hide a card | [[06 Supabase Setup]] |
 | Find a component and what it does | [[07 Components]] |
 | See what was verified and how to re-run it | [[08 Quality and Verification]] |
 | Find out why something is the way it is | [[09 Decisions]] |

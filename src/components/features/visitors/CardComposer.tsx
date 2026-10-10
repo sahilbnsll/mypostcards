@@ -18,7 +18,7 @@ const COLOR_LABEL: Record<CardColor, string> = {
 
 /**
  * The guest desk form: pick what the card is about, write, draw, or both, choose a paper colour
- * and send. The card is held for approval before it appears on the wall.
+ * and send. The card goes on the wall straight away.
  */
 export function CardComposer() {
   // Bumping this remounts the form, which is how "send another" starts from a clean card.
@@ -48,7 +48,7 @@ function ComposerForm({ onAnother }: { onAnother: () => void }) {
     return (
       <div className={styles.thanks} role="status">
         <h2 className={styles.thanksTitle}>Your card is in the post</h2>
-        <p>Thank you. It will appear on the wall once I have had a look at it.</p>
+        <p>Thank you. Your card is on the wall.</p>
         <button type="button" className={styles.again} onClick={onAnother}>
           Write another
         </button>
@@ -156,7 +156,7 @@ function ComposerForm({ onAnother }: { onAnother: () => void }) {
           {pending ? "Sending…" : "Send the card"}
         </button>
         <p className={styles.privacy}>
-          Cards are read before they appear. I keep your card and the name you give, plus a one-day anonymous code used only to limit spam. Please leave links out.
+          Your card goes on the wall right away, for anyone to see. I keep your card and the name you give, plus a one-day anonymous code used only to limit spam. Please leave links out.
         </p>
       </div>
     </form>

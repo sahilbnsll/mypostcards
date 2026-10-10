@@ -2,7 +2,9 @@
 
 import { createHash } from "node:crypto";
 import { headers } from "next/headers";
+import { updateTag } from "next/cache";
 import { getSupabase } from "@/lib/supabase";
+import { VISITOR_CARDS_TAG } from "@/content/visitors";
 import { LIMITS, isCardColor, isKind, sanitizeDrawing } from "@/content/visitors-shared";
 
 export interface CardFormState {
@@ -29,8 +31,8 @@ async function visitorHash(): Promise<string | null> {
 
 /**
  * Receives a card from the guest desk form. Everything is checked again here and again in the
- * database; the form's own limits are only a courtesy. The card is stored unapproved and shows on
- * the wall only after the owner approves it.
+ * database; the form's own limits are only a courtesy. A valid card goes on the wall straight away
+ * (there is no approval step); the owner can hide one later in the Supabase dashboard.
  */
 export async function submitVisitorCard(_previous: CardFormState, formData: FormData): Promise<CardFormState> {
   // A hidden field only a script would fill in: pretend it worked and drop it.
@@ -65,7 +67,12 @@ export async function submitVisitorCard(_previous: CardFormState, formData: Form
   if (LINKS.test(name) || LINKS.test(message)) return { status: "error", message: "Please leave links out of your card." };
 
   const supabase = getSupabase();
-  if (!supabase) return { status: "error", message: "The guest desk is closed right now. Please come back later." };
+  if (!supabase) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn("[my-postcards] SUPABASE_URL or SUPABASE_ANON_KEY is missing. Fill them in .env.local and restart npm run dev.");
+    }
+    return { status: "error", message: "The guest desk is closed right now. Please come back later." };
+  }
 
   const { error } = await supabase.rpc("submit_visitor_card", {
     p_kind: kind,
@@ -83,5 +90,7 @@ export async function submitVisitorCard(_previous: CardFormState, formData: Form
     return { status: "error", message: "Your card could not be sent. Please try again in a moment." };
   }
 
+  // Expire the cached wall so the new card shows up right away, for the sender and for everyone.
+  updateTag(VISITOR_CARDS_TAG);
   return { status: "success" };
 }

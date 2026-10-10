@@ -44,7 +44,7 @@ content/*.json + content/stories/*.md + public/images/**
 
 - The journal is a static import: no database, no network, no revalidation endpoint. Content changes by committing files; Vercel redeploys.
 - Validation is strict on purpose (slug format, references, required alt text, unknown field names with suggestions, local image files exist). Errors are collected and stop the build with the file and the fix. See [[05 Content Model]].
-- **Visitor cards** are the only runtime data: `getVisitorWall()` (`"use cache"`, tag `visitor-cards`, 5 minute revalidate) reads approved rows through the anon key. It never throws: no config means "closed", a missing table or failure means an empty wall plus a log warning. The submit path is a server action calling the `submit_visitor_card()` database function ([[06 Supabase Setup]], [[09 Decisions]] D19).
+- **Visitor cards** are the only runtime data: `getVisitorWall()` (`"use cache"`, tag `visitor-cards`, 5 minute revalidate) reads visible (not hidden) rows through the anon key. It never throws: no config means "closed", a missing table or failure means an empty wall plus a log warning. The submit path is a server action that expires the wall's cache tag (`updateTag`) so a new card shows at once, calling the `submit_visitor_card()` database function ([[06 Supabase Setup]], [[09 Decisions]] D19).
 - No secret ever reaches the browser; the site never holds a write key.
 
 ## Rendering decisions

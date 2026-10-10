@@ -8,11 +8,12 @@
 --
 -- Safety model
 --   * Visitors cannot touch the table. The only way in is submit_visitor_card(), which validates
---     everything again, rate limits, and always stores the card as NOT approved.
---   * The public (anon) key can read only APPROVED cards, and only the public columns. The hashed
---     visitor fingerprint (ip_hash) is never readable by it.
---   * You moderate in the dashboard: Table Editor > visitor_cards > tick "approved" on the cards
---     you want on the wall. Tick "pinned" to keep one at the top. Delete the ones you do not want.
+--     everything again and rate limits. A valid card goes on the wall straight away: there is no
+--     approval step.
+--   * The public (anon) key can read every card that is not hidden, and only the public columns.
+--     The hashed visitor fingerprint (ip_hash) is never readable by it.
+--   * You only need the dashboard to take something down: Table Editor > visitor_cards > tick
+--     "hidden" on a card (or delete the row). Tick "pinned" to keep one at the top.
 --   * The site never needs the service-role key. Do not put it in Vercel.
 
 begin;
@@ -38,7 +39,7 @@ create table if not exists public.visitor_cards (
 
   color      text not null default 'paper' check (color in ('paper', 'sky', 'rose', 'sun', 'mint')),
 
-  approved   boolean not null default false,
+  hidden     boolean not null default false,
   pinned     boolean not null default false,
 
   -- sha256 of (visitor address + secret + today's date). Used only to limit spam; it changes
@@ -48,17 +49,33 @@ create table if not exists public.visitor_cards (
   check (message is not null or drawing is not null)
 );
 
-create index if not exists visitor_cards_wall_idx on public.visitor_cards (approved, pinned desc, created_at desc);
+-- Upgrade from the earlier approval-based version, if it was ever run: keep what was approved
+-- visible, hide the rest, then drop the old column and its index.
+alter table public.visitor_cards add column if not exists hidden boolean not null default false;
+do $$
+begin
+  if exists (
+    select 1 from information_schema.columns
+    where table_schema = 'public' and table_name = 'visitor_cards' and column_name = 'approved'
+  ) then
+    execute 'update public.visitor_cards set hidden = not approved';
+    execute 'drop policy if exists "Public can read approved visitor cards" on public.visitor_cards';
+    execute 'drop index if exists public.visitor_cards_wall_idx';
+    execute 'alter table public.visitor_cards drop column approved';
+  end if;
+end $$;
+
+create index if not exists visitor_cards_wall_idx on public.visitor_cards (hidden, pinned desc, created_at desc);
 create index if not exists visitor_cards_ip_idx   on public.visitor_cards (ip_hash, created_at);
 
 alter table public.visitor_cards enable row level security;
 
--- Public read: approved rows only, public columns only.
-drop policy if exists "Public can read approved visitor cards" on public.visitor_cards;
-create policy "Public can read approved visitor cards"
+-- Public read: every card that is not hidden, public columns only.
+drop policy if exists "Public can read visible visitor cards" on public.visitor_cards;
+create policy "Public can read visible visitor cards"
   on public.visitor_cards for select
   to anon, authenticated
-  using (approved);
+  using (not hidden);
 
 revoke all on public.visitor_cards from anon, authenticated;
 grant select (id, created_at, kind, name, message, drawing, color, pinned)
@@ -114,8 +131,8 @@ begin
     raise exception 'rate_limited';
   end if;
 
-  -- Always unapproved. The table's own checks validate lengths and the kind.
-  insert into public.visitor_cards (kind, name, message, drawing, color, approved, pinned, ip_hash)
+  -- Visible straight away; never pinned. The table's own checks validate lengths and the kind.
+  insert into public.visitor_cards (kind, name, message, drawing, color, hidden, pinned, ip_hash)
   values (p_kind, p_name, p_message, p_drawing, coalesce(p_color, 'paper'), false, false, p_ip_hash);
 end;
 $$;

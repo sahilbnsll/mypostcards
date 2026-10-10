@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/config/site";
-import { Stamp } from "@/components/ui/Stamp";
+import { StampMark } from "@/components/brand/StampMark";
 import { SearchPalette } from "@/components/features/search/SearchPalette";
 import { ThemeToggle } from "./ThemeToggle";
+import { NavIcon } from "./NavIcon";
 import { cn } from "@/lib/utils";
 import styles from "./Header.module.css";
 
@@ -21,8 +22,6 @@ export function Header() {
   const [menuPath, setMenuPath] = useState<string | null>(null);
   const menuOpen = menuPath === pathname;
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const navRef = useRef<HTMLUListElement>(null);
-  const indicatorRef = useRef<HTMLSpanElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   // Solid bar once the page has moved: a sentinel at the top avoids a scroll listener.
@@ -35,44 +34,6 @@ export function Header() {
     observer.observe(sentinel);
     return () => observer.disconnect();
   }, []);
-
-  // One underline that slides to the hovered link and returns to the current page.
-  const moveIndicator = useCallback((target: HTMLElement | null) => {
-    const nav = navRef.current;
-    const indicator = indicatorRef.current;
-    if (!nav || !indicator) return;
-    if (!target) {
-      indicator.style.opacity = "0";
-      return;
-    }
-    const navBox = nav.getBoundingClientRect();
-    const box = target.getBoundingClientRect();
-    indicator.style.opacity = "1";
-    indicator.style.width = `${box.width}px`;
-    indicator.style.transform = `translateX(${box.left - navBox.left}px)`;
-  }, []);
-
-  const settleIndicator = useCallback(() => {
-    const current = navRef.current?.querySelector<HTMLElement>('[aria-current="page"]') ?? null;
-    moveIndicator(current);
-  }, [moveIndicator]);
-
-  useLayoutEffect(() => {
-    settleIndicator();
-    // Only animate the underline after its first placement, so it never slides in from the left.
-    const frame = requestAnimationFrame(() => {
-      if (indicatorRef.current) indicatorRef.current.dataset.ready = "true";
-    });
-    const nav = navRef.current;
-    if (!nav) return;
-    const observer = new ResizeObserver(settleIndicator);
-    observer.observe(nav);
-    document.fonts?.ready.then(settleIndicator);
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-    };
-  }, [pathname, settleIndicator]);
 
   // Mobile menu: a modal <dialog> gives focus trapping and Escape for free.
   const closeMenu = useCallback(() => setMenuPath(null), []);
@@ -89,12 +50,12 @@ export function Header() {
       <header className={cn(styles.header, scrolled && styles.scrolled)}>
         <div className={cn("wrap", styles.inner)}>
           <Link href="/" className={styles.brand} aria-label={`${siteConfig.name}, home`}>
-            <Stamp className={styles.stamp} tone="red" />
-            <span className={styles.wordmark}>my postcards</span>
+            <StampMark className={styles.stamp} />
+            <span className={styles.wordmark}>mypostcards</span>
           </Link>
 
           <nav aria-label="Main" className={styles.desktopNav}>
-            <ul role="list" className={styles.navList} ref={navRef} onPointerLeave={settleIndicator}>
+            <ul role="list" className={styles.navList}>
               {siteConfig.navLinks.map((link) => {
                 const active = isActive(pathname, link.href);
                 return (
@@ -103,36 +64,36 @@ export function Header() {
                       href={link.href}
                       className={styles.navLink}
                       aria-current={active ? "page" : undefined}
-                      onPointerEnter={(e) => moveIndicator(e.currentTarget)}
-                      onFocus={(e) => moveIndicator(e.currentTarget)}
-                      onBlur={settleIndicator}
                     >
+                      <NavIcon name={link.icon} className={styles.navIcon} />
                       {link.title}
                     </Link>
                   </li>
                 );
               })}
-              <span ref={indicatorRef} className={styles.indicator} aria-hidden />
             </ul>
           </nav>
 
           <div className={styles.actions}>
             <SearchPalette />
             <ThemeToggle />
-          <button
-            type="button"
-            className={cn(styles.pill, styles.menuButton)}
-            aria-haspopup="dialog"
-            aria-expanded={menuOpen}
-            aria-controls="site-menu"
-            onClick={() => {
-              // Open in the same tick as the tap so the slide starts on the very next frame.
-              dialogRef.current?.showModal();
-              setMenuPath(pathname);
-            }}
-          >
-            Menu
-          </button>
+            <button
+              type="button"
+              className={cn(styles.pill, styles.menuButton)}
+              aria-haspopup="dialog"
+              aria-expanded={menuOpen}
+              aria-controls="site-menu"
+              onClick={() => {
+                // Open in the same tick as the tap so the slide starts on the very next frame.
+                dialogRef.current?.showModal();
+                setMenuPath(pathname);
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M4 8h16M4 16h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+              Menu
+            </button>
           </div>
         </div>
       </header>
@@ -150,7 +111,7 @@ export function Header() {
       >
         <div className={styles.menuPanel}>
           <div className={styles.menuTop}>
-            <span className={styles.wordmark}>my postcards</span>
+            <span className={styles.wordmark}>mypostcards</span>
             <button type="button" className={styles.pill} onClick={closeMenu}>
               Close
             </button>
@@ -165,7 +126,8 @@ export function Header() {
                     aria-current={isActive(pathname, link.href) ? "page" : undefined}
                     onClick={closeMenu}
                   >
-                    {link.title}
+                    <span className={styles.menuTitle}>{link.title}</span>
+                    <span className={styles.menuHint}>{link.hint}</span>
                   </Link>
                 </li>
               ))}

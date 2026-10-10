@@ -6,7 +6,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 6.5rem;
+  width: 7rem;
   height: 5.5rem;
   pointer-events: none;
 }
@@ -23,8 +23,8 @@
 .postmark {
   position: absolute;
   top: 0.9rem;
-  right: 1.9rem;
-  width: 4.4rem;
+  right: 2.7rem;
+  width: 4.2rem;
   height: auto;
   color: var(--ink);
   opacity: 0.6;
@@ -34,7 +34,7 @@
 
 .title {
   max-width: 14ch;
-  padding-right: 6rem;
+  padding-right: 7rem;
   font-size: var(--step-2);
   font-weight: 700;
   letter-spacing: -0.03em;

@@ -1,7 +1,7 @@
 ---
 title: Product and Scope
 tags: [product]
-updated: 2026-10-09
+updated: 2026-10-10
 ---
 
 # Product and scope
@@ -25,7 +25,7 @@ A developer portfolio, a general photographer portfolio, a booking site, an Inst
 
 ## Explicitly deferred
 
-No authentication or accounts, no community posts or submissions, no profiles, likes, comments, followers or feeds, no moderation, no custom backend or admin UI. See [[10 Backlog]].
+No authentication or accounts, no community posts or submissions, no profiles, likes, comments, followers or feeds, no review queue (visitor cards are public at once and can be hidden afterwards), no custom backend or admin UI. See [[10 Backlog]].
 
 ## Honesty rules for content
 

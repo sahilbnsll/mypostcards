@@ -3612,3 +3612,443 @@ export default function CursorDemo() {
 }
 
 ```
+
+
+You are given a task to integrate an existing React component in the codebase
+
+The codebase should support:
+- shadcn project structure  
+- Tailwind CSS
+- Typescript
+
+If it doesn't, provide instructions on how to setup project via shadcn CLI, install Tailwind or Typescript.
+
+Determine the default path for components and styles. 
+If default path for components is not /components/ui, provide instructions on why it's important to create this folder
+Copy-paste this component to /components/ui folder:
+```tsx
+navigation-menu-05.tsx
+import { BookOpen, Home, Rss } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+
+const navigationMenuItems = [
+  { title: "Home", href: "#", icon: Home, isActive: true },
+  { title: "Blog", href: "#blog", icon: Rss },
+  { title: "Docs", href: "#docs", icon: BookOpen },
+];
+
+export default function NavigationMenuWithActiveItem() {
+  return (
+    <NavigationMenu>
+      <NavigationMenuList className="space-x-8">
+        {navigationMenuItems.map((item) => (
+          <NavigationMenuItem key={item.title}>
+            <NavigationMenuLink
+              active={item.isActive}
+              asChild
+              className={cn(
+                "group relative inline-flex h-9 w-max items-center justify-center px-0.5 py-2 font-medium text-sm",
+                "before:absolute before:inset-x-0 before:bottom-0 before:h-[2px] before:scale-x-0 before:bg-primary before:transition-transform",
+                "hover:text-accent-foreground hover:before:scale-x-100",
+                "focus:text-accent-foreground focus:outline-hidden focus:before:scale-x-100",
+                "disabled:pointer-events-none disabled:opacity-50",
+                "data-active:bg-transparent data-[state=open]:before:scale-x-100 data-active:before:scale-x-100",
+                "hover:bg-transparent focus:bg-transparent active:bg-transparent",
+              )}
+            >
+              <Link className="flex-row items-center gap-2.5" href={item.href}>
+                <item.icon className="h-5 w-5 shrink-0" />
+                {item.title}
+              </Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        ))}
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
+}
+
+
+demo.tsx
+import NavigationMenuWithActiveItem from "@/components/ui/navigation-menu-05";
+
+export default function NavigationMenu05Demo() {
+  return (
+    <div className="flex min-h-64 w-full items-center justify-center bg-background p-8 text-foreground">
+      <NavigationMenuWithActiveItem />
+    </div>
+  );
+}
+
+```
+
+Copy-paste these files for dependencies:
+```tsx
+shadcn/navigation-menu
+import * as React from "react"
+import { ChevronDownIcon } from "@radix-ui/react-icons"
+import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
+import { cva } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const NavigationMenu = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>
+>(({ className, children, ...props }, ref) => (
+  <NavigationMenuPrimitive.Root
+    ref={ref}
+    className={cn(
+      "relative z-10 flex max-w-max flex-1 items-center justify-center",
+      className
+    )}
+    {...props}
+  >
+    {children}
+    <NavigationMenuViewport />
+  </NavigationMenuPrimitive.Root>
+))
+NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
+
+const NavigationMenuList = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.List>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>
+>(({ className, ...props }, ref) => (
+  <NavigationMenuPrimitive.List
+    ref={ref}
+    className={cn(
+      "group flex flex-1 list-none items-center justify-center space-x-1",
+      className
+    )}
+    {...props}
+  />
+))
+NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName
+
+const NavigationMenuItem = NavigationMenuPrimitive.Item
+
+const navigationMenuTriggerStyle = cva(
+  "group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+)
+
+const NavigationMenuTrigger = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => (
+  <NavigationMenuPrimitive.Trigger
+    ref={ref}
+    className={cn(navigationMenuTriggerStyle(), "group", className)}
+    {...props}
+  >
+    {children}{" "}
+    <ChevronDownIcon
+      className="relative top-[1px] ml-1 h-3 w-3 transition duration-300 group-data-[state=open]:rotate-180"
+      aria-hidden="true"
+    />
+  </NavigationMenuPrimitive.Trigger>
+))
+NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName
+
+const NavigationMenuContent = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <NavigationMenuPrimitive.Content
+    ref={ref}
+    className={cn(
+      "left-0 top-0 w-full data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 md:absolute md:w-auto ",
+      className
+    )}
+    {...props}
+  />
+))
+NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName
+
+const NavigationMenuLink = NavigationMenuPrimitive.Link
+
+const NavigationMenuViewport = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
+>(({ className, ...props }, ref) => (
+  <div className={cn("absolute left-0 top-full flex justify-center")}>
+    <NavigationMenuPrimitive.Viewport
+      className={cn(
+        "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
+        className
+      )}
+      ref={ref}
+      {...props}
+    />
+  </div>
+))
+NavigationMenuViewport.displayName =
+  NavigationMenuPrimitive.Viewport.displayName
+
+const NavigationMenuIndicator = React.forwardRef<
+  React.ElementRef<typeof NavigationMenuPrimitive.Indicator>,
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Indicator>
+>(({ className, ...props }, ref) => (
+  <NavigationMenuPrimitive.Indicator
+    ref={ref}
+    className={cn(
+      "top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in",
+      className
+    )}
+    {...props}
+  >
+    <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
+  </NavigationMenuPrimitive.Indicator>
+))
+NavigationMenuIndicator.displayName =
+  NavigationMenuPrimitive.Indicator.displayName
+
+export {
+  navigationMenuTriggerStyle,
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuContent,
+  NavigationMenuTrigger,
+  NavigationMenuLink,
+  NavigationMenuIndicator,
+  NavigationMenuViewport,
+}
+
+```
+
+Install NPM dependencies:
+```bash
+next, lucide-react, @radix-ui/react-icons, class-variance-authority, @radix-ui/react-navigation-menu
+```
+You are given a task to integrate an existing React component in the codebase
+
+The codebase should support:
+- shadcn project structure  
+- Tailwind CSS
+- Typescript
+
+If it doesn't, provide instructions on how to setup project via shadcn CLI, install Tailwind or Typescript.
+
+Determine the default path for components and styles. 
+If default path for components is not /components/ui, provide instructions on why it's important to create this folder
+Copy-paste this component to /components/ui folder:
+```tsx
+pixeleted-404-not-found.tsx
+import { ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+
+interface Error404Props {
+  postcardImage?: string
+  postcardAlt?: string
+  curvedTextTop?: string
+  curvedTextBottom?: string
+  heading?: string
+  subtext?: string
+  backButtonLabel?: string
+  backButtonHref?: string
+}
+
+export function Error404({
+  postcardImage = "/statue-of-liberty-oil-pastel.jpg",
+  postcardAlt = "New York City Postcard",
+  curvedTextTop = "The General Intelligence",
+  curvedTextBottom = "Company of New York",
+  heading = "(404) Looks like the page you're looking for got lost somewhere.",
+  subtext = "But hey — in New York, even the unexpected detours lead somewhere.",
+  backButtonLabel = "Back to Home",
+  backButtonHref = "/",
+}: Error404Props) {
+  return (
+    <div className= "min-h-screen flex items-center justify-center px-4 py-16" >
+    <link rel="preconnect" href = "https://fonts.googleapis.com" />
+      <link rel="preconnect" href = "https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel = "stylesheet" />
+          <div className="flex flex-col items-center" >
+            <div className="relative mb-16" >
+              <svg
+            className="absolute -top-16 -left-12 w-[140px] h-[140px] pointer-events-none z-20 animate-spin-slow"
+  viewBox = "0 0 140 140"
+  style = {{ animationDuration: "20s" }
+}
+          >
+  <defs>
+  {/* Full circle path with smaller radius */ }
+  < path id = "circlePath" d = "M 70,70 m -50,0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" fill = "transparent" />
+    </defs>
+{/* Combined circular text */ }
+<text
+              className="text-[11px] fill-foreground font-serif uppercase"
+style = {{ fontWeight: 400, letterSpacing: "0.15em" }}
+            >
+  <textPath href="#circlePath" startOffset = "0%" >
+    { curvedTextTop } • { curvedTextBottom } •
+</textPath>
+  < /text>
+  < /svg>
+
+  < div className = "relative z-10" >
+    <div
+              className="relative p-3 shadow-2xl rotate-[4deg] hover:rotate-0 transition-transform duration-300 bg-white"
+            >
+  <div className="relative overflow-hidden bg-white" >
+    <img
+                  src={ postcardImage || "/placeholder.svg" }
+alt = { postcardAlt }
+className = "w-[360px] h-[220px] object-cover"
+  />
+  </div>
+  < /div>
+
+{/* Postal cancellation marks */ }
+<svg className="absolute -right-16 top-1/2 -translate-y-1/2 w-28 h-20" viewBox = "0 0 100 60" >
+  <path
+                d="M 10 15 Q 20 10 30 15 Q 40 20 50 15 Q 60 10 70 15 Q 80 20 90 15"
+stroke = "#888"
+strokeWidth = "1.5"
+fill = "none"
+opacity = "0.6"
+  />
+  <path
+                d="M 10 25 Q 20 20 30 25 Q 40 30 50 25 Q 60 20 70 25 Q 80 30 90 25"
+stroke = "#888"
+strokeWidth = "1.5"
+fill = "none"
+opacity = "0.6"
+  />
+  <path
+                d="M 10 35 Q 20 30 30 35 Q 40 40 50 35 Q 60 30 70 35 Q 80 40 90 35"
+stroke = "#888"
+strokeWidth = "1.5"
+fill = "none"
+opacity = "0.6"
+  />
+  </svg>
+  < /div>
+  < /div>
+
+  < div className = "text-center max-w-2xl" >
+    <h1 className="text-4xl md:text-5xl font-doto mb-6 text-balance leading-tight" > { heading } < /h1>
+      < p className = "text-muted-foreground text-base md:text-lg mb-10 font-sans" > { subtext } < /p>
+        < Button asChild className = "rounded-lg px-6 py-3 font-sans" >
+          <Link href={ backButtonHref } className = "flex items-center gap-2" >
+            { backButtonLabel }
+            < ArrowRight className = "w-4 h-4" />
+              </Link>
+              < /Button>
+              < /div>
+              < /div>
+              < /div>
+  )
+}
+
+
+demo.tsx
+import { Error404 } from "@/components/ui/pixeleted-404-not-found"
+
+export default function Error404Demo() {
+  return (
+    <Error404
+      postcardImage="https://cdn.21st.dev/assets/mirror/9e/9e64a2d8260f18efc82decc3e835f9ee656f14e736085507071a73f0841b38dd.jpg"
+      postcardAlt="New York City Postcard with Statue of Liberty"
+      curvedTextTop="The General Intelligence"
+      curvedTextBottom="of New York"
+      heading="(404) Looks like the page you're looking for got lost somewhere."
+      subtext="But hey — in New York, even the unexpected detours lead somewhere."
+      backButtonLabel="Back to Home"
+      backButtonHref="/"
+    />
+  )
+}
+
+```
+
+Copy-paste these files for dependencies:
+```tsx
+shadcn/button
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline:
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  },
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    )
+  },
+)
+Button.displayName = "Button"
+
+export { Button, buttonVariants }
+
+```
+
+Install NPM dependencies:
+```bash
+next, lucide-react, @radix-ui/react-slot, class-variance-authority
+```
+
+Extend existing Tailwind 4 index.css with this code (or if project uses Tailwind 3, extend tailwind.config.js or globals.css):
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+```

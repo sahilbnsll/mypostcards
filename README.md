@@ -29,7 +29,7 @@ Photos go in `public/images/`; entries go in `content/*.json`. Trips can have da
 
 1. Run `supabase/schema.sql` in the Supabase SQL editor.
 2. Set `SUPABASE_URL` and `SUPABASE_ANON_KEY` (and optionally `VISITOR_SALT`) in Vercel and `.env.local`. Never the service-role key.
-3. Approve cards in the Table Editor (`approved` column).
+3. Cards go on the wall straight away. To take one down, tick `hidden` on it in the Table Editor (or delete the row).
 
 Runbook: `vault/06 Supabase Setup.md`.
 

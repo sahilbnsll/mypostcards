@@ -42,6 +42,7 @@ Tokens: `--ease-out` (entrances, most things), `--ease-in-out`, `--ease-spring`;
 ### Added with the pivot
 
 - **Round cursor** (`Cursor`): rAF eased follow (22% per frame, stops when settled); ring over pressable things, smaller on press; with reduced motion it sits exactly on the pointer and transitions are off. Mouse only. D25.
+- **Header links**: the underline scales in from the left and leaves to the right (transform only, 280ms, off with reduced motion).
 - **Map postcards**: hover or focus scales the card (spring); no entrance animation.
 - **Search dialog and mobile menu**: CSS transitions with `@starting-style` and `allow-discrete`.
 

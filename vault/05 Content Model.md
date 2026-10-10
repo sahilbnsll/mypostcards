@@ -38,4 +38,4 @@ postcards  *-1 trip, destination, cafe, story   (all optional)
 
 ## Visitor card (database)
 
-`kind` (hello, place suggestion, about the site, other), `name?`, `message?`, `drawing` (stroke JSON: colour names, widths, points), `color` (card tint), `approved`, `pinned`. Never shown before approval.
+`kind` (hello, place suggestion, about the site, other), `name?`, `message?`, `drawing` (stroke JSON: colour names, widths, points), `color` (card tint), `hidden` (default false: cards are public at once), `pinned`.

@@ -19,7 +19,7 @@ export default async function VisitorsPage() {
     <>
       <PageHead
         title="Visitors"
-        lede="Leave a card: a hello, a thought, a place I should go. Write it, draw it, or both. It joins the wall once I have had a look."
+        lede="Leave a card: a hello, a thought, a place I should go. Write it, draw it, or both. It goes up on the wall right away."
       />
 
       <section className="wrap" aria-labelledby="leave-a-card">
@@ -28,7 +28,9 @@ export default async function VisitorsPage() {
         </h2>
         {wall.status === "closed" && (
           <p className="visitors-note" role="note">
-            The guest desk is still being set up, so cards can not be sent just yet. You can already try the pen.
+            {process.env.NODE_ENV === "development"
+              ? "Local setup: put SUPABASE_URL and SUPABASE_ANON_KEY in .env.local (the file is already in the project folder), then stop and restart npm run dev. Until then cards can not be sent."
+              : "The guest desk is still being set up, so cards can not be sent just yet. You can already try the pen."}
           </p>
         )}
         <CardComposer />

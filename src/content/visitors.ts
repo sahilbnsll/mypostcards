@@ -11,9 +11,9 @@ export interface VisitorWall {
 }
 
 /**
- * Approved visitor cards, pinned first, newest next. A failure here must never break the page or
+ * Visitor cards that are not hidden, pinned first, newest next. A failure here must never break the page or
  * a deploy, so every problem becomes an empty wall with a warning in the log. The result is
- * cached briefly so approving a card in the dashboard shows up within minutes.
+ * cached briefly; a new card expires the cache at once, and hiding one in the dashboard shows within minutes.
  */
 export async function getVisitorWall(limit = 60): Promise<VisitorWall> {
   "use cache";

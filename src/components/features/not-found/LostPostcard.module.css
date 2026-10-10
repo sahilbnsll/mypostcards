@@ -1,0 +1,124 @@
+.scene {
+  position: relative;
+  width: min(26rem, 100%);
+  margin-inline: auto;
+}
+
+/* The postcard: a print with a wide strip at the bottom for the handwriting */
+.print {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 0.8rem 0.8rem 0;
+  background: var(--print);
+  box-shadow: var(--shadow-lift);
+  rotate: 4deg;
+  transition: rotate 450ms var(--ease-out), box-shadow var(--d-base) var(--ease-out);
+}
+
+.print:hover,
+.print:focus-visible {
+  rotate: 0deg;
+}
+
+.photo {
+  display: block;
+}
+
+.note {
+  display: block;
+  padding: 0.35rem 0 0.55rem;
+  font-family: var(--font-hand);
+  font-size: 1.7rem;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--print-ink);
+}
+
+/* The seal sits on the top-left corner and turns slowly */
+.seal {
+  position: absolute;
+  z-index: 2;
+  top: -3.6rem;
+  left: -2.6rem;
+  width: 8.4rem;
+  height: 8.4rem;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: turn 32s linear infinite;
+}
+
+.disc {
+  fill: var(--paper);
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+.ringText {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  fill: var(--ink);
+}
+
+.sealStamp {
+  position: relative;
+  width: 1.9rem;
+  height: auto;
+  rotate: -6deg;
+  filter: drop-shadow(0 1px 1px rgb(15 26 43 / 0.25));
+}
+
+@keyframes turn {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* Cancellation waves running off the right edge, in the logo's clay */
+.waves {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: -4.5rem;
+  width: 7rem;
+  height: auto;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+.waves g {
+  stroke: var(--logo-accent);
+}
+
+@media (max-width: 36rem) {
+  .waves {
+    display: none;
+  }
+
+  .seal {
+    left: -0.8rem;
+    width: 7.2rem;
+    height: 7.2rem;
+    top: -3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    animation: none;
+  }
+
+  .print {
+    transition: none;
+  }
+}

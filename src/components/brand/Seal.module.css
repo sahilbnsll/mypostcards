@@ -1,0 +1,10 @@
+.seal {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.letters text {
+  font-family: var(--font-display);
+  font-weight: 600;
+}

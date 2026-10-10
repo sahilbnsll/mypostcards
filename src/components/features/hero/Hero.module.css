@@ -142,9 +142,9 @@
 
 .stamp {
   position: absolute;
-  top: -2.2cqw;
-  right: -1.6cqw;
-  width: 7.5cqw;
+  top: -3cqw;
+  right: -2.2cqw;
+  width: 9.5cqw;
   height: auto;
   rotate: 7deg;
   filter: drop-shadow(0 2px 2px rgb(15 26 43 / 0.28));
@@ -156,10 +156,15 @@
   left: -3.2cqw;
   width: 12cqw;
   height: auto;
-  color: var(--ink);
-  opacity: 0.62;
+  /* Light theme: brown ink stamped over whatever is underneath. Dark theme: a deep-green seal with
+     sage ink, because the stamp lands on a photo, a paper edge and the dark page all at once. */
+  border-radius: 50%;
+  background: var(--postmark-bg, transparent);
+  color: var(--postmark-ink, var(--logo-ink));
+  opacity: var(--postmark-opacity, 0.72);
   rotate: -14deg;
   mix-blend-mode: var(--postmark-blend, multiply);
+  box-shadow: var(--postmark-shadow, none);
 }
 
 .empty {

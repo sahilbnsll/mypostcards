@@ -27,17 +27,35 @@ Deliberately avoided: warm cream plus terracotta, tracked all-caps eyebrows abov
 | `--air-blue` | `#1f4da6` | Links on hover, handwritten notes, focus ring (7.4:1 on paper) |
 | `--air-stripe` | red/card/blue diagonal | Airmail edge: hero foot, footer top, lightbox back, empty state, mobile menu |
 
+### Brand and logo
+
+The logo (a postage stamp with a camera, postmark waves, and a lowercase serif "mypostcards") comes from the author's own sheet, kept as `design-reference/brand/logo-sheet.webp`. The stamp was traced into two single-colour vector layers so it can follow the theme: `public/brand/mark-main.svg` (frame and camera) and `public/brand/mark-accent.svg` (postmark waves and sun), shown through CSS masks by `LogoMark`. `public/brand/logo.svg` is the same mark in fixed colours for places that cannot read the theme (share images, README).
+
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| `--logo-main` | `#264a3a` green | `#a8cdb8` sage | stamp frame, camera |
+| `--logo-accent` | `#b35a31` clay | `#e39a6e` | postmark waves, sun, lens dot |
+| `--logo-ink` | `#4b3e38` brown | `#d9cdbf` | seal ring and lettering |
+| `--postmark-bg` / `--postmark-ink` | transparent / `--logo-ink` (brown) | `#0d1a14` / `#a8cdb8` | the hero postmark is brown ink stamped over whatever is below in light mode and a deep-green seal with sage ink in dark mode (it lands on a photo, a paper edge and the dark page at once) |
+| `--logo-paper` | `#f4eee0` cream | `#070b14` | camera lines on the small stamp |
+
+The short line under the wordmark is `siteConfig.descriptor` ("Postcards from Sahil"); change it in one place.
+
+The decorative `Stamp` on hero cards and postcard backs is drawn like a real stamp: warm paper edge with perforations, a window graded light to deep with a thin inset line, the logo's camera (its lens holds a sun and two peaks) and cancellation waves across the corner. "blue" is the logo green, "red" the clay, "ink" the brown. Every colour is a `--stamp-*` token (paper edge, a graded window and a line colour per tone, and the cancellation waves) with a light and a dark palette: at night the paper is softer, the window brighter and the lines dark, so it reads as lit rather than flat.
+
+Three sizes: **StampMark** (header, 25 to 30px, thick lines), **LogoMark** (footer, 64px and up), **Seal** (About page: a live-SVG round badge whose lettering follows the ring). The footer is dark in both themes, so it sets the light-on-dark values itself. The wordmark is Newsreader 600 in lowercase, one word. The rest of the site keeps its blue-grey paper and airmail red and blue; the brand colours appear only in the logo ([[09 Decisions]] D28).
+
 ### Dark theme
 
 Same roles, new values, defined twice in `tokens.css` (explicit `data-theme="dark"` and the system-preference fallback; keep identical).
 
 | Token | Dark | Notes |
 |---|---|---|
-| `--paper` / `--paper-deep` / `--card` | `#0f1522` / `#1a2336` / `#222d45` | page, wells, panels step up clearly |
+| `--paper` / `--paper-deep` / `--card` | `#070b14` / `#101827` / `#1a2338` | page matches the footer (`--night`); wells and panels step up from it |
 | `--ink` / `--ink-soft` / `--muted` / `--faint` | `#f1f2ee` / `#cdd3de` / `#a5b0c2` / `#7b879c` | warm white text |
 | `--rule` / `--rule-strong` | `#2e3b56` / `#52627f` | borders and map outlines |
 | `--air-red` / `--air-blue` | `#ff6b5e` / `#92b6ff` | lightened to stay legible |
-| `--map-sea` / `--map-land` | `#0a111f` / `#2c3d5c` | flat map |
+| `--map-sea` / `--map-land` | `#0c1424` / `#2c3d5c` | flat map |
 
 Role tokens that do not flip: `--print` (photo prints, polaroids, stamps: `#fbfbf8` light, `#ece9e0` dark), `--print-ink` (text on prints), `--on-photo` (text over photographs). Panels use `--card`, which does flip. See [[09 Decisions]] D23.
 

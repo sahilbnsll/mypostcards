@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { getJournal, hasSampleContent } from "@/content";
+import { LogoMark } from "@/components/brand/LogoMark";
 import styles from "./Footer.module.css";
 
 export async function Footer() {
@@ -12,7 +13,13 @@ export async function Footer() {
       <div className="airmail-edge" aria-hidden />
       <div className={`wrap ${styles.inner}`}>
         <div className={styles.about}>
-          <p className={styles.wordmark}>my postcards</p>
+          <div className={styles.brand}>
+            <LogoMark className={styles.mark} />
+            <div>
+              <p className={styles.wordmark}>mypostcards</p>
+              <p className={styles.descriptor}>{siteConfig.descriptor}</p>
+            </div>
+          </div>
           <p className={styles.tagline}>{siteConfig.tagline}</p>
         </div>
 

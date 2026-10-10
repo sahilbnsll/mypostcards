@@ -4,8 +4,10 @@ import { siteConfig } from "@/config/site";
 import { getJournal } from "@/content";
 import { featuredFirst } from "@/content/selectors";
 import { PhotoSpread } from "@/components/features/spread/PhotoSpread";
+import { Seal } from "@/components/brand/Seal";
 import { Prose } from "@/components/ui/Prose";
 import { PageHead } from "@/components/ui/PageHead";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "About",
@@ -32,7 +34,9 @@ export default async function AboutPage() {
   return (
     <>
       <PageHead title="About" />
-      <section className="wrap" aria-label="About">
+      <section className={`wrap ${styles.about}`} aria-label="About">
+        <Seal className={styles.seal} />
+        <div>
         <Prose text={ABOUT} />
         <p style={{ marginTop: "var(--s-6)" }}>
           Kept by{" "}
@@ -45,6 +49,7 @@ export default async function AboutPage() {
           </Link>
           .
         </p>
+        </div>
       </section>
 
       {spread.length > 0 && (

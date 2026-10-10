@@ -8,13 +8,15 @@ updated: 2026-10-10
 
 ## Do next
 
-- [ ] **Connect the guest desk**: run `supabase/schema.sql`, set `SUPABASE_URL`, `SUPABASE_ANON_KEY` (and optionally `VISITOR_SALT`) on Vercel; approve cards in the Table Editor ([[06 Supabase Setup]]). Delete the old unused tables and storage bucket.
+- [ ] **Connect the guest desk**: run `supabase/schema.sql`, set `SUPABASE_URL`, `SUPABASE_ANON_KEY` (and optionally `VISITOR_SALT`) on Vercel; cards go live at once, hide one with the `hidden` column if needed ([[06 Supabase Setup]]). Delete the old unused tables and storage bucket.
 - [ ] Add the first real postcards under `public/images/postcards/` and `content/postcards.json`; then remove the sample entries ([[12 Sample Content and Credits]]).
 - [ ] Run Lighthouse, axe on the new pages (postcard, itinerary, places, cafés, visitors, search dialog) in both themes, and a real-device pass; record in [[08 Quality and Verification]].
 - [ ] Optional: a daily Vercel cron that pings Supabase so the free project does not pause.
 - [ ] Deploy to the subdomain and set the environment variables.
 
 ## Known limitations
+
+- Detail pages ([slug] routes) deliver their content through React's streaming swap: the served HTML holds it in a hidden block that a small inline script moves into place. Browsers do this at once; with JavaScript off only the loading skeleton is visible. Fixing it means making these routes fully part of the static shell, which Cache Components does not currently do for dynamic params.
 
 - Unknown slugs return HTTP 200 with the not-found UI and `noindex` (the page streams after the shell). Acceptable for SEO because of `noindex`, but not a true 404.
 - First request for each image pays the optimizer's encode cost. Self-host or pre-warm the real photographs.
@@ -77,7 +79,10 @@ Authentication, community posts and submissions, profiles, likes, comments, foll
 
 ## Added after the pivot
 
-- Visitor cards: no email or notification when a card arrives (check the dashboard). Moderation is manual.
+- Brand: decide whether to re-theme the whole site (paper, ink, accents) to the logo's green, clay and brown, and whether the hero's giant "my postcards" should become the serif "mypostcards". Not done: the logo's colours currently appear only in the logo.
+- Brand: the logo sheet is 1024px, so the traced stamp is as detailed as that allows. A higher-resolution export would let the camera lines be redrawn finer.
+
+- Visitor cards: no review before they appear and no notification when one arrives. If abuse becomes a problem: a report button, an auto-hide after reports, or restoring approval.
 - The world map thins pins to one per ~7 degrees and spreads cards on the server; very narrow screens can still show touching cards.
 - The round cursor hides the native one for mouse users; reconsider if it annoys.
 - Tag pages and RSS are still open.

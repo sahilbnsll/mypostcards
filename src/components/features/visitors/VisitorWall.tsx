@@ -48,7 +48,7 @@ export function VisitorCardView({ card, index = 0 }: { card: VisitorCard; index?
   );
 }
 
-/** Approved cards, laid out like a pinboard. */
+/** Visitor cards, laid out like a pinboard. */
 export function VisitorWall({ cards }: { cards: VisitorCard[] }) {
   return (
     <ul role="list" className={styles.wall}>

@@ -1,0 +1,25 @@
+.about {
+  display: grid;
+  gap: var(--s-6);
+  align-items: start;
+}
+
+.seal {
+  width: min(11rem, 50%);
+  /* A stamped badge, set slightly off true */
+  rotate: -7deg;
+}
+
+@media (min-width: 52rem) {
+  .about {
+    grid-template-columns: minmax(0, 1fr) 11rem;
+    gap: var(--s-8);
+  }
+
+  .seal {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    margin-top: var(--s-4);
+  }
+}

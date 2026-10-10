@@ -7,6 +7,7 @@ import { getJournal } from "@/content";
 import { EMPTY_SLUG, findBySlug, staticSlugs } from "@/content/selectors";
 import { siteConfig } from "@/config/site";
 import { formatLocation } from "@/lib/utils";
+import { BRAND, stampMarkDataUri } from "@/lib/brand";
 
 export const alt = "A postcard from My Postcards";
 export const size = { width: 1200, height: 630 };
@@ -69,9 +70,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center" }}>
             <div style={{ display: "flex", fontSize: photo ? 62 : 84, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2 }}>{title}</div>
             {where ? <div style={{ display: "flex", marginTop: 20, fontSize: 30, color: "#526075" }}>{where}</div> : null}
-            <div style={{ display: "flex", alignItems: "center", marginTop: 44, fontSize: 26, fontWeight: 700 }}>
-              <div style={{ display: "flex", width: 22, height: 28, marginRight: 14, background: "#d8362b", border: "3px solid #fbfbf8", boxShadow: "0 0 0 1px #d8362b" }} />
-              my postcards
+            <div style={{ display: "flex", alignItems: "center", marginTop: 44, fontSize: 30, fontWeight: 700, color: BRAND.green }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={stampMarkDataUri()} width={30} height={37} alt="" style={{ marginRight: 14 }} />
+              mypostcards
             </div>
           </div>
         </div>

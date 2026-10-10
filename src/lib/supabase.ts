@@ -4,7 +4,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
  * The Supabase client for the guest desk, or null when it is not configured (local development
  * without keys, or a deployment that has not been given them yet).
  *
- * It uses the public anon key only. That key can read approved visitor cards and call
+ * It uses the public anon key only. That key can read visible visitor cards and call
  * submit_visitor_card(); nothing else (see supabase/schema.sql). The service-role key is never
  * used here and must not be added to this project's environment.
  *
