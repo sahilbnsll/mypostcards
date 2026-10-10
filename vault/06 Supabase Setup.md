@@ -1,92 +1,46 @@
 ---
-title: Supabase Setup
-tags: [runbook, supabase]
-updated: 2026-10-09
+title: Supabase Setup (visitor cards)
+tags: [supabase, runbook]
+updated: 2026-10-10
 ---
 
-# Supabase setup runbook
+# Supabase: the guest desk only
 
-Status: schema and seed are **written and tested locally, not yet applied** to the live project (no credentials were available to the assistant). The database is empty, so start at step 1.
+Supabase is used for **one thing**: the visitor cards on `/visitors` (the "guest desk"). Photographs, trips, places, cafés and stories are authored in the repository (`content/` and `public/images/`, see [[05 Content Model]]) and never touch the database. The site works with no Supabase at all: the desk shows "still being set up" and the pen still works, but cards can not be sent ([[09 Decisions]] D19, D20).
 
-## 1. Create the tables
+## What exists
 
-1. Supabase dashboard → **SQL Editor** → New query.
-2. Paste all of `supabase/schema.sql` → **Run**. It creates five tables, constraints, indexes, RLS policies (public read of published rows only) and the `postcards` storage bucket.
-3. Safe to run again: it never drops data.
+- Table `visitor_cards`: `kind`, `name`, `message`, `drawing` (stroke JSON), `color`, `approved`, `pinned`, `ip_hash`, timestamps. Constraints on lengths, kinds and colours.
+- **Row level security.** Anonymous visitors can read only rows where `approved = true`, and only the public columns (`ip_hash` is unreadable). They can not insert, update or delete.
+- **Writes go through one function**, `submit_visitor_card()` (`security definer`): validates input, rate-limits (3 per hour and 8 per day per IP hash, 40 per hour overall), and always stores the card unapproved.
+- Nothing appears on the site until you approve it.
 
-## 2. Load the sample content (optional but recommended first)
+The SQL is in `supabase/schema.sql` and is safe to run twice. It was tested in an embedded Postgres (PGlite): anon can not write directly, can not read `ip_hash` or `select *`, nothing public before approval, rate limit works, bad input is rejected.
 
-Pick one:
+## One-time setup
 
-- **No keys needed:** paste `supabase/seed.sql` into the SQL editor → Run. (Regenerate with `npm run seed:sql` after editing `src/content/data/sample.ts`.)
-- **Script:** put `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in `.env.local`, then `npm run seed`. Upserts by slug; never deletes.
+1. In the Supabase dashboard open **SQL Editor**, paste `supabase/schema.sql`, run it.
+2. The old setup created tables `postcards`, `trips`, `destinations`, `cafes`, `stories` and a storage bucket. They are unused now. The commented block at the end of `schema.sql` drops the tables; delete the storage bucket in the dashboard (**Storage**) by hand.
+3. In Vercel, **Settings, Environment Variables**: `SUPABASE_URL`, `SUPABASE_ANON_KEY` (the project's anon/public key) and, optionally, `VISITOR_SALT` (any long random string; used to hash visitor IP addresses, which rotate daily). **Do not add the service-role key anywhere.** The site never needs it.
+4. Redeploy. Locally, copy `.env.example` to `.env.local` with the same values.
 
-Result: 5 destinations, 5 trips, 4 cafés, 3 stories, 48 postcards, all `is_sample = true`.
+## Moderating cards
 
-## 3. Point the site at Supabase
+Open **Table Editor, `visitor_cards`**. New cards have `approved = false`. Tick `approved` to publish a card (it shows within about five minutes, the wall is cached briefly); tick `pinned` to keep it first; delete rows you do not want. Nothing else is needed.
 
-Create `.env.local` (copy `.env.example`):
+## How the form is protected
 
-```bash
-SUPABASE_URL=https://<project-ref>.supabase.co
-SUPABASE_ANON_KEY=<anon / publishable key>
-```
+Honeypot field, a minimum time on the form, links rejected (cards are plain text and drawings), drawing data re-validated on the server and again on read, rendered only as SVG paths (never HTML), per-IP and global rate limits in the database, daily-rotating hashed IP (never stored raw), RLS as the last layer. The worst a bypass can do is add unapproved rows you never publish.
 
-Dashboard → Project Settings → **API**. Restart `npm run dev`. The anon key is read-only by design (RLS), and is only used on the server.
+## Free plan notes
 
-> **Never** put the service-role key in client code, a `NEXT_PUBLIC_` variable, or a hosting dashboard's public settings. It bypasses RLS. If it ever leaks, rotate it in Supabase.
-
-## 4. Add your own postcards
-
-Table Editor, in this order (foreign keys point earlier): `destinations` → `trips` → `cafes` → `stories` → `postcards`.
-
-Minimum for a postcard: `slug`, `title`, `image_src`, `image_alt`, `image_width`, `image_height`, `category`. Add `caption`, location, `trip_slug`, etc. as you like. Leave `is_sample` false. See [[05 Content Model]].
-
-Tips:
-- Slugs: lowercase words with hyphens (`kyoto-evening-lane`).
-- Width and height: the file's pixel size (any consistent pair with the right ratio works; it only reserves space).
-- `image_color`: optional hex of the photo's average colour for a nicer loading tint.
-- Hide something without deleting: set `published = false`.
-- Put a photo first: set `featured = true`, or give it a low `sort_order`.
-
-### Uploading photos
-
-Storage → bucket `postcards` → upload → open the object → copy the **public URL** → paste into `image_src`. Aim for about 2000px on the long edge, JPEG, quality 80-85. The site resizes and converts to AVIF/WebP.
-
-## 5. Remove the sample content when ready
-
-```sql
-delete from public.postcards where is_sample;
-delete from public.stories   where is_sample;
-delete from public.cafes     where is_sample;
-delete from public.trips     where is_sample;
-delete from public.destinations where is_sample;
-```
-
-The footer notice and lightbox "sample" labels disappear on their own once no sample rows remain.
-
-## 6. Make edits appear quickly
-
-By default the site refreshes content hourly. For instant updates, create a **Database Webhook** (Database → Webhooks) on insert/update/delete for each table: `POST https://mypostcards.sahilbansal.net/api/revalidate` with header `x-revalidate-secret: <REVALIDATE_SECRET>`. Set `REVALIDATE_SECRET` in `.env.local` and in the host's environment. Without it the route answers 503 and is inert.
-
-## 7. Deployment environment
-
-Set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `REVALIDATE_SECRET`. Not the service-role key. Build needs network access to Supabase and Google Fonts.
+Supabase Free pauses a project after a week of inactivity (the wall then shows as unavailable until you resume it in the dashboard) and has 500 MB database, 5 GB egress. A card is a few kilobytes. If pausing bothers you, [[10 Backlog]] has a daily keep-alive cron (Vercel Hobby allows one cron per day).
 
 ## Troubleshooting
 
 | Symptom | Cause |
 |---|---|
-| Site shows sample content | `SUPABASE_URL` or `SUPABASE_ANON_KEY` missing, or `CONTENT_SOURCE=local` |
-| Build log: `[my-postcards] Supabase tables not found ... Run supabase/schema.sql` and an empty home page | Tables not created yet. Run step 1; the site fills in within about a minute (or redeploy) |
-| Build fails with `Supabase query for "postcards" failed: Invalid API key` (or another message) | Wrong URL or key in the environment, or an RLS/grant problem. Fix the env var and redeploy |
-| Home says "No postcards yet" | Connected and empty: add rows or seed |
-| Row exists but not on site | `published = false`, or cache not refreshed yet (wait or call the revalidate route) |
-| Image blank or 400 from `/_next/image` | Host not allow-listed (Storage host is derived from `SUPABASE_URL` at build/dev start: restart), or bad URL |
-| Insert fails on `slug` | Must match `^[a-z0-9]+(-[a-z0-9]+)*$` |
-
-## The Vercel and GitHub connections do not create the database
-
-Connecting Supabase to Vercel only copies environment variables (URL and keys) into the Vercel project. Connecting Vercel to GitHub only builds and deploys the code. Neither runs SQL, so **tables, policies and the storage bucket are created only by running `supabase/schema.sql`** (step 1). Order that avoids a confusing first deploy: run the schema, seed or add rows, then deploy. If the env vars exist before the tables do, the build still succeeds but the site is empty.
-
-Optional automation: Supabase's own GitHub integration (Project Settings > Integrations > GitHub) can apply SQL files in `supabase/migrations/` whenever the production branch changes. That needs the schema stored as a migration file and the integration enabled in the Supabase dashboard. Not set up yet; see [[10 Backlog]].
+| `/visitors` says the desk is being set up | `SUPABASE_URL` or `SUPABASE_ANON_KEY` missing on this deploy |
+| Build log: "visitor_cards table does not exist" | Step 1 not done; the site still builds, with an empty wall |
+| "Your card could not be sent" | The function is missing or the project is paused; check Logs, Postgres |
+| A card was sent but is not shown | It is waiting for approval, or the wall cache has not refreshed yet (up to five minutes) |

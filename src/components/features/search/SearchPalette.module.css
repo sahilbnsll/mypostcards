@@ -1,0 +1,215 @@
+.trigger {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  transition: background-color var(--d-fast), border-color var(--d-fast);
+}
+
+.trigger:hover {
+  background: var(--paper-deep);
+  border-color: var(--rule-strong);
+}
+
+/* A panel dropped from the top. Enter and exit are CSS transitions, like the mobile menu. */
+.dialog {
+  position: fixed;
+  inset: 0;
+  width: min(40rem, calc(100% - 2rem));
+  max-width: none;
+  max-height: none;
+  margin: 10svh auto auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  opacity: 0;
+  translate: 0 -12px;
+  transition:
+    opacity 200ms ease,
+    translate 200ms var(--ease-out),
+    display 200ms allow-discrete,
+    overlay 200ms allow-discrete;
+}
+
+.dialog[open] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@starting-style {
+  .dialog[open] {
+    opacity: 0;
+    translate: 0 -12px;
+  }
+}
+
+.dialog::backdrop {
+  background: rgb(12 20 36 / 0);
+  transition:
+    background-color 200ms ease,
+    display 200ms allow-discrete,
+    overlay 200ms allow-discrete;
+}
+
+.dialog[open]::backdrop {
+  background: rgb(12 20 36 / 0.6);
+}
+
+@starting-style {
+  .dialog[open]::backdrop {
+    background: rgb(12 20 36 / 0);
+  }
+}
+
+.panel {
+  max-height: 76svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  box-shadow: var(--shadow-lift);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 0 var(--s-4);
+  border-bottom: 1px solid var(--rule);
+}
+
+.glass {
+  flex: none;
+  color: var(--muted);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 3.5rem;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.input::placeholder {
+  color: var(--muted);
+}
+
+.input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.field:focus-within {
+  box-shadow: inset 0 -2px 0 var(--air-blue);
+}
+
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.close {
+  flex: none;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.status {
+  min-height: 1.5rem;
+  padding: var(--s-2) var(--s-4) 0;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.results {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s-2);
+}
+
+.option {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  align-items: baseline;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.option[data-active] {
+  background: var(--paper-deep);
+  box-shadow: inset 3px 0 0 var(--air-red);
+}
+
+.kind {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--air-blue);
+}
+
+.text {
+  display: grid;
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  overflow: hidden;
+  font-size: var(--step--1);
+  color: var(--muted);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.empty {
+  padding: var(--s-4) var(--s-5) var(--s-5);
+  color: var(--ink-soft);
+}
+
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+
+.quick a {
+  display: inline-block;
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.quick a:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--card);
+}

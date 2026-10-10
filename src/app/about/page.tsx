@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { getJournal } from "@/content";
+import { featuredFirst } from "@/content/selectors";
+import { PhotoSpread } from "@/components/features/spread/PhotoSpread";
 import { Prose } from "@/components/ui/Prose";
 import { PageHead } from "@/components/ui/PageHead";
 
@@ -22,7 +25,10 @@ Every photograph is a postcard with a short caption, a place and a kind: travel,
 
 The collection is being built. Until my own postcards are in, the photographs on the site are free-to-use samples from Unsplash, marked as samples wherever they appear.`;
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const { postcards } = await getJournal();
+  const spread = featuredFirst(postcards).slice(0, 5);
+
   return (
     <>
       <PageHead title="About" />
@@ -40,6 +46,20 @@ export default function AboutPage() {
           .
         </p>
       </section>
+
+      {spread.length > 0 && (
+        <section className="wrap section--tight" aria-labelledby="spread-title">
+          <h2 id="spread-title" className="visually-hidden">
+            A few postcards
+          </h2>
+          <PhotoSpread postcards={spread} id="about-spread" />
+          <p style={{ marginTop: "var(--s-5)", textAlign: "center" }}>
+            <Link href="/gallery" className="text-link">
+              Open the gallery
+            </Link>
+          </p>
+        </section>
+      )}
     </>
   );
 }

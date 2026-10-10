@@ -8,7 +8,7 @@ A personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bans
 
 ## Stack
 
-Next.js 16 (App Router, Cache Components), React 19, TypeScript (strict), CSS Modules with design tokens, `next/image` and `next/font`, Supabase (Postgres, read-only from the site). No Tailwind, no animation library.
+Next.js 16 (App Router, Cache Components), React 19, TypeScript (strict), CSS Modules with design tokens, `next/image` and `next/font`. Content is files in this repository. Supabase is used only for visitor cards. No Tailwind, no animation library.
 
 > This Next.js version has breaking changes. Read the relevant guide in `node_modules/next/dist/docs/` before changing framework-level code (see `AGENTS.md`).
 
@@ -16,43 +16,48 @@ Next.js 16 (App Router, Cache Components), React 19, TypeScript (strict), CSS Mo
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000
+npm run dev          # http://localhost:3000, rebuilds data when content/ or public/images/ change
 ```
 
-With no environment variables the site shows built-in **sample content** (48 sample postcards).
+No environment variables are needed to run the site. Without Supabase the visitors page works as a preview and cards can not be sent.
 
-## Connect Supabase
+## Adding your own postcards
 
-1. Run `supabase/schema.sql` in the Supabase SQL editor (creates tables, RLS, storage bucket).
-2. Optionally load samples: paste `supabase/seed.sql`, or set `SUPABASE_SERVICE_ROLE_KEY` in `.env.local` and run `npm run seed`.
-3. Copy `.env.example` to `.env.local` and set `SUPABASE_URL` and `SUPABASE_ANON_KEY`. Restart the dev server.
+Photos go in `public/images/`; entries go in `content/*.json`. Trips can have day-by-day itineraries, cafés can have guide details, places can be marked as planned. The full guide, with examples: [`content/README.md`](content/README.md). Mistakes stop the build with a message that names the file and the fix.
 
-Full runbook, including adding your own postcards and uploading photos: `vault/06 Supabase Setup.md`.
+## Visitor cards (Supabase, optional)
+
+1. Run `supabase/schema.sql` in the Supabase SQL editor.
+2. Set `SUPABASE_URL` and `SUPABASE_ANON_KEY` (and optionally `VISITOR_SALT`) in Vercel and `.env.local`. Never the service-role key.
+3. Approve cards in the Table Editor (`approved` column).
+
+Runbook: `vault/06 Supabase Setup.md`.
 
 ## Scripts
 
 | Script | Purpose |
 |---|---|
-| `npm run dev` | Dev server |
+| `npm run dev` | Dev server that also watches `content/` and `public/images/` |
+| `npm run content` | Rebuild and validate the content data once |
 | `npm run build` / `npm start` | Production build and server |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm run seed` | Upsert sample rows into Supabase (needs `.env.local`) |
-| `npm run seed:sql` | Regenerate `supabase/seed.sql` from `src/content/data/sample.ts` |
 
 ## Layout
 
 ```text
+content/          authored data (postcards, trips, destinations, cafés, stories)
+public/images/    your photographs
 src/app/          routes and metadata
 src/components/   layout, ui primitives, feature components
-src/content/      types, data layer (Supabase + sample), selectors
-src/styles/       tokens.css, globals.css, motion.css
-supabase/         schema.sql, seed.sql
-scripts/          seed.mjs
+src/content/      types, selectors, generated journal (not committed)
+src/styles/       tokens.css (light and dark), globals.css, motion.css
+supabase/         schema.sql (visitor cards)
+scripts/          build-content.mjs, dev.mjs
 vault/            project documentation (Obsidian)
 design-reference/ supplied UI component references
 ```
 
 ## Scope
 
-Single-creator journal. Deliberately not built: authentication, community posts, profiles, likes, comments, feeds, moderation, custom backend. See `vault/10 Backlog.md`.
+Single-creator journal. Deliberately not built: accounts, profiles, likes, feeds, a custom backend. Visitors can leave a card; nothing else is user-generated. See `vault/10 Backlog.md`.

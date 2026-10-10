@@ -42,3 +42,6 @@ next-env.d.ts
 
 # keep the template tracked
 !.env.example
+
+# generated from content/ by scripts/build-content.mjs
+/src/content/generated/

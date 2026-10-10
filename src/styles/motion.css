@@ -14,7 +14,7 @@
 
 /* ---- Scroll reveals ------------------------------------------------------------------- */
 
-[data-reveal][data-reveal-state="pending"] {
+:is([data-reveal="text"], [data-reveal="photo"])[data-reveal-state="pending"] {
   opacity: 0;
 }
 
@@ -26,7 +26,7 @@
   filter: grayscale(1) brightness(1.08) contrast(0.92);
 }
 
-[data-reveal][data-reveal-state="in"] {
+:is([data-reveal="text"], [data-reveal="photo"])[data-reveal-state="in"] {
   transition:
     opacity 700ms var(--ease-out) calc(var(--i, 0) * 70ms),
     transform 700ms var(--ease-out) calc(var(--i, 0) * 70ms),

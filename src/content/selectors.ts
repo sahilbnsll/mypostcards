@@ -1,4 +1,4 @@
-import type { Category, Journal, Postcard, PostcardView } from "./types";
+import type { Category, ImageAsset, Journal, Postcard, PostcardView } from "./types";
 
 type WithSlug = { slug: string };
 
@@ -60,7 +60,32 @@ export function staticSlugs<T extends WithSlug>(items: readonly T[]): Array<{ sl
   return items.length > 0 ? items.map(({ slug }) => ({ slug })) : [{ slug: EMPTY_SLUG }];
 }
 
-/** Attach the names of each postcard's trip, place and café so client components need no lookups. */
+/**
+ * Postcards most like this one, best first. Scores shared context (same trip, place or café) above
+ * shared tags and kind, and ignores anything with no overlap at all.
+ */
+export function relatedPostcards(postcards: readonly Postcard[], card: Postcard, max = 4): Postcard[] {
+  const tags = new Set(card.tags);
+  return postcards
+    .filter((other) => other.slug !== card.slug)
+    .map((other) => {
+      let score = 0;
+      if (card.tripSlug && other.tripSlug === card.tripSlug) score += 4;
+      if (card.cafeSlug && other.cafeSlug === card.cafeSlug) score += 4;
+      if (card.destinationSlug && other.destinationSlug === card.destinationSlug) score += 3;
+      else if (card.location.city && other.location.city === card.location.city) score += 3;
+      else if (card.location.country && other.location.country === card.location.country) score += 1;
+      for (const tag of other.tags) if (tags.has(tag)) score += 1.5;
+      if (other.category === card.category) score += 1;
+      return { other, score };
+    })
+    .filter((entry) => entry.score >= 2)
+    .sort((a, b) => b.score - a.score || a.other.sortOrder - b.other.sortOrder)
+    .slice(0, max)
+    .map((entry) => entry.other);
+}
+
+/** Attach the names of each postcard's trip, place and café, plus its related postcards. */
 export function toViews(journal: Journal, postcards: readonly Postcard[]): PostcardView[] {
   const trips = new Map(journal.trips.map((t) => [t.slug, t.title]));
   const places = new Map(journal.destinations.map((d) => [d.slug, d.name]));
@@ -70,8 +95,12 @@ export function toViews(journal: Journal, postcards: readonly Postcard[]): Postc
     tripTitle: card.tripSlug ? trips.get(card.tripSlug) : undefined,
     destinationName: card.destinationSlug ? places.get(card.destinationSlug) : undefined,
     cafeName: card.cafeSlug ? cafes.get(card.cafeSlug) : undefined,
+    related: relatedPostcards(journal.postcards, card).map((r) => ({ slug: r.slug, title: r.title })),
   }));
 }
+
+export const visitedPlaces = (journal: Journal) => journal.destinations.filter((d) => d.status === "visited");
+export const plannedPlaces = (journal: Journal) => journal.destinations.filter((d) => d.status === "planned");
 
 /**
  * Up to `n` postcards, taking turns across categories so every kind shows up. Order within a
@@ -138,4 +167,48 @@ export function globePins(postcards: readonly Postcard[], max = 7, minSeparation
     });
   }
   return chosen;
+}
+
+export interface MapPin {
+  id: string;
+  lat: number;
+  lng: number;
+  label: string;
+  /** Where the pin leads. Without it the pin is just a mark. */
+  href?: string;
+  /** Hollow and dashed: somewhere still to visit. */
+  planned?: boolean;
+  /** The number shown on a route map. Defaults to the pin's position in the list. */
+  number?: number;
+  /** A photograph for the pin: it is drawn as a small postcard. */
+  image?: ImageAsset;
+}
+
+/**
+ * Pins for the flat map: one per distinct spot that has postcards with coordinates (featured
+ * first, one per ~7° square so postcards on the map do not pile up), plus every planned place that has coordinates.
+ */
+export function mapPins(journal: Journal): MapPin[] {
+  const pins: MapPin[] = [];
+  const spots = new Set<string>();
+  for (const card of featuredFirst(journal.postcards)) {
+    const point = card.location.coordinates;
+    if (!point) continue;
+    const spot = `${Math.round(point.lat / 7)},${Math.round(point.lng / 7)}`;
+    if (spots.has(spot)) continue;
+    spots.add(spot);
+    pins.push({
+      id: card.slug,
+      lat: point.lat,
+      lng: point.lng,
+      label: card.location.city ?? card.location.placeName ?? card.title,
+      href: `/postcards/${card.slug}`,
+      image: card.image,
+    });
+  }
+  for (const place of plannedPlaces(journal)) {
+    if (!place.coordinates) continue;
+    pins.push({ id: `planned-${place.slug}`, ...place.coordinates, label: place.name, href: `/destinations/${place.slug}`, planned: true });
+  }
+  return pins;
 }

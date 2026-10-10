@@ -39,7 +39,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: place.name,
     description: place.description,
     alternates: { canonical: `/destinations/${place.slug}` },
-    openGraph: { title: place.name, description: place.description, images: [{ url: place.coverImage.src, alt: place.coverImage.alt }] },
+    openGraph: {
+      title: place.name,
+      description: place.description,
+      ...(place.coverImage ? { images: [{ url: place.coverImage.src, alt: place.coverImage.alt }] } : {}),
+    },
   };
 }
 
@@ -66,7 +70,7 @@ async function DestinationContent({ params }: { params: Params }) {
         meta={
           <>
             <span>{[place.region, place.country].filter(Boolean).join(", ")}</span>
-            <span>{plural(postcards.length, "postcard")}</span>
+            <span>{place.status === "planned" ? "Dreaming of" : plural(postcards.length, "postcard")}</span>
           </>
         }
       />

@@ -13,6 +13,7 @@ import {
   toViews,
 } from "@/content/selectors";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
+import { Itinerary } from "@/components/features/trips/Itinerary";
 import { StoryCard } from "@/components/features/stories/StoryCard";
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { CollectionHero } from "@/components/ui/CollectionHero";
@@ -77,6 +78,13 @@ async function TripContent({ params }: { params: Params }) {
       {trip.story && (
         <section className="wrap section--tight" aria-label="About this trip" {...reveal("text")}>
           <Prose text={trip.story} />
+        </section>
+      )}
+
+      {trip.days.length > 0 && (
+        <section className="wrap section--tight" aria-labelledby="trip-itinerary">
+          <SectionHeader id="trip-itinerary" title="Itinerary" intro="Day by day, with the tips worth knowing." />
+          <Itinerary tripTitle={trip.title} days={trip.days} postcards={journal.postcards} />
         </section>
       )}
 

@@ -1,8 +1,5 @@
 import type { NextConfig } from "next";
 
-// Photos may live in Supabase Storage. The project host comes from the same env var the data layer uses.
-const supabaseHost = process.env.SUPABASE_URL ? new URL(process.env.SUPABASE_URL).hostname : undefined;
-
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
@@ -15,18 +12,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
         pathname: "/photo-*",
-        // Only the exact origin variant used by the sample data, not arbitrary transformations.
+        // Sample photographs only: the exact origin variant, not arbitrary transformations.
+        // Your own photographs live in public/images and need no entry here.
         search: "?auto=format&fit=max&w=2000&q=80",
       },
-      ...(supabaseHost
-        ? [
-            {
-              protocol: "https" as const,
-              hostname: supabaseHost,
-              pathname: "/storage/v1/object/public/**",
-            },
-          ]
-        : []),
     ],
   },
   async headers() {

@@ -20,6 +20,7 @@ export const siteConfig = {
     { title: "Places", href: "/destinations" },
     { title: "Cafés", href: "/cafes" },
     { title: "Stories", href: "/stories" },
+    { title: "Visitors", href: "/visitors" },
     { title: "About", href: "/about" },
   ] satisfies NavLink[],
 } as const;

@@ -3164,3 +3164,451 @@ Install NPM dependencies:
 ```bash
 framer-motion, @radix-ui/react-slot, class-variance-authority
 ```
+
+You are given a task to integrate an existing React component in the codebase
+
+The codebase should support:
+- shadcn project structure  
+- Tailwind CSS
+- Typescript
+
+If it doesn't, provide instructions on how to setup project via shadcn CLI, install Tailwind or Typescript.
+
+Determine the default path for components and styles. 
+If default path for components is not /components/ui, provide instructions on why it's important to create this folder
+Copy-paste this component to /components/ui folder:
+```tsx
+gallery-4.tsx
+"use client";
+
+import * as React from "react";
+import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { ZoomIn } from "lucide-react";
+
+type Photo = {
+  id: number;
+  src: string;
+  title: string;
+  location: string;
+};
+
+const photos: Photo[] = [
+  {
+    id: 1,
+    src: "https://cdn.21st.dev/assets/mirror/a2/a2764f768efec602ba1c8326917338179218e0633c7750112b9f097be2adf089.jpg",
+    title: "Financial District",
+    location: "New York, USA",
+  },
+  {
+    id: 2,
+    src: "https://cdn.21st.dev/assets/mirror/cd/cd147d18aba4119bb2ff18c9a0c3d0c288e522e3f337538fce4dd65a40c6f5c4.jpg",
+    title: "Alpine Fog",
+    location: "Grindelwald, CH",
+  },
+  {
+    id: 3,
+    src: "https://cdn.21st.dev/assets/mirror/64/64fbb664cfbed080b6752521916411e8a512a7fe83dc88fb280ac8bea4205866.jpg",
+    title: "Coastal Dunes",
+    location: "Jutland, DK",
+  },
+  {
+    id: 4,
+    src: "https://cdn.21st.dev/assets/mirror/3b/3b83b6e017654aee8c1a4317adc04d73e28e65eaf2aafbbaa26f3b750275ac10.jpg",
+    title: "Pine Canopy",
+    location: "Bavaria, DE",
+  },
+  {
+    id: 5,
+    src: "https://cdn.21st.dev/assets/mirror/c0/c00ab4224f4dafb35957325e47f7aaad095a18ed7e535c5c08478791c73ca774.jpg",
+    title: "Still Water",
+    location: "Hallstatt, AT",
+  },
+];
+
+export default function GalleryBlock() {
+  const [active, setActive] = React.useState<Photo | null>(null);
+
+  return (
+    <section className="flex min-h-svh w-full justify-center bg-background px-6 py-16 text-foreground">
+      <div className="w-full max-w-4xl">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <Badge variant="secondary">Field Notes</Badge>
+            <h2 className="mt-3 font-heading text-2xl font-bold tracking-tight text-balance sm:text-3xl">
+              Selected Work
+            </h2>
+          </div>
+          <span className="text-sm text-muted-foreground tabular-nums">
+            {photos.length} Photos
+          </span>
+        </div>
+
+        <Dialog
+          open={active !== null}
+          onOpenChange={(open) => !open && setActive(null)}
+        >
+          <div className="grid aspect-[3/2] grid-cols-4 grid-rows-2 gap-2">
+            {photos.map((photo, index) => (
+              <button
+                key={photo.id}
+                type="button"
+                onClick={() => setActive(photo)}
+                className={
+                  "group relative overflow-hidden rounded-lg border border-border bg-muted " +
+                  (index === 0 ? "col-span-2 row-span-2" : "")
+                }
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.title}
+                  className="size-full object-cover grayscale transition-all duration-300 group-hover:grayscale-0"
+                  loading="lazy"
+                />
+                <span className="absolute inset-0 flex items-center justify-center bg-foreground/0 opacity-0 transition-opacity group-hover:bg-foreground/10 group-hover:opacity-100">
+                  <span className="flex size-9 items-center justify-center rounded-md bg-background/90 text-foreground">
+                    <ZoomIn className="size-4" aria-hidden="true" />
+                  </span>
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <DialogContent className="overflow-hidden p-0 sm:max-w-2xl">
+            {active && (
+              <>
+                <div className="aspect-video w-full overflow-hidden bg-muted">
+                  <img
+                    src={active.src}
+                    alt={active.title}
+                    className="size-full object-cover"
+                  />
+                </div>
+                <div className="p-4 pt-0">
+                  <DialogTitle className="text-base">
+                    {active.title}
+                  </DialogTitle>
+                  <DialogDescription>{active.location}</DialogDescription>
+                </div>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
+      </div>
+    </section>
+  );
+}
+
+
+demo.tsx
+import GalleryBlock from "@/components/ui/gallery-4";
+
+export default function GalleryDemo() {
+  return <GalleryBlock />;
+}
+
+```
+
+Copy-paste these files for dependencies:
+```tsx
+shadcn/badge
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const badgeVariants = cva(
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        default:
+          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        secondary:
+          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive:
+          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        outline: "text-foreground",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+)
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+function Badge({ className, variant, ...props }: BadgeProps) {
+  return (
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+  )
+}
+
+export { Badge, badgeVariants }
+
+```
+```tsx
+shadcn/dialog
+'use client';
+
+import * as React from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { X } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
+
+const Dialog = DialogPrimitive.Root;
+
+const DialogTrigger = DialogPrimitive.Trigger;
+
+const DialogPortal = DialogPrimitive.Portal;
+
+const DialogClose = DialogPrimitive.Close;
+
+const DialogOverlay = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Overlay
+    ref={ref}
+    className={cn(
+      'fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      className
+    )}
+    {...props}
+  />
+));
+DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
+
+const DialogContent = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <DialogPortal>
+    <DialogOverlay />
+    <DialogPrimitive.Content
+      ref={ref}
+      className={cn(
+        'fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg',
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+        <X className="h-4 w-4" />
+        <span className="sr-only">Close</span>
+      </DialogPrimitive.Close>
+    </DialogPrimitive.Content>
+  </DialogPortal>
+));
+DialogContent.displayName = DialogPrimitive.Content.displayName;
+
+const DialogHeader = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      'flex flex-col space-y-1.5 text-center sm:text-left',
+      className
+    )}
+    {...props}
+  />
+);
+DialogHeader.displayName = 'DialogHeader';
+
+const DialogFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
+      className
+    )}
+    {...props}
+  />
+);
+DialogFooter.displayName = 'DialogFooter';
+
+const DialogTitle = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Title
+    ref={ref}
+    className={cn(
+      'text-lg font-semibold leading-none tracking-tight',
+      className
+    )}
+    {...props}
+  />
+));
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
+
+const DialogDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn('text-sm text-muted-foreground', className)}
+    {...props}
+  />
+));
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
+
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+};
+```
+
+Install NPM dependencies:
+```bash
+lucide-react, class-variance-authority, @radix-ui/react-dialog
+```
+
+You are given a task to integrate an existing React component in the codebase
+
+The codebase should support:
+- shadcn project structure  
+- Tailwind CSS
+- Typescript
+
+If it doesn't, provide instructions on how to setup project via shadcn CLI, install Tailwind or Typescript.
+
+Determine the default path for components and styles. 
+If default path for components is not /components/ui, provide instructions on why it's important to create this folder
+Copy-paste this component to /components/ui folder:
+```tsx
+inverted-cursor.tsx
+"use client"
+
+import React, { useEffect, useRef, useState } from "react"
+
+interface CursorProps {
+  size?: number
+}
+
+export const Cursor: React.FC<CursorProps> = ({ size = 60 }) => {
+  const cursorRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  // @ts-ignore
+  const requestRef = useRef<number>()
+  const previousPos = useRef({ x: -size, y: -size })
+
+  const [visible, setVisible] = useState(false)
+  const [position, setPosition] = useState({ x: -size, y: -size })
+
+  const animate = () => {
+    if (!cursorRef.current) return
+
+    const currentX = previousPos.current.x
+    const currentY = previousPos.current.y
+    const targetX = position.x - size / 2
+    const targetY = position.y - size / 2
+
+    const deltaX = (targetX - currentX) * 0.2
+    const deltaY = (targetY - currentY) * 0.2
+
+    const newX = currentX + deltaX
+    const newY = currentY + deltaY
+
+    previousPos.current = { x: newX, y: newY }
+    cursorRef.current.style.transform = `translate(${newX}px, ${newY}px)`
+
+    requestRef.current = requestAnimationFrame(animate)
+  }
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      setVisible(true)
+      setPosition({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      })
+    }
+
+    const handleMouseEnter = () => {
+      setVisible(true)
+    }
+
+    const handleMouseLeave = () => {
+      setVisible(false)
+    }
+
+    container.addEventListener("mousemove", handleMouseMove)
+    container.addEventListener("mouseenter", handleMouseEnter)
+    container.addEventListener("mouseleave", handleMouseLeave)
+
+    requestRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      container.removeEventListener("mousemove", handleMouseMove)
+      container.removeEventListener("mouseenter", handleMouseEnter)
+      container.removeEventListener("mouseleave", handleMouseLeave)
+      if (requestRef.current) cancelAnimationFrame(requestRef.current)
+    }
+  }, [position, size])
+
+  return (
+    <div ref={containerRef} className="absolute inset-0 cursor-none">
+      <div
+        ref={cursorRef}
+        className="pointer-events-none absolute z-50 rounded-full bg-white mix-blend-difference transition-opacity duration-300"
+        style={{
+          width: size,
+          height: size,
+          opacity: visible ? 1 : 0,
+        }}
+        aria-hidden="true"
+      />
+    </div>
+  )
+}
+
+export default Cursor
+
+
+demo.tsx
+"use client"
+
+import { Cursor } from "@/components/ui/inverted-cursor"
+
+export default function CursorDemo() {
+  return (
+    <div className="relative h-96 w-full cursor-none overflow-hidden">
+      {/* Custom circular inverted color cursor */}
+      <Cursor />
+
+      {/* Main content centered vertically and horizontally */}
+      <main className="flex h-full items-center justify-center">
+        <h1 className="text-4xl font-extrabold select-none">Move your mouse</h1>
+      </main>
+    </div>
+  )
+}
+
+```

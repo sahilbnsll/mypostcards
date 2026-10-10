@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getJournal } from "@/content";
 import { EMPTY_SLUG, findBySlug, postcardsForCafe, staticSlugs, toViews } from "@/content/selectors";
+import { CafeGuide } from "@/components/features/cafes/CafeGuide";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { CollectionHero } from "@/components/ui/CollectionHero";
@@ -52,7 +53,6 @@ async function CafeContent({ params }: { params: Params }) {
         meta={
           <>
             {where && <span>{where}</span>}
-            {cafe.favoriteOrder && <span>Usual order: {cafe.favoriteOrder}</span>}
             <span>{plural(postcards.length, "postcard")}</span>
             {place && (
               <span>
@@ -64,6 +64,10 @@ async function CafeContent({ params }: { params: Params }) {
           </>
         }
       />
+
+      <div className="wrap section--tight">
+        <CafeGuide cafe={cafe} />
+      </div>
 
       {postcards.length > 0 && (
         <section className="wrap section--tight" aria-labelledby="cafe-postcards">

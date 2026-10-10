@@ -1,0 +1,131 @@
+.pad {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.surface {
+  position: relative;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-card);
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 23px, color-mix(in srgb, var(--ink) 9%, transparent) 23px 24px),
+    var(--card);
+  cursor: crosshair;
+  overflow: hidden;
+  /* A finger drawing here must not scroll the page. Everywhere else on the page it still does. */
+  touch-action: none;
+  user-select: none;
+}
+
+.hint {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-hand);
+  font-size: 2rem;
+  color: var(--faint);
+  pointer-events: none;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-5);
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.swatch,
+.size {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.swatch input,
+.size input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.swatch::before {
+  content: "";
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 2px var(--card), 0 0 0 3px var(--rule-strong);
+}
+
+.swatch[data-color="blue"]::before {
+  background: var(--air-blue);
+}
+
+.swatch[data-color="red"]::before {
+  background: var(--air-red);
+}
+
+.swatch:has(input:checked)::before,
+.size:has(input:checked) {
+  box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--air-blue);
+}
+
+.size:has(input:checked) {
+  box-shadow: inset 0 0 0 2px var(--air-blue);
+}
+
+.swatch:has(input:focus-visible),
+.size:has(input:focus-visible) {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 2px;
+}
+
+.dot {
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.action {
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.action:hover:not(:disabled) {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--card);
+}
+
+.action:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.note {
+  min-height: 1.4em;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+}

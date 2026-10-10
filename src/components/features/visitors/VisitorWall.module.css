@@ -1,0 +1,114 @@
+.wall {
+  column-count: 1;
+  column-gap: var(--s-5);
+}
+
+@media (min-width: 40rem) {
+  .wall {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 70rem) {
+  .wall {
+    column-count: 3;
+  }
+}
+
+.cell {
+  break-inside: avoid;
+  margin-bottom: var(--s-5);
+}
+
+.card {
+  --tint: var(--card);
+  position: relative;
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-4) var(--s-3);
+  background: var(--tint);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+  rotate: var(--tilt, 0deg);
+  transition: rotate var(--d-slow) var(--ease-out), box-shadow var(--d-slow) var(--ease-out);
+}
+
+.card:hover {
+  rotate: 0deg;
+  box-shadow: var(--shadow-lift);
+}
+
+.card[data-color="sky"] {
+  --tint: color-mix(in srgb, var(--air-blue) 16%, var(--card));
+}
+
+.card[data-color="rose"] {
+  --tint: color-mix(in srgb, var(--air-red) 13%, var(--card));
+}
+
+.card[data-color="sun"] {
+  --tint: color-mix(in srgb, #e9b949 24%, var(--card));
+}
+
+.card[data-color="mint"] {
+  --tint: color-mix(in srgb, #2f9e7a 17%, var(--card));
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.pin {
+  padding: 1px var(--s-2);
+  border: 1px solid var(--air-red);
+  border-radius: var(--radius-pill);
+  color: var(--air-red);
+}
+
+/* The drawing sits on a faint ruled field, like paper */
+.drawing {
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 23px, color-mix(in srgb, var(--ink) 8%, transparent) 23px 24px),
+    color-mix(in srgb, var(--card) 70%, transparent);
+}
+
+.message {
+  font-size: var(--step-0);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+/* Short messages get the handwriting, long ones stay legible */
+.message[data-hand] {
+  font-family: var(--font-hand);
+  font-size: 1.85rem;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.from {
+  color: var(--ink);
+  font-weight: 600;
+}

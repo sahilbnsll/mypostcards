@@ -1,69 +1,82 @@
 ---
 title: Architecture
 tags: [engineering]
-updated: 2026-10-09
+updated: 2026-10-10
 ---
 
 # Architecture
 
 ## Stack
 
-Next.js **16.4** (App Router, React 19.3, **Cache Components** + Partial Prefetching on), TypeScript strict, **CSS Modules** with global design tokens, `next/image`, `next/font`. Runtime dependencies added: `@supabase/supabase-js` (server-side only) and `cobe` (19 KB WebGL globe, MIT, no dependencies, client-only). No Tailwind, no animation library. `AGENTS.md` warns this Next has breaking changes: read `node_modules/next/dist/docs/` before changing framework-level code.
+Next.js **16.4** (App Router, React 19.3, **Cache Components** + Partial Prefetching on), TypeScript strict, **CSS Modules** with global design tokens, `next/image`, `next/font`. Runtime dependencies: `cobe` (WebGL globe), `sharp` (measure local images at build, share-image photo), `d3-geo` + `topojson-client` + `world-atlas` (flat map drawn as SVG on the server), `@supabase/supabase-js` (visitor cards only, server-side). No Tailwind, no animation library. `AGENTS.md` warns this Next has breaking changes: read `node_modules/next/dist/docs/` before changing framework-level code.
 
 ## Folders
 
 ```text
-src/app/                 routes: / /gallery /trips[/slug] /destinations[/slug] /cafes[/slug] /stories[/slug] /about
-                         + not-found, error, icon.svg, manifest, robots, sitemap, api/revalidate
+content/                 authored data: postcards, trips, destinations, cafes (JSON), stories (Markdown), README
+public/images/           the author's photographs
+scripts/                 build-content.mjs (validate + generate), dev.mjs (dev server + watcher)
+src/app/                 routes: / /gallery /postcards/[slug] /trips[/slug] /destinations[/slug] /cafes[/slug]
+                         /stories[/slug] /visitors /about /search-index.json + not-found, error, icon, manifest, robots, sitemap
+                         (per-route opengraph-image for postcards, trips, places, cafés, stories)
 src/components/
-  layout/                Header (client), Footer (server)
+  layout/                Header, Footer, ThemeToggle
   ui/                    Photo, Stamp/Postmark, PageHead, CollectionHero, SectionHeader, Prose, EmptyState,
-                         DetailSkeleton, MotionController
-  features/              hero (+ DeckDrag), gallery (BloomGallery), lightbox, carousel, trips (TripCards, TripStack),
-                         places, globe (GlobePostcards, PlacesGlobe), zoom (ZoomGallery), stories, cafes
-src/content/             types, categories, mappers (row to domain), selectors (pure slicing), data/sample.ts, index.ts
-src/lib/                 utils (formatting), reveal (scroll-reveal props)
-src/styles/              tokens.css, globals.css, motion.css
-supabase/                schema.sql, seed.sql (generated)
-scripts/seed.mjs         seed Supabase or emit seed.sql
+                         DetailSkeleton, MotionController, Cursor
+  features/              hero, gallery, lightbox, carousel, trips (TripCards, TripStack, Itinerary), places, globe,
+                         map (SvgMap), zoom, stories, cafes (CafeGuide), postcard (PostcardBack, RelatedPostcards),
+                         search (SearchPalette), visitors (CardComposer, DrawingPad, VisitorWall)
+src/content/             types, selectors, visitors(-shared), generated/journal.json (not committed), index.ts
+src/lib/                 utils, reveal, supabase (anon client, server-only)
+src/styles/              tokens.css (light + dark), globals.css, motion.css
+supabase/                schema.sql (visitor_cards)
 vault/                   this documentation (Obsidian)
 ```
 
 ## Data flow and caching
 
 ```text
-Supabase (or sample.ts)
-   → getJournal()  ["use cache", cacheLife("hours"), cacheTag("journal")]
-   → server components slice it with selectors (by trip, place, category...)
-   → client components receive plain serialisable props (PostcardView[])
+content/*.json + content/stories/*.md + public/images/**
+   → scripts/build-content.mjs  (validate, measure local images, derive covers)
+   → src/content/generated/journal.json   (gitignored; built by prebuild, pretypecheck and npm run dev)
+   → getJournal()  → server components slice it with selectors → client components get plain props
 ```
 
-- One cached call loads **everything** (five small queries in parallel). Right for a single-creator journal up to a few hundred postcards. Revisit past ~1,000 (see [[10 Backlog]]).
-- Source choice (`src/content/index.ts`): Supabase if `SUPABASE_URL` and `SUPABASE_ANON_KEY` are set, else the bundled sample journal. `CONTENT_SOURCE=local` forces samples. If Supabase is configured but a query fails (bad key, permissions, network), the error **throws** (shown by `error.tsx`, and it fails the build) instead of silently falling back, so a broken connection is never hidden. The one exception is a **missing table** (`PGRST205` / `42P01`): that is a setup step, so it logs a warning, serves an empty journal and uses a 60-second cache lifetime until the tables exist. See [[09 Decisions]] D13.
-- Freshness: content refreshes at most hourly, or immediately via `POST /api/revalidate` (header `x-revalidate-secret`, constant-time compare, 503 when no secret is configured).
-- The Supabase key is **server-only** (not `NEXT_PUBLIC_`), so it never ships to the browser.
+- The journal is a static import: no database, no network, no revalidation endpoint. Content changes by committing files; Vercel redeploys.
+- Validation is strict on purpose (slug format, references, required alt text, unknown field names with suggestions, local image files exist). Errors are collected and stop the build with the file and the fix. See [[05 Content Model]].
+- **Visitor cards** are the only runtime data: `getVisitorWall()` (`"use cache"`, tag `visitor-cards`, 5 minute revalidate) reads approved rows through the anon key. It never throws: no config means "closed", a missing table or failure means an empty wall plus a log warning. The submit path is a server action calling the `submit_visitor_card()` database function ([[06 Supabase Setup]], [[09 Decisions]] D19).
+- No secret ever reaches the browser; the site never holds a write key.
 
 ## Rendering decisions
 
 - Index pages and the home page are fully static.
-- `[slug]` pages: `generateStaticParams` prerenders every known slug. The page default export is a thin `<Suspense>` wrapper with a skeleton around the param-reading content. That is Next's supported way for **new slugs added in Supabase to appear without a rebuild** (shell served, content streams). See [[09 Decisions]].
+- `[slug]` pages (including `/postcards/[slug]`): `generateStaticParams` prerenders every slug from the journal (133+ static pages). The page default export is a thin `<Suspense>` wrapper with a skeleton around the param-reading content, which is Cache Components' supported shape for dynamic params. See [[09 Decisions]].
 - Empty collections: `staticSlugs()` returns a placeholder slug (`__none__`), because Cache Components forbids empty `generateStaticParams`. The page 404s on it.
 - Header and Footer are deliberately **not** inside Suspense, so nav and footer links are in the initial HTML even on large pages.
 
 ## Client boundaries (kept small)
 
-`Header`, `MotionController`, `BloomGallery`, `Lightbox` + `useLightbox`, `PrintCarousel`, `error.tsx`. Everything else is server components. Large data crosses the boundary only as `PostcardView[]`.
+`Header`, `ThemeToggle`, `SearchPalette`, `Cursor`, `MotionController`, `BloomGallery`, `Lightbox` + `useLightbox`, `PrintCarousel`, the visitor composer and drawing pad, `error.tsx`. The flat map (`SvgMap`) is a server component that ships no JavaScript. Everything else is server components. Large data crosses the boundary only as `PostcardView[]`.
 
 ## Images
 
-`Photo` wraps `next/image` with a frame whose aspect ratio comes from the stored width/height and a background of the photo's average colour. Always passes `sizes`. Above the fold uses `fetchPriority="high"`; lightbox images are `eager`; everything else lazy. Origin URLs are pinned (`?auto=format&fit=max&w=2000&q=80`) and allow-listed in `next.config.ts` (`images.unsplash.com`, plus the Supabase Storage host derived from `SUPABASE_URL`). AVIF then WebP, 31-day optimizer cache.
+`Photo` wraps `next/image` with a frame whose aspect ratio comes from the stored width/height and a background of the photo's average colour. Always passes `sizes`. Above the fold uses `fetchPriority="high"`; lightbox images are `eager`; everything else lazy. Local photos are served from `public/images/`; sample photos are Unsplash URLs (pinned query, allow-listed in `next.config.ts`). AVIF then WebP, 31-day optimizer cache.
 
 ## Lightbox and URLs
 
 Native `<dialog>` (focus trap, Escape, inert background). Current photo is mirrored in `#p=slug` with `history.replaceState`, so photos are linkable and the hero deep-links to `/gallery#p=slug`. Only one lightbox per page syncs the hash (the carousel's does not). Closing syncs state directly rather than waiting for the `close` event.
 
+## Dark theme
+
+Tokens are redefined under `:root[data-theme="dark"]` and, identically, under `@media (prefers-color-scheme: dark)` for `:root:not([data-theme])`-style fallbacks (keep both blocks the same). A tiny inline script in the layout `<head>` sets `data-theme` from `localStorage` or the system preference before first paint, so there is no flash. See [[02 Design System]].
+
+## Search
+
+`/search-index.json` is a static route listing postcards, places, trips, cafés and stories. `SearchPalette` (dialog, `/` or Ctrl/Cmd+K) loads it on first open and scores matches in the browser (accent-insensitive).
+
 ## Security notes
 
-- Public read only through RLS; the site never holds a write key. Service-role key is used only by `npm run seed`, locally.
+- Visitor data is written only through a `security definer` function behind RLS; the site holds the anon key only. See [[06 Supabase Setup]].
+- Drawings are stroke data re-validated on write and read and rendered as SVG paths, never HTML. Cards are plain text; links are rejected.
 - Response headers: `nosniff`, `Referrer-Policy`, `X-Frame-Options: DENY`, `Permissions-Policy`. No CSP yet (see [[10 Backlog]]).
-- `.env*` ignored; `.env.example` tracked. Secret scan of the working tree: clean.
+- `.env*` ignored; `.env.example` tracked. No service-role key is needed anywhere.

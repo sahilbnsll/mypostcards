@@ -19,6 +19,11 @@ html {
   scroll-padding-top: calc(var(--header-h) + var(--s-4));
 }
 
+/* Nothing behind an open modal (menu, lightbox) should scroll. The gutter is reserved, so no jump. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 body {
   min-height: 100svh;
   display: flex;
@@ -248,4 +253,22 @@ ol[role="list"] {
 .section-top {
   padding-top: var(--section);
   padding-bottom: var(--s-6);
+}
+
+/* A quiet notice above a form that cannot be submitted yet */
+.visitors-note {
+  max-width: 52ch;
+  margin-bottom: var(--s-5);
+  padding: var(--s-3) var(--s-4);
+  border-left: 3px solid var(--air-blue);
+  background: var(--card);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* The round cursor replaces the pointer for a mouse. Fields, the drawing pad and open dialogs
+   keep the real one. */
+html[data-cursor]:not(:has(dialog[open])) :not(input, textarea, select, [data-native-cursor], [data-native-cursor] *) {
+  cursor: none !important;
 }

@@ -24,7 +24,7 @@ export function CafeCard({ cafe, count, index = 0, as: Heading = "h3" }: { cafe:
         </ul>
       )}
       <p className={styles.meta}>
-        {[cafe.favoriteOrder ? `Usual order: ${cafe.favoriteOrder}` : undefined, plural(count, "postcard")].filter(Boolean).join(", ")}
+        {[cafe.favoriteOrder ? `Usual order: ${cafe.favoriteOrder}` : undefined, cafe.price, plural(count, "postcard")].filter(Boolean).join(", ")}
       </p>
     </article>
   );

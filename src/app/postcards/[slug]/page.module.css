@@ -1,0 +1,67 @@
+.layout {
+  display: grid;
+  gap: var(--s-6);
+  align-items: start;
+}
+
+@media (min-width: 62rem) {
+  .layout {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--s-8);
+  }
+
+  .back {
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-4));
+  }
+}
+
+/* The photograph mounted like a print */
+.photo {
+  padding: clamp(0.5rem, 1.2vw, 0.9rem);
+  background: var(--print);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+}
+
+.back {
+  overflow: hidden;
+  background: var(--card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+}
+
+.backInner {
+  padding: var(--s-6) clamp(var(--s-4), 3vw, var(--s-6)) var(--s-4);
+}
+
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--rule);
+}
+
+.pager a {
+  display: grid;
+  gap: 2px;
+  padding: var(--s-3) clamp(var(--s-4), 3vw, var(--s-6));
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  transition: background-color var(--d-fast);
+}
+
+.pager a:hover {
+  background: var(--paper-deep);
+}
+
+.pagerNext {
+  text-align: right;
+  border-left: 1px solid var(--rule);
+}
+
+.pagerLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted);
+}

@@ -79,3 +79,21 @@
     z-index: 2;
   }
 }
+
+/* Planned places: the print is tinted back, and a place with no photograph yet gets a dashed card */
+.thumb[data-planned] {
+  filter: grayscale(0.85);
+  opacity: 0.8;
+}
+
+.someday {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  border: 2px dashed var(--air-blue);
+  border-radius: var(--radius-card);
+  background: var(--card);
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  color: var(--air-blue);
+}

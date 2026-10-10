@@ -1,7 +1,7 @@
 ---
 title: My Postcards, project vault
 tags: [index]
-updated: 2026-10-09
+updated: 2026-10-10
 ---
 
 # My Postcards
@@ -19,7 +19,8 @@ Personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal
 | Understand every animation and its rules | [[03 Motion System]] |
 | Know how the app is built and cached | [[04 Architecture]] |
 | Know the data model | [[05 Content Model]] |
-| Connect Supabase, add rows, upload photos | [[06 Supabase Setup]] |
+| Add postcards, trips, cafés (content guide) | `content/README.md`, [[05 Content Model]] |
+| Connect the visitor guest desk, moderate cards | [[06 Supabase Setup]] |
 | Find a component and what it does | [[07 Components]] |
 | See what was verified and how to re-run it | [[08 Quality and Verification]] |
 | Find out why something is the way it is | [[09 Decisions]] |
@@ -27,21 +28,20 @@ Personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal
 | See what changed and when | [[11 Changelog]] |
 | Check where the sample photographs came from | [[12 Sample Content and Credits]] |
 
-## Status (2026-10-09)
+## Status (2026-10-10)
 
-- Site is built and verified locally: 35 prerendered routes, typecheck, lint and production build pass. Pushed to GitHub earlier; the work since (globe, drag cards, trip stack, zoom, Vercel fix) is **not committed yet**.
-- Content comes from `src/content/data/sample.ts` (48 sample postcards) until Supabase is connected. Supabase schema and seed are written and tested in an embedded Postgres, **not yet applied to the live project**. Vercel has the Supabase env vars, so until `schema.sql` is run the deployed site is empty (it builds, with a warning).
-- Lighthouse and real-device testing have **not** been run. See [[08 Quality and Verification]].
+- Content is authored in `content/` and `public/images/` (see `content/README.md`); 48 sample postcards, 5 trips, 6 places, 4 cafés, 3 stories for now. Supabase is used only for the visitor guest desk and is **not yet connected** ([[06 Supabase Setup]]); the desk shows "being set up" until then.
+- Typecheck, lint and production build pass (134 static pages). Work since the last push (the whole pivot: repo content, visitors, postcard pages, itineraries, search, flat map, dark theme, cursor) is **not committed**.
+- axe on the new pages, Lighthouse and real devices are **not** done. See [[08 Quality and Verification]].
 
 ## Commands
 
 ```bash
-npm run dev        # http://localhost:3000
-npm run build      # production build (also type-checks)
+npm run dev        # http://localhost:3000, also watches content/ and public/images/
+npm run content    # validate and regenerate the content data
+npm run build      # production build (validates content first)
 npm run lint
 npm run typecheck
-npm run seed:sql   # regenerate supabase/seed.sql from the sample data
-npm run seed       # push sample rows to Supabase (needs .env.local, see 06)
 ```
 
 ## How to maintain this vault

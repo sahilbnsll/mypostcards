@@ -47,10 +47,10 @@ export function Stamp({
         </mask>
       </defs>
       <g mask={`url(#${maskId})`}>
-        <rect width="64" height="78" fill="var(--card)" />
+        <rect width="64" height="78" fill="var(--print)" />
         <rect x="7" y="7" width="50" height="64" fill={field} />
-        <circle cx="45" cy="21" r="5" fill="var(--card)" opacity="0.92" />
-        <path d="M7 71 L24 40 L34 56 L42 44 L57 71 Z" fill="var(--card)" opacity="0.92" />
+        <circle cx="45" cy="21" r="5" fill="var(--print)" opacity="0.92" />
+        <path d="M7 71 L24 40 L34 56 L42 44 L57 71 Z" fill="var(--print)" opacity="0.92" />
       </g>
     </svg>
   );

@@ -1,0 +1,139 @@
+/* Phones: the large tile on its own row, then a 2-up grid */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-2);
+}
+
+.cell {
+  min-width: 0;
+  aspect-ratio: 1;
+}
+
+.cell[data-large] {
+  grid-column: 1 / -1;
+  aspect-ratio: 3 / 2;
+}
+
+/* Wide: a 4 by 2 grid, the first tile taking a 2 by 2 block */
+@media (min-width: 52rem) {
+  .bento {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    aspect-ratio: 2 / 1;
+    gap: var(--s-3);
+  }
+
+  .cell,
+  .cell[data-large] {
+    aspect-ratio: auto;
+  }
+
+  .cell[data-large] {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+
+.tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-card);
+  background: var(--paper-deep);
+  box-shadow: var(--shadow-print);
+  overflow: hidden;
+  text-align: left;
+}
+
+.tile .photo {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.tile .photo img {
+  transition:
+    filter 400ms var(--ease-out),
+    scale 900ms var(--ease-out);
+}
+
+/* Black and white until pointed at; only where hover exists */
+@media (hover: hover) {
+  .tile .photo img {
+    filter: grayscale(1) contrast(1.05);
+  }
+
+  .tile:hover .photo img,
+  .tile:focus-visible .photo img {
+    filter: none;
+  }
+}
+
+.tile:hover .photo img {
+  scale: 1.04;
+}
+
+.caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: grid;
+  gap: 2px;
+  padding: var(--s-6) var(--s-3) var(--s-3);
+  background: linear-gradient(to top, rgb(12 20 36 / 0.8), transparent);
+  color: var(--on-photo);
+  opacity: 0;
+  transform: translate3d(0, 6px, 0);
+  transition:
+    opacity var(--d-base) var(--ease-out),
+    transform var(--d-base) var(--ease-out);
+  pointer-events: none;
+}
+
+/* Always visible on the large tile and on touch, hover or focus elsewhere */
+.cell[data-large] .caption,
+.tile:focus-visible .caption {
+  opacity: 1;
+  transform: none;
+}
+
+@media (hover: hover) {
+  .tile:hover .caption {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (hover: none) {
+  .caption {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.cell[data-large] .title {
+  font-size: var(--step-1);
+}
+
+.where {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.tile:focus-visible {
+  outline-offset: 4px;
+}

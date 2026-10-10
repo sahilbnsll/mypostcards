@@ -1,0 +1,83 @@
+[
+  {
+    "slug": "greenhouse-corner",
+    "name": "Greenhouse Corner",
+    "neighborhood": "By the glass wall",
+    "cover": "https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=max&w=2000&q=80",
+    "coverAlt": "A round café table with a French press by a glass wall dripping with greenery",
+    "coverWidth": 2000,
+    "coverHeight": 1333,
+    "coverColor": "#747368",
+    "vibes": [
+      "plants",
+      "window seat",
+      "slow morning"
+    ],
+    "notes": "Sample entry. A café where the garden presses against the glass and nobody minds how long you stay.",
+    "order": "French press",
+    "price": "££",
+    "seat": "The round table by the glass wall",
+    "wifi": "Fast and free",
+    "sample": true
+  },
+  {
+    "slug": "bicycle-room",
+    "name": "The Bicycle Room",
+    "neighborhood": "Concrete and pendant bulbs",
+    "cover": "https://images.unsplash.com/photo-1493857671505-72967e2e2760?auto=format&fit=max&w=2000&q=80",
+    "coverAlt": "A concrete-walled café with a menu board and two bicycles leaning inside",
+    "coverWidth": 2000,
+    "coverHeight": 1333,
+    "coverColor": "#796f5b",
+    "vibes": [
+      "industrial",
+      "bikes",
+      "bright"
+    ],
+    "notes": "Sample entry. Raw concrete, a long counter and a couple of bicycles that live inside.",
+    "order": "Cortado",
+    "price": "£",
+    "seat": "Long counter, facing the espresso machine",
+    "wifi": "Free, no password",
+    "sample": true
+  },
+  {
+    "slug": "slow-pour",
+    "name": "Slow Pour",
+    "neighborhood": "Brew bar",
+    "cover": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=max&w=2000&q=80",
+    "coverAlt": "A barista pouring from a gooseneck kettle over a pour-over dripper, glassware behind",
+    "coverWidth": 2000,
+    "coverHeight": 1333,
+    "coverColor": "#3f4645",
+    "vibes": [
+      "pour-over",
+      "filter",
+      "beans"
+    ],
+    "notes": "Sample entry. A bar that treats filter coffee as a small ceremony.",
+    "order": "Pour-over",
+    "price": "£££",
+    "seat": "Bar stool opposite the kettle",
+    "wifi": "None, on purpose",
+    "sample": true
+  },
+  {
+    "slug": "blue-cup",
+    "name": "Blue Cup",
+    "neighborhood": "Corner table",
+    "cover": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=max&w=2000&q=80",
+    "coverAlt": "Two flat whites with leaf latte art on a wooden table beside a trailing plant",
+    "coverWidth": 2000,
+    "coverHeight": 2985,
+    "coverColor": "#716c58",
+    "vibes": [
+      "flat white",
+      "wood",
+      "quiet"
+    ],
+    "notes": "Sample entry. Blue saucers, warm wood and the kind of light that makes a flat white look good.",
+    "order": "Flat white",
+    "sample": true
+  }
+]

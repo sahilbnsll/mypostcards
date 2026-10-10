@@ -1,0 +1,188 @@
+.map {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  /* The sea: a quiet blue, so land and water read apart in both themes */
+  background: var(--map-sea);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.land {
+  fill: var(--map-land);
+  stroke: var(--rule-strong);
+  stroke-width: 0.7;
+  stroke-linejoin: round;
+}
+
+.graticule {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 0.5;
+  opacity: 0.7;
+}
+
+.route {
+  fill: none;
+  stroke: var(--air-red);
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+  stroke-linecap: round;
+}
+
+.pins {
+  position: absolute;
+  inset: 0;
+}
+
+/* A thread from the real spot to a postcard that was moved aside, and the spot itself */
+.thread {
+  stroke: var(--print);
+  stroke-width: 1.2;
+  opacity: 0.55;
+}
+
+.dot {
+  fill: var(--air-red);
+  stroke: var(--print);
+  stroke-width: 2;
+}
+
+.dot[data-planned] {
+  fill: var(--air-blue);
+}
+
+/* The li is the middle of the postcard; the true spot is drawn in the SVG underneath */
+.pin {
+  position: absolute;
+  translate: -50% -50%;
+}
+
+.pin:hover,
+.pin:focus-within {
+  z-index: 6;
+}
+
+.link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* A comfortable target around a small postcard */
+  padding: 0.2rem;
+}
+
+.card {
+  position: relative;
+  display: block;
+  width: clamp(1.7rem, 4.6cqw, 3.2rem);
+  padding: max(2px, 0.5cqw);
+  padding-bottom: max(3px, 0.8cqw);
+  background: var(--print);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 5px 10px -4px rgb(0 0 0 / 0.55);
+  transition: scale var(--d-base) var(--ease-spring);
+}
+
+/* A route map has fewer, more important pins: show them larger */
+.map[data-route] .card {
+  width: clamp(2.6rem, 8.5cqw, 4.6rem);
+}
+
+.blank {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  background: var(--paper-deep);
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 2.4cqw, 1.2rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--air-red);
+}
+
+/* Somewhere still to go: a dashed, empty card */
+.card[data-planned] {
+  background: color-mix(in srgb, var(--print) 20%, transparent);
+  box-shadow: none;
+  outline: 2px dashed var(--air-blue);
+  outline-offset: -2px;
+}
+
+.card[data-planned] .blank {
+  background: transparent;
+  color: var(--air-blue);
+}
+
+/* The stop number on a route map */
+.badge {
+  position: absolute;
+  top: -0.45rem;
+  left: -0.45rem;
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: var(--air-red);
+  color: #0f1a2b;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 0 0 2px var(--print);
+}
+
+.link:is(a):hover .card,
+.link:is(a):focus-visible .card {
+  scale: 1.5;
+}
+
+/* The label sits below the postcard (above it near the bottom edge) and shows on hover or focus */
+.tag {
+  position: absolute;
+  top: calc(100% + 0.1rem);
+  left: 50%;
+  translate: -50% 0;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-card);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--d-fast);
+  z-index: 3;
+}
+
+.pin[data-low] .tag {
+  top: auto;
+  bottom: calc(100% + 0.1rem);
+}
+
+.link:hover .tag,
+.link:focus-visible .tag {
+  opacity: 1;
+  /* Clear of the enlarged postcard */
+  translate: -50% 0.7rem;
+}
+
+.pin[data-low] .link:hover .tag,
+.pin[data-low] .link:focus-visible .tag {
+  translate: -50% -0.7rem;
+}
+
+.link:focus-visible {
+  outline-offset: 0;
+}

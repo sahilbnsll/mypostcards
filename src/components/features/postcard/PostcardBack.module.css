@@ -1,0 +1,98 @@
+.back {
+  position: relative;
+}
+
+.marks {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6.5rem;
+  height: 5.5rem;
+  pointer-events: none;
+}
+
+.stamp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: auto;
+  rotate: 4deg;
+}
+
+.postmark {
+  position: absolute;
+  top: 0.9rem;
+  right: 1.9rem;
+  width: 4.4rem;
+  height: auto;
+  color: var(--ink);
+  opacity: 0.6;
+  rotate: -12deg;
+  mix-blend-mode: var(--postmark-blend, multiply);
+}
+
+.title {
+  max-width: 14ch;
+  padding-right: 6rem;
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.page .title {
+  max-width: 16ch;
+  font-size: var(--step-3);
+}
+
+.caption {
+  margin-top: var(--s-3);
+  max-width: 42ch;
+  font-size: var(--step-0);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.note {
+  margin-top: var(--s-4);
+  max-width: 24ch;
+  font-family: var(--font-hand);
+  font-size: 1.9rem;
+  line-height: 1.05;
+  color: var(--air-blue);
+  rotate: -1.5deg;
+}
+
+.facts {
+  margin-top: var(--s-5);
+  border-top: 1px solid var(--rule);
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: var(--s-3);
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--step--1);
+  line-height: 1.4;
+}
+
+.fact dt {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.fact dd {
+  font-family: var(--font-display);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.credit {
+  margin-top: var(--s-4);
+  font-size: var(--step--1);
+  font-style: italic;
+  color: var(--muted);
+}

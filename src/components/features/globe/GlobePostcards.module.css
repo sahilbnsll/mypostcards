@@ -45,7 +45,7 @@
     margin-bottom: 0.5rem;
     width: clamp(3.4rem, 15cqw, 4.75rem);
     padding: 0.3rem 0.3rem 0;
-    background: var(--card);
+    background: var(--print);
     box-shadow: var(--shadow-print);
     pointer-events: none;
     opacity: var(--vis);
@@ -63,7 +63,7 @@
   font-size: clamp(0.5rem, 2.2cqw, 0.66rem);
   font-weight: 600;
   text-align: center;
-  color: var(--ink);
+  color: var(--print-ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

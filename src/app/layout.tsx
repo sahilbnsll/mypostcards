@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionController } from "@/components/ui/MotionController";
+import { Cursor } from "@/components/ui/Cursor";
 import "@/styles/globals.css";
 
 // Display: a quirky variable grotesk with a width axis, set tight and lowercase for the wordmark.
@@ -59,14 +60,25 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#eceeea",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#eceeea" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1523" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${text.variable} ${hand.variable}`}>
+    <html lang="en" className={`${display.variable} ${text.variable} ${hand.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Applies the saved (or system) theme before first paint, so there is no flash. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}`,
+          }}
+        />
+      </head>
       <body>
         <a href="#main" className="skip-link">
           Skip to content
@@ -78,6 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <Suspense fallback={null}>
           <MotionController />
+          <Cursor />
         </Suspense>
       </body>
     </html>

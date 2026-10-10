@@ -1,10 +1,12 @@
 import { getJournal } from "@/content";
+import { getVisitorWall } from "@/content/visitors";
 import {
   balancedSample,
   featuredFirst,
   globePins,
   postcardCount,
   toViews,
+  visitedPlaces,
 } from "@/content/selectors";
 import { Hero } from "@/components/features/hero/Hero";
 import { PrintCarousel } from "@/components/features/carousel/PrintCarousel";
@@ -14,6 +16,7 @@ import { ZoomGallery } from "@/components/features/zoom/ZoomGallery";
 import { PlacesGlobe } from "@/components/features/globe/PlacesGlobe";
 import { StoryFeature } from "@/components/features/stories/StoryFeature";
 import { PlacesIndex } from "@/components/features/places/PlacesIndex";
+import { VisitorCardView } from "@/components/features/visitors/VisitorWall";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
 
@@ -22,6 +25,7 @@ const CAROUSEL_COUNT = 10;
 
 export default async function HomePage() {
   const journal = await getJournal();
+  const wall = await getVisitorWall(3);
   const { postcards, trips, destinations, stories } = journal;
 
   const heroCards = featuredFirst(postcards).slice(0, 5);
@@ -107,6 +111,26 @@ export default async function HomePage() {
             </section>
           )}
 
+          <section className="section" aria-labelledby="visitors-title">
+            <div className="wrap">
+              <SectionHeader
+                id="visitors-title"
+                title="From visitors"
+                intro={wall.cards.length > 0 ? "Cards left on the guest desk." : "A hello, a thought, a place I should go. Write it or draw it."}
+                action={{ href: "/visitors", label: "Leave a card" }}
+              />
+              {wall.cards.length > 0 && (
+                <ul role="list" style={{ display: "grid", gap: "var(--s-5)", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 17rem), 1fr))" }}>
+                  {wall.cards.map((card, index) => (
+                    <li key={card.id}>
+                      <VisitorCardView card={card} index={index} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </section>
+
           {destinations.length > 0 && (
             <section className="section" aria-labelledby="places-title">
               <div className="wrap">
@@ -117,7 +141,7 @@ export default async function HomePage() {
                   action={{ href: "/destinations", label: "All places" }}
                 />
                 <PlacesGlobe pins={pins} />
-                <PlacesIndex places={destinations.slice(0, 6)} counts={placeCounts} />
+                <PlacesIndex places={visitedPlaces(journal).slice(0, 6)} counts={placeCounts} />
               </div>
             </section>
           )}

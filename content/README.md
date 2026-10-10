@@ -1,0 +1,101 @@
+# Writing the journal
+
+Everything on the site except the visitor cards comes from this folder and from `public/images/`. Edit a file, save, and the dev server rebuilds the data (`npm run dev` watches both folders). On deploy, `npm run build` does the same. If something is wrong, the build stops and says which file, which entry and what to fix.
+
+```text
+content/
+  postcards.json      every photograph
+  trips.json          trips, with optional day-by-day itineraries
+  destinations.json   places (visited or planned)
+  cafes.json          cafés and food spots, with optional guide details
+  stories/*.md        longer pieces
+public/images/        your own photographs (see below)
+```
+
+Slugs (`"slug"`) are lowercase words joined by single hyphens, for example `kyoto-morning`. They become URLs and are how files point at each other (`"trip": "paper-lanterns"`).
+
+## Adding a postcard
+
+1. Copy the photo into `public/images/postcards/`, for example `public/images/postcards/kyoto-morning.jpg`. Resize it to about 2400 px on the long edge first (smaller is fine) so the repo and the site stay light.
+2. Add an entry to `postcards.json`:
+
+```json
+{
+  "slug": "kyoto-morning",
+  "title": "Kyoto, early",
+  "image": "/images/postcards/kyoto-morning.jpg",
+  "alt": "A narrow street in Gion before the shops open, wet from rain",
+  "category": "city",
+  "place": "Gion",
+  "city": "Kyoto",
+  "country": "Japan",
+  "lat": 35.0116,
+  "lng": 135.7681,
+  "date": "2025-04-06",
+  "trip": "paper-lanterns",
+  "destination": "kyoto",
+  "tags": ["morning", "street"],
+  "sample": false
+}
+```
+
+Required: `slug`, `title`, `image`, `alt`, `category`. Everything else is optional and only shown when present. Width, height and an average colour are measured from the file for you. `alt` is mandatory: describe what is in the photo, in a sentence.
+
+`sample: true` marks a stand-in photo. The site is open about those. Leave it out (or `false`) for your own photographs, and delete the sample entries when you no longer need them.
+
+Other optional fields: `caption`, `note` (the text on the back of the postcard), `place` (the spot, such as a street or a viewpoint), `region`, `period` (such as `"Spring 2025"` when there is no exact date), `cafe`, `story`, `camera`, `credit`, `creditUrl`, `featured` (appears first on the home page and gallery).
+
+Categories: `travel`, `city`, `cafe`, `food`, `getaway`.
+
+A misspelt field name is caught and a likely correction suggested.
+
+## A trip with an itinerary
+
+In `trips.json`, add `days` to a trip. Every field of a stop except `place` is optional and appears only when filled in:
+
+```json
+"days": [
+  {
+    "title": "Arrival",
+    "stops": [
+      {
+        "place": "Fushimi Inari",
+        "time": "Early morning",
+        "note": "Start before seven; the gates are empty.",
+        "tip": "Walk past the first viewpoint, the crowd thins out.",
+        "lat": 34.9671,
+        "lng": 135.7727,
+        "postcard": "kyoto-morning"
+      }
+    ]
+  }
+]
+```
+
+Stops with `lat` and `lng` are drawn on the route map beside the timeline, numbered in order. A stop with `postcard` shows that photograph on its map pin and in the timeline.
+
+## A café or food spot
+
+`cafes.json` entries accept `order` (your usual), `price` (as you would write it, such as `"around 4 euro"`), `seat` (the best seat), `wifi`, and `map` (a link, https only). Only what you provide is shown.
+
+## A place you have not been yet
+
+In `destinations.json` set `"status": "planned"`. A planned place needs no cover photo and appears under "Dreaming of" and as a dashed pin on the map (give it `lat` and `lng`). When you go, change it to `"visited"` and add a cover.
+
+## Stories
+
+Add a Markdown file to `content/stories/`; the file name is the slug. It starts with a front matter block between `---` lines (`title`, `subtitle`, `excerpt`, `date`, `cover`, `coverAlt`, optional `trip`, `destination`, `featured`, as in the existing files), then the story in Markdown. A story with a local cover needs no width or height.
+
+## Photographs and the repository
+
+Photos live in the repository only, in `public/images/`. The build never changes them. Prefer JPEG or WebP at 2400 px or less; Next resizes them per device when the page loads. Vercel's free plan includes 5,000 image transformations a month, so keep the number of different photos reasonable. Remove EXIF location data from photos if you do not want to publish where they were taken.
+
+## Commands
+
+```bash
+npm run dev       # dev server; rebuilds the data whenever content/ or public/images/ changes
+npm run content   # rebuild the data once and check it, without starting anything
+npm run build     # production build (runs the same check first)
+```
+
+The generated file `src/content/generated/journal.json` is not committed. Never edit it.

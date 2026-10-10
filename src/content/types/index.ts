@@ -1,9 +1,9 @@
 /**
  * Domain types for My Postcards.
  *
- * Every entity is keyed by a human-readable `slug`. The same slug is the primary
- * key in Supabase (see supabase/schema.sql), so rows are easy to create by hand
- * and relations read naturally (`tripSlug: "alpine-light"`).
+ * Every entity is keyed by a human-readable `slug`, and relations use slugs
+ * (`tripSlug: "alpine-light"`). The journal is authored in `content/` (JSON and Markdown) with
+ * photographs in `public/images/`; `scripts/build-content.mjs` turns that into these types.
  */
 
 export type Category = "travel" | "city" | "cafe" | "food" | "getaway";
@@ -77,6 +77,26 @@ export interface Postcard {
   sortOrder: number;
 }
 
+/** One thing to do or see on an itinerary day. Only `place` is required. */
+export interface ItineraryStop {
+  place: string;
+  /** Free text: "Before sunrise", "10:30", "Late afternoon". */
+  time?: string;
+  note?: string;
+  /** A practical tip, shown set apart from the note. */
+  tip?: string;
+  coordinates?: GeoCoordinates;
+  /** A postcard from this stop. */
+  postcardSlug?: string;
+}
+
+export interface ItineraryDay {
+  /** 1-based, taken from the order in the file. */
+  day: number;
+  title?: string;
+  stops: ItineraryStop[];
+}
+
 export interface Trip {
   slug: string;
   title: string;
@@ -88,10 +108,14 @@ export interface Trip {
   startDate?: string;
   endDate?: string;
   periodLabel?: string;
+  /** Day-by-day plan or record. Empty when the trip has no itinerary. */
+  days: ItineraryDay[];
   isSample: boolean;
   featured: boolean;
   sortOrder: number;
 }
+
+export type PlaceStatus = "visited" | "planned";
 
 export interface Destination {
   slug: string;
@@ -99,8 +123,11 @@ export interface Destination {
   country: string;
   region?: string;
   description: string;
-  coverImage: ImageAsset;
+  /** Optional for planned places that have no photograph yet. */
+  coverImage?: ImageAsset;
   coordinates?: GeoCoordinates;
+  /** "planned" places are shown under "Dreaming of". */
+  status: PlaceStatus;
   isSample: boolean;
   sortOrder: number;
 }
@@ -115,7 +142,12 @@ export interface Cafe {
   coverImage: ImageAsset;
   vibeTags: string[];
   notes?: string;
+  /** The guide details below are shown only when they are filled in. */
   favoriteOrder?: string;
+  price?: string;
+  bestSeat?: string;
+  wifi?: string;
+  mapUrl?: string;
   isSample: boolean;
   sortOrder: number;
 }
@@ -151,4 +183,6 @@ export interface PostcardView extends Postcard {
   tripTitle?: string;
   destinationName?: string;
   cafeName?: string;
+  /** Up to four related postcards, best match first. */
+  related: Array<{ slug: string; title: string }>;
 }

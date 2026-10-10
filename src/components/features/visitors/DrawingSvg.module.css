@@ -1,0 +1,20 @@
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ink {
+  stroke: var(--ink);
+}
+
+.blue {
+  stroke: var(--air-blue);
+}
+
+.red {
+  stroke: var(--air-red);
+}

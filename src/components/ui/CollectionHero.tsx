@@ -9,7 +9,7 @@ interface CollectionHeroProps {
   title: string;
   lede?: string;
   back: { href: string; label: string };
-  cover: ImageAsset;
+  cover?: ImageAsset;
   meta?: ReactNode;
 }
 
@@ -20,13 +20,15 @@ export function CollectionHero({ title, lede, back, cover, meta }: CollectionHer
       <PageHead title={title} lede={lede} back={back}>
         {meta && <div className={styles.meta}>{meta}</div>}
       </PageHead>
-      <div className="wrap">
-        <div className={styles.cover} {...reveal("photo")}>
-          <span className={styles.drift} data-drift>
-            <Photo image={cover} ratio="21 / 9" sizes="(min-width: 90rem) 1400px, 100vw" priority className={styles.photo} />
-          </span>
+      {cover && (
+        <div className="wrap">
+          <div className={styles.cover} {...reveal("photo")}>
+            <span className={styles.drift} data-drift>
+              <Photo image={cover} ratio="21 / 9" sizes="(min-width: 90rem) 1400px, 100vw" priority className={styles.photo} />
+            </span>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

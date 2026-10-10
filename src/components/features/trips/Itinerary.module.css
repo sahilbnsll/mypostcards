@@ -1,0 +1,176 @@
+.layout {
+  display: grid;
+  gap: var(--s-7);
+}
+
+@media (min-width: 62rem) {
+  .layout {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--s-8);
+    align-items: start;
+  }
+
+  /* The route map stays in view while the timeline scrolls */
+  .map {
+    grid-column: 2;
+    grid-row: 1;
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-5));
+  }
+
+  .days {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+
+.days {
+  display: grid;
+  gap: var(--s-7);
+}
+
+.dayTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-1) var(--s-3);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--ink);
+}
+
+.dayNumber {
+  font-size: var(--step-2);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.dayName {
+  font-family: var(--font-text);
+  font-size: var(--step-1);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
+
+.stops {
+  position: relative;
+  display: grid;
+  gap: var(--s-6);
+  margin-top: var(--s-5);
+}
+
+/* The thread the stops hang on */
+.stops::before {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  width: 0;
+  border-left: 2px dashed var(--rule-strong);
+}
+
+.stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.7rem 1fr;
+  gap: var(--s-4);
+  scroll-margin-top: calc(var(--header-h) + var(--s-5));
+}
+
+.marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--air-red);
+  color: var(--card);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.stop:target .marker {
+  outline: 3px solid var(--air-blue);
+  outline-offset: 3px;
+}
+
+.body {
+  display: grid;
+  gap: var(--s-2);
+  min-width: 0;
+}
+
+.place {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-1) var(--s-3);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.time {
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.note {
+  max-width: 52ch;
+  color: var(--ink-soft);
+}
+
+.tip {
+  max-width: 52ch;
+  padding: var(--s-2) var(--s-3);
+  border-left: 3px solid var(--air-blue);
+  background: var(--card);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.tipLabel {
+  margin-right: var(--s-1);
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--air-blue);
+}
+
+.extras {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-5);
+  margin-top: var(--s-1);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+}
+
+.postcard {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  color: var(--ink-soft);
+  transition: color var(--d-fast);
+}
+
+.postcard:hover {
+  color: var(--air-blue);
+}
+
+.postcard .thumb {
+  width: 3rem;
+  border: 3px solid var(--print);
+  border-radius: 2px;
+  box-shadow: var(--shadow-print);
+}

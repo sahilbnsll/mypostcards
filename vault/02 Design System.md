@@ -1,7 +1,7 @@
 ---
 title: Design System
 tags: [design]
-updated: 2026-10-09
+updated: 2026-10-10
 ---
 
 # Design system
@@ -26,6 +26,20 @@ Deliberately avoided: warm cream plus terracotta, tracked all-caps eyebrows abov
 | `--air-red` | `#d8362b` | Stamp, nav underline, sample-note rule. Never body text |
 | `--air-blue` | `#1f4da6` | Links on hover, handwritten notes, focus ring (7.4:1 on paper) |
 | `--air-stripe` | red/card/blue diagonal | Airmail edge: hero foot, footer top, lightbox back, empty state, mobile menu |
+
+### Dark theme
+
+Same roles, new values, defined twice in `tokens.css` (explicit `data-theme="dark"` and the system-preference fallback; keep identical).
+
+| Token | Dark | Notes |
+|---|---|---|
+| `--paper` / `--paper-deep` / `--card` | `#0f1522` / `#1a2336` / `#222d45` | page, wells, panels step up clearly |
+| `--ink` / `--ink-soft` / `--muted` / `--faint` | `#f1f2ee` / `#cdd3de` / `#a5b0c2` / `#7b879c` | warm white text |
+| `--rule` / `--rule-strong` | `#2e3b56` / `#52627f` | borders and map outlines |
+| `--air-red` / `--air-blue` | `#ff6b5e` / `#92b6ff` | lightened to stay legible |
+| `--map-sea` / `--map-land` | `#0a111f` / `#2c3d5c` | flat map |
+
+Role tokens that do not flip: `--print` (photo prints, polaroids, stamps: `#fbfbf8` light, `#ece9e0` dark), `--print-ink` (text on prints), `--on-photo` (text over photographs). Panels use `--card`, which does flip. See [[09 Decisions]] D23.
 
 ## Type
 
@@ -65,7 +79,11 @@ Reference: `design-reference/Ui-components.md` (five 21st.dev-style components w
 | `drag-cards` | `DeckDrag`: hero postcards can be picked up and moved around the table, and still open on click | Mouse and pen only: a finger must keep scrolling and tapping. Works on server-rendered markup via `data-slot` and CSS variables, keeps the keyboard path (the cards are still links). A drag never counts as a click |
 | `scroll-cards` | `TripStack`: featured trips as cards that stack as you scroll | Pure CSS `position: sticky` (no JS). Text sits on a scrim for contrast. Whole card is one link |
 | `zoom-parallax` | `ZoomGallery`: a collage that opens up so the middle photo fills the screen, between the carousel and the gallery | CSS scroll-linked animation instead of framer-motion, and **no Lenis** (smooth-scroll libraries take over scrolling). Only on wide screens with motion allowed; otherwise a plain grid |
+| `gallery` ("Welcome to My Stories") | `PhotoSpread` on the About page: five postcards spring apart from a stack into an overlapping row as they scroll into view; mouse and pen can drag them (reuses `DeckDrag`) | CSS transitions instead of framer-motion; sized in container widths so it holds its proportions on phones; every card is a link to its postcard; already spread when JavaScript is off or motion is reduced. Dropped the shadcn `Button` and the gradient headline |
+| `gallery-4` ("Selected Work") | `FeaturedBento` at the top of `/gallery`: five selected postcards in a bento (one 2x2 tile, four small), black and white until hovered | Uses the site's own lightbox instead of Radix `Dialog` (stepping through just those five). Greyscale only where hover exists, so touch screens see colour. Shows title and place on hover or focus |
 | `image-stream-hero` | Not used | An endlessly looping 3D corridor of 18 cards is constant ambient motion and heavy for a photo-first site. Revisit only as an opt-in section (see [[10 Backlog]]) |
+
+**All 11 references in `design-reference/Ui-components.md` have been read in full** (colour-filter gallery, polaroid line carousel, focus cards, scroll-morph hero, image-stream hero, cobe globe polaroids, drag cards, scroll cards, zoom parallax, gallery, gallery-4). Nine are used, adapted; two are deliberately not (virtual-scroll hero, endless 3D corridor).
 
 Reference notes about "shadcn project structure" and `/components/ui` were not applicable: the project already has its own `components/ui` primitives layer in CSS Modules and no Tailwind. No `framer-motion` was added.
 

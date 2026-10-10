@@ -1,7 +1,7 @@
 ---
 title: Motion System
 tags: [design, motion]
-updated: 2026-10-09
+updated: 2026-10-10
 ---
 
 # Motion system
@@ -26,7 +26,7 @@ Tokens: `--ease-out` (entrances, most things), `--ease-in-out`, `--ease-spring`;
 | Sections | Text settles (14px rise + fade); photographs *develop* (greyscale to colour) | `MotionController` sets `data-reveal-state`; CSS transitions | Enters viewport; stagger `--i × 70ms` capped by `i % 8` |
 | Story, collection heroes | Photograph drifts inside its frame | `[data-drift]` + `animation-timeline: view()` | Scroll (desktop, supported browsers) |
 | Header | Single underline slides to hovered or current link; opaque bar after scroll | Measured `translateX/width`; IntersectionObserver sentinel | Hover/focus/route |
-| Mobile menu | Panel slides in, list items stagger 45ms | CSS keyframes in `<dialog>` | Open |
+| Mobile menu | Panel slides in from the right over a fading backdrop (340ms out-ease), items fade up 40ms apart; on close the panel leaves quickly (240ms) and the dialog stays displayed until it has finished | CSS `transition` with `@starting-style` and `display`/`overlay` `allow-discrete` on the `<dialog>`; opened synchronously in the tap handler; page scroll locked with `html:has(dialog[open])` | Open, close, route change |
 | Gallery filter | Non-matches go B&W and dim; matches bloom into colour from pointer, staggered up to 420ms | `clip-path: circle()` transition on a colour layer | Chip click, hover on a dimmed photo |
 | Carousel | Prints swing on their pegs by scroll velocity and settle with overshoot | rAF pendulum, writes one CSS variable; stops when at rest | Scroll/drag |
 | Trip cards | Neighbours recede (blur + desaturate) | `:has()`, only with hover capability | Hover, focus |
@@ -35,7 +35,15 @@ Tokens: `--ease-out` (entrances, most things), `--ease-in-out`, `--ease-spring`;
 | Look closer | Collage scales up so the centre photo fills the viewport, others fly outward (about 250svh of scroll) | `view-timeline` on the section, tiles scale by `--to`; stage is `position: sticky` | Scroll, wide screens, motion allowed, supported browsers only |
 | Trips | Cards stack: each sticks a little lower and the next slides over | `position: sticky` | Scroll |
 | Places globe | Globe turns slowly and can be dragged; polaroids fade and blur as their pin goes behind the globe | cobe (WebGL) + rAF only while visible; CSS variable `--cobe-visible-id` drives opacity | On while on screen unless held, paused, or reduced motion |
+| About | Five postcards spring apart from a stack into an overlapping row (spring overshoot, 90ms stagger) | Container `data-reveal="spread"`; CSS `translate` transitions keyed on `data-reveal-state` | Scrolls into view, once |
+| Gallery, Selected | Tiles go from black and white to colour and zoom 4% on hover or focus; caption fades up | CSS filter and scale | Hover/focus, hover-capable devices only |
 | Lightbox | Photo grows out of the clicked thumbnail (FLIP, uniform scale); backdrop fades; back-of-card fades up; slide direction follows prev/next; exit fade | WAAPI + CSS | Open, step, close |
+
+### Added with the pivot
+
+- **Round cursor** (`Cursor`): rAF eased follow (22% per frame, stops when settled); ring over pressable things, smaller on press; with reduced motion it sits exactly on the pointer and transitions are off. Mouse only. D25.
+- **Map postcards**: hover or focus scales the card (spring); no entrance animation.
+- **Search dialog and mobile menu**: CSS transitions with `@starting-style` and `allow-discrete`.
 
 ## Reduced motion
 

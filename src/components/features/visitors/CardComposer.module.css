@@ -1,0 +1,319 @@
+/* The form is a postcard: card stock, an airmail edge, and the paper colour the visitor picks. */
+.form {
+  --tint: var(--card);
+  position: relative;
+  display: grid;
+  gap: var(--s-5);
+  max-width: 44rem;
+  padding: clamp(var(--s-4), 3vw, var(--s-6));
+  background: var(--tint);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+  padding-top: calc(clamp(var(--s-4), 3vw, var(--s-6)) + 8px);
+  overflow: hidden;
+  transition: background-color var(--d-slow) var(--ease-out);
+}
+
+.form::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 8px;
+  background: var(--air-stripe);
+  background-size: 62px 62px;
+}
+
+.form[data-color="sky"] {
+  --tint: color-mix(in srgb, var(--air-blue) 16%, var(--card));
+}
+
+.form[data-color="rose"] {
+  --tint: color-mix(in srgb, var(--air-red) 13%, var(--card));
+}
+
+.form[data-color="sun"] {
+  --tint: color-mix(in srgb, #e9b949 24%, var(--card));
+}
+
+.form[data-color="mint"] {
+  --tint: color-mix(in srgb, #2f9e7a 17%, var(--card));
+}
+
+.kinds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.legend,
+.label {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.legend {
+  width: 100%;
+}
+
+.optional {
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.chip {
+  position: relative;
+}
+
+.chip input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.chip span {
+  display: inline-block;
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  transition: background-color var(--d-fast), color var(--d-fast), border-color var(--d-fast);
+}
+
+.chip:hover span {
+  border-color: var(--ink);
+}
+
+.chip input:checked + span {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--card);
+}
+
+.chip:has(input:focus-visible) {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 3px;
+  border-radius: var(--radius-pill);
+}
+
+.field {
+  min-width: 0;
+}
+
+.message,
+.input {
+  width: 100%;
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  color: var(--ink);
+}
+
+.message {
+  resize: vertical;
+  min-height: 7rem;
+  font-family: var(--font-hand);
+  font-size: 1.7rem;
+  line-height: 1.15;
+}
+
+.message::placeholder,
+.input::placeholder {
+  color: var(--faint);
+}
+
+.count {
+  margin-top: var(--s-1);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.count[data-low] {
+  color: var(--air-red);
+}
+
+.toggle {
+  margin-bottom: var(--s-3);
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  transition: background-color var(--d-fast), color var(--d-fast);
+}
+
+.toggle:hover {
+  background: var(--ink);
+  color: var(--card);
+}
+
+.row {
+  display: grid;
+  gap: var(--s-4);
+}
+
+@media (min-width: 40rem) {
+  .row {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: var(--s-6);
+  }
+}
+
+.colors {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.swatches {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.swatch {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.swatch input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.swatch::before {
+  content: "";
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: 0 0 0 1px var(--rule-strong);
+}
+
+.swatch[data-color="sky"]::before {
+  background: color-mix(in srgb, var(--air-blue) 30%, var(--card));
+}
+
+.swatch[data-color="rose"]::before {
+  background: color-mix(in srgb, var(--air-red) 26%, var(--card));
+}
+
+.swatch[data-color="sun"]::before {
+  background: color-mix(in srgb, #e9b949 50%, var(--card));
+}
+
+.swatch[data-color="mint"]::before {
+  background: color-mix(in srgb, #2f9e7a 34%, var(--card));
+}
+
+.swatch:has(input:checked)::before {
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.swatch:has(input:focus-visible) {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 2px;
+}
+
+/* Hidden from people, present for scripts */
+.trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.error {
+  padding: var(--s-3) var(--s-4);
+  border-left: 3px solid var(--air-red);
+  background: color-mix(in srgb, var(--air-red) 10%, var(--card));
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.submitRow {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.submit {
+  justify-self: start;
+  padding: var(--s-3) var(--s-6);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--card);
+  font-family: var(--font-display);
+  font-weight: 700;
+  transition: background-color var(--d-fast);
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--air-blue);
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.privacy {
+  max-width: 52ch;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.thanks {
+  display: grid;
+  gap: var(--s-3);
+  justify-items: start;
+  max-width: 34rem;
+  padding: var(--s-6);
+  background: var(--card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-print);
+}
+
+.thanksTitle {
+  font-size: var(--step-2);
+  font-weight: 700;
+}
+
+.again {
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.again:hover {
+  background: var(--ink);
+  color: var(--card);
+}

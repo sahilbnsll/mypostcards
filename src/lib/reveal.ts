@@ -5,7 +5,7 @@ import type { CSSProperties } from "react";
  * `suppressHydrationWarning` is deliberate: the controller adds `data-reveal-state` to the live
  * DOM, which may happen before React finishes hydrating that element.
  */
-export function reveal(kind: "text" | "photo", index = 0) {
+export function reveal(kind: "text" | "photo" | "spread", index = 0) {
   return {
     "data-reveal": kind,
     style: { "--i": index % 8 } as CSSProperties,

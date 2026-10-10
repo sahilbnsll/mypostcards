@@ -1,12 +1,52 @@
 ---
 title: Decisions
 tags: [decisions]
-updated: 2026-10-09
+updated: 2026-10-10
 ---
 
 # Decisions log
 
 Newest first. Format: decision, why, trade-off.
+
+### D25. A custom round cursor, for a mouse only
+- **Why:** from the cursor reference: a white circle with `mix-blend-mode: difference` that eases after the pointer. Built ref-driven (no re-render per move). The blend sits on the fixed outer layer (on an inner element it does not blend and shows as a solid white disc). Over buttons and links the circle becomes a ring, so the control and its hover colours stay visible in light and dark; it shrinks on press.
+- **Guard rails:** only when `(hover: hover) and (pointer: fine)`; reduced motion removes the trailing; the real cursor stays over form fields, the drawing pad and any open dialog (the top layer sits above the circle); keyboard focus is untouched.
+- **Trade-off:** a hidden native cursor is a usability cost for some people; to remove it, delete `<Cursor />` from the layout.
+
+### D24. Map postcards are spread apart on the server and tied to their place by a thread
+- **Why:** pins as postcards overlap where places are close. A small relaxation pass (pure arithmetic, no client code) pushes overlapping cards apart, with a weak pull back toward each card's own spot; a thin line and a dot mark the real position. World pins are also thinned to one per ~7 degrees. Labels sit below the card so they cannot clip at the top edge.
+- **Trade-off:** card size is assumed in map units (about 5% of the width; 8.5% on route maps), so on very narrow screens the cards are relatively larger and can still touch (hover or focus raises one).
+
+### D23. Dark theme: two identical token blocks, light "physical" surfaces, fixed light text on photos
+- **Why:** an explicit choice (`data-theme`, set before first paint) plus a no-JS system-preference fallback means the same values twice; keep them identical. Prints, polaroids and stamps use `--print` so they stay light like paper; text on photos uses `--on-photo` so it stays readable whatever the theme.
+- **Trade-off:** one more pair of tokens to remember; panels still use `--card`, which flips.
+
+### D22. Postcard pages, related postcards, search, flat map and planned places added
+- **Why:** each photo gets a linkable page and a share image (`opengraph-image` with `"use cache"` so they prerender); related postcards score trip, café, place, tags and category; search is a static index plus a client palette; the flat map is server-drawn SVG (`d3-geo`, `world-atlas`) so it needs no tile service or key; planned places make a "dreaming of" list.
+- **Trade-off:** more static pages (134) and a few small dependencies; the search index grows with the content.
+
+### D21. Itineraries and café guide fields are optional data, shown only when provided
+- **Why:** nothing is invented. A stop shows only what was filled in; a café shows price, seat, wifi or a map link only when given.
+
+### D20. The guest desk: visitor cards, moderated, protected in the database
+- **Why:** visitors can draw or type a card. All writes go through `submit_visitor_card()` with validation and rate limits; RLS lets the anon key read only approved rows and public columns; nothing is public until approved in the dashboard. Drawings are stroke data rendered as SVG paths, never HTML. The page works without Supabase as a preview ("being set up").
+- **Trade-off:** requires moderating; Supabase Free pauses after a week idle ([[10 Backlog]]).
+
+### D19. Content moved from Supabase into the repository; Supabase is for visitor cards only
+- **Why:** the author edits the gallery by committing files, photos live in the repo, nothing needs an upload script, no keys are needed to build, and the free-plan limits (storage, pausing) stop mattering for content. Validation moved into `scripts/build-content.mjs`, with clear errors.
+- **Trade-off:** adding a postcard is a commit and deploy instead of a dashboard edit; repo size grows with photos (keep them near 2400 px).
+
+### D18. Photo hosting recommendation: Supabase Storage plus a local upload script (superseded by D19)
+- **Why:** keeps all content in one place and makes adding a postcard a one-command job (resize, strip EXIF, read date/GPS/camera, upload, insert the row) with no commit or deploy. See [[06 Supabase Setup]] for the limits behind it.
+- **Trade-off:** 1 GB storage cap, the one-week pause on free projects (needs a keep-alive cron), and a local script that holds the service-role key.
+
+### D17. Mobile menu animates with CSS enter/exit transitions, not keyframes
+- **Why:** keyframes could not animate the dialog out (it vanished) and the backdrop popped while the panel faded. `@starting-style` plus `allow-discrete` gives matching enter and exit, is interruptible, and needs no timers. Opened in the tap handler so it starts on the next frame; page scroll is locked while any modal is open.
+- **Trade-off:** browsers without `@starting-style` or `allow-discrete` show and hide it instantly (still fully usable).
+
+### D16. The two gallery references became a bento on /gallery and a spread on About
+- **Why:** the bento adds the editorial "varied rhythm" the masonry alone lacks and gives /gallery a curated opening; the spread gives the otherwise text-only About page a tactile image. Both reuse existing pieces (lightbox, `DeckDrag`) instead of adding Radix, framer-motion or shadcn.
+- **Trade-off:** the five selected photos also appear in the full gallery below (intentional). The bento's black and white default means colour only on hover or touch, which is why the "Selected" intro says so.
 
 ### D15. Zoom parallax uses CSS scroll-linked animation, not framer-motion and Lenis
 - **Why:** Lenis replaces native scrolling with a smoothed version, which conflicts with the no-scroll-hijack rule; framer-motion would be a heavy dependency for one effect. `view-timeline` does the same job with no JS.

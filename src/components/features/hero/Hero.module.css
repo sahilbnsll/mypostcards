@@ -129,7 +129,7 @@
   position: relative;
   display: block;
   padding: 2.4cqw;
-  background: var(--card);
+  background: var(--print);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-print);
   transition: box-shadow var(--d-slow) var(--ease-out);
@@ -159,7 +159,7 @@
   color: var(--ink);
   opacity: 0.62;
   rotate: -14deg;
-  mix-blend-mode: multiply;
+  mix-blend-mode: var(--postmark-blend, multiply);
 }
 
 .empty {

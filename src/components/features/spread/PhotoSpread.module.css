@@ -1,0 +1,69 @@
+/* Everything is sized in container widths, so the row keeps its proportions at any screen size */
+.stage {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  max-width: 56rem;
+  margin-inline: auto;
+  aspect-ratio: 100 / 38;
+}
+
+.row {
+  position: absolute;
+  inset: 0;
+}
+
+/* Five cards, each 26 wide, stepping 18 across: 4 * 18 + 26 = 98 wide, centred */
+.slot {
+  position: absolute;
+  left: 1cqw;
+  top: var(--y);
+  width: 26cqw;
+  z-index: calc(10 - var(--n));
+  translate: calc(var(--n) * 18cqw) 0;
+  rotate: var(--r);
+  transform: translate(var(--dx, 0px), var(--dy, 0px));
+  transition:
+    translate 950ms var(--ease-spring) calc(var(--n) * 90ms),
+    rotate 700ms var(--ease-out) calc(var(--n) * 90ms),
+    scale var(--d-base) var(--ease-out);
+}
+
+/* Before it scrolls into view the cards are stacked in the middle */
+.stage[data-reveal-state="pending"] .slot {
+  translate: 36cqw 0;
+  rotate: 0deg;
+}
+
+.slot:hover,
+.slot:focus-within {
+  scale: 1.07;
+  z-index: 20;
+}
+
+.card {
+  position: relative;
+  display: block;
+  border: 1cqw solid var(--print);
+  border-radius: 1.2cqw;
+  background: var(--print);
+  box-shadow: var(--shadow-print);
+  overflow: hidden;
+  transition: box-shadow var(--d-base) var(--ease-out);
+}
+
+.slot:hover .card {
+  box-shadow: var(--shadow-lift);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .slot {
+    cursor: grab;
+  }
+
+  .slot[data-dragging] {
+    cursor: grabbing;
+    transition: none;
+    z-index: 30;
+  }
+}

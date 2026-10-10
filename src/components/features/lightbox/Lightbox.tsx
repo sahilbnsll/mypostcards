@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
+import { PostcardBack } from "@/components/features/postcard/PostcardBack";
 import { Photo } from "@/components/ui/Photo";
-import { Postmark, Stamp } from "@/components/ui/Stamp";
-import { CATEGORY_BY_ID } from "@/content/categories";
-import { formatCoordinates, formatLocation, formatWhen, pad2 } from "@/lib/utils";
+import { pad2 } from "@/lib/utils";
 import type { LightboxItem } from "./types";
 import styles from "./Lightbox.module.css";
 
@@ -46,6 +45,8 @@ export function Lightbox({ list, index, origin, onIndexChange, onClose }: Lightb
     closing.current = false;
     onClose();
   }, [onClose]);
+
+  const indexBySlug = new Map((list ?? []).map((entry, i) => [entry.slug, i] as const));
 
   const requestClose = useCallback(() => {
     const dialog = dialogRef.current;
@@ -104,6 +105,11 @@ export function Lightbox({ list, index, origin, onIndexChange, onClose }: Lightb
     },
     [count, index, onIndexChange],
   );
+
+  const jumpTo = (target: number) => {
+    setDirection(target > index ? 1 : -1);
+    onIndexChange(target);
+  };
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "ArrowRight") {
@@ -171,45 +177,43 @@ export function Lightbox({ list, index, origin, onIndexChange, onClose }: Lightb
 
           <div className={styles.back} role="group" aria-label="About this postcard">
             <div className={styles.backInner} key={item.slug}>
-              <div className={styles.marks} aria-hidden>
-                <Postmark className={styles.postmark} top={item.location.city ?? item.location.country ?? "my postcards"} date={item.isSample ? "sample" : (item.takenOn?.slice(0, 4) ?? "kept")} />
-                <Stamp className={styles.stamp} tone="blue" />
-              </div>
+              <PostcardBack item={item} />
 
-              <h2 className={styles.title}>{item.title}</h2>
-              {item.caption && <p className={styles.caption}>{item.caption}</p>}
-              {item.note && <p className={styles.note}>{item.note}</p>}
+              <p className={styles.pageLink}>
+                <Link href={`/postcards/${item.slug}`} className="text-link">
+                  Open this postcard&rsquo;s page
+                </Link>
+              </p>
 
-              <dl className={styles.facts}>
-                <Fact label="Where" value={formatLocation(item.location)} />
-                <Fact label="When" value={formatWhen(item)} />
-                <Fact label="Kind" value={CATEGORY_BY_ID[item.category].label} />
-                {item.tripTitle && item.tripSlug && (
-                  <Fact label="Trip" value={<Link href={`/trips/${item.tripSlug}`} className="text-link">{item.tripTitle}</Link>} />
-                )}
-                {item.destinationName && item.destinationSlug && (
-                  <Fact label="Place" value={<Link href={`/destinations/${item.destinationSlug}`} className="text-link">{item.destinationName}</Link>} />
-                )}
-                {item.cafeName && item.cafeSlug && (
-                  <Fact label="Café" value={<Link href={`/cafes/${item.cafeSlug}`} className="text-link">{item.cafeName}</Link>} />
-                )}
-                {item.location.coordinates && (
-                  <Fact label="Coordinates" value={formatCoordinates(item.location.coordinates.lat, item.location.coordinates.lng)} />
-                )}
-                {item.camera && (
-                  <Fact
-                    label="Camera"
-                    value={[item.camera.body, item.camera.lens, item.camera.aperture, item.camera.shutterSpeed, item.camera.iso ? `ISO ${item.camera.iso}` : undefined].filter(Boolean).join(", ")}
-                  />
-                )}
-              </dl>
-
-              {(item.credit || item.isSample) && (
-                <p className={styles.credit}>
-                  {item.isSample ? "Sample photograph" : "Photo"}
-                  {item.credit ? ` via ${item.credit}` : ""}
-                  {item.isSample ? ". Not from my travels." : ""}
-                </p>
+              {item.related.length > 0 && (
+                <section className={styles.related} aria-label="More like this">
+                  <h3 className={styles.relatedTitle}>More like this</h3>
+                  <ul role="list" className={styles.relatedList}>
+                    {item.related.map((rel) => {
+                      const at = indexBySlug.get(rel.slug);
+                      const target = at === undefined ? undefined : list![at];
+                      return (
+                        <li key={rel.slug}>
+                          {target ? (
+                            <button
+                              type="button"
+                              className={styles.relatedItem}
+                              onClick={() => jumpTo(at!)}
+                              aria-label={`Show ${rel.title}`}
+                              title={rel.title}
+                            >
+                              <Photo image={target.image} ratio="1 / 1" sizes="96px" />
+                            </button>
+                          ) : (
+                            <Link href={`/postcards/${rel.slug}`} className={styles.relatedText}>
+                              {rel.title}
+                            </Link>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
               )}
             </div>
 
@@ -241,16 +245,6 @@ export function Lightbox({ list, index, origin, onIndexChange, onClose }: Lightb
         </div>
       )}
     </dialog>
-  );
-}
-
-function Fact({ label, value }: { label: string; value?: React.ReactNode }) {
-  if (!value) return null;
-  return (
-    <div className={styles.fact}>
-      <dt>{label}</dt>
-      <dd>{value}</dd>
-    </div>
   );
 }
 

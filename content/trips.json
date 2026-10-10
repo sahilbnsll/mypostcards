@@ -1,0 +1,138 @@
+[
+  {
+    "slug": "alpine-light",
+    "title": "Alpine Light",
+    "summary": "Cloud seas at sunrise, turquoise lakes and a long blue hour in the high country.",
+    "story": "The mountains do most of the work here. Light arrives from the side, catches one ridge at a time, and leaves the valleys in blue shadow.\n\nThese frames are arranged the way a day moves: sunrise above the cloud, midday on the lake, and the stars that come out once the last hut light goes off.",
+    "cover": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=max&w=2000&q=80",
+    "coverAlt": "A small wooden rowboat on turquoise alpine water with limestone peaks behind",
+    "coverWidth": 2000,
+    "coverHeight": 1333,
+    "coverColor": "#6c938f",
+    "destination": "alps",
+    "featured": true,
+    "sample": true,
+    "days": [
+      {
+        "title": "Above the cloud line",
+        "stops": [
+          {
+            "place": "Valais, Switzerland",
+            "time": "Before sunrise",
+            "note": "Be up high before the light arrives. The valley fills with cloud and the peaks stand out of it.",
+            "tip": "Bring gloves: it is cold long after the sun is up.",
+            "lat": 46.2,
+            "lng": 7.6,
+            "postcard": "above-the-clouds"
+          },
+          {
+            "place": "Night sky",
+            "time": "After dark",
+            "note": "A clear, moonless night turns the ridge into a skyline of its own.",
+            "postcard": "night-ridge"
+          }
+        ]
+      },
+      {
+        "title": "The lake",
+        "stops": [
+          {
+            "place": "Lago di Braies, Italy",
+            "time": "Late morning",
+            "note": "Rent a rowboat once the early crowd thins. The water is greenest when the sun is high.",
+            "tip": "Walk the shore path for the opposite view of the same boats.",
+            "lat": 46.694,
+            "lng": 12.086,
+            "postcard": "braies-turquoise"
+          },
+          {
+            "place": "On the water",
+            "note": "From the boat, the far shore does the composing for you.",
+            "postcard": "braies-rowboat"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "paper-lanterns",
+    "title": "Paper Lanterns",
+    "summary": "Wooden lanes, red pagodas and the hour after dusk.",
+    "story": "A collection built around evening: the moment shopfronts glow, lanterns come on and a mountain turns pink behind a pagoda.",
+    "cover": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=max&w=2000&q=80",
+    "coverAlt": "A wooden-fronted lane at dusk with a pagoda in the distance and a woman in a kimono walking away",
+    "coverWidth": 2000,
+    "coverHeight": 1333,
+    "coverColor": "#484241",
+    "destination": "japan",
+    "featured": true,
+    "sample": true,
+    "days": [
+      {
+        "title": "Kyoto, as the lights come on",
+        "stops": [
+          {
+            "place": "Higashiyama, Kyoto",
+            "time": "Dusk",
+            "note": "Wooden lanes, a pagoda at the end of the street, and the hour when shopfronts glow.",
+            "tip": "Go in the last hour before dark; the crowds thin and the sky stays blue.",
+            "lat": 34.999,
+            "lng": 135.781,
+            "postcard": "kyoto-evening-street"
+          }
+        ]
+      },
+      {
+        "title": "The mountain",
+        "stops": [
+          {
+            "place": "Chureito Pagoda, Fujiyoshida",
+            "time": "Morning",
+            "note": "Climb the steps for the classic view: a red pagoda with the mountain standing over the town.",
+            "tip": "Mornings are clearest.",
+            "lat": 35.502,
+            "lng": 138.801,
+            "postcard": "fuji-pagoda"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "subcontinent-days",
+    "title": "Subcontinent Days",
+    "summary": "Marble at first light, then yellow cabs once the sun is gone.",
+    "cover": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=max&w=2000&q=80",
+    "coverAlt": "The Taj Mahal at dawn, mirrored in a long reflecting pool lined with clipped cypresses",
+    "coverWidth": 2000,
+    "coverHeight": 1333,
+    "coverColor": "#8a9196",
+    "destination": "india",
+    "sample": true
+  },
+  {
+    "slug": "island-temples",
+    "title": "Island Temples",
+    "summary": "Stone and water, mist and morning, from a lake in Bali to a hilltop in Java.",
+    "cover": "https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=max&w=2000&q=80",
+    "coverAlt": "Bell-shaped stupas rising through morning haze at Borobudur",
+    "coverWidth": 2000,
+    "coverHeight": 1333,
+    "coverColor": "#826251",
+    "destination": "indonesia",
+    "sample": true
+  },
+  {
+    "slug": "weekend-escapes",
+    "title": "Weekend Escapes",
+    "summary": "Short drives, long roads and places to switch off for two days.",
+    "story": "Not every trip needs a passport. These are the quick ones: a van, a forest path, a waterfall and a ridge with the weather coming in.",
+    "cover": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=max&w=2000&q=80",
+    "coverAlt": "A yellow camper van parked on a desert road beneath red sandstone cliffs",
+    "coverWidth": 2000,
+    "coverHeight": 1408,
+    "coverColor": "#b09b91",
+    "featured": true,
+    "sample": true
+  }
+]

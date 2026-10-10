@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { siteConfig } from "@/config/site";
 import { Stamp } from "@/components/ui/Stamp";
+import { SearchPalette } from "@/components/features/search/SearchPalette";
+import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
 import styles from "./Header.module.css";
 
@@ -114,20 +116,30 @@ export function Header() {
             </ul>
           </nav>
 
+          <div className={styles.actions}>
+            <SearchPalette />
+            <ThemeToggle />
           <button
             type="button"
             className={cn(styles.pill, styles.menuButton)}
             aria-haspopup="dialog"
             aria-expanded={menuOpen}
-            onClick={() => setMenuPath(pathname)}
+            aria-controls="site-menu"
+            onClick={() => {
+              // Open in the same tick as the tap so the slide starts on the very next frame.
+              dialogRef.current?.showModal();
+              setMenuPath(pathname);
+            }}
           >
             Menu
           </button>
+          </div>
         </div>
       </header>
 
       <dialog
         ref={dialogRef}
+        id="site-menu"
         className={styles.menu}
         aria-label="Site menu"
         onClose={closeMenu}

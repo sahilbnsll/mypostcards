@@ -57,6 +57,12 @@
   line-height: 1;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
 /* Desktop navigation */
 .desktopNav {
   display: none;
@@ -128,7 +134,12 @@
   }
 }
 
-/* Mobile menu */
+/*
+ * Mobile menu. A modal <dialog> that slides in from the right over a fading backdrop and slides
+ * back out on close. Enter and exit are both plain CSS transitions (@starting-style for the way
+ * in, "allow-discrete" so the dialog stays displayed while it animates out), so they can be
+ * interrupted mid-flight and need no timers. Browsers without support just show and hide it.
+ */
 .menu {
   position: fixed;
   inset: 0;
@@ -141,9 +152,20 @@
   border: 0;
   background: transparent;
   color: var(--ink);
+  transition:
+    display 340ms allow-discrete,
+    overlay 340ms allow-discrete;
 }
 
 .menu::backdrop {
+  background: rgb(12 20 36 / 0);
+  transition:
+    background-color 300ms ease,
+    display 340ms allow-discrete,
+    overlay 340ms allow-discrete;
+}
+
+.menu[open]::backdrop {
   background: rgb(12 20 36 / 0.55);
 }
 
@@ -155,7 +177,26 @@
   margin-left: auto;
   padding: var(--s-4) var(--gutter) 0;
   background: var(--paper);
-  animation: menu-in var(--d-slow) var(--ease-out) both;
+  box-shadow: -24px 0 48px -24px rgb(12 20 36 / 0.45);
+  /* Out: quick and decisive */
+  transform: translate3d(100%, 0, 0);
+  transition: transform 240ms cubic-bezier(0.4, 0, 1, 1);
+}
+
+.menu[open] .menuPanel {
+  /* In: settles gently */
+  transform: none;
+  transition: transform 340ms var(--ease-out);
+}
+
+@starting-style {
+  .menu[open]::backdrop {
+    background: rgb(12 20 36 / 0);
+  }
+
+  .menu[open] .menuPanel {
+    transform: translate3d(100%, 0, 0);
+  }
 }
 
 .menuTop {
@@ -171,8 +212,26 @@
 
 .menuList li {
   border-bottom: 1px solid var(--rule);
-  animation: menu-item var(--d-slow) var(--ease-out) both;
-  animation-delay: calc(80ms + var(--i) * 45ms);
+  opacity: 0;
+  translate: 0 10px;
+  transition:
+    opacity 150ms ease,
+    translate 150ms ease;
+}
+
+.menu[open] .menuList li {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 300ms var(--ease-out) calc(110ms + var(--i) * 40ms),
+    translate 300ms var(--ease-out) calc(110ms + var(--i) * 40ms);
+}
+
+@starting-style {
+  .menu[open] .menuList li {
+    opacity: 0;
+    translate: 0 10px;
+  }
 }
 
 .menuLink {
@@ -198,20 +257,6 @@
 
 .menuPanel :global(.airmail-edge) {
   margin-inline: calc(var(--gutter) * -1);
-}
-
-@keyframes menu-in {
-  from {
-    transform: translate3d(16%, 0, 0);
-    opacity: 0;
-  }
-}
-
-@keyframes menu-item {
-  from {
-    transform: translate3d(0, 10px, 0);
-    opacity: 0;
-  }
 }
 
 @media (min-width: 62rem) {

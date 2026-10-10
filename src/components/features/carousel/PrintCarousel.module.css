@@ -106,7 +106,7 @@
   width: 100%;
   padding: clamp(6px, 1vw, 9px) clamp(6px, 1vw, 9px) 0;
   border: 0;
-  background: var(--card);
+  background: var(--print);
   box-shadow: var(--shadow-print);
   text-align: left;
   transform-origin: 50% 0;
@@ -133,7 +133,7 @@
   font-style: italic;
   line-height: clamp(2.5rem, 4vw, 3rem);
   text-align: center;
-  color: var(--ink-soft);
+  color: var(--print-ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
