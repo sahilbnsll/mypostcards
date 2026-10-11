@@ -8,6 +8,77 @@
   --logo-ink: #d9cdbf;
 }
 
+/* Postcard mosaic ----------------------------------------------------------------------- */
+
+.mosaicSection {
+  background: color-mix(in srgb, var(--night) 85%, black);
+  border-bottom: 1px solid color-mix(in srgb, var(--on-night) 8%, transparent);
+}
+
+.mosaicHeader {
+  padding-block: var(--s-5) var(--s-2);
+  text-align: center;
+}
+
+.mosaicIntro {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--on-night-muted);
+}
+
+.mosaicWrap {
+  overflow: hidden;
+  padding-block: var(--s-2) var(--s-6);
+}
+
+.mosaicList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  padding: 0 var(--s-4);
+}
+
+.mosaicItem {
+  position: relative;
+  flex: none;
+}
+
+.mosaicThumb {
+  display: block;
+  width: clamp(3.75rem, 6vw, 5.25rem);
+  padding: 3px;
+  background: var(--card);
+  border-radius: 2px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  rotate: var(--tilt, 0deg);
+  transition:
+    transform var(--d-fast) var(--ease-spring),
+    rotate var(--d-fast) var(--ease-spring),
+    box-shadow var(--d-fast);
+}
+
+.mosaicThumb:hover {
+  rotate: 0deg;
+  transform: translateY(-4px) scale(1.12);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.65);
+  z-index: 10;
+}
+
+.mosaicImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1px;
+}
+
+/* Footer layout ------------------------------------------------------------------------- */
+
 .inner {
   display: grid;
   gap: var(--s-7);
@@ -50,13 +121,24 @@
   color: var(--on-night-muted);
 }
 
+.colTitle {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-night-muted);
+  margin-bottom: var(--s-3);
+}
+
 .links ul {
   display: grid;
   grid-template-columns: repeat(2, max-content);
-  gap: var(--s-2) var(--s-7);
+  gap: var(--s-2) var(--s-6);
 }
 
-.links a {
+.links a,
+.socialList a {
   display: inline-block;
   padding-block: var(--s-1);
   font-family: var(--font-display);
@@ -65,10 +147,16 @@
   transition: color var(--d-fast);
 }
 
-.links a:hover {
+.links a:hover,
+.socialList a:hover {
   color: var(--stripe-white);
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.socialList {
+  display: grid;
+  gap: var(--s-1);
 }
 
 .by {
@@ -92,9 +180,9 @@
   box-shadow: none;
 }
 
-@media (min-width: 52rem) {
+@media (min-width: 58rem) {
   .inner {
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr 0.8fr 1fr;
     align-items: start;
   }
 

@@ -7,15 +7,19 @@ interface SectionHeaderProps {
   title: string;
   intro?: string;
   action?: { href: string; label: string };
+  badge?: React.ReactNode;
 }
 
-export function SectionHeader({ id, title, intro, action }: SectionHeaderProps) {
+export function SectionHeader({ id, title, intro, action, badge }: SectionHeaderProps) {
   return (
     <div className={styles.head} {...reveal("text")}>
       <div>
-        <h2 id={id} className={styles.title}>
-          {title}
-        </h2>
+        <div className={styles.titleRow}>
+          <h2 id={id} className={styles.title}>
+            {title}
+          </h2>
+          {badge && <span className={styles.badge}>{badge}</span>}
+        </div>
         {intro && <p className={styles.intro}>{intro}</p>}
       </div>
       {action && (

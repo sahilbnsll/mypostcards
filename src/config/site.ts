@@ -20,6 +20,12 @@ export const siteConfig = {
     name: "Sahil Bansal",
     website: "https://sahilbansal.net",
   },
+  socials: [
+    { title: "Personal Site", href: "https://sahilbansal.net" },
+    { title: "GitHub", href: "https://github.com/sahilbnsll" },
+    { title: "Twitter / X", href: "https://x.com/sahilbansalll" },
+    { title: "Instagram", href: "https://www.instagram.com/__heyitsahil/" },
+  ],
   navLinks: [
     { title: "Gallery", icon: "gallery", href: "/gallery", hint: "Every postcard, with filters" },
     { title: "Trips", icon: "trips", href: "/trips", hint: "Journeys, day by day" },

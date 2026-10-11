@@ -2,7 +2,7 @@ import Link from "next/link";
 import { reveal } from "@/lib/reveal";
 import { Photo } from "@/components/ui/Photo";
 import type { Story } from "@/content/types";
-import { formatDate, plural } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import styles from "./StoryFeature.module.css";
 
 /** One story, given room: a tall photograph that drifts slightly as it scrolls, and the start of the text. */
@@ -21,9 +21,9 @@ export function StoryFeature({ story }: { story: Story }) {
         {story.subtitle && <p className={styles.subtitle}>{story.subtitle}</p>}
         <p className={styles.excerpt}>{story.excerpt}</p>
         <p className={styles.meta}>
-          {[story.publishedAt ? formatDate(story.publishedAt) : undefined, `${plural(story.readingTimeMinutes, "minute")} to read`]
+          {[story.publishedAt ? formatDate(story.publishedAt) : undefined, `${story.readingTimeMinutes ?? 3} min read`]
             .filter(Boolean)
-            .join(", ")}
+            .join(" · ")}
         </p>
         <Link href={`/stories/${story.slug}`} className={`text-link ${styles.more}`}>
           Read the story

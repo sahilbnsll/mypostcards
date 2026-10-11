@@ -5,11 +5,33 @@
 }
 
 .media {
+  position: relative;
   display: block;
   margin-bottom: var(--s-2);
   overflow: hidden;
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-print);
+}
+
+.readBadge {
+  position: absolute;
+  top: var(--s-2);
+  right: var(--s-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.55rem;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--on-photo);
+  background: color-mix(in srgb, var(--night) 76%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
 }
 
 .img {

@@ -5,11 +5,8 @@
 /* Filter bar ------------------------------------------------------------------------------ */
 
 .bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-3) var(--s-5);
+  display: grid;
+  gap: var(--s-3);
   padding-block: var(--s-3);
   margin-bottom: var(--s-5);
 }
@@ -22,6 +19,14 @@
   border-bottom: 1px solid var(--rule);
 }
 
+.topRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-5);
+}
+
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -32,7 +37,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
-  min-height: 2.5rem;
+  min-height: 2.25rem;
   padding: 0 var(--s-4);
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius-pill);
@@ -63,8 +68,182 @@
 }
 
 .chip[aria-checked="true"] .count {
-  /* A little softer than the label, in both themes (the chip is dark in light mode and light in dark mode) */
+  /* A little softer than the label, in both themes */
   color: color-mix(in srgb, var(--card) 74%, var(--ink));
+}
+
+/* Controls: Search and Sort ------------------------------------------------------------- */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-3);
+}
+
+.searchToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 2.25rem;
+  padding: 0 var(--s-3);
+  background: var(--card);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    border-color var(--d-fast) var(--ease-out),
+    color var(--d-fast) var(--ease-out);
+}
+
+.searchToggle:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 2.25rem;
+  padding: 0 var(--s-3);
+  background: var(--card);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.searchIcon {
+  flex: none;
+  color: var(--muted);
+}
+
+.searchInput {
+  border: none;
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  color: var(--ink);
+  width: 10rem;
+  padding: 0;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--faint);
+}
+
+.clearSearch {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0 var(--s-1);
+  cursor: pointer;
+  transition: color var(--d-fast);
+}
+
+.clearSearch:hover {
+  color: var(--ink);
+}
+
+.sortBox {
+  position: relative;
+}
+
+.sortSelect {
+  min-height: 2.25rem;
+  padding: 0 2rem 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23526075' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  transition: border-color var(--d-fast) var(--ease-out);
+}
+
+.sortSelect:hover,
+.sortSelect:focus-visible {
+  border-color: var(--ink);
+  outline: none;
+}
+
+/* Tag / Mood strip ---------------------------------------------------------------------- */
+
+.tagStrip {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  overflow-x: auto;
+  padding-block: var(--s-1);
+}
+
+.tagLabel {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+}
+
+.tagList {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.tagPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--d-fast) var(--ease-out),
+    border-color var(--d-fast) var(--ease-out),
+    color var(--d-fast) var(--ease-out);
+}
+
+.tagPill:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.tagPill[data-active] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--card);
+}
+
+.statusRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-top: var(--s-1);
 }
 
 .status {
@@ -72,6 +251,23 @@
   font-size: var(--step--1);
   font-weight: 500;
   color: var(--muted);
+}
+
+.resetBtn {
+  border: none;
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--air-red);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0;
+}
+
+.resetBtn:hover {
+  color: color-mix(in srgb, var(--air-red) 80%, black);
 }
 
 /* Grid: columns give each photograph its own height, so ratios stay honest --------------- */

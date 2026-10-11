@@ -8,6 +8,19 @@ updated: 2026-10-10
 
 Newest first.
 
+## 2026-10-11: Nine journal polish features
+
+- **Loading skeletons**: postcard-shaped placeholders (`VisitorWallSkeleton`, `VisitorCardSkeleton`) with paper tint, dashed stamp outline, ruled lines, and shimmer sweep while Supabase loads. Added `src/app/visitors/loading.tsx` and wrapped home visitor wall in `<Suspense>`.
+- **Footer upgrade**: added a 12-postcard thumbnail mosaic with hover tilts and spring animation, an `airmail-edge` visual divider, and links to socials (GitHub, Twitter / X, Instagram, personal site).
+- **Card count badge**: section headers now support an optional `badge` prop; added "X cards on the wall" to the home visitors section and the `/visitors` wall.
+- **Reading time estimate**: added a small "3 min read" glassmorphism postal pill on story cards (`StoryCard`, `StoryFeature`) and story page meta headers.
+- **Related postcards**: story detail pages now show postcards matching both the trip and destination (deduplicated) under a "Related postcards" section with count badge.
+- **Trip timeline**: for trips with multiple postcards, added a vertical "Travel diary timeline" (`TripTimeline`) showing entries in chronological order with date stamps, location tags, stamp watermarks, and handwritten notes (`--font-hand`).
+- **Mood filtering**: `BloomGallery` now curates up to 6 prominent mood pills (`alps`, `lake`, `mountains`, etc.) without noisy hashtags or counters, keeping the interface calm and uncluttered.
+- **Non-persistent search**: search bar in `BloomGallery` is now a quiet pill button by default; clicking it expands the search input with autofocus, and closing or pressing Escape collapses it back.
+- **Sort options**: added a sort dropdown in `BloomGallery` supporting Default order, Newest first, Oldest first, and By place (A–Z).
+- **Stats bar**: added `<StatsBar>` horizontal strip under the hero showing `48 postcards · 6 places · 5 trips · 3 stories` with quick-nav links.
+
 ## 2026-10-10 (night): New 404 page
 
 - The "page not found" screen is redesigned from the 404 reference: tilted postcard, turning seal, cancellation waves, personal copy, back button and search hint. Works in light and dark and on phones. [[07 Components]].

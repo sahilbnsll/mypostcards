@@ -37,7 +37,12 @@ export default async function VisitorsPage() {
       </section>
 
       <section className="wrap section--tight" aria-labelledby="on-the-wall">
-        <SectionHeader id="on-the-wall" title="On the wall" intro="Cards from people who stopped by." />
+        <SectionHeader
+          id="on-the-wall"
+          title="On the wall"
+          intro="Cards from people who stopped by."
+          badge={wall.cards.length > 0 ? `${wall.cards.length} cards on the wall` : undefined}
+        />
         {wall.cards.length > 0 ? (
           <VisitorWall cards={wall.cards} />
         ) : (

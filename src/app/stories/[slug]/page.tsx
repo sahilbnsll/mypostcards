@@ -16,7 +16,7 @@ import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { CollectionHero } from "@/components/ui/CollectionHero";
 import { Prose } from "@/components/ui/Prose";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { formatDate, plural } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -52,14 +52,13 @@ async function StoryContent({ params }: { params: Params }) {
 
   const trip = story.tripSlug ? findBySlug(journal.trips, story.tripSlug) : undefined;
   const place = story.destinationSlug ? findBySlug(journal.destinations, story.destinationSlug) : undefined;
-  const related = toViews(
-    journal,
-    story.tripSlug
-      ? postcardsForTrip(journal, story.tripSlug)
-      : story.destinationSlug
-        ? postcardsForDestination(journal, story.destinationSlug)
-        : [],
-  ).slice(0, 8);
+  const tripCards = story.tripSlug ? postcardsForTrip(journal, story.tripSlug) : [];
+  const placeCards = story.destinationSlug ? postcardsForDestination(journal, story.destinationSlug) : [];
+  const deduplicatedMap = new Map<string, typeof tripCards[number]>();
+  for (const card of [...tripCards, ...placeCards]) {
+    deduplicatedMap.set(card.slug, card);
+  }
+  const related = toViews(journal, Array.from(deduplicatedMap.values())).slice(0, 8);
 
   return (
     <article>
@@ -71,7 +70,7 @@ async function StoryContent({ params }: { params: Params }) {
         meta={
           <>
             {story.publishedAt && <span>{formatDate(story.publishedAt)}</span>}
-            <span>{plural(story.readingTimeMinutes, "minute")} to read</span>
+            <span>{story.readingTimeMinutes} min read</span>
             {trip && (
               <span>
                 <Link href={`/trips/${trip.slug}`} className="text-link">
@@ -101,7 +100,13 @@ async function StoryContent({ params }: { params: Params }) {
 
       {related.length > 0 && (
         <section className="wrap section--tight" aria-labelledby="story-postcards">
-          <SectionHeader id="story-postcards" title="Photographs from this story" />
+          <SectionHeader
+            id="story-postcards"
+            title="Related postcards"
+            intro={`Photographs sharing this trip and destination${[trip?.title, place?.name].filter(Boolean).length > 0 ? ` (${[trip?.title, place?.name].filter(Boolean).join(" · ")})` : ""}.`}
+            action={{ href: "/gallery", label: "Open full gallery" }}
+            badge={`${related.length} cards`}
+          />
           <BloomGallery items={related} filterable={false} />
         </section>
       )}

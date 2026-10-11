@@ -14,6 +14,7 @@ import {
 } from "@/content/selectors";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
 import { Itinerary } from "@/components/features/trips/Itinerary";
+import { TripTimeline } from "@/components/features/trips/TripTimeline";
 import { StoryCard } from "@/components/features/stories/StoryCard";
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { CollectionHero } from "@/components/ui/CollectionHero";
@@ -85,6 +86,18 @@ async function TripContent({ params }: { params: Params }) {
         <section className="wrap section--tight" aria-labelledby="trip-itinerary">
           <SectionHeader id="trip-itinerary" title="Itinerary" intro="Day by day, with the tips worth knowing." />
           <Itinerary tripTitle={trip.title} days={trip.days} postcards={journal.postcards} />
+        </section>
+      )}
+
+      {postcards.length > 1 && (
+        <section className="wrap section--tight" aria-labelledby="trip-timeline">
+          <SectionHeader
+            id="trip-timeline"
+            title="Travel diary timeline"
+            intro="Flipping through the journey in chronological order."
+            badge={`${postcards.length} entries`}
+          />
+          <TripTimeline postcards={postcards} tripTitle={trip.title} />
         </section>
       )}
 

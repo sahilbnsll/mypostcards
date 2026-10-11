@@ -48,9 +48,19 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 | `PlacesIndex` | Typographic list with a sliding print |
 | `StoryFeature`, `StoryCard` | Home feature and list cards. `as="h2"` on index pages for correct heading order |
 | `CafeCard` | Photo, name, location, vibe tags, usual order |
+| `StatsBar` | Scale indicator under the hero: horizontal paper strip displaying postcard, place, trip, and story counts with quick links |
+| `TripTimeline` | Travel diary vertical timeline for trips with multiple postcards: numbered nodes on a dotted spine, date stamps, tilted postcard cards, and handwritten notes (`--font-hand`) |
+| `VisitorCardSkeleton`, `VisitorWallSkeleton` | Postcard-shaped loading placeholders with paper backgrounds, dashed stamp frames, ruled drawing blocks, and shimmer pulses |
 
-## Added with the pivot
+## Added with the pivot and journal polish
 
+- `StatsBar`: subtle scale strip under the hero showing total postcards, places, trips, and stories.
+- `TripTimeline`: travel diary view for multi-postcard trips, displaying entries chronologically with date stamps, location, and handwritten diary notes.
+- `VisitorWallSkeleton` / `VisitorCardSkeleton`: postcard loading skeletons supporting both standard masonry and scattered table variants.
+- `BloomGallery` enhancements: curated mood filter pills (max 6 prominent moods, no hashtag clutter), non-persistent collapsible search button, and sort dropdown (default, newest first, oldest first, by place).
+- `StoryCard` / `StoryFeature`: added prominent "3 min read" estimate badge and clean meta formatting.
+- `Footer` upgrade: 12-postcard thumbnail mosaic with hover spring, an `airmail-edge` stripe visual divider, and social links (`siteConfig.socials`).
+- `SectionHeader`: added support for an optional `badge` prop (e.g. "23 cards on the wall", "10 entries").
 - `SvgMap`: server-drawn flat map (world or fit-to-pins). Pins are real links drawn as small postcards (`MapPin.image`), spread apart server-side with a thread to the true spot; `route` numbers them and draws the route.
 - `Itinerary`: day-by-day timeline plus sticky route map. `CafeGuide`: usual order, price, seat, wifi, map link (only if given).
 - `PostcardBack` / `RelatedPostcards`: shared by the lightbox and `/postcards/[slug]`.
