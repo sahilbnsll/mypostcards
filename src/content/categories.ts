@@ -10,6 +10,7 @@ export const CATEGORIES: readonly CategoryMeta[] = [
   { id: "cafe", label: "Café", plural: "cafés", blurb: "Quiet corners and good light." },
   { id: "food", label: "Food", plural: "food", blurb: "Tables worth photographing." },
   { id: "getaway", label: "Getaway", plural: "getaways", blurb: "Weekends and short drives." },
+  { id: "art", label: "Art", plural: "art", blurb: "Things people make, and the light they sit in." },
 ] as const;
 
 export const CATEGORY_BY_ID: Record<Category, CategoryMeta> = Object.fromEntries(

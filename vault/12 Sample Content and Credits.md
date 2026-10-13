@@ -1,23 +1,24 @@
 ---
 title: Sample Content and Credits
 tags: [content, credits]
-updated: 2026-10-09
+updated: 2026-10-14
 ---
 
 # Sample content and credits
 
+## What is the author's own
+
+Three art postcards (`art-*`: a miniature hill with a lit house and its signed back, by Aslam Khan, and a lamp-lit pothos) and seven photographs from a dinner at P.F. Chang's, Gurugram, on 6 October 2026 (`content/postcards.json`, slugs `pf-changs-*`), with their café entry and the Gurugram place. They are marked `sample: false`, so they show no sample notice and the postmark carries the year. The files in `public/images/postcards/` are cleaned copies (upright, 2000px, no location or device data); the originals are kept out of the published site in the git-ignored `private-originals/` folder.
+
+The captions and handwritten notes were written from what each picture shows, in the author's voice, and are meant to be edited.
+
 ## What is sample
 
-All rows in `src/content/data/sample.ts` (and therefore `supabase/seed.sql`): 5 destinations, 5 trips, 4 cafés, 3 stories, 48 postcards. Every one has `isSample: true` (`is_sample` in SQL).
+**Nothing, since 2026-10-14.** All the stand-in content (48 Unsplash postcards, 5 trips, 6 places including a "Dreaming of" one, 4 cafés and 3 stories) was removed at the author's request; it is still in the git history (commit 9784db7 and earlier) if it is ever needed as a reference for the data shapes. The sample-content machinery stays in the code (`sample: true` in a content entry shows a "Sample photograph" line and a footer note, and the postmark says "someday"), so stand-ins can be used again for a test without changing code.
 
-- Captions and titles describe what is in the photograph. No dates are given. Locations appear only where a landmark is unmistakable (for example Lago di Braies, the Taj Mahal, Multnomah Falls).
-- Café names are fictional placeholders and marked "Sample entry".
-- The three stories are written as observations and carry a "Sample story" notice.
-- The UI discloses this: footer note, lightbox line "Sample photograph via Unsplash. Not from my travels.", postmark reading SAMPLE.
+## Photographs (historical)
 
-## Photographs
-
-Source: **Unsplash** (free to use under the Unsplash License; attribution is appreciated, not required). Loaded from `images.unsplash.com` with pinned parameters `?auto=format&fit=max&w=2000&q=80`.
+The removed samples came from **Unsplash** (free to use under the Unsplash License; attribution is appreciated, not required). Loaded from `images.unsplash.com` with pinned parameters `?auto=format&fit=max&w=2000&q=80`.
 
 How they were chosen: unsplash.com is protected by a bot check and was not scraped. Instead, candidate photo IDs were requested directly from the image CDN, measured for real aspect ratio and average colour, and reviewed on contact sheets. 74 candidates, all loaded, 48 used. IDs for six alpine photographs and several others came from the user's own reference file.
 
@@ -25,6 +26,6 @@ Photographer names were not retrievable, so the credit reads "Unsplash". Before 
 
 ## When real photographs arrive
 
-1. Upload to the `postcards` Supabase bucket ([[06 Supabase Setup]]).
-2. Add rows with `is_sample` left false and real alt text.
-3. Delete the sample rows. The notices disappear automatically.
+1. Copy the photo (cleaned of location data) into `public/images/postcards/`.
+2. Add an entry to `content/postcards.json` with `sample` left out or false and real alt text (see `content/README.md`).
+3. Delete the sample entries. The notices disappear automatically.

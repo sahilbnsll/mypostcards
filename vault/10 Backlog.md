@@ -1,7 +1,7 @@
 ---
 title: Backlog
 tags: [backlog]
-updated: 2026-10-10
+updated: 2026-10-14
 ---
 
 # Backlog and known limitations
@@ -9,7 +9,7 @@ updated: 2026-10-10
 ## Do next
 
 - [ ] **Connect the guest desk**: run `supabase/schema.sql`, set `SUPABASE_URL`, `SUPABASE_ANON_KEY` (and optionally `VISITOR_SALT`) on Vercel; cards go live at once, hide one with the `hidden` column if needed ([[06 Supabase Setup]]). Delete the old unused tables and storage bucket.
-- [ ] Add the first real postcards under `public/images/postcards/` and `content/postcards.json`; then remove the sample entries ([[12 Sample Content and Credits]]).
+- [x] ~~Add the first real postcards and remove the sample entries~~ done 2026-10-14 ([[12 Sample Content and Credits]]). Next: add trips and stories when there are some; both pages are ready and show empty states until then.
 - [ ] Run Lighthouse, axe on the new pages (postcard, itinerary, places, cafés, visitors, search dialog) in both themes, and a real-device pass; record in [[08 Quality and Verification]].
 - [ ] Optional: a daily Vercel cron that pings Supabase so the free project does not pause.
 - [ ] Deploy to the subdomain and set the environment variables.

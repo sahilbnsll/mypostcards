@@ -25,6 +25,27 @@ interface BloomGalleryProps {
 
 const SIZES = "(min-width: 75rem) 25vw, (min-width: 52rem) 33vw, 50vw";
 
+/** The column counts the gallery can show; the stylesheet picks one by screen width. */
+const COLUMN_COUNTS = [2, 3, 4] as const;
+
+/**
+ * Deal the photos into columns, each one into whichever column is shortest so far. CSS columns
+ * balance by total height instead, so a few tall photographs can leave the last column empty;
+ * this way every column is used, and the order still reads down each column in turn.
+ */
+function deal<T extends { image: { width: number; height: number } }>(items: readonly T[], count: number): Array<Array<{ item: T; index: number }>> {
+  const columns: Array<Array<{ item: T; index: number }>> = Array.from({ length: count }, () => []);
+  const heights = new Array<number>(count).fill(0);
+  items.forEach((item, index) => {
+    let shortest = 0;
+    for (let c = 1; c < count; c++) if (heights[c] < heights[shortest] - 0.001) shortest = c;
+    columns[shortest].push({ item, index });
+    // Height relative to the column width, plus a little for the gap between photos
+    heights[shortest] += item.image.height / item.image.width + 0.04;
+  });
+  return columns;
+}
+
 export function BloomGallery({ items, filterable = true, stickyFilters = false }: BloomGalleryProps) {
   const [filter, setFilter] = useState<Filter>("all");
   const [activeTag, setActiveTag] = useState<string | null>(null);
@@ -166,7 +187,52 @@ export function BloomGallery({ items, filterable = true, stickyFilters = false }
     setSearchOpen(false);
   };
 
+  // Photos that light up appear one after another; work out each one's delay once, up front
+  const delays = new Map<string, number>();
   let rank = 0;
+  for (const item of sortedItems) {
+    if (matches(item) && hover?.slug !== item.slug) delays.set(item.slug, Math.min(rank++ * 60, 420));
+  }
+
+  const layouts = COLUMN_COUNTS.map((count) => ({ count, columns: deal(sortedItems, count) }));
+
+  const cell = (item: LightboxItem, index: number) => {
+    const on = matches(item);
+    const isHover = hover?.slug === item.slug;
+    const bloomed = on || isHover;
+    const delay = delays.get(item.slug) ?? 0;
+    const label = [item.title, formatLocation(item.location, ["city", "country"])].filter(Boolean).join(", ");
+    return (
+      <div key={item.slug} role="listitem" className={styles.cell} {...reveal("photo", index)}>
+        <button
+          type="button"
+          className={styles.item}
+          data-on={bloomed || undefined}
+          data-dim={filtering && !bloomed ? true : undefined}
+          data-grey={filtering || undefined}
+          aria-label={`Open ${label}`}
+          onClick={(e) => lightbox.open(item.slug, e.currentTarget, matching.length > 0 && on ? matching : sortedItems)}
+          onPointerEnter={(e) => onEnter(e, item.slug)}
+          onPointerLeave={() => setHover((h) => (h?.slug === item.slug ? null : h))}
+          style={
+            {
+              aspectRatio: item.image.width / item.image.height,
+              "--ox": `${isHover ? hover.x : 50}%`,
+              "--oy": `${isHover ? hover.y : 50}%`,
+              "--delay": `${delay}ms`,
+            } as CSSProperties
+          }
+        >
+          <Photo image={item.image} sizes={SIZES} className={styles.base} />
+          {prepared && filterable && <Photo image={item.image} sizes={SIZES} decorative className={styles.bloom} />}
+          <span className={styles.caption} aria-hidden>
+            <span className={styles.captionTitle}>{item.title}</span>
+            <span className={styles.captionMeta}>{formatLocation(item.location, ["city", "country"]) || CATEGORY_BY_ID[item.category].label}</span>
+          </span>
+        </button>
+      </div>
+    );
+  };
 
   return (
     <div ref={rootRef} className={styles.gallery} data-filtering={filtering || undefined}>
@@ -316,53 +382,18 @@ export function BloomGallery({ items, filterable = true, stickyFilters = false }
         </div>
       )}
 
-      <ul role="list" className={styles.grid}>
-        {sortedItems.map((item, index) => {
-          const on = matches(item);
-          const isHover = hover?.slug === item.slug;
-          const bloomed = on || isHover;
-          const delay = on && !isHover ? Math.min(rank++ * 60, 420) : 0;
-          const label = [item.title, formatLocation(item.location, ["city", "country"])].filter(Boolean).join(", ");
-          return (
-            <li
-              key={item.slug}
-              className={styles.cell}
-              {...reveal("photo", index)}
-            >
-              <button
-                type="button"
-                className={styles.item}
-                data-on={bloomed || undefined}
-                data-dim={filtering && !bloomed ? true : undefined}
-                data-grey={filtering || undefined}
-                aria-label={`Open ${label}`}
-                onClick={(e) => lightbox.open(item.slug, e.currentTarget, matching.length > 0 && on ? matching : sortedItems)}
-                onPointerEnter={(e) => onEnter(e, item.slug)}
-                onPointerLeave={() => setHover((h) => (h?.slug === item.slug ? null : h))}
-                style={
-                  {
-                    aspectRatio: item.image.width / item.image.height,
-                    "--ox": `${isHover ? hover.x : 50}%`,
-                    "--oy": `${isHover ? hover.y : 50}%`,
-                    "--delay": `${delay}ms`,
-                  } as CSSProperties
-                }
-              >
-                <Photo image={item.image} sizes={SIZES} className={styles.base} />
-                {prepared && filterable && (
-                  <Photo image={item.image} sizes={SIZES} decorative className={styles.bloom} />
-                )}
-                <span className={styles.caption} aria-hidden>
-                  <span className={styles.captionTitle}>{item.title}</span>
-                  <span className={styles.captionMeta}>
-                    {formatLocation(item.location, ["city", "country"]) || CATEGORY_BY_ID[item.category].label}
-                  </span>
-                </span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      {/* One arrangement per column count; the stylesheet shows the one that fits the screen. The
+          hidden ones are display:none, so they cost nothing to look at or tab through, and
+          their lazy photographs are never fetched. */}
+      {layouts.map(({ count, columns }) => (
+        <div key={count} role="list" className={styles.grid} data-cols={count}>
+          {columns.map((column, c) => (
+            <div key={c} className={styles.column}>
+              {column.map(({ item, index }) => cell(item, index))}
+            </div>
+          ))}
+        </div>
+      ))}
 
       <Lightbox
         list={lightbox.state?.list ?? null}

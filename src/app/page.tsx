@@ -99,7 +99,7 @@ export default async function HomePage() {
         <section className="wrap section" aria-labelledby="empty-title">
           <EmptyState
             title="No postcards yet"
-            body="The journal is connected but empty. If you have not yet, run supabase/schema.sql in the Supabase SQL editor; then add rows to the postcards table or load the sample content."
+            body="The first postcards are on their way. Add one in content/postcards.json (the guide is in content/README.md) and it will appear here."
           />
         </section>
       ) : (

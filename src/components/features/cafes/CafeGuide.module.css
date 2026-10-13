@@ -1,39 +1,84 @@
 .guide {
-  max-width: 34rem;
+  overflow: hidden;
   background: var(--card);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-print);
-  overflow: hidden;
 }
 
-.list {
+/* Narrow screens: one detail per line, with a dashed rule between */
+.grid {
   display: grid;
+  padding-inline: var(--s-5);
 }
 
-.row {
+.cell {
   display: grid;
-  grid-template-columns: 7rem 1fr;
-  gap: var(--s-3);
-  padding: var(--s-3) var(--s-5);
-  border-bottom: 1px solid var(--rule);
+  gap: var(--s-1);
+  padding-block: var(--s-4);
   font-family: var(--font-display);
-  font-size: var(--step--1);
-  line-height: 1.4;
 }
 
-.row dt {
+.cell + .cell {
+  border-top: 1px dashed var(--rule-strong);
+}
+
+.cell dt {
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--muted);
 }
 
-.row dd {
+.cell dd {
+  font-size: var(--step-0);
   font-weight: 600;
+  line-height: 1.3;
 }
 
-.map {
-  display: inline-block;
-  margin: var(--s-4) var(--s-5);
-  font-family: var(--font-display);
-  font-size: var(--step--1);
-  font-weight: 600;
+/* Wide screens: the details sit side by side, cut apart by perforations */
+@media (min-width: 52rem) {
+  .grid {
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  }
+
+  .cell {
+    padding-inline: var(--s-5);
+  }
+
+  .cell:first-child {
+    padding-left: 0;
+  }
+
+  .cell + .cell {
+    border-top: 0;
+    border-left: 1px dashed var(--rule-strong);
+  }
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-5);
+  margin-inline: var(--s-5);
+  padding-block: var(--s-4);
+  border-top: 1px dashed var(--rule-strong);
+}
+
+/* Written by hand, in the same blue ink as the notes on the back of a postcard */
+.note {
+  max-width: 44ch;
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  line-height: 1.15;
+  color: var(--air-blue);
+}
+
+/* With only a rating and a line or two, the card stays compact rather than stretching across */
+.guide[data-compact] {
+  max-width: 34rem;
+}
+
+.guide[data-compact] .grid {
+  grid-template-columns: minmax(0, 1fr);
 }

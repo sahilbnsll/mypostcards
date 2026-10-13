@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { reveal } from "@/lib/reveal";
 import { Photo } from "@/components/ui/Photo";
+import { Rating } from "@/components/ui/Rating";
 import type { Cafe } from "@/content/types";
 import { plural } from "@/lib/utils";
 import styles from "./CafeCard.module.css";
@@ -23,6 +24,7 @@ export function CafeCard({ cafe, count, index = 0, as: Heading = "h3" }: { cafe:
           ))}
         </ul>
       )}
+      {cafe.rating && <Rating value={cafe.rating} size="sm" className={styles.rating} />}
       <p className={styles.meta}>
         {[cafe.favoriteOrder ? `Usual order: ${cafe.favoriteOrder}` : undefined, cafe.price, plural(count, "postcard")].filter(Boolean).join(", ")}
       </p>

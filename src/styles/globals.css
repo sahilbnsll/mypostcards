@@ -272,3 +272,26 @@ ol[role="list"] {
 html[data-cursor]:not(:has(dialog[open])) :not(input, textarea, select, [data-native-cursor], [data-native-cursor] *) {
   cursor: none !important;
 }
+
+/* Space between a page heading and the card that sits above the photograph */
+.hero-aside {
+  margin-bottom: var(--s-6);
+}
+
+/* A page head with a picture beside the text: two columns on wide screens, stacked below */
+.page-head[data-split] .page-head-side {
+  margin-top: var(--s-7);
+}
+
+@media (min-width: 62rem) {
+  .page-head[data-split] {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--s-8);
+    align-items: center;
+  }
+
+  .page-head[data-split] .page-head-side {
+    margin-top: 0;
+  }
+}

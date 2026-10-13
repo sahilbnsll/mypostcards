@@ -1,7 +1,7 @@
 ---
 title: Content Model
 tags: [data]
-updated: 2026-10-10
+updated: 2026-10-14
 ---
 
 # Content model
@@ -29,10 +29,10 @@ postcards  *-1 trip, destination, cafe, story   (all optional)
 
 ## Entities
 
-- **Postcard**: `slug, title, image, alt, category` required. Optional `caption, note, place, city, region, country, lat, lng, date | period, trip, destination, cafe, story, tags, camera, credit, creditUrl, featured, sample`. Categories: travel, city, cafe, food, getaway. Each postcard has its own page (`/postcards/[slug]`) and share image, and a list of related postcards ([[09 Decisions]] D22).
+- **Postcard**: `slug, title, image, alt, category` required. Optional `caption, note, place, city, region, country, lat, lng, date | period, trip, destination, cafe, story, tags, camera, credit, creditUrl, featured, sample`. Categories: travel, city, cafe, food, getaway, art. Optional `artist` credits whoever made the thing in the photo. Each postcard has its own page (`/postcards/[slug]`) and share image, and a list of related postcards ([[09 Decisions]] D22).
 - **Trip**: summary, optional cover, dates or `period`, and optional `days`: `[{ title, stops: [{ place, time?, note?, tip?, lat?, lng?, postcard? }] }]`. Shown as a timeline with a route map ([[07 Components]]).
 - **Destination**: `status` is `visited` (default) or `planned`. Planned places need no cover and appear under "Dreaming of" and as dashed pins.
-- **Cafe**: `order, price, seat, wifi, map` (https link) are shown only when provided.
+- **Cafe**: `order, price, seat, wifi, map` (https link), `rating` (0.5 to 5, at most one decimal, drawn as stars filled by the exact amount) and `ratingNote` are shown only when provided. A postcard may also have its own `rating`.
 - **Story**: front matter plus Markdown body.
 - **`sample: true`** flags stand-in content. The UI says so honestly; never present samples as the author's own travel ([[12 Sample Content and Credits]]).
 

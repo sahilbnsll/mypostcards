@@ -6,7 +6,7 @@
  * photographs in `public/images/`; `scripts/build-content.mjs` turns that into these types.
  */
 
-export type Category = "travel" | "city" | "cafe" | "food" | "getaway";
+export type Category = "travel" | "city" | "cafe" | "food" | "getaway" | "art";
 
 export interface CategoryMeta {
   id: Category;
@@ -68,9 +68,13 @@ export interface Postcard {
   storySlug?: string;
   tags: string[];
   camera?: CameraMetadata;
+  /** Who made the thing in the photograph (a painting, a model, a print), when it is not me. */
+  artist?: string;
   /** Photographer credit, shown for photos that are not mine. */
   credit?: string;
   creditUrl?: string;
+  /** My rating of what is in the photo (a dish, a drink, a view): 0.5 to 5, at most one decimal. */
+  rating?: number;
   /** True while a photo is stand-in content rather than one of my own. */
   isSample: boolean;
   featured: boolean;
@@ -148,6 +152,9 @@ export interface Cafe {
   bestSeat?: string;
   wifi?: string;
   mapUrl?: string;
+  /** My rating of the place: 0.5 to 5, at most one decimal, with an optional line about it. */
+  rating?: number;
+  ratingNote?: string;
   isSample: boolean;
   sortOrder: number;
 }

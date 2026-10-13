@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Rating } from "@/components/ui/Rating";
 import { Postmark, Stamp } from "@/components/ui/Stamp";
 import { CATEGORY_BY_ID } from "@/content/categories";
 import type { PostcardView } from "@/content/types";
@@ -39,6 +40,8 @@ export function PostcardBack({ item, as: Heading = "h2", variant = "panel" }: Po
         <Fact label="Where" value={formatLocation(item.location)} />
         <Fact label="When" value={formatWhen(item)} />
         <Fact label="Kind" value={CATEGORY_BY_ID[item.category].label} />
+        {item.artist && <Fact label="Artist" value={item.artist} />}
+        {item.rating && <Fact label="My rating" value={<Rating value={item.rating} size="sm" />} />}
         {item.tripTitle && item.tripSlug && (
           <Fact label="Trip" value={<Link href={`/trips/${item.tripSlug}`} className="text-link">{item.tripTitle}</Link>} />
         )}

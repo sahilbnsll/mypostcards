@@ -1,12 +1,39 @@
----
+﻿---
 title: Changelog
 tags: [changelog]
-updated: 2026-10-10
+updated: 2026-10-14
 ---
 
 # Changelog
 
 Newest first.
+
+## 2026-10-14: Daksina Bhawan, ratings to one decimal, and the samples are gone
+
+- **Daksina Bhawan** (South Indian restaurant, Sector 67, Gurugram) added as a café with six postcards (a dosa and five interior shots under the brass temple bells), your map link, and a rating of 4.8/5 with a line about the benne dosa, idli and filter coffee. A staff member in the staircase photo is softly blurred; originals are in `private-originals/daksina-bhawan/`.
+- **Ratings take one decimal** (0.5 to 5, so 4.8 works). Each star is filled by the exact amount: a 4.8 is four full stars and a fifth filled to 80%.
+- **All sample content removed** (48 postcards, 5 trips, 6 places, 4 cafés, 3 stories). The site now holds only the author's own 16 postcards, 1 place and 2 cafés; the Trips and Stories pages show friendly empty states. About and the home empty state no longer mention samples, and the Unsplash allowlist was dropped from `next.config.ts`. [[12 Sample Content and Credits]]
+
+## 2026-10-13 (late): Art
+
+- New kind **Art** (gallery filter) and an optional `artist` field, shown as "Artist" on the back of a postcard. Three postcards added: a miniature hill with a lit house by Aslam Khan, the signed back of the same piece, and a lamp-lit pothos (all 10 October 2026). Originals kept in the git-ignored `private-originals/art/`.
+
+## 2026-10-13 (night): the café page as a template
+
+- Café pages use a split header (text, details and guide on the left, the cover as a tilted print with a stamp and handwritten caption on the right), a derived "Visited" date, a gallery that fills every column, and a "More cafés" strip. Rating stars are hand-drawn and yellow, and the map link is a text link "Open in Maps". See [[07 Components]], [[09 Decisions]] D29.
+
+## 2026-10-13 (evening): P.F. Chang's rated, redrawn stamps, a map button by the name
+
+- P.F. Chang's is rated 4.5/5.
+- The rating is drawn as five hand-drawn stars in marker yellow (earlier versions used miniature stamps, then clay stars) with the number beside them, and the line under it reads "Good food, good ambience, and a ceiling worth looking up at." The "Open on a map" link became an "Open in Maps" text link with an arrow in the details row beside the place link (Gurugram) and left the guide card, which is now compact when it holds little. See [[07 Components]].
+
+## 2026-10-13 (later): Ratings, and the guide above the photo
+
+- Cafés and postcards can carry your own rating (`rating`, 0.5 to 5 in half steps; cafés also `ratingNote`), drawn as five stamps. The café guide card moved above the cover photograph and was redesigned as a postal slip. See [[07 Components]] and `content/README.md`.
+
+## 2026-10-13: The first real postcards
+
+- Seven photographs from P.F. Chang's, Gurugram (6 October 2026) added with captions and handwritten notes, a café entry (with the map link) and a Gurugram place. The blossom-ceiling photo is featured, so it leads the gallery bento. Photos were cleaned (upright, 2000px, no GPS or device data); originals moved to the git-ignored `private-originals/`. See [[12 Sample Content and Credits]].
 
 ## 2026-10-11: Nine journal polish features
 

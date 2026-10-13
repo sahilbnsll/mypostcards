@@ -54,3 +54,7 @@
   font-weight: 500;
   color: var(--muted);
 }
+
+.rating {
+  margin-top: var(--s-3);
+}

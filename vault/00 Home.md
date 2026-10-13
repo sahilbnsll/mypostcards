@@ -1,7 +1,7 @@
 ---
 title: My Postcards, project vault
 tags: [index]
-updated: 2026-10-10
+updated: 2026-10-14
 ---
 
 # My Postcards
@@ -30,8 +30,8 @@ Personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal
 
 ## Status (2026-10-10)
 
-- Content is authored in `content/` and `public/images/` (see `content/README.md`); 48 sample postcards, 5 trips, 6 places, 4 cafés, 3 stories for now. Supabase is used only for the visitor guest desk and is **not yet connected** ([[06 Supabase Setup]]); the desk shows "being set up" until then.
-- Typecheck, lint and production build pass (134 static pages). Work since the last push (the whole pivot: repo content, visitors, postcard pages, itineraries, search, flat map, dark theme, cursor) is **not committed**.
+- Content is authored in `content/` and `public/images/` (see `content/README.md`); 16 postcards (all the author's own: P.F. Chang's, Daksina Bhawan, three art pieces), 1 place (Gurugram), 2 cafés, and no trips or stories yet. All the stand-in sample content was removed on 2026-10-14. Supabase is used only for the visitor guest desk and is **not yet connected** ([[06 Supabase Setup]]); the desk shows "being set up" until then.
+- Typecheck, lint and production build pass (59 static pages). Work since the last push (the whole pivot: repo content, visitors, postcard pages, itineraries, search, flat map, dark theme, cursor) is **not committed**.
 - axe on the new pages, Lighthouse and real devices are **not** done. See [[08 Quality and Verification]].
 
 ## Commands

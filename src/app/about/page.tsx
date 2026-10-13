@@ -21,11 +21,11 @@ My Postcards is a personal photo journal. It collects photographs from trips, ca
 
 ## How it is organised
 
-Every photograph is a postcard with a short caption, a place and a kind: travel, city, café, food or getaway. Postcards are grouped into trips, filed under places, and the ones that deserve more than a line get a story.
+Every photograph is a postcard with a short caption, a place and a kind: travel, city, café, food, getaway or art. Postcards are grouped into trips, filed under places, and the ones that deserve more than a line get a story.
 
 ## Right now
 
-The collection is being built. Until my own postcards are in, the photographs on the site are free-to-use samples from Unsplash, marked as samples wherever they appear.`;
+The collection is small and still growing. So far it holds a few restaurant tables, a dosa, some hand-made art and a lamp-lit plant, with more places on the way. Every photograph here is mine.`;
 
 export default async function AboutPage() {
   const { postcards } = await getJournal();

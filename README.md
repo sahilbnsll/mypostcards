@@ -2,7 +2,7 @@
 
 > A little collection of places I've been and moments I've kept.
 
-A personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal: travel, cafés, city streets, food and weekend getaways, presented as digital postcards.
+A personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal: travel, cafés, city streets, food, weekend getaways and the odd piece of art, presented as digital postcards.
 
 **Project documentation lives in the Obsidian vault at [`vault/`](vault/00%20Home.md).** Open the `vault/` folder as a vault in Obsidian. Start with `00 Home.md`.
 

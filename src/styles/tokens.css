@@ -107,6 +107,10 @@
   --logo-ink: #4b3e38;
   --logo-paper: #f4eee0;
 
+  /* Rating stars: marker yellow with a darker amber pen line */
+  --star-fill: #f7c52b;
+  --star-edge: #b87a0c;
+
   /* Decorative postage stamp: paper edge, three window colours (graded a to b) with their line colour */
   --stamp-paper-a: #fffdf6;
   --stamp-paper-b: #ece3cf;
@@ -170,6 +174,8 @@
   --logo-accent: #e39a6e;
   --logo-ink: #d9cdbf;
   --logo-paper: #070b14;
+  --star-fill: #ffd04a;
+  --star-edge: #f0a81c;
   --stamp-paper-a: #f1ead9;
   --stamp-paper-b: #d6ccb4;
   --stamp-cancel: #1a120e;
@@ -224,6 +230,8 @@
     --logo-accent: #e39a6e;
     --logo-ink: #d9cdbf;
     --logo-paper: #070b14;
+    --star-fill: #ffd04a;
+    --star-edge: #f0a81c;
     --stamp-paper-a: #f1ead9;
     --stamp-paper-b: #d6ccb4;
     --stamp-cancel: #1a120e;

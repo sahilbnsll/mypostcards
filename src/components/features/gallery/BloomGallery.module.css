@@ -1,4 +1,4 @@
-.gallery {
+﻿.gallery {
   --gap: clamp(0.5rem, 0.2rem + 1.4vw, 1.25rem);
 }
 
@@ -198,7 +198,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .tagList {
@@ -272,26 +272,48 @@
 
 /* Grid: columns give each photograph its own height, so ratios stay honest --------------- */
 
+/* One arrangement per column count; exactly one of them is shown, by screen width */
 .grid {
-  column-count: 2;
-  column-gap: var(--gap);
+  display: none;
+  align-items: start;
+  gap: var(--gap);
 }
 
-.cell {
-  break-inside: avoid;
-  margin-bottom: var(--gap);
+.grid[data-cols="2"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 @media (min-width: 52rem) {
-  .grid {
-    column-count: 3;
+  .grid[data-cols="2"] {
+    display: none;
+  }
+
+  .grid[data-cols="3"] {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 75rem) {
-  .grid {
-    column-count: 4;
+  .grid[data-cols="3"] {
+    display: none;
   }
+
+  .grid[data-cols="4"] {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.column {
+  display: grid;
+  align-content: start;
+  gap: var(--gap);
+}
+
+.cell {
+  min-width: 0;
 }
 
 .item {

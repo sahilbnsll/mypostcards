@@ -45,3 +45,6 @@ next-env.d.ts
 
 # generated from content/ by scripts/build-content.mjs
 /src/content/generated/
+
+# Original photographs (they carry location data); only the cleaned copies in public/images are published
+/private-originals/

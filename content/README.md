@@ -1,4 +1,4 @@
-# Writing the journal
+﻿# Writing the journal
 
 Everything on the site except the visitor cards comes from this folder and from `public/images/`. Edit a file, save, and the dev server rebuilds the data (`npm run dev` watches both folders). On deploy, `npm run build` does the same. If something is wrong, the build stops and says which file, which entry and what to fix.
 
@@ -45,7 +45,7 @@ Required: `slug`, `title`, `image`, `alt`, `category`. Everything else is option
 
 Other optional fields: `caption`, `note` (the text on the back of the postcard), `place` (the spot, such as a street or a viewpoint), `region`, `period` (such as `"Spring 2025"` when there is no exact date), `cafe`, `story`, `camera`, `credit`, `creditUrl`, `featured` (appears first on the home page and gallery).
 
-Categories: `travel`, `city`, `cafe`, `food`, `getaway`.
+Categories: `travel`, `city`, `cafe`, `food`, `getaway`, `art`. For art, add `"artist": "Their Name"` to credit whoever made the piece: it shows as "Artist" on the back of the postcard (`credit` is for a photographer who is not you).
 
 A misspelt field name is caught and a likely correction suggested.
 
@@ -76,7 +76,18 @@ Stops with `lat` and `lng` are drawn on the route map beside the timeline, numbe
 
 ## A café or food spot
 
-`cafes.json` entries accept `order` (your usual), `price` (as you would write it, such as `"around 4 euro"`), `seat` (the best seat), `wifi`, and `map` (a link, https only). Only what you provide is shown.
+`cafes.json` entries accept `order` (your usual), `price` (as you would write it, such as `"around 4 euro"`), `seat` (the best seat), `wifi`, `map` (a link, https only), and your rating:
+
+```json
+"rating": 4.5,
+"ratingNote": "Go for the ceiling, stay for the noodles."
+```
+
+`rating` is a number from 0.5 to 5 with at most one decimal (4, 4.5, 4.8). The last star is filled by the exact amount, so a 4.8 is five stars with the fifth almost full. It is drawn as five hand-drawn yellow stars (full, half, empty) on the café's guide card, which sits above the photograph, and as a small row on the café's card in the list. A café with a `map` link also gets an "Open in Maps" link in the details row under its name, next to its place. `ratingNote` is one handwritten line shown beside it. Only what you provide is shown, and with none of it the guide card is not shown at all.
+
+A café page builds the rest itself from what you have written: the "Visited" date comes from the dates on its postcards, the handwritten caption under the cover photo is its `neighborhood`, and a "More cafés" strip links to others.
+
+A single photograph can carry a rating too, for a dish, a drink or a view: add `"rating": 4` to that postcard in `postcards.json` and "My rating" appears on the back of the postcard.
 
 ## A place you have not been yet
 

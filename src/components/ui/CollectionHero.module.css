@@ -29,3 +29,61 @@
     aspect-ratio: 4 / 3;
   }
 }
+
+.aside {
+  margin-top: var(--s-6);
+}
+
+/* Split variant: the cover photograph as a postcard print, a little off true, with a stamp */
+.print {
+  position: relative;
+  margin: 0;
+  padding: clamp(0.6rem, 1.4vw, 1rem) clamp(0.6rem, 1.4vw, 1rem) 0;
+  background: var(--print);
+  box-shadow: var(--shadow-lift);
+  rotate: 2deg;
+  transition: rotate 500ms var(--ease-out);
+}
+
+.print:hover {
+  rotate: 0deg;
+}
+
+.printPhoto {
+  display: block;
+}
+
+.printNote {
+  padding: 0.35rem 0 0.6rem;
+  font-family: var(--font-hand);
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+  line-height: 1.1;
+  text-align: center;
+  color: var(--print-ink);
+}
+
+.print:not(:has(.printNote)) {
+  padding-bottom: clamp(0.6rem, 1.4vw, 1rem);
+}
+
+.printStamp {
+  position: absolute;
+  top: calc(var(--s-6) * -1);
+  right: calc(var(--s-5) * -1);
+  width: clamp(3.6rem, 7vw, 5rem);
+  height: auto;
+  rotate: 7deg;
+  filter: drop-shadow(0 2px 2px rgb(15 26 43 / 0.28));
+}
+
+@media (max-width: 40rem) {
+  .printStamp {
+    right: -0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .print {
+    transition: none;
+  }
+}

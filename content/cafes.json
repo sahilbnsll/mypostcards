@@ -1,83 +1,38 @@
 [
   {
-    "slug": "greenhouse-corner",
-    "name": "Greenhouse Corner",
-    "neighborhood": "By the glass wall",
-    "cover": "https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=max&w=2000&q=80",
-    "coverAlt": "A round café table with a French press by a glass wall dripping with greenery",
-    "coverWidth": 2000,
-    "coverHeight": 1333,
-    "coverColor": "#747368",
+    "slug": "pf-changs",
+    "name": "P.F. Chang's",
+    "city": "Gurugram",
+    "country": "India",
+    "neighborhood": "Under the blossom ceiling",
+    "destination": "gurugram",
     "vibes": [
-      "plants",
-      "window seat",
-      "slow morning"
+      "blossom ceiling",
+      "red booths",
+      "dim light"
     ],
-    "notes": "Sample entry. A café where the garden presses against the glass and nobody minds how long you stay.",
-    "order": "French press",
-    "price": "££",
-    "seat": "The round table by the glass wall",
-    "wifi": "Fast and free",
-    "sample": true
+    "notes": "Dinner on 6 October 2026: a ceiling of pink blossom, red leather booths, and a table that kept filling up with small dishes.",
+    "map": "https://maps.app.goo.gl/B64UD8JmqVDk4JRj6",
+    "sample": false,
+    "rating": 4.5,
+    "ratingNote": "Good food, good ambience, and a ceiling worth looking up at."
   },
   {
-    "slug": "bicycle-room",
-    "name": "The Bicycle Room",
-    "neighborhood": "Concrete and pendant bulbs",
-    "cover": "https://images.unsplash.com/photo-1493857671505-72967e2e2760?auto=format&fit=max&w=2000&q=80",
-    "coverAlt": "A concrete-walled café with a menu board and two bicycles leaning inside",
-    "coverWidth": 2000,
-    "coverHeight": 1333,
-    "coverColor": "#796f5b",
+    "slug": "daksina-bhawan",
+    "name": "Daksina Bhawan",
+    "city": "Gurugram",
+    "country": "India",
+    "neighborhood": "Under the temple bells",
+    "destination": "gurugram",
     "vibes": [
-      "industrial",
-      "bikes",
-      "bright"
+      "temple bells",
+      "carved wood",
+      "warm lanterns"
     ],
-    "notes": "Sample entry. Raw concrete, a long counter and a couple of bicycles that live inside.",
-    "order": "Cortado",
-    "price": "£",
-    "seat": "Long counter, facing the espresso machine",
-    "wifi": "Free, no password",
-    "sample": true
-  },
-  {
-    "slug": "slow-pour",
-    "name": "Slow Pour",
-    "neighborhood": "Brew bar",
-    "cover": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=max&w=2000&q=80",
-    "coverAlt": "A barista pouring from a gooseneck kettle over a pour-over dripper, glassware behind",
-    "coverWidth": 2000,
-    "coverHeight": 1333,
-    "coverColor": "#3f4645",
-    "vibes": [
-      "pour-over",
-      "filter",
-      "beans"
-    ],
-    "notes": "Sample entry. A bar that treats filter coffee as a small ceremony.",
-    "order": "Pour-over",
-    "price": "£££",
-    "seat": "Bar stool opposite the kettle",
-    "wifi": "None, on purpose",
-    "sample": true
-  },
-  {
-    "slug": "blue-cup",
-    "name": "Blue Cup",
-    "neighborhood": "Corner table",
-    "cover": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=max&w=2000&q=80",
-    "coverAlt": "Two flat whites with leaf latte art on a wooden table beside a trailing plant",
-    "coverWidth": 2000,
-    "coverHeight": 2985,
-    "coverColor": "#716c58",
-    "vibes": [
-      "flat white",
-      "wood",
-      "quiet"
-    ],
-    "notes": "Sample entry. Blue saucers, warm wood and the kind of light that makes a flat white look good.",
-    "order": "Flat white",
-    "sample": true
+    "notes": "A South Indian restaurant where the ceiling is hung with brass temple bells, a mural of a temple and an elephant fills one wall, and the dosa comes with sambar and a row of chutneys.",
+    "map": "https://maps.app.goo.gl/4YwK4vV8ceokmjQy7",
+    "sample": false,
+    "rating": 4.8,
+    "ratingNote": "The benne dosa is the star. The idli is good too, and the filter coffee is great."
   }
 ]

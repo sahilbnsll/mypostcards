@@ -26,16 +26,16 @@ const imagesDir = join(root, "public", "images");
 const outFile = join(root, "src", "content", "generated", "journal.json");
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const CATEGORIES = ["travel", "city", "cafe", "food", "getaway"];
+const CATEGORIES = ["travel", "city", "cafe", "food", "getaway", "art"];
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 const KEYS = {
-  postcard: ["slug", "title", "caption", "note", "image", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "credit", "creditUrl", "featured", "sample"],
+  postcard: ["slug", "title", "caption", "note", "image", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "artist", "credit", "creditUrl", "rating", "featured", "sample"],
   trip: ["slug", "title", "summary", "story", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "destination", "start", "end", "period", "featured", "sample", "days"],
   day: ["title", "stops"],
   stop: ["place", "time", "note", "tip", "lat", "lng", "postcard"],
   destination: ["slug", "name", "country", "region", "description", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "lat", "lng", "status", "sample"],
-  cafe: ["slug", "name", "city", "country", "neighborhood", "destination", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "vibes", "notes", "order", "price", "seat", "wifi", "map", "sample"],
+  cafe: ["slug", "name", "city", "country", "neighborhood", "destination", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "vibes", "notes", "order", "price", "seat", "wifi", "map", "rating", "ratingNote", "sample"],
   story: ["title", "subtitle", "date", "excerpt", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "trip", "destination", "featured", "sample"],
 };
 
@@ -81,6 +81,16 @@ export async function buildContent({ quiet = false } = {}) {
       return undefined;
     }
     return value.trim();
+  };
+
+  /** My rating: 0.5 to 5 with at most one decimal (4, 4.5, 4.8). Left out entirely when there is none. */
+  const rating = (value, where) => {
+    if (value === undefined || value === null) return undefined;
+    if (typeof value !== "number" || value < 0.5 || value > 5 || Math.round(value * 10) / 10 !== value) {
+      fail(where, `"rating" must be a number from 0.5 to 5 with at most one decimal, for example 4, 4.5 or 4.8`);
+      return undefined;
+    }
+    return value;
   };
 
   const coordinates = (lat, lng, where) => {
@@ -198,8 +208,10 @@ export async function buildContent({ quiet = false } = {}) {
       storySlug: raw.story,
       tags: Array.isArray(raw.tags) ? raw.tags.map(String) : [],
       camera: raw.camera,
+      artist: str(raw.artist, where, "artist"),
       credit: str(raw.credit, where, "credit"),
       creditUrl: str(raw.creditUrl, where, "creditUrl"),
+      rating: rating(raw.rating, where),
       isSample: raw.sample === true,
       featured: raw.featured === true,
       sortOrder: index + 1,
@@ -322,6 +334,8 @@ export async function buildContent({ quiet = false } = {}) {
       bestSeat: str(raw.seat, where, "seat"),
       wifi: str(raw.wifi, where, "wifi"),
       mapUrl: map,
+      rating: rating(raw.rating, where),
+      ratingNote: str(raw.ratingNote, where, "ratingNote"),
       isSample: raw.sample === true,
       sortOrder: index + 1,
     });

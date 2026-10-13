@@ -1,12 +1,16 @@
 ---
 title: Decisions
 tags: [decisions]
-updated: 2026-10-10
+updated: 2026-10-13
 ---
 
 # Decisions log
 
 Newest first. Format: decision, why, trade-off.
+
+### D29. The café page is a template: split header, derived date, shortest-column gallery, "More cafés"
+- **Why:** the old page was a text column on the left, a card, then a wide photo, leaving the right side empty, and the gallery left a whole column empty when a few photos were tall. The split header uses the width (text and guide beside a postcard-style cover), the visit date and next cafés come from existing data with nothing extra to type, and the gallery deals photos into the shortest column. Everything is automatic from the entry in `content/cafes.json`.
+- **Trade-off:** the gallery markup is rendered once per column count (hidden copies are `display: none`, so their lazy photographs are never fetched), which makes the page HTML larger. The wide cover stays on trips, places and stories; moving them to the split header would be a separate decision.
 
 ### D28. The logo is traced to vectors in two theme-aware layers; the site palette is unchanged
 - **Why:** the author's logo sheet is a raster image (1024px, cream paper texture). Cropping it would blur on retina screens, show a cream box on the dark theme and ship a large PNG. Tracing the stamp into green and clay layers gives sharp vectors, themed colours (sage and light clay on dark) and about 16 KB as cached static files used as masks. Thin camera lines vanish below about 60px, so the header and favicon use a bolder hand-built stamp from the same design (the sheet's own "small stamp" and "app icon" variants). The round seal is rebuilt as live SVG text.

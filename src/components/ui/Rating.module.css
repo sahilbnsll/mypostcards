@@ -1,0 +1,74 @@
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-display);
+}
+
+.stars {
+  display: block;
+  width: auto;
+  overflow: visible;
+}
+
+.md .stars {
+  height: 1.8rem;
+}
+
+.sm {
+  font-size: 0.8125rem;
+}
+
+.sm .stars {
+  height: 1.1rem;
+}
+
+/* Marker yellow, and the darker pen line round it */
+.fill {
+  fill: var(--star-fill);
+}
+
+.line {
+  fill: none;
+  stroke: var(--star-edge);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sm .line {
+  stroke-width: 1.8;
+}
+
+/* An empty star is only the pen line, drawn lightly */
+.faint {
+  stroke: color-mix(in srgb, var(--ink) 32%, transparent);
+  stroke-dasharray: 0;
+}
+
+/* The number is the plain answer; it is set large in the guide and small elsewhere */
+.value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15em;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.md .value {
+  font-size: var(--step-1);
+  line-height: 1;
+}
+
+.outOf {
+  font-size: 0.55em;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.sm .value {
+  font-weight: 700;
+}

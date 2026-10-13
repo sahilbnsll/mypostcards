@@ -1,7 +1,7 @@
 ---
 title: Design System
 tags: [design]
-updated: 2026-10-10
+updated: 2026-10-13
 ---
 
 # Design system
@@ -44,6 +44,10 @@ The short line under the wordmark is `siteConfig.descriptor` ("Postcards from Sa
 The decorative `Stamp` on hero cards and postcard backs is drawn like a real stamp: warm paper edge with perforations, a window graded light to deep with a thin inset line, the logo's camera (its lens holds a sun and two peaks) and cancellation waves across the corner. "blue" is the logo green, "red" the clay, "ink" the brown. Every colour is a `--stamp-*` token (paper edge, a graded window and a line colour per tone, and the cancellation waves) with a light and a dark palette: at night the paper is softer, the window brighter and the lines dark, so it reads as lit rather than flat.
 
 Three sizes: **StampMark** (header, 25 to 30px, thick lines), **LogoMark** (footer, 64px and up), **Seal** (About page: a live-SVG round badge whose lettering follows the ring). The footer is dark in both themes, so it sets the light-on-dark values itself. The wordmark is Newsreader 600 in lowercase, one word. The rest of the site keeps its blue-grey paper and airmail red and blue; the brand colours appear only in the logo ([[09 Decisions]] D28).
+
+### Rating stars
+
+`--star-fill` and `--star-edge`: marker yellow (`#f7c52b`, pen line `#b87a0c`) in light mode, a brighter `#ffd04a` and `#f0a81c` in dark mode. Used only by `Rating`, which draws hand-style stars. Yellow was chosen over the logo's clay because yellow stars are what people read as a rating.
 
 ### Dark theme
 

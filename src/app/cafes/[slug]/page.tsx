@@ -3,8 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getJournal } from "@/content";
-import { EMPTY_SLUG, findBySlug, postcardsForCafe, staticSlugs, toViews } from "@/content/selectors";
+import { EMPTY_SLUG, findBySlug, postcardCount, postcardsForCafe, staticSlugs, toViews } from "@/content/selectors";
+import { CafeCard } from "@/components/features/cafes/CafeCard";
 import { CafeGuide } from "@/components/features/cafes/CafeGuide";
+import { MapLink } from "@/components/features/cafes/MapLink";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { CollectionHero } from "@/components/ui/CollectionHero";
@@ -33,6 +35,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
+/** "6 October 2026" from an ISO date, the same on the server and in every time zone. */
+const day = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+
 async function CafeContent({ params }: { params: Params }) {
   const { slug } = await params;
   const journal = await getJournal();
@@ -41,7 +46,17 @@ async function CafeContent({ params }: { params: Params }) {
 
   const postcards = toViews(journal, postcardsForCafe(journal, cafe.slug));
   const place = cafe.destinationSlug ? findBySlug(journal.destinations, cafe.destinationSlug) : undefined;
-  const where = [cafe.neighborhood, cafe.city, cafe.country].filter(Boolean).join(", ");
+  const where = [cafe.city, cafe.country].filter(Boolean).join(", ");
+
+  // When I went, worked out from the postcards (nothing is shown if none of them has a date)
+  const dates = [...new Set(postcards.map((p) => p.takenOn).filter((d): d is string => Boolean(d)))].sort();
+  const visited = dates.length === 0 ? undefined : dates.length === 1 ? `Visited ${day(dates[0])}` : `First visited ${day(dates[0])}`;
+
+  // Where to go next: cafés in the same place first, then the rest
+  const others = journal.cafes
+    .filter((c) => c.slug !== cafe.slug)
+    .sort((a, b) => Number(b.destinationSlug === cafe.destinationSlug) - Number(a.destinationSlug === cafe.destinationSlug))
+    .slice(0, 3);
 
   return (
     <article>
@@ -50,29 +65,41 @@ async function CafeContent({ params }: { params: Params }) {
         lede={cafe.notes}
         back={{ href: "/cafes", label: "All cafés" }}
         cover={cafe.coverImage}
+        variant="split"
+        coverNote={cafe.neighborhood}
+        aside={<CafeGuide cafe={cafe} />}
         meta={
           <>
             {where && <span>{where}</span>}
+            {visited && <span>{visited}</span>}
             <span>{plural(postcards.length, "postcard")}</span>
-            {place && (
+            {place && place.name !== cafe.city && (
               <span>
                 <Link href={`/destinations/${place.slug}`} className="text-link">
                   {place.name}
                 </Link>
               </span>
             )}
+            {cafe.mapUrl && <MapLink href={cafe.mapUrl} name={cafe.name} />}
           </>
         }
       />
-
-      <div className="wrap section--tight">
-        <CafeGuide cafe={cafe} />
-      </div>
 
       {postcards.length > 0 && (
         <section className="wrap section--tight" aria-labelledby="cafe-postcards">
           <SectionHeader id="cafe-postcards" title="Postcards" />
           <BloomGallery items={postcards} filterable={false} />
+        </section>
+      )}
+
+      {others.length > 0 && (
+        <section className="wrap section--tight" aria-labelledby="more-cafes">
+          <SectionHeader id="more-cafes" title="More cafés" action={{ href: "/cafes", label: "All cafés" }} />
+          <div className="card-grid">
+            {others.map((other, index) => (
+              <CafeCard key={other.slug} cafe={other} count={postcardCount(journal, "cafeSlug", other.slug)} index={index} />
+            ))}
+          </div>
         </section>
       )}
     </article>

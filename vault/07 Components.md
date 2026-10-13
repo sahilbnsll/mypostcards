@@ -1,7 +1,7 @@
----
+﻿---
 title: Components
 tags: [engineering, components]
-updated: 2026-10-10
+updated: 2026-10-14
 ---
 
 # Components
@@ -62,7 +62,7 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 - `Footer` upgrade: 12-postcard thumbnail mosaic with hover spring, an `airmail-edge` stripe visual divider, and social links (`siteConfig.socials`).
 - `SectionHeader`: added support for an optional `badge` prop (e.g. "23 cards on the wall", "10 entries").
 - `SvgMap`: server-drawn flat map (world or fit-to-pins). Pins are real links drawn as small postcards (`MapPin.image`), spread apart server-side with a thread to the true spot; `route` numbers them and draws the route.
-- `Itinerary`: day-by-day timeline plus sticky route map. `CafeGuide`: usual order, price, seat, wifi, map link (only if given).
+- `Itinerary`: day-by-day timeline plus sticky route map. `CafeGuide`: a postal-slip card shown **above** the cover photograph (via `CollectionHero`'s `aside` slot): airmail edge, details cut apart by perforations, your rating and a handwritten line; compact when it holds only one or two things. `MapLink`: an "Open in Maps" text link with a small arrow in the details row under the café's name, right after the place link. `Rating` (`ui/`): five hand-drawn stars in marker yellow (each star wobbles a little and differs from its neighbours, the pen line overshoots where it started, the fill sits a hair off the line; each star filled by the exact amount (a 4.8 is four full stars and a fifth filled to 80%); only a faint pen line when empty) plus the number; theme-aware through the `--star-fill` and `--star-edge` tokens; used in the guide, on café cards and on postcard backs.
 - `PostcardBack` / `RelatedPostcards`: shared by the lightbox and `/postcards/[slug]`.
 - `SearchPalette`, `ThemeToggle`, `Cursor`. `Header`: plain links with a sweeping underline (CSS only) and `NavIcon` line icons from 75rem, frosted bar when scrolled, mobile menu with page hints (`siteConfig.navLinks[].icon` and `.hint`).
 - Visitors: `CardComposer`, `DrawingPad` (marked `data-native-cursor`), `VisitorWall` / `VisitorCardView`, `DrawingSvg`.
@@ -75,6 +75,15 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 ## The 404 page
 
 `src/app/not-found.tsx` with `LostPostcard` (`features/not-found/`): a postcard that came back "return to sender" (the first wide featured photograph, linking to its own page), a slowly turning ring seal with the small stamp inside, clay cancellation waves, the heading "Lost in the post", an "Error 404" line, a back button, a link to the gallery and a hint that "/" opens search. Built from the 21st.dev "pixelated 404" reference but rebuilt: the pixel font, shadcn button and hard-coded colours were replaced by the project's fonts, tokens and logo. CSS-only motion (the ring turns, the print straightens on hover), both off for reduced motion. `noindex`.
+
+## The café page template
+
+Every café uses the same layout, so a new entry in `content/cafes.json` gets it for free:
+
+- **Header (`CollectionHero variant="split"`, `PageHead side`)**: on wide screens the heading, the details row and the guide card on the left and the cover photograph as a tilted postcard print on the right (handwritten caption from `neighborhood`, a stamp on its corner); on narrow screens it stacks, with the guide card above the photograph. Trips, places and stories keep the wide cover.
+- **Details row**: city and country, "Visited 6 October 2026" (worked out from the postcards' dates; "First visited" when there are several dates), number of postcards, the place link when it adds something, and "Open in Maps".
+- **Gallery (`BloomGallery`)**: photos are dealt into columns, each into the shortest column so far, so every column is used at every width (CSS columns left the last one empty when a few photos were tall). One arrangement is rendered per column count (2, 3, 4) and the stylesheet shows the one that fits; the hidden ones are `display: none`.
+- **"More cafés"**: up to three other cafés, ones in the same place first.
 
 ## Routes
 
