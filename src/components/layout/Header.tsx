@@ -51,7 +51,7 @@ export function Header() {
         <div className={cn("wrap", styles.inner)}>
           <Link href="/" className={styles.brand} aria-label={`${siteConfig.name}, home`}>
             <StampMark className={styles.stamp} />
-            <span className={styles.wordmark}>mypostcards</span>
+            <span className={styles.wordmark}>my postcards</span>
           </Link>
 
           <nav aria-label="Main" className={styles.desktopNav}>
@@ -111,7 +111,7 @@ export function Header() {
       >
         <div className={styles.menuPanel}>
           <div className={styles.menuTop}>
-            <span className={styles.wordmark}>mypostcards</span>
+            <span className={styles.wordmark}>my postcards</span>
             <button type="button" className={styles.pill} onClick={closeMenu}>
               Close
             </button>

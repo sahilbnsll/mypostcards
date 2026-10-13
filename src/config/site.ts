@@ -35,4 +35,9 @@ export const siteConfig = {
     { title: "Visitors", icon: "visitors", href: "/visitors", hint: "Leave a note or a drawing" },
     { title: "About", icon: "about", href: "/about", hint: "Who keeps this place" },
   ] satisfies NavLink[],
+  /** Smaller sections, kept out of the header so it stays light. Linked from the footer. */
+  collections: [
+    { title: "Art", href: "/art" },
+    { title: "Random clicks", href: "/random-clicks" },
+  ],
 } as const;

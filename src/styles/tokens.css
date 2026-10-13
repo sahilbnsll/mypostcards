@@ -101,29 +101,8 @@
   --d-slow: 640ms;
   --d-hero: 1000ms;
 
-  /* Brand: the colours of the logo. Sage and clay replace green and terracotta on dark surfaces. */
-  --logo-main: #264a3a;
-  --logo-accent: #b35a31;
-  --logo-ink: #4b3e38;
-  --logo-paper: #f4eee0;
-
-  /* Rating stars: marker yellow with a darker amber pen line */
-  --star-fill: #f7c52b;
-  --star-edge: #b87a0c;
-
-  /* Decorative postage stamp: paper edge, three window colours (graded a to b) with their line colour */
-  --stamp-paper-a: #fffdf6;
-  --stamp-paper-b: #ece3cf;
-  --stamp-cancel: #2b201b;
-  --stamp-clay-a: #d27240;
-  --stamp-clay-b: #a24a25;
-  --stamp-clay-line: #fbf1dc;
-  --stamp-green-a: #33604c;
-  --stamp-green-b: #1c382b;
-  --stamp-green-line: #fbf1dc;
-  --stamp-brown-a: #5d4d46;
-  --stamp-brown-b: #392c27;
-  --stamp-brown-line: #fbf1dc;
+  /* The logo's wordmark and waves take the page ink; its stamp has fixed colours (brand/stampGeometry.ts) */
+  --logo-ink: var(--ink);
 
   color-scheme: light;
 }
@@ -166,28 +145,12 @@
     0 28px 48px -20px rgb(0 0 0 / 0.9);
 
   --postmark-blend: normal;
-  --postmark-bg: #0d1a14;
-  --postmark-ink: #a8cdb8;
+  --postmark-bg: #0c1424;
+  --postmark-ink: #eceeea;
   --postmark-opacity: 0.97;
-  --postmark-shadow: 0 3px 8px rgb(0 0 0 / 0.55), inset 0 0 0 1px rgb(168 205 184 / 0.28);
-  --logo-main: #a8cdb8;
-  --logo-accent: #e39a6e;
-  --logo-ink: #d9cdbf;
-  --logo-paper: #070b14;
+  --postmark-shadow: 0 3px 8px rgb(0 0 0 / 0.55), inset 0 0 0 1px rgb(236 238 234 / 0.28);
   --star-fill: #ffd04a;
   --star-edge: #f0a81c;
-  --stamp-paper-a: #f1ead9;
-  --stamp-paper-b: #d6ccb4;
-  --stamp-cancel: #1a120e;
-  --stamp-clay-a: #e8a06b;
-  --stamp-clay-b: #c26a3a;
-  --stamp-clay-line: #2b190e;
-  --stamp-green-a: #93c9ad;
-  --stamp-green-b: #5f9c82;
-  --stamp-green-line: #0f241a;
-  --stamp-brown-a: #bfae9f;
-  --stamp-brown-b: #8e7b6e;
-  --stamp-brown-line: #261b16;
   color-scheme: dark;
 }
 
@@ -222,28 +185,12 @@
     0 28px 48px -20px rgb(0 0 0 / 0.9);
 
     --postmark-blend: normal;
-    --postmark-bg: #0d1a14;
-    --postmark-ink: #a8cdb8;
+    --postmark-bg: #0c1424;
+    --postmark-ink: #eceeea;
     --postmark-opacity: 0.97;
-    --postmark-shadow: 0 3px 8px rgb(0 0 0 / 0.55), inset 0 0 0 1px rgb(168 205 184 / 0.28);
-    --logo-main: #a8cdb8;
-    --logo-accent: #e39a6e;
-    --logo-ink: #d9cdbf;
-    --logo-paper: #070b14;
+    --postmark-shadow: 0 3px 8px rgb(0 0 0 / 0.55), inset 0 0 0 1px rgb(236 238 234 / 0.28);
     --star-fill: #ffd04a;
     --star-edge: #f0a81c;
-    --stamp-paper-a: #f1ead9;
-    --stamp-paper-b: #d6ccb4;
-    --stamp-cancel: #1a120e;
-    --stamp-clay-a: #e8a06b;
-    --stamp-clay-b: #c26a3a;
-    --stamp-clay-line: #2b190e;
-    --stamp-green-a: #93c9ad;
-    --stamp-green-b: #5f9c82;
-    --stamp-green-line: #0f241a;
-    --stamp-brown-a: #bfae9f;
-    --stamp-brown-b: #8e7b6e;
-    --stamp-brown-line: #261b16;
     color-scheme: dark;
   }
 }

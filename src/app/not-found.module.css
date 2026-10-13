@@ -61,8 +61,8 @@
 
 .primary:hover {
   gap: var(--s-4);
-  background: var(--logo-main);
-  color: var(--logo-paper);
+  background: var(--air-red);
+  color: #fff;
 }
 
 .hint {

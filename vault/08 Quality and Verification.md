@@ -6,6 +6,8 @@ updated: 2026-10-14
 
 # Quality and verification
 
+- Art and Random clicks (2026-10-14): both pages, the footer group (desktop and 375px, no horizontal overflow) and the gallery chips (Art 2, Random clicks 1) checked in the browser. Not checked: axe on the two new pages, the mobile menu (does not list them by design).
+
 Everything below was actually run on 2026-10-09. Anything not listed was **not** verified.
 
 ## Automated gates
@@ -60,6 +62,7 @@ Everything below was actually run on 2026-10-09. Anything not listed was **not**
 - Ratings and the guide card (2026-10-13): checked in the browser with temporary values (since removed): the café page (light, 375 wide: stacks, no overflow), a postcard back in dark mode. `rating` validation (0.5 to 5, half steps) added to the content check. Not checked: axe on these pages.
 - Rating stars and map button (2026-10-13): checked in the browser on the café page in light, dark and at 375 wide (no overflow). Not checked: axe on the changed page, the rating on the café list card.
 - Café page template (2026-10-13): checked in the browser at 1440 wide (light), 375 wide (dark, no overflow) and the "More cafés" strip; the gallery uses all four columns (2+2+2+1) with seven photos; an untouched tab's console had no errors or hydration warnings. Not checked: axe on the new layout, other cafés with a different number of details, a café with no map link or no rating.
+- New logo (2026-10-14): checked in the browser (header at 1440 and zoomed, hero stamp, postcard back, About seal in dark, footer lockup in dark, 404 seal) and as images (default share image, app icon). Not checked: the favicon in a real browser tab, the installable-app icons on a phone, axe on the changed pages.
 - Daksina Bhawan and sample removal (2026-10-14): `npm run content` passes (16 postcards, 1 place, 2 cafés, no trips or stories); typecheck, lint, build (59 static pages), `npm audit --omit=dev` (0) and the secrets scan are clean; every main route returns 200 in dev and the café, home, Places, Trips, Stories and About pages were checked in the browser with the reduced content. Not checked: other widths of the new café page for six photos, the globe and map with only one place.
 - New 404 page (2026-10-10): checked in the browser in light and dark at 1280 wide and in dark at 375 wide (no horizontal overflow). Not checked: axe, a real unknown URL on the deployed site (HTTP status), the ring animation under reduced motion.
 - Itinerary route map (Japan) rendered with numbered stops and a dashed route; related postcards, postcard page and share-image metadata checked earlier.

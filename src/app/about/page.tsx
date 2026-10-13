@@ -21,7 +21,7 @@ My Postcards is a personal photo journal. It collects photographs from trips, ca
 
 ## How it is organised
 
-Every photograph is a postcard with a short caption, a place and a kind: travel, city, café, food, getaway or art. Postcards are grouped into trips, filed under places, and the ones that deserve more than a line get a story.
+Every photograph is a postcard with a short caption, a place and a kind: travel, city, café, food, getaway, art or random click. Postcards are grouped into trips, filed under places, and the ones that deserve more than a line get a story.
 
 ## Right now
 

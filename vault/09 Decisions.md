@@ -1,12 +1,20 @@
 ---
 title: Decisions
 tags: [decisions]
-updated: 2026-10-13
+updated: 2026-10-14
 ---
 
 # Decisions log
 
 Newest first. Format: decision, why, trade-off.
+
+### D31. Art and Random clicks live in the footer's Explore list, not the header
+- **Why:** the header already carries seven links plus search, theme and menu, and two more would crowd it. They are also smaller sections than Gallery or Cafés. They are listed after Cafés in the footer's Explore list (`siteConfig.collections`, merged in `Footer.tsx`), are filter chips in the gallery, show up in search, and have their own pages (`/art`, `/random-clicks`). "Random clicks" is a real category (`random`) rather than a tag, so it filters like every other kind. The lamp postcard moved there and was renamed `random-lamp-over-the-pothos`.
+- **Trade-off:** less discoverable than a header link, and the mobile menu does not list them. Promote one to the header if it grows.
+
+### D30. A new logo drawn from the site's own design language (replaces D28)
+- **Why:** the first logo (a green camera stamp traced from an AI-generated sheet) did not belong to the site: its green and terracotta appeared nowhere else, and its serif wordmark clashed with the heavy lowercase title on the home page. The new mark is a perforated airmail stamp whose frame is the site's own red-white-blue stripe, with a night window and a dusk landscape, next to a "my postcards" wordmark set exactly like the home title. One drawing (`stampGeometry.ts`) feeds every use, so the favicon, icons, header, footer, seal, hero stamps and share images can never drift apart.
+- **Trade-off:** the stamp's colours are fixed rather than themed, so on a dark page it keeps its cream paper edge (a stamp is paper); the wordmark and waves follow the theme. The old green and clay tokens and the traced mask files were deleted.
 
 ### D29. The café page is a template: split header, derived date, shortest-column gallery, "More cafés"
 - **Why:** the old page was a text column on the left, a card, then a wide photo, leaving the right side empty, and the gallery left a whole column empty when a few photos were tall. The split header uses the width (text and guide beside a postcard-style cover), the visit date and next cafés come from existing data with nothing extra to type, and the gallery deals photos into the shortest column. Everything is automatic from the entry in `content/cafes.json`.

@@ -1,7 +1,7 @@
 ---
 title: Design System
 tags: [design]
-updated: 2026-10-13
+updated: 2026-10-14
 ---
 
 # Design system
@@ -29,21 +29,13 @@ Deliberately avoided: warm cream plus terracotta, tracked all-caps eyebrows abov
 
 ### Brand and logo
 
-The logo (a postage stamp with a camera, postmark waves, and a lowercase serif "mypostcards") comes from the author's own sheet, kept as `design-reference/brand/logo-sheet.webp`. The stamp was traced into two single-colour vector layers so it can follow the theme: `public/brand/mark-main.svg` (frame and camera) and `public/brand/mark-accent.svg` (postmark waves and sun), shown through CSS masks by `LogoMark`. `public/brand/logo.svg` is the same mark in fixed colours for places that cannot read the theme (share images, README).
+The logo is **one postage stamp**, built from the site's own vocabulary: an airmail-striped frame (the same red, paper and blue diagonal as the site's edges), a night-blue window holding a dusk scene (a cream sun, a snow-capped blue peak behind a red one) and perforated paper. It sits beside the wordmark **"my postcards"**, set lowercase in Bricolage Grotesque ExtraBold with tight tracking, exactly like the big title on the home page.
 
-| Token | Light | Dark | Use |
-|---|---|---|---|
-| `--logo-main` | `#264a3a` green | `#a8cdb8` sage | stamp frame, camera |
-| `--logo-accent` | `#b35a31` clay | `#e39a6e` | postmark waves, sun, lens dot |
-| `--logo-ink` | `#4b3e38` brown | `#d9cdbf` | seal ring and lettering |
-| `--postmark-bg` / `--postmark-ink` | transparent / `--logo-ink` (brown) | `#0d1a14` / `#a8cdb8` | the hero postmark is brown ink stamped over whatever is below in light mode and a deep-green seal with sage ink in dark mode (it lands on a photo, a paper edge and the dark page at once) |
-| `--logo-paper` | `#f4eee0` cream | `#070b14` | camera lines on the small stamp |
-
-The short line under the wordmark is `siteConfig.descriptor` ("Postcards from Sahil"); change it in one place.
-
-The decorative `Stamp` on hero cards and postcard backs is drawn like a real stamp: warm paper edge with perforations, a window graded light to deep with a thin inset line, the logo's camera (its lens holds a sun and two peaks) and cancellation waves across the corner. "blue" is the logo green, "red" the clay, "ink" the brown. Every colour is a `--stamp-*` token (paper edge, a graded window and a line colour per tone, and the cancellation waves) with a light and a dark palette: at night the paper is softer, the window brighter and the lines dark, so it reads as lit rather than flat.
-
-Three sizes: **StampMark** (header, 25 to 30px, thick lines), **LogoMark** (footer, 64px and up), **Seal** (About page: a live-SVG round badge whose lettering follows the ring). The footer is dark in both themes, so it sets the light-on-dark values itself. The wordmark is Newsreader 600 in lowercase, one word. The rest of the site keeps its blue-grey paper and airmail red and blue; the brand colours appear only in the logo ([[09 Decisions]] D28).
+- **One drawing, one place.** `src/components/brand/stampGeometry.ts` holds the colours, frame, window, peaks, perforations and waves. Every use reads it: `StampArt` (React), `stampSvg` (a string for the favicon, the app icons and the share images) and the seal. Change the logo there and it changes everywhere.
+- **Fixed colours.** A stamp is a physical object, so its colours do not change with the theme (paper `#fbfbf8`, night `#0c1424`, red `#d8362b`, blue `#1f4da6`, with lighter red and blue for the peaks). Only the wordmark and the cancellation waves follow the page ink (`--logo-ink`, which is `--ink`; the footer sets it light because it is dark in both themes).
+- **Sizes.** `StampMark` (header, about 26px), `LogoMark` (the stamp with cancellation waves trailing off its left side: footer and 404 fallback), `Seal` (the round "postcards from Sahil" badge on the About page, with the stamp in its centre), and the decorative `Stamp` on hero cards and postcard backs, which is the same stamp in its `night`, `red` or `blue` window.
+- **Where else.** Favicon (`src/app/icon.svg`), Apple and installable-app icons (the stamp on the night colour), the default share image and the postcard share image.
+- The earlier logo (a green camera stamp traced from a Gemini sheet) was retired on 2026-10-14 ([[09 Decisions]] D30). The sheet is kept in `design-reference/brand/` for reference only.
 
 ### Rating stars
 

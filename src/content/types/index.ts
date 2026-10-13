@@ -6,7 +6,7 @@
  * photographs in `public/images/`; `scripts/build-content.mjs` turns that into these types.
  */
 
-export type Category = "travel" | "city" | "cafe" | "food" | "getaway" | "art";
+export type Category = "travel" | "city" | "cafe" | "food" | "getaway" | "art" | "random";
 
 export interface CategoryMeta {
   id: Category;

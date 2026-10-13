@@ -69,7 +69,7 @@ export function Hero({ cards, totalPostcards, totalPlaces }: HeroProps) {
                     <Link href={`/gallery#p=${card.slug}`} className={styles.card} aria-label={`Open “${card.title}”`}>
                       <Photo image={card.image} ratio={slot.ratio} sizes={slot.sizes} priority={index === 0} />
                       {slot.mark === "stamp" && <Stamp className={styles.stamp} tone="red" />}
-                      {slot.mark === "postmark" && <Postmark className={styles.postmark} top="mypostcards" date="kept" />}
+                      {slot.mark === "postmark" && <Postmark className={styles.postmark} top="my postcards" date="kept" />}
                     </Link>
                   </li>
                 );

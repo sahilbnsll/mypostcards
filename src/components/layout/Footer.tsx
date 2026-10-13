@@ -13,6 +13,8 @@ export async function Footer() {
   const journal = await getJournal();
   const showSampleNote = hasSampleContent(journal);
   const mosaicCards = balancedSample(journal.postcards, 12);
+  // Art and Random clicks sit among the pages, after Cafés
+  const explore = [...siteConfig.navLinks.slice(0, 4), ...siteConfig.collections, ...siteConfig.navLinks.slice(4)];
 
   return (
     <footer className={styles.footer}>
@@ -57,7 +59,7 @@ export async function Footer() {
           <div className={styles.brand}>
             <LogoMark className={styles.mark} />
             <div>
-              <p className={styles.wordmark}>mypostcards</p>
+              <p className={styles.wordmark}>my postcards</p>
               <p className={styles.descriptor}>{siteConfig.descriptor}</p>
             </div>
           </div>
@@ -67,7 +69,7 @@ export async function Footer() {
         <nav aria-label="Explore pages" className={styles.links}>
           <p className={styles.colTitle}>Explore</p>
           <ul role="list">
-            {siteConfig.navLinks.map((link) => (
+            {explore.map((link) => (
               <li key={link.href}>
                 <Link href={link.href}>{link.title}</Link>
               </li>

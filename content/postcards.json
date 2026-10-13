@@ -185,16 +185,15 @@
     "sample": false
   },
   {
-    "slug": "art-lamp-over-the-pothos",
+    "slug": "random-lamp-over-the-pothos",
     "title": "A lamp over the pothos",
     "caption": "One small lamp, one pothos, and everything else in the dark.",
     "note": "With the room light off, a corner turns into a stage. The lamp pours yellow-green over the leaves, and even the brown edges look deliberate.",
-    "image": "/images/postcards/art-lamp-over-the-pothos.jpg",
+    "image": "/images/postcards/random-lamp-over-the-pothos.jpg",
     "alt": "A pothos plant lit from above by a small white lamp in a pitch-black room, its heart-shaped leaves glowing yellow-green with a few brown patches",
-    "category": "art",
+    "category": "random",
     "date": "2026-10-10",
     "tags": [
-      "art",
       "plants",
       "night",
       "light"

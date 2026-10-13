@@ -25,7 +25,7 @@ export function PostcardBack({ item, as: Heading = "h2", variant = "panel" }: Po
       <div className={styles.marks} aria-hidden>
         <Postmark
           className={styles.postmark}
-          top={item.location.city ?? item.location.country ?? "mypostcards"}
+          top={item.location.city ?? item.location.country ?? "my postcards"}
           // A stand-in photograph says "someday" (the line below the facts still says it is a sample)
           date={item.isSample ? "someday" : (item.takenOn?.slice(0, 4) ?? "kept")}
         />

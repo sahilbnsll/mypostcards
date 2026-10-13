@@ -70,10 +70,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center" }}>
             <div style={{ display: "flex", fontSize: photo ? 62 : 84, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2 }}>{title}</div>
             {where ? <div style={{ display: "flex", marginTop: 20, fontSize: 30, color: "#526075" }}>{where}</div> : null}
-            <div style={{ display: "flex", alignItems: "center", marginTop: 44, fontSize: 30, fontWeight: 700, color: BRAND.green }}>
+            <div style={{ display: "flex", alignItems: "center", marginTop: 44, fontSize: 30, fontWeight: 800, color: BRAND.ink }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={stampMarkDataUri()} width={30} height={37} alt="" style={{ marginRight: 14 }} />
-              mypostcards
+              my postcards
             </div>
           </div>
         </div>

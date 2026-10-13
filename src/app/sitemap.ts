@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     { url: at("/"), changeFrequency: "weekly", priority: 1 },
-    ...["/gallery", "/trips", "/destinations", "/cafes", "/stories", "/visitors", "/about"].map((path) => ({
+    ...["/gallery", "/trips", "/destinations", "/cafes", "/art", "/random-clicks", "/stories", "/visitors", "/about"].map((path) => ({
       url: at(path),
       changeFrequency: "weekly" as const,
       priority: 0.8,

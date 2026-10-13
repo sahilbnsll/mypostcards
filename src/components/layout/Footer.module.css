@@ -3,9 +3,7 @@
   background: var(--night);
   color: var(--on-night);
   /* The footer is dark in both themes, so the logo always uses its light-on-dark colours */
-  --logo-main: #a8cdb8;
-  --logo-accent: #e39a6e;
-  --logo-ink: #d9cdbf;
+  --logo-ink: #e9ece7;
 }
 
 /* Postcard mosaic ----------------------------------------------------------------------- */
@@ -88,20 +86,21 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: var(--s-5);
+  gap: var(--s-4);
 }
 
 .mark {
   flex: none;
-  width: clamp(5.5rem, 14vw, 7.5rem);
+  width: clamp(4.5rem, 9vw, 5.75rem);
 }
 
 .wordmark {
-  font-family: var(--font-text);
-  font-size: var(--step-3);
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.2rem + 1.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .descriptor {
@@ -143,6 +142,7 @@
   padding-block: var(--s-1);
   font-family: var(--font-display);
   font-weight: 500;
+  white-space: nowrap;
   color: var(--on-night);
   transition: color var(--d-fast);
 }
@@ -182,8 +182,13 @@
 
 @media (min-width: 58rem) {
   .inner {
-    grid-template-columns: 1.4fr 1fr 0.8fr 1fr;
+    grid-template-columns: 1.3fr 1.5fr 0.8fr 0.8fr;
     align-items: start;
+  }
+
+  /* Nine links read as three tidy rows of three */
+  .links ul {
+    grid-template-columns: repeat(3, max-content);
   }
 
   .by {

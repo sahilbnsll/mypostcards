@@ -26,7 +26,7 @@ const imagesDir = join(root, "public", "images");
 const outFile = join(root, "src", "content", "generated", "journal.json");
 
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const CATEGORIES = ["travel", "city", "cafe", "food", "getaway", "art"];
+const CATEGORIES = ["travel", "city", "cafe", "food", "getaway", "art", "random"];
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 const KEYS = {

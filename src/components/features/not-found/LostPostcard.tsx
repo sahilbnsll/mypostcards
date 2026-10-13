@@ -5,7 +5,7 @@ import type { Postcard } from "@/content/types";
 import styles from "./LostPostcard.module.css";
 
 /** Goes round the seal. Spaced out to fill the ring exactly (see textLength). */
-const RING_TEXT = "MYPOSTCARDS • LOST IN THE POST • TRY ANOTHER ROAD • ";
+const RING_TEXT = "MY POSTCARDS • LOST IN THE POST • TRY ANOTHER ROAD • ";
 
 /**
  * The picture on the 404 page: a postcard that came back "return to sender", a seal that turns

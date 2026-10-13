@@ -1,13 +1,8 @@
 import { useId } from "react";
 import { siteConfig } from "@/config/site";
+import { StampBody } from "./StampArt";
 import { cn } from "@/lib/utils";
 import styles from "./Seal.module.css";
-
-/** Short sun rays above the lens, as in the logo. */
-const RAYS = [-150, -120, -90, -60, -30].map((deg) => {
-  const a = (deg * Math.PI) / 180;
-  return { x1: 100 + Math.cos(a) * 10.5, y1: 107 + Math.sin(a) * 10.5, x2: 100 + Math.cos(a) * 14, y2: 107 + Math.sin(a) * 14 };
-});
 
 /**
  * The round travel-photo-journal badge, drawn as live SVG so its lettering is real text that
@@ -29,7 +24,7 @@ export function Seal({ className, label = `${siteConfig.name}: ${siteConfig.desc
       <g className={styles.letters} fill="var(--logo-ink)">
         <text fontSize="17" letterSpacing="3.4">
           <textPath href={`#${id}-top`} startOffset="50%" textAnchor="middle">
-            MYPOSTCARDS
+            MY POSTCARDS
           </textPath>
         </text>
         <text fontSize="12.5" letterSpacing="2.6">
@@ -40,17 +35,10 @@ export function Seal({ className, label = `${siteConfig.name}: ${siteConfig.desc
         <circle cx="19" cy="100" r="3" />
         <circle cx="181" cy="100" r="3" />
       </g>
-      <g fill="none" stroke="var(--logo-main)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="62" y="84" width="76" height="50" rx="9" />
-        <path d="M79 84l5-11h32l5 11" />
-        <circle cx="100" cy="109" r="16" />
-      </g>
-      <g fill="none" stroke="var(--logo-accent)" strokeWidth="2.6" strokeLinecap="round">
-        <path d="M91 107a9 9 0 0 1 18 0" />
-        {RAYS.map((ray, i) => (
-          <line key={i} {...ray} />
-        ))}
-      </g>
+      {/* The logo's stamp in the middle of the ring */}
+      <svg x="77" y="68" width="46" height="56" viewBox="0 0 64 78" aria-hidden>
+        <StampBody id={`${id}-stamp`} />
+      </svg>
     </svg>
   );
 }

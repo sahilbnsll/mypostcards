@@ -53,7 +53,7 @@
 }
 
 .stamp {
-  width: 1.55rem;
+  width: 1.6rem;
   height: auto;
   transition: transform var(--d-base) var(--ease-spring);
 }
@@ -62,12 +62,12 @@
   transform: rotate(-5deg) translateY(-1px);
 }
 
-/* The logo's wordmark: a lowercase serif, one word */
+/* The wordmark: lowercase, tight and heavy, in the same face as the home page's big title */
 .wordmark {
-  font-family: var(--font-text);
-  font-size: 1.55rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.045em;
   line-height: 1;
   white-space: nowrap;
 }

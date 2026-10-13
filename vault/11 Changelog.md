@@ -1,4 +1,4 @@
-﻿---
+---
 title: Changelog
 tags: [changelog]
 updated: 2026-10-14
@@ -7,6 +7,15 @@ updated: 2026-10-14
 # Changelog
 
 Newest first.
+
+## 2026-10-14 (latest): Art and Random clicks
+- Two new sections, `/art` and `/random-clicks`, linked from the footer's Explore list (the header is unchanged: [[09 Decisions]] D31). New category `random` ("Random clicks"). The house piece and its signed back are under Art; the lamp-lit pothos moved to Random clicks and was renamed `random-lamp-over-the-pothos`.
+- Footer: the brand lockup is one line at the header wordmark's size, and the Explore list now includes Art and Random clicks (three rows of three on wide screens). A bordered postcard-back version was tried and dropped as it looked heavier than the rest of the site.
+
+## 2026-10-14 (later): A new logo
+
+- Replaced the green camera-stamp logo with an airmail postage stamp drawn from the site's own colours and stripe, plus a "my postcards" wordmark in the home title's face. Header, footer lockup, About seal, 404 seal, hero and postcard-back stamps, favicon, app icons and both share images all use it. [[09 Decisions]] D30, [[02 Design System]].
+- Removed the old `--logo-*` and `--stamp-*` colour tokens and the traced mask files.
 
 ## 2026-10-14: Daksina Bhawan, ratings to one decimal, and the samples are gone
 

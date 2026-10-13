@@ -1,7 +1,7 @@
 ---
 title: Architecture
 tags: [engineering]
-updated: 2026-10-10
+updated: 2026-10-14
 ---
 
 # Architecture
@@ -16,7 +16,7 @@ Next.js **16.4** (App Router, React 19.3, **Cache Components** + Partial Prefetc
 content/                 authored data: postcards, trips, destinations, cafes (JSON), stories (Markdown), README
 public/images/           the author's photographs
 scripts/                 build-content.mjs (validate + generate), dev.mjs (dev server + watcher)
-src/app/                 routes: / /gallery /postcards/[slug] /trips[/slug] /destinations[/slug] /cafes[/slug]
+src/app/                 routes: / /gallery /postcards/[slug] /trips[/slug] /destinations[/slug] /cafes[/slug] /art /random-clicks
                          /stories[/slug] /visitors /about /search-index.json + not-found, error, icon, manifest, robots, sitemap
                          (per-route opengraph-image for postcards, trips, places, cafés, stories)
 src/components/

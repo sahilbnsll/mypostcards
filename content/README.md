@@ -45,7 +45,7 @@ Required: `slug`, `title`, `image`, `alt`, `category`. Everything else is option
 
 Other optional fields: `caption`, `note` (the text on the back of the postcard), `place` (the spot, such as a street or a viewpoint), `region`, `period` (such as `"Spring 2025"` when there is no exact date), `cafe`, `story`, `camera`, `credit`, `creditUrl`, `featured` (appears first on the home page and gallery).
 
-Categories: `travel`, `city`, `cafe`, `food`, `getaway`, `art`. For art, add `"artist": "Their Name"` to credit whoever made the piece: it shows as "Artist" on the back of the postcard (`credit` is for a photographer who is not you).
+Categories: `travel`, `city`, `cafe`, `food`, `getaway`, `art`, `random` (shown as "Random clicks"; the Art and Random clicks pages list these). For art, add `"artist": "Their Name"` to credit whoever made the piece: it shows as "Artist" on the back of the postcard (`credit` is for a photographer who is not you).
 
 A misspelt field name is caught and a likely correction suggested.
 

@@ -9,7 +9,7 @@ import { PageHead } from "@/components/ui/PageHead";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "Every postcard in one place. Filter by travel, city, café, food, getaway or art.",
+  description: "Every postcard in one place. Filter by travel, city, café, food, getaway, art or random clicks.",
   alternates: { canonical: "/gallery" },
 };
 

@@ -1,4 +1,4 @@
-﻿---
+---
 title: Components
 tags: [engineering, components]
 updated: 2026-10-14
@@ -67,10 +67,13 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 - `SearchPalette`, `ThemeToggle`, `Cursor`. `Header`: plain links with a sweeping underline (CSS only) and `NavIcon` line icons from 75rem, frosted bar when scrolled, mobile menu with page hints (`siteConfig.navLinks[].icon` and `.hint`).
 - Visitors: `CardComposer`, `DrawingPad` (marked `data-native-cursor`), `VisitorWall` / `VisitorCardView`, `DrawingSvg`.
 
+## Footer
+
+`layout/Footer`: the postcard mosaic, the airmail stripe, then four open columns (logo and tagline, Explore, Connect, credit). Explore merges the header links with `siteConfig.collections` (Art, Random clicks). Dark in both themes.
+
 ## Brand
 
-- `StampMark` (header), `LogoMark` (footer, mask-based), `Seal` (About), all in `src/components/brand/`. Colours from the `--logo-*` tokens.
-- Share images: `src/app/opengraph-image.tsx` (site default) and the postcard one use `src/lib/brand.ts` (brand colours, logo and stamp as data URIs). Icons: `src/app/icon.svg`, `src/app/apple-icon.png`, `public/icons/*` (192, 512, maskable), listed in `manifest.ts`.
+All in `src/components/brand/`, drawn from `stampGeometry.ts`: `StampArt` / `StampBody` (the stamp), `StampMark` (header), `LogoMark` (stamp plus waves), `Seal` (round badge), `stampSvg.ts` (string version). `ui/Stamp` (hero cards and postcard backs) is the same stamp with a `tone`. `src/lib/brand.ts` builds data URIs for the share images. See [[02 Design System]].
 
 ## The 404 page
 
@@ -87,7 +90,7 @@ Every café uses the same layout, so a new entry in `content/cafes.json` gets it
 
 ## Routes
 
-`/` home (hero, carousel, zoom, gallery, trip stack, story, places globe) · `/gallery` · `/trips`, `/trips/[slug]` · `/destinations`, `/destinations/[slug]` · `/cafes`, `/cafes/[slug]` · `/stories`, `/stories/[slug]` · `/about` · `not-found`, `error` · `/icon.svg`, `/manifest.webmanifest`, `/robots.txt`, `/sitemap.xml` · `POST /api/revalidate`.
+`/` home (hero, carousel, zoom, gallery, trip stack, story, places globe) · `/gallery` · `/trips`, `/trips/[slug]` · `/destinations`, `/destinations/[slug]` · `/cafes`, `/cafes/[slug]` · `/art`, `/random-clicks` (both `KindCollection`: the gallery narrowed to one category, no filter bar) · `/stories`, `/stories/[slug]` · `/about` · `not-found`, `error` · `/icon.svg`, `/manifest.webmanifest`, `/robots.txt`, `/sitemap.xml` · `POST /api/revalidate`.
 
 ## Conventions
 
