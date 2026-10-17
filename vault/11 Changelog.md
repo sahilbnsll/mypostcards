@@ -8,6 +8,9 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): Two random clicks from the office café
+- Added "A camera, a cup and an old newspaper" (an illustrated still life) and "A heart in the foam" (a painted latte), both from 13 October 2026, under Random clicks. Place is "The café at my office" with no city or coordinates (none were given, so they stay off the map). Photos in `random-clicks/office-cafe/`, cleaned (no metadata); originals in the git-ignored `private-originals/random-clicks/office-cafe/`. The second photo is small (322 by 536) and is shown as it is, not enlarged.
+
 ## 2026-10-17 (last): A shorter home page
 - The home page "The collection" now shows 8 postcards instead of 16 (a few favourites from every kind and place), without the filter bar, and ends with a "View all 23 postcards" button that opens the gallery. The button is drawn as an airmail envelope (postcard-stock face inside the red, white and blue stripe), so it reads the same in light and dark mode. `balancedSample` also spreads picks across cafés and places within a kind. [[09 Decisions]] D33.
 

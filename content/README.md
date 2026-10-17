@@ -21,7 +21,7 @@ public/images/
     pf-changs/          blossom-ceiling.jpg, spring-rolls.jpg ...
     costa-coffee/       mural-wall.jpg, serene-caramel-frappe.jpg, cheesecake.jpg ...
   art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
-  random-clicks/        lamp-over-the-pothos.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg)
+  random-clicks/        lamp-over-the-pothos.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), office-cafe/ (camera-and-cup.jpg, heart-latte.jpg)
   trips/<trip>/         photos from a trip (when there are trips)
   destinations/<place>/ photos from a place that belong to no café or trip
 private-originals/      the same folders, holding your untouched originals (git-ignored, never published)
