@@ -8,6 +8,9 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (evening): Staircase photo replaced
+- Swapped the Daksina Bhawan staircase photo for a new version and renamed the file to `wooden-stairs.jpg` so no cache (Next's 31-day image cache, browsers) keeps serving the old picture. The published copy was cleaned again (upright, no metadata, 1125 by 2000), and the raw file is kept in the git-ignored `private-originals/cafes/daksina-bhawan/`.
+
 ## 2026-10-17 (later): Photos filed by café and kind
 - Moved every photo out of the flat `public/images/postcards/` folder into `cafes/daksina-bhawan/`, `cafes/pf-changs/`, `art/` and `random-clicks/`, with short names (`front-view.jpg`). The git-ignored `private-originals/` now mirrors the same folders, each original renamed `<shot>__IMG_nnnn`. No postcard slug or URL changed. [[09 Decisions]] D32.
 - Added a "Finding things" section to the README (where photos and code live).
