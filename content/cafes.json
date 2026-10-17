@@ -73,5 +73,20 @@
     "sample": false,
     "rating": 4.3,
     "ratingNote": "The samosa chaat is so tasty, and the walking tacos are so good."
+  },
+  {
+    "slug": "pind-bhaturas",
+    "name": "Pind Bhaturas",
+    "city": "Gurugram",
+    "country": "India",
+    "neighborhood": "Ordered in, every Sunday",
+    "destination": "gurugram",
+    "vibes": [
+      "chole bhature",
+      "Sunday order"
+    ],
+    "notes": "My go-to place in Gurugram for chole bhature. I usually order from them, and I order chole bhature every Sunday: their chole bhature are so good, so tasty.",
+    "order": "Chole bhature",
+    "sample": false
   }
 ]

@@ -676,5 +676,65 @@
       "office"
     ],
     "sample": false
+  },
+  {
+    "slug": "pind-bhaturas-chole-bhature",
+    "title": "The one thing between me and my six pecs",
+    "caption": "Two puffed bhature with chole, onion salad, green chutney and a bottle of something cold, on a steel plate.",
+    "note": "I love chole bhature so much that I order them every Sunday. I cannot say no to them at all. This one is from Pind Bhaturas, my usual place in Gurugram, and it is so good, so tastyyyy. The one thing standing between me and my six pecs.",
+    "image": "/images/cafes/pind-bhaturas/chole-bhature.jpg",
+    "alt": "A round steel plate seen from above with two golden puffed bhature, a glass bowl of dark chole with a spoon, a black bowl of sliced onions and peppers, a small tub of green chutney, and a hand holding a tall bottle of a creamy white drink, on a grey blanket",
+    "category": "food",
+    "place": "Pind Bhaturas (ordered in)",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "destination": "gurugram",
+    "cafe": "pind-bhaturas",
+    "tags": [
+      "pind-bhaturas",
+      "chole-bhature",
+      "sunday",
+      "comfort-food"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "random-batman-doll",
+    "title": "Batman, on guard at my desk",
+    "caption": "A small crocheted Batman standing on a laptop keyboard, in front of a Batman wallpaper.",
+    "note": "My sister gave me this wool Batman when I was on a trip in Jaipur. I have always been a huge Batman fan, and she knows it. Now he stays with me at the office, on my desk, all the time.",
+    "image": "/images/random-clicks/batman-doll.jpg",
+    "alt": "A small crocheted Batman doll in a dark cowl with white eyes, a pale yellow face, a grey body and a yellow belt, standing on the keyboard of an open laptop whose screen shows a Batman lock-screen wallpaper with a red bat symbol and the time 17:18",
+    "category": "random",
+    "place": "My desk at the office",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "date": "2026-09-22",
+    "destination": "gurugram",
+    "tags": [
+      "batman",
+      "gift",
+      "crochet",
+      "desk"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "random-veni-vidi-vici",
+    "title": "Veni, vidi, vici",
+    "caption": "A small neck tattoo of Caesar's three words, laid out as a cross between leaf-tipped arrows.",
+    "note": "My recent tattoo: veni, vidi, vici, the famous line from Julius Caesar. It means \"I came, I saw, I conquered.\" I am trying to bring that line into my life, conquering and achieving everything I long for.",
+    "image": "/images/random-clicks/veni-vidi-vici-tattoo.jpg",
+    "alt": "A pencil-shaded close-up of the side of a man's neck below the ear, with a small tattoo of the words VENI written downwards and VIDI and VICI written across it, forming a cross with leaf-tipped arrows at each end",
+    "category": "random",
+    "tags": [
+      "tattoo",
+      "quote",
+      "julius-caesar",
+      "latin"
+    ],
+    "sample": false
   }
 ]
