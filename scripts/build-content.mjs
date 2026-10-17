@@ -30,11 +30,11 @@ const CATEGORIES = ["travel", "city", "cafe", "food", "getaway", "art", "random"
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 const KEYS = {
-  postcard: ["slug", "title", "caption", "note", "image", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "artist", "credit", "creditUrl", "rating", "featured", "sample"],
+  postcard: ["slug", "title", "caption", "note", "image", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "artist", "artistUrl", "credit", "creditUrl", "rating", "featured", "sample"],
   trip: ["slug", "title", "summary", "story", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "destination", "start", "end", "period", "featured", "sample", "days"],
   day: ["title", "stops"],
   stop: ["place", "time", "note", "tip", "lat", "lng", "postcard"],
-  destination: ["slug", "name", "country", "region", "description", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "lat", "lng", "status", "sample"],
+  destination: ["slug", "name", "country", "region", "area", "description", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "lat", "lng", "status", "sample"],
   cafe: ["slug", "name", "city", "country", "neighborhood", "destination", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "vibes", "notes", "order", "price", "seat", "wifi", "map", "rating", "ratingNote", "sample"],
   story: ["title", "subtitle", "date", "excerpt", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "trip", "destination", "featured", "sample"],
 };
@@ -84,6 +84,15 @@ export async function buildContent({ quiet = false } = {}) {
   };
 
   /** My rating: 0.5 to 5 with at most one decimal (4, 4.5, 4.8). Left out entirely when there is none. */
+  const link = (value, where, field) => {
+    const text = str(value, where, field);
+    if (text && !/^https:\/\//.test(text)) {
+      fail(where, `"${field}" must be a link starting with https://`);
+      return undefined;
+    }
+    return text;
+  };
+
   const rating = (value, where) => {
     if (value === undefined || value === null) return undefined;
     if (typeof value !== "number" || value < 0.5 || value > 5 || Math.round(value * 10) / 10 !== value) {
@@ -209,6 +218,7 @@ export async function buildContent({ quiet = false } = {}) {
       tags: Array.isArray(raw.tags) ? raw.tags.map(String) : [],
       camera: raw.camera,
       artist: str(raw.artist, where, "artist"),
+      artistUrl: link(raw.artistUrl, where, "artistUrl"),
       credit: str(raw.credit, where, "credit"),
       creditUrl: str(raw.creditUrl, where, "creditUrl"),
       rating: rating(raw.rating, where),
@@ -217,6 +227,56 @@ export async function buildContent({ quiet = false } = {}) {
       sortOrder: index + 1,
     });
   }
+
+  // Places are automatic. Every city a postcard comes from becomes a place (with its postcards, cover,
+  // map pin and globe pin), so adding a postcard updates Places and the maps without editing
+  // destinations.json. That file is only for places you want to describe, or places still planned.
+  const gazetteer = JSON.parse(readFileSync(join(root, "scripts", "gazetteer.json"), "utf8"));
+  const slugify = (text) =>
+    text.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  // Cities that sit next to each other share one area name (Delhi NCR), so a pin on the globe or the
+  // map can carry that name instead of listing every city.
+  const areaOf = (name) =>
+    Object.entries(gazetteer._regions ?? {}).find(([, cities]) => cities.includes(String(name).toLowerCase()))?.[0];
+  const manualPlaces = readJson("destinations.json");
+  const manualBySlug = new Map(manualPlaces.filter((d) => d.slug).map((d) => [d.slug, d]));
+  const manualByName = new Map(manualPlaces.filter((d) => d.name).map((d) => [slugify(d.name), d]));
+  const autoCards = new Map();
+  for (const card of postcards) {
+    const city = card.location.city;
+    if (!city || card.destinationSlug) continue;
+    const key = slugify(city);
+    if (!key) continue;
+    const manual = manualByName.get(key) ?? manualBySlug.get(key);
+    card.destinationSlug = manual ? manual.slug : key;
+    if (!manual) autoCards.set(key, [...(autoCards.get(key) ?? []), card]);
+  }
+  const mostCommon = (values) => {
+    const counts = new Map();
+    for (const v of values) if (v) counts.set(v, (counts.get(v) ?? 0) + 1);
+    return [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+  };
+  const autoPlaces = [...autoCards.entries()].map(([slug, cards]) => {
+    const name = cards[0].location.city;
+    const located = cards.map((c) => c.location.coordinates).filter(Boolean);
+    const known = gazetteer[name.toLowerCase()];
+    const point = located.length
+      ? { lat: located.reduce((s, p) => s + p.lat, 0) / located.length, lng: located.reduce((s, p) => s + p.lng, 0) / located.length }
+      : known
+        ? { lat: known[0], lng: known[1] }
+        : undefined;
+    return {
+      auto: true,
+      slug,
+      name,
+      country: mostCommon(cards.map((c) => c.location.country)) ?? "",
+      region: mostCommon(cards.map((c) => c.location.region)),
+      description: `Postcards kept in ${name}.`,
+      lat: point?.lat,
+      lng: point?.lng,
+      status: "visited",
+    };
+  });
 
   const byGroup = (key) => {
     const map = new Map();
@@ -245,9 +305,9 @@ export async function buildContent({ quiet = false } = {}) {
 
   // Destinations
   const destinations = [];
-  for (const [index, raw] of readJson("destinations.json").entries()) {
-    const where = `destinations.json #${index + 1}${raw.slug ? ` (${raw.slug})` : ""}`;
-    checkKeys(raw, KEYS.destination, where);
+  for (const [index, raw] of [...manualPlaces, ...autoPlaces].entries()) {
+    const where = raw.auto ? `place "${raw.name}" (from its postcards)` : `destinations.json #${index + 1}${raw.slug ? ` (${raw.slug})` : ""}`;
+    if (!raw.auto) checkKeys(raw, KEYS.destination, where);
     const slug = str(raw.slug, where, "slug", { required: true });
     if (!claimSlug("destination", slug, where)) continue;
     const status = raw.status ?? "visited";
@@ -256,8 +316,9 @@ export async function buildContent({ quiet = false } = {}) {
     destinations.push({
       slug,
       name: str(raw.name, where, "name", { required: true }),
-      country: str(raw.country, where, "country", { required: true }),
+      country: raw.auto ? raw.country : str(raw.country, where, "country", { required: true }),
       region: str(raw.region, where, "region"),
+      area: str(raw.area, where, "area") ?? (raw.name ? areaOf(raw.name) : undefined),
       description: str(raw.description, where, "description") ?? "",
       coverImage,
       coordinates: coordinates(raw.lat, raw.lng, where),
@@ -265,6 +326,26 @@ export async function buildContent({ quiet = false } = {}) {
       isSample: raw.sample === true,
       sortOrder: index + 1,
     });
+  }
+
+  // A postcard with no coordinates of its own sits at its place (marked approximate), so it is
+  // on the map and the globe too.
+  const placeBySlug = new Map(destinations.map((d) => [d.slug, d]));
+  const placeByName = new Map(destinations.map((d) => [slugify(d.name), d.slug]));
+  for (const card of postcards) {
+    const place = card.destinationSlug ? placeBySlug.get(card.destinationSlug) : undefined;
+    if (!card.location.coordinates && place?.coordinates) {
+      card.location.coordinates = place.coordinates;
+      card.location.approximate = true;
+    }
+    if (place?.area) card.location.area = place.area;
+  }
+  if (!quiet) {
+    for (const d of destinations) {
+      if (d.status === "visited" && !d.coordinates) {
+        console.log(`note: "${d.name}" is listed under Places but not pinned on the map. Add lat and lng to one of its postcards or to destinations.json, or add the city to scripts/gazetteer.json.`);
+      }
+    }
   }
 
   // Trips (with itineraries)
@@ -325,7 +406,7 @@ export async function buildContent({ quiet = false } = {}) {
       city: str(raw.city, where, "city"),
       country: str(raw.country, where, "country"),
       neighborhood: str(raw.neighborhood, where, "neighborhood"),
-      destinationSlug: raw.destination,
+      destinationSlug: raw.destination ?? (raw.city ? placeByName.get(slugify(raw.city)) : undefined),
       coverImage: await cover(raw, where, byCafe.get(slug)),
       vibeTags: Array.isArray(raw.vibes) ? raw.vibes.map(String) : [],
       notes: str(raw.notes, where, "notes"),

@@ -26,6 +26,10 @@ private-originals/      the same folders, holding your untouched originals (git-
 
 Short file names inside the folder (the folder says which café), the postcard slug stays globally unique ([[09 Decisions]] D32). Originals are named `<shot>__IMG_1234.JPEG` so each one can be traced to its published photo.
 
+## Places are derived
+
+The build makes a place for every `city` that postcards carry (and attaches cafés with a `city` to it), so Places, the globe and the flat map never need a hand-edited list. Coordinates come from the postcards, then `destinations.json`, then `scripts/gazetteer.json`; a postcard without coordinates is placed at its place and marked approximate (its back hides the coordinates). Cities that sit next to each other share a named **area** (`_regions` in the gazetteer, or `area` on a destination): the globe and map show one pin called "Delhi NCR" and the list shows the area with its cities inside, while each city keeps its place page. `destinations.json` is now for descriptions, planned places, areas and exact coordinates ([[09 Decisions]] D34).
+
 ## Where content lives
 
 ```text
@@ -48,7 +52,7 @@ postcards  *-1 trip, destination, cafe, story   (all optional)
 
 ## Entities
 
-- **Postcard**: `slug, title, image, alt, category` required. Optional `caption, note, place, city, region, country, lat, lng, date | period, trip, destination, cafe, story, tags, camera, credit, creditUrl, featured, sample`. Categories: travel, city, cafe, food, getaway, art, random (shown as "Random clicks"). `/art` and `/random-clicks` list one category each. Optional `artist` credits whoever made the thing in the photo. Each postcard has its own page (`/postcards/[slug]`) and share image, and a list of related postcards ([[09 Decisions]] D22).
+- **Postcard**: `slug, title, image, alt, category` required. Optional `caption, note, place, city, region, country, lat, lng, date | period, trip, destination, cafe, story, tags, camera, credit, creditUrl, featured, sample`. Categories: travel, city, cafe, food, getaway, art, random (shown as "Random clicks"). `/art` and `/random-clicks` list one category each. Optional `artist` credits whoever made the thing in the photo, and optional `artistUrl` (an https link, shown as `@handle` beside the name) points to their page. Each postcard has its own page (`/postcards/[slug]`) and share image, and a list of related postcards ([[09 Decisions]] D22).
 - **Trip**: summary, optional cover, dates or `period`, and optional `days`: `[{ title, stops: [{ place, time?, note?, tip?, lat?, lng?, postcard? }] }]`. Shown as a timeline with a route map ([[07 Components]]).
 - **Destination**: `status` is `visited` (default) or `planned`. Planned places need no cover and appear under "Dreaming of" and as dashed pins.
 - **Cafe**: `order, price, seat, wifi, map` (https link), `rating` (0.5 to 5, at most one decimal, drawn as stars filled by the exact amount) and `ratingNote` are shown only when provided. A postcard may also have its own `rating`.

@@ -40,7 +40,23 @@ export function PostcardBack({ item, as: Heading = "h2", variant = "panel" }: Po
         <Fact label="Where" value={formatLocation(item.location)} />
         <Fact label="When" value={formatWhen(item)} />
         <Fact label="Kind" value={CATEGORY_BY_ID[item.category].label} />
-        {item.artist && <Fact label="Artist" value={item.artist} />}
+        {item.artist && (
+          <Fact
+            label="Artist"
+            value={
+              item.artistUrl ? (
+                <>
+                  {item.artist}{" "}
+                  <a href={item.artistUrl} target="_blank" rel="noopener noreferrer" className="text-link">
+                    {handleOf(item.artistUrl)} ↗
+                  </a>
+                </>
+              ) : (
+                item.artist
+              )
+            }
+          />
+        )}
         {item.rating && <Fact label="My rating" value={<Rating value={item.rating} size="sm" />} />}
         {item.tripTitle && item.tripSlug && (
           <Fact label="Trip" value={<Link href={`/trips/${item.tripSlug}`} className="text-link">{item.tripTitle}</Link>} />
@@ -54,7 +70,7 @@ export function PostcardBack({ item, as: Heading = "h2", variant = "panel" }: Po
         {item.storyTitle && item.storySlug && (
           <Fact label="Story" value={<Link href={`/stories/${item.storySlug}`} className="text-link">{item.storyTitle}</Link>} />
         )}
-        {item.location.coordinates && (
+        {item.location.coordinates && !item.location.approximate && (
           <Fact label="Coordinates" value={formatCoordinates(item.location.coordinates.lat, item.location.coordinates.lng)} />
         )}
         {item.camera && (
@@ -74,6 +90,17 @@ export function PostcardBack({ item, as: Heading = "h2", variant = "panel" }: Po
       )}
     </div>
   );
+}
+
+/** "@name" for an Instagram or X link, otherwise the site's host name. */
+function handleOf(url: string): string {
+  try {
+    const { hostname, pathname } = new URL(url);
+    const name = pathname.split("/").filter(Boolean)[0];
+    return name && /(^|\.)(instagram|x|twitter)\.com$/.test(hostname) ? `@${name}` : hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
 }
 
 function Fact({ label, value }: { label: string; value?: ReactNode }) {

@@ -594,5 +594,27 @@
       "protest"
     ],
     "sample": false
+  },
+  {
+    "slug": "art-charcoal-embrace",
+    "title": "Two figures in charcoal",
+    "caption": "A charcoal drawing of two people held close, on bright pink paper.",
+    "note": "A drawing by my friend Dr. Nishant, a psychologist and an artist at heart. Two figures in an embrace, drawn in smudged charcoal on hot pink paper and signed with a bold N in the corner. I took this photo when we met in Delhi.",
+    "image": "/images/art/charcoal-embrace.jpg",
+    "alt": "A charcoal drawing on bright pink paper of two figures in a close embrace seen from behind, one with dark curly hair, signed with a bold N at the lower right, in a spiral-bound sketchbook held up by a hand in a dimly lit room",
+    "category": "art",
+    "place": "Delhi",
+    "city": "Delhi",
+    "country": "India",
+    "date": "2026-10-09",
+    "artist": "Dr. Nishant",
+    "artistUrl": "https://www.instagram.com/nishant.narratives/",
+    "tags": [
+      "art",
+      "drawing",
+      "charcoal",
+      "sketchbook"
+    ],
+    "sample": false
   }
 ]

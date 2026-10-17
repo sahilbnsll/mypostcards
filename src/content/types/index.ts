@@ -37,6 +37,10 @@ export interface LocationInfo {
   region?: string;
   country?: string;
   coordinates?: GeoCoordinates;
+  /** True when the coordinates are the place's, not the exact spot the photo was taken. */
+  approximate?: boolean;
+  /** The named area the place belongs to (Delhi NCR), used to label pins on the globe and the map. */
+  area?: string;
 }
 
 export interface CameraMetadata {
@@ -70,6 +74,8 @@ export interface Postcard {
   camera?: CameraMetadata;
   /** Who made the thing in the photograph (a painting, a model, a print), when it is not me. */
   artist?: string;
+  /** A link to the artist's page (for example their Instagram), shown beside their name. */
+  artistUrl?: string;
   /** Photographer credit, shown for photos that are not mine. */
   credit?: string;
   creditUrl?: string;
@@ -126,6 +132,8 @@ export interface Destination {
   name: string;
   country: string;
   region?: string;
+  /** A named area that groups places which sit next to each other (Delhi NCR). */
+  area?: string;
   description: string;
   /** Optional for planned places that have no photograph yet. */
   coverImage?: ImageAsset;

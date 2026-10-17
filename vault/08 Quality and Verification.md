@@ -6,6 +6,12 @@ updated: 2026-10-17
 
 # Quality and verification
 
+- Delhi NCR area (2026-10-17): the globe caption reads "Delhi NCR" and the list shows "Delhi NCR, 22 postcards" with Gurugram (20) and Delhi (2) as links; the places index below still lists both cities. Not checked: the flat map's pin label, a named area with a single city, axe.
+
+- Automatic places (2026-10-17): the build lists 2 places (Gurugram with 20 postcards, Delhi with 2); /destinations lists both, /destinations/delhi renders, and the globe's list has a row for each (Gurugram 20 postcards, Delhi 2) with a caption line for each on the pin (before this fix the caption showed only the first name, Gurugram). On the flat world map Delhi and Gurugram are one pin (about 25 km apart). A temporary test postcard from Jaipur was pinned from the gazetteer, and one from an unknown city was listed with the build note and no pin (both removed again). Not checked: axe on the places pages.
+
+- Friend's drawing (2026-10-17): content validates (27 postcards); the postcard page shows "Artist: Dr. Nishant @nishant.narratives" and the link opens in a new tab with rel noopener noreferrer. Title wrapping checked at 1024px. Not checked: axe, the Instagram link on a phone.
+
 - The emptiest metro (2026-10-17): content validates (26 postcards, 1 story); the story page and the postcard page render, the postcard shows the "Story" link. News facts were read from two fetched articles (The Daily Jagran, Republic); the Business Standard page returned 403 and NewsBytes was only seen as a search result. Not checked: the exact opening time of the closure on 9 October, the exact reopening time, axe, a phone width check of the story page.
 
 - Office café photos (2026-10-17): content validates (25 postcards); both appear on /random-clicks with no broken images. Not checked: axe, how the small second photo looks in the lightbox on a large screen (it is only 322 pixels wide).

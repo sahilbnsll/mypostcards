@@ -6,7 +6,7 @@ Everything on the site except the visitor cards comes from this folder and from 
 content/
   postcards.json      every photograph
   trips.json          trips, with optional day-by-day itineraries
-  destinations.json   places (visited or planned)
+  destinations.json   places you want to describe, or have not been to yet (the rest are automatic)
   cafes.json          cafés and food spots, with optional guide details
   stories/*.md        longer pieces
 public/images/        your own photographs, one folder per café, trip or kind (see below)
@@ -63,7 +63,7 @@ Required: `slug`, `title`, `image`, `alt`, `category`. Everything else is option
 
 Other optional fields: `caption`, `note` (the text on the back of the postcard), `place` (the spot, such as a street or a viewpoint), `region`, `period` (such as `"Spring 2025"` when there is no exact date), `cafe`, `story`, `camera`, `credit`, `creditUrl`, `featured` (appears first on the home page and gallery).
 
-Categories: `travel`, `city`, `cafe`, `food`, `getaway`, `art`, `random` (shown as "Random clicks"; the Art and Random clicks pages list these). For art, add `"artist": "Their Name"` to credit whoever made the piece: it shows as "Artist" on the back of the postcard (`credit` is for a photographer who is not you).
+Categories: `travel`, `city`, `cafe`, `food`, `getaway`, `art`, `random` (shown as "Random clicks"; the Art and Random clicks pages list these). For art, add `"artist": "Their Name"` to credit whoever made the piece, and optionally `"artistUrl": "https://www.instagram.com/their.handle/"` to link them (the back of the postcard then shows their name and `@handle`): it shows as "Artist" on the back of the postcard (`credit` is for a photographer who is not you).
 
 A misspelt field name is caught and a likely correction suggested.
 
@@ -106,6 +106,16 @@ Stops with `lat` and `lng` are drawn on the route map beside the timeline, numbe
 A café page builds the rest itself from what you have written: the "Visited" date comes from the dates on its postcards, the handwritten caption under the cover photo is its `neighborhood`, and a "More cafés" strip links to others.
 
 A single photograph can carry a rating too, for a dish, a drink or a view: add `"rating": 4` to that postcard in `postcards.json` and "My rating" appears on the back of the postcard.
+
+## Places and the maps are automatic
+
+You do not have to add a place by hand. Every `city` that a postcard carries becomes a place on the Places page, with its postcards, a cover photo, a pin on the globe and the flat map, and a page of its own at `/destinations/<city>`. Add a postcard with `"city": "Jaipur"` and Jaipur appears after the next rebuild.
+
+Where the pin goes, in order: the `lat` and `lng` of the postcards from that city (their average), then the place's own `lat` and `lng` in `destinations.json`, then the city list in `scripts/gazetteer.json` (about forty cities; add a line for a new one). A postcard with no coordinates of its own sits at its place, and its back does not show the coordinates because they are approximate. If a city cannot be pinned the build says so ("... is listed under Places but not pinned on the map") and the place still appears in the list.
+
+Cities that sit next to each other are grouped into a named **area** so the globe and the map show one pin with one name instead of a list: Delhi, Gurugram, Noida, Faridabad and Ghaziabad are "Delhi NCR". The list is `_regions` in `scripts/gazetteer.json` (add a line for another area), or give a place an `"area": "Name"` in `destinations.json`. The globe's list shows the area with its cities inside it as links, and every city keeps its own page and its place on the Places list.
+
+Use `destinations.json` when you want a description, your own cover photo, or exact coordinates for a place; give the entry the same name as the city and the postcards attach to it. Cafés with a `city` attach to the matching place the same way.
 
 ## A place you have not been yet
 

@@ -1,7 +1,7 @@
 ---
 title: Backlog
 tags: [backlog]
-updated: 2026-10-14
+updated: 2026-10-17
 ---
 
 # Backlog and known limitations
@@ -16,6 +16,7 @@ updated: 2026-10-14
 
 ## Known limitations
 
+- The world map and the globe show places that are close together (Delhi and Gurugram) as one pin named after both. A zoomable regional map would show them apart.
 - Detail pages ([slug] routes) deliver their content through React's streaming swap: the served HTML holds it in a hidden block that a small inline script moves into place. Browsers do this at once; with JavaScript off only the loading skeleton is visible. Fixing it means making these routes fully part of the static shell, which Cache Components does not currently do for dynamic params.
 
 - Unknown slugs return HTTP 200 with the not-found UI and `noindex` (the page streams after the shell). Acceptable for SEO because of `noindex`, but not a true 404.

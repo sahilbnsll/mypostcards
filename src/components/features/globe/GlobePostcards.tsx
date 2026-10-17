@@ -161,7 +161,13 @@ export function GlobePostcards({ pins }: GlobePostcardsProps) {
               aria-hidden
             >
               <Photo image={pin.image} ratio="1 / 1" sizes="72px" />
-              <span className={styles.caption}>{pin.label.split(",")[0]}</span>
+              <span className={styles.caption}>
+                {pin.places.slice(0, 3).map((place) => (
+                  <span key={place.name} className={styles.captionName}>
+                    {place.name}
+                  </span>
+                ))}
+              </span>
             </div>
           ))}
       </div>

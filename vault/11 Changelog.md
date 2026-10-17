@@ -8,6 +8,18 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): Nearby cities share an area name
+- Delhi, Gurugram, Noida, Faridabad and Ghaziabad are grouped as **Delhi NCR** (plus a Mumbai region and a Bay Area), so the globe's postcard and the map pin say "Delhi NCR", and the list beside the globe shows "Delhi NCR, 22 postcards" with Gurugram and Delhi as links inside it. New optional `area` on a destination; `_regions` in `scripts/gazetteer.json`. Every city still has its own page and its place on the Places list.
+
+## 2026-10-17 (last): Places and maps update themselves
+- Places are now made from postcards: every `city` becomes a place with its postcards, cover, globe pin and map pin, so the Delhi postcards added Delhi automatically (Places went from 1 to 2). Coordinates come from the postcards, then `destinations.json`, then a new `scripts/gazetteer.json`; a postcard without coordinates sits at its place and hides the approximate coordinates on its back. A pin is named after every nearby place ("Gurugram, Delhi, India"); the globe's postcard shows one line per place, and the list beside it has one row per place (with its postcard count) that opens that place's page. [[09 Decisions]] D34.
+- Cafés with a `city` attach to the matching place. The Gurugram description was refreshed. The build prints a note for any visited place it cannot pin.
+
+## 2026-10-17 (last): A friend's drawing, with credit
+- New Art postcard "Two figures in charcoal": a charcoal drawing by the author's friend Dr. Nishant (psychologist and artist), photographed in Delhi on 9 October 2026 (from the photo's own metadata). Photo in `art/`, original in the git-ignored `private-originals/art/`.
+- New optional postcard field `artistUrl`: the back of a postcard shows the artist's name with a link to their page as `@handle` (here https://www.instagram.com/nishant.narratives/). Checked by `scripts/build-content.mjs` (must start with https://).
+- Postcard titles in the narrower side column are one step smaller below 64rem, so a long word no longer breaks in the middle.
+
 ## 2026-10-17 (last): The emptiest metro, a story
 - New postcard "The emptiest metro" (10 October 2026, kind City) with the first story on the site, **The emptiest metro**: the author's own account of crossing an almost empty Delhi Metro platform on the way from Delhi to Gurugram, plus context from the news. Photo in `city/` (cleaned, no metadata), original in the git-ignored `private-originals/city/`.
 - Context checked against reports by The Daily Jagran and Republic (and search results from Business Standard and NewsBytes): the CJP protest at Jantar Mantar on 10 October; Delhi Police asked DMRC to close gates at 57 stations; DMRC cut that to 45; closures were due to end at 6 pm and were extended to 10 pm. The story says the gates were closed by DMRC at the police's request (not "the Delhi government").

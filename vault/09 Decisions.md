@@ -8,6 +8,10 @@ updated: 2026-10-17
 
 Newest first. Format: decision, why, trade-off.
 
+### D34. Places and map pins are derived from postcards, not listed by hand
+- **Why:** `destinations.json` listed only Gurugram, so new postcards from Delhi (and anywhere else) never reached the Places page, the map or the globe. Now the build creates a place for every postcard `city`, finds its coordinates (postcards, then the place entry, then `scripts/gazetteer.json`), and gives a postcard that has none its place's coordinates, marked approximate. Cities that sit next to each other are grouped into a named area (`_regions` in the gazetteer, or `area` on a destination), so a pin on the globe or map is called "Delhi NCR" rather than listing cities; a pin that covers places with no named area is named after all of them.
+- **Trade-off:** a new city without coordinates anywhere is listed but not pinned (the build says so), and cities near each other share one pin on the world map (named by their area, which is configured by hand for now). The gazetteer is a small hand-kept list rather than a geocoder, because the build has no network. `destinations.json` still wins when it names the city.
+
 ### D33. The home page shows eight postcards, then a button to the gallery
 - **Why:** the "collection" section on the home page listed up to 16 postcards with filters, which made the page very long as the journal grew. It now shows 8, chosen by `balancedSample`: turns across categories (so every kind appears), and within a kind across cafés, trips and places (so one spot does not fill it), featured first. A "View all N postcards" button leads to `/gallery`, which keeps the filters, tags and search. The home preview has no filter bar.
 - **Trade-off:** the preview is a fixed size, so it stays short however many postcards there are, but a visitor has to go to the gallery to filter. The footer mosaic uses the same selection.

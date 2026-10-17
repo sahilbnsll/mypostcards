@@ -45,6 +45,13 @@
   font-size: var(--step-3);
 }
 
+/* In the narrower side column a long word (charcoal, blossom) must fit beside the stamp */
+@media (max-width: 64rem) {
+  .page .title {
+    font-size: var(--step-2);
+  }
+}
+
 .caption {
   margin-top: var(--s-3);
   max-width: 42ch;

@@ -38,7 +38,7 @@ vault/                   this documentation (Obsidian)
 
 ```text
 content/*.json + content/stories/*.md + public/images/**
-   → scripts/build-content.mjs  (validate, measure local images, derive covers)
+   → scripts/build-content.mjs  (validate, measure local images, derive covers, derive places from postcard cities)
    → src/content/generated/journal.json   (gitignored; built by prebuild, pretypecheck and npm run dev)
    → getJournal()  → server components slice it with selectors → client components get plain props
 ```
