@@ -654,5 +654,27 @@
       "street-food"
     ],
     "sample": false
+  },
+  {
+    "slug": "random-heart-in-the-sky",
+    "title": "Love is in the air",
+    "caption": "A heart-shaped patch of cloud over the office towers.",
+    "note": "28 September 2026. The weather turned beautiful out of nowhere, and then a heart appeared in the sky above my office. It looked so romantic. Love is in the air, quite literally.",
+    "image": "/images/random-clicks/m3m-urbana/heart-in-the-sky.jpg",
+    "alt": "A heart-shaped patch of dark blue cloud among white and grey clouds, above the glass towers of an office park with an Urbana sign, over a plaza with potted trees, hoardings and a few people walking",
+    "category": "random",
+    "place": "M3M Urbana Business Park",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "date": "2026-09-28",
+    "destination": "gurugram",
+    "tags": [
+      "sky",
+      "clouds",
+      "heart",
+      "office"
+    ],
+    "sample": false
   }
 ]

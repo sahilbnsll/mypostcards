@@ -72,7 +72,7 @@ public/images/
     ny-united-cafe/     samosa-chaat.jpg and the two paintings (camera-and-cup.jpg, heart-latte.jpg)
   art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
   city/                 empty-metro-platform.jpg (street, skyline and transit shots that are not a trip)
-  random-clicks/        lamp-over-the-pothos.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg)
+  random-clicks/        lamp-over-the-pothos.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), m3m-urbana/ (heart-in-the-sky.jpg)
   trips/<trip>/         photos from a trip (when there are trips)
   destinations/<place>/ photos from a place that belong to no café or trip
 private-originals/      the same folders, holding your untouched originals (git-ignored, never published)

@@ -8,6 +8,9 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): Love is in the air
+- New Random clicks postcard "Love is in the air": a heart-shaped patch of cloud over the office towers at M3M Urbana Business Park, 28 September 2026 (the date in the photo's own metadata agrees). Photo in `random-clicks/m3m-urbana/`, cleaned (no metadata); original in the git-ignored `private-originals/random-clicks/m3m-urbana/`. It has no coordinates of its own, so it sits at Gurugram (Delhi NCR) and its back does not show coordinates.
+
 ## 2026-10-17 (last): NY United Cafe
 - New café **NY United Cafe** (ground floor, Tower B, M3M Urbana Business Park, Sector 67, Gurugram), with your map link, the usual order (walking taco and chai) and a rating of 4.3/5. New postcard "Samosa chaat, in a paper bowl". The two paintings from the office café ("A camera, a cup and an old newspaper", "A heart in the foam") now belong to it, still under Random clicks, and moved to `cafes/ny-united-cafe/`. The old `random-clicks/office-cafe/` folder is gone.
 - The samosa chaat photo has no date (the file carries no metadata), so the postcard has none; the café's "Visited" date comes from the paintings (13 October 2026). Originals are in the git-ignored `private-originals/cafes/ny-united-cafe/`.

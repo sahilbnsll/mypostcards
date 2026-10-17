@@ -6,6 +6,8 @@ updated: 2026-10-17
 
 # Quality and verification
 
+- Love is in the air (2026-10-17): content validates (29 postcards); the postcard page loads with the photo, date and place, and its coordinates are marked approximate (hidden). Not checked: axe, the Random clicks page, a phone width.
+
 - NY United Cafe (2026-10-17): content validates (28 postcards, 4 cafés); the café page shows 3 postcards, its rating, usual order and map link, with no broken images. Not checked: axe, a phone width, the Random clicks page after the paintings gained a café link.
 
 - Delhi NCR area (2026-10-17): the globe caption reads "Delhi NCR" and the list shows "Delhi NCR, 22 postcards" with Gurugram (20) and Delhi (2) as links; the places index below still lists both cities. Not checked: the flat map's pin label, a named area with a single city, axe.
