@@ -54,5 +54,24 @@
     "sample": false,
     "rating": 4.5,
     "ratingNote": "The coffee is great, the cheesecake is good, and the ambience and café theme are both good."
+  },
+  {
+    "slug": "ny-united-cafe",
+    "name": "NY United Cafe",
+    "city": "Gurugram",
+    "country": "India",
+    "neighborhood": "Ground floor, Tower B",
+    "destination": "gurugram",
+    "vibes": [
+      "samosa chaat",
+      "walking tacos",
+      "paintings on the wall"
+    ],
+    "notes": "On the ground floor of Tower B, M3M Urbana Business Park, Sector 67, Gurugram, in the building where I work. Samosa chaat, chai, and their own walking tacos: blue Lay's piled with vegetables and sauces, with a veg tikka patty or paneer.",
+    "order": "Walking taco and chai",
+    "map": "https://maps.app.goo.gl/Y9Afei5qGrWWzre29",
+    "sample": false,
+    "rating": 4.3,
+    "ratingNote": "The samosa chaat is so tasty, and the walking tacos are so good."
   }
 ]

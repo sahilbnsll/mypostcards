@@ -8,6 +8,10 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): NY United Cafe
+- New café **NY United Cafe** (ground floor, Tower B, M3M Urbana Business Park, Sector 67, Gurugram), with your map link, the usual order (walking taco and chai) and a rating of 4.3/5. New postcard "Samosa chaat, in a paper bowl". The two paintings from the office café ("A camera, a cup and an old newspaper", "A heart in the foam") now belong to it, still under Random clicks, and moved to `cafes/ny-united-cafe/`. The old `random-clicks/office-cafe/` folder is gone.
+- The samosa chaat photo has no date (the file carries no metadata), so the postcard has none; the café's "Visited" date comes from the paintings (13 October 2026). Originals are in the git-ignored `private-originals/cafes/ny-united-cafe/`.
+
 ## 2026-10-17 (last): Nearby cities share an area name
 - Delhi, Gurugram, Noida, Faridabad and Ghaziabad are grouped as **Delhi NCR** (plus a Mumbai region and a Bay Area), so the globe's postcard and the map pin say "Delhi NCR", and the list beside the globe shows "Delhi NCR, 22 postcards" with Gurugram and Delhi as links inside it. New optional `area` on a destination; `_regions` in `scripts/gazetteer.json`. Every city still has its own page and its place on the Places list.
 

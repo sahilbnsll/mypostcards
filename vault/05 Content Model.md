@@ -16,9 +16,10 @@ public/images/
     daksina-bhawan/     one folder per café: front-view.jpg, temple-bells.jpg, dosa.jpg ...
     pf-changs/          blossom-ceiling.jpg, spring-rolls.jpg ...
     costa-coffee/       mural-wall.jpg, serene-caramel-frappe.jpg, cheesecake.jpg ...
+    ny-united-cafe/     samosa-chaat.jpg and the two paintings (camera-and-cup.jpg, heart-latte.jpg)
   art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
   city/                 empty-metro-platform.jpg (street, skyline and transit shots that are not a trip)
-  random-clicks/        lamp-over-the-pothos.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), office-cafe/ (camera-and-cup.jpg, heart-latte.jpg)
+  random-clicks/        lamp-over-the-pothos.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg)
   trips/<trip>/         photos from a trip (when there are trips)
   destinations/<place>/ photos from a place that belong to no café or trip
 private-originals/      the same folders, holding your untouched originals (git-ignored, never published)

@@ -6,6 +6,8 @@ updated: 2026-10-17
 
 # Quality and verification
 
+- NY United Cafe (2026-10-17): content validates (28 postcards, 4 cafés); the café page shows 3 postcards, its rating, usual order and map link, with no broken images. Not checked: axe, a phone width, the Random clicks page after the paintings gained a café link.
+
 - Delhi NCR area (2026-10-17): the globe caption reads "Delhi NCR" and the list shows "Delhi NCR, 22 postcards" with Gurugram (20) and Delhi (2) as links; the places index below still lists both cities. Not checked: the flat map's pin label, a named area with a single city, axe.
 
 - Automatic places (2026-10-17): the build lists 2 places (Gurugram with 20 postcards, Delhi with 2); /destinations lists both, /destinations/delhi renders, and the globe's list has a row for each (Gurugram 20 postcards, Delhi 2) with a caption line for each on the pin (before this fix the caption showed only the first name, Gurugram). On the flat world map Delhi and Gurugram are one pin (about 25 km apart). A temporary test postcard from Jaipur was pinned from the gazetteer, and one from an unknown city was listed with the build note and no pin (both removed again). Not checked: axe on the places pages.

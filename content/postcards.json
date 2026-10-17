@@ -542,37 +542,51 @@
     "slug": "random-camera-and-cup",
     "title": "A camera, a cup and an old newspaper",
     "caption": "An illustrated still life of a pale green film camera and a cup on a worn blue table.",
-    "note": "Seen at the café on the ground floor of my office. A pale green film camera, a full cup, a folded newspaper and a small photograph, all on a table with the paint wearing off. It looks like a morning from another decade.",
-    "image": "/images/random-clicks/office-cafe/camera-and-cup.jpg",
+    "note": "Seen at NY United Cafe, on the ground floor of my office. A pale green film camera, a full cup, a folded newspaper and a small photograph, all on a table with the paint wearing off. It looks like a morning from another decade.",
+    "image": "/images/cafes/ny-united-cafe/camera-and-cup.jpg",
     "alt": "An illustration seen from above of a pale green and maroon film camera on a folded newspaper, a white cup of amber drink on a saucer, and a small instant photograph, on a blue wooden table with chipped orange paint",
     "category": "random",
-    "place": "The café at my office",
+    "place": "NY United Cafe",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "lat": 28.495,
+    "lng": 77.089,
     "date": "2026-10-13",
-    "sample": false,
+    "destination": "gurugram",
+    "cafe": "ny-united-cafe",
     "tags": [
-      "office",
+      "ny-united-cafe",
       "coffee",
       "illustration",
       "camera"
-    ]
+    ],
+    "sample": false
   },
   {
     "slug": "random-heart-latte",
     "title": "A heart in the foam",
     "caption": "A painted cup of coffee with a heart in the foam, in thick strokes of orange, gold and blue.",
-    "note": "Another one from the café at my office: a painting of a latte with steam curling up, done in thick, bright brushstrokes. Warm oranges on one side, cool blue shadows on the other, and a small heart in the foam.",
-    "image": "/images/random-clicks/office-cafe/heart-latte.jpg",
+    "note": "Another one from NY United Cafe, downstairs at my office: a painting of a latte with steam curling up, done in thick, bright brushstrokes. Warm oranges on one side, cool blue shadows on the other, and a small heart in the foam.",
+    "image": "/images/cafes/ny-united-cafe/heart-latte.jpg",
     "alt": "A thickly painted picture of a cup of coffee on a saucer with a heart in the foam and steam rising, against swirling brushstrokes of orange, gold and deep blue",
     "category": "random",
-    "place": "The café at my office",
+    "place": "NY United Cafe",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "lat": 28.495,
+    "lng": 77.089,
     "date": "2026-10-13",
-    "sample": false,
+    "destination": "gurugram",
+    "cafe": "ny-united-cafe",
     "tags": [
-      "office",
+      "ny-united-cafe",
       "coffee",
       "painting",
       "latte"
-    ]
+    ],
+    "sample": false
   },
   {
     "slug": "city-empty-metro",
@@ -614,6 +628,30 @@
       "drawing",
       "charcoal",
       "sketchbook"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "ny-united-cafe-samosa-chaat",
+    "title": "Samosa chaat, in a paper bowl",
+    "caption": "A paper bowl of samosa chaat under a pile of sev, curd, onion, coriander and red chutney.",
+    "note": "Broken samosa, chickpeas, cool curd, onion, coriander and red sauce, all under a drift of sev. It is so tasty. This is the café on the ground floor of my office, where my usual order is the walking taco and chai.",
+    "image": "/images/cafes/ny-united-cafe/samosa-chaat.jpg",
+    "alt": "A hand holding a white paper bowl of samosa chaat with a wooden spoon: pieces of samosa and chickpeas under curd, red sauce, chopped onion, coriander and a heap of fine sev, with a menu board showing burgers and omelettes behind",
+    "category": "food",
+    "place": "NY United Cafe",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "lat": 28.495,
+    "lng": 77.089,
+    "destination": "gurugram",
+    "cafe": "ny-united-cafe",
+    "tags": [
+      "ny-united-cafe",
+      "chaat",
+      "samosa",
+      "street-food"
     ],
     "sample": false
   }
