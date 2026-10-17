@@ -104,5 +104,21 @@
     ],
     "notes": "Shop 19, Ground Floor, DLF Cyberhub, Gurugram. A North-West Frontier and Punjabi restaurant.",
     "sample": false
+  },
+  {
+    "slug": "skyhouse-bar-and-kitchen",
+    "name": "Skyhouse Bar & Kitchen",
+    "city": "Noida",
+    "country": "India",
+    "neighborhood": "Logix City Centre, Sector 32",
+    "vibes": [
+      "fancy dinner",
+      "after the movies"
+    ],
+    "notes": "Logix City Centre, Noida Rd, Wave City Center, Sector 32, Noida, Uttar Pradesh 201301. A fancy dinner after a day at my cousin's in Noida and a night at the movies. It was a good day.",
+    "map": "https://maps.google.com/maps?vet=10CAAQoqAOahcKEwjYtZOj-sCXAxUAAAAAHQAAAAAQFg..i&rlz=1C1CHBF_enIN1227IN1227&sca_esv=8b817fadbfcf6ab7&udm&fvr=1&pvq=Cg0vZy8xMWhiMDM3eG5tIhkKE3NreWhvdXNlIGJhciAmIGNhZmUQAhgD&lqi=CiFza3lob3VzZSBiYXIgJiBjYWZlIG5vaWRhIGFkZHJlc3MiAkgBSJPlz4Gor4CACFo5EAAQARACEAMYABgBGAIYAxgEIhlza3lob3VzZSBiYXIgJiBjYWZlIG5vaWRhKgoIAhAAEAEQAhADkgEEY2FmZQ&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&ftid=0x390ce5bde9b87069:0x5d2d9aae65e02870",
+    "sample": false,
+    "rating": 4.2,
+    "ratingNote": "The food is a 4.5 out of 5 and the ambience is great. It was a good day, and Skyhouse is so good too."
   }
 ]

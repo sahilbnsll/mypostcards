@@ -8,6 +8,11 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): Skyhouse, Noida
+- New café **Skyhouse Bar & Kitchen** (Logix City Centre, Sector 32, Noida; address from restaurant listings, map link as given) with a rating of 4.2/5 and a note that the food is a 4.5 and the ambience great. Three postcards from 2 October 2026, the day at the author's cousin's in Noida: the dinner, the drinks, and the Spider-Man: Brand New Day title card on the cinema screen (under Random clicks).
+- Noida appeared on Places by itself and joined Delhi NCR on the globe and map, next to Gurugram and Delhi.
+- The dish in the dinner photo is not named, because it is too dark to tell. The film photo shows a title card, so the postcard does not say which film was watched.
+
 ## 2026-10-17 (last): Punjab Grill and KitKat's F1 car
 - New café **Punjab Grill** (Shop 19, Ground Floor, DLF Cyberhub, Gurugram; a North-West Frontier and Punjabi restaurant; address and cuisine from restaurant listings, corrected from "Cyber City" to Cyberhub by the author) with two postcards, a peach iced tea and a cold coffee, and malai chaap on a hanging stand (first described wrongly as drinks and kebabs; the author corrected both). No map link or rating yet.
 - New Random clicks postcard "KitKat's own F1 car": a KitKat-red Formula 1 style car with "Have a break" on it, at a KitKat showcase. The banner in the photo says Official Partner of Formula 1, which matches KitKat's partnership as Formula 1's Official Chocolate Bar (announced by Nestlé on 12 November 2024). It is a show car, not the life-size chocolate car KitKat unveiled at Silverstone, and the postcard does not say otherwise. The place is unknown, so it has none.

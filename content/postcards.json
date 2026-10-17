@@ -948,5 +948,67 @@
       "showcase"
     ],
     "sample": false
+  },
+  {
+    "slug": "skyhouse-dinner",
+    "title": "A fancy dinner",
+    "caption": "Dinner at Skyhouse Bar & Kitchen.",
+    "note": "A fancy dinner after the movies, on a good day at my cousin's in Noida. The food is a 4.5.",
+    "image": "/images/cafes/skyhouse/dinner.jpg",
+    "alt": "A baked dish with a browned, cheesy top and vegetables in a dark restaurant, with a knife and fork resting on its edge",
+    "category": "food",
+    "place": "Skyhouse Bar & Kitchen",
+    "date": "2026-10-02",
+    "city": "Noida",
+    "region": "Uttar Pradesh",
+    "country": "India",
+    "sample": false,
+    "cafe": "skyhouse-bar-and-kitchen",
+    "tags": [
+      "skyhouse",
+      "noida",
+      "dinner"
+    ]
+  },
+  {
+    "slug": "skyhouse-drinks",
+    "title": "Drinks with a cherry on top",
+    "caption": "Drinks at Skyhouse.",
+    "note": "Skyhouse is so good, and so is the ambience.",
+    "image": "/images/cafes/skyhouse/drinks.jpg",
+    "alt": "A stemmed glass of pale orange drink with a cherry on a pick and a fan of sliced apple, next to a bright orange drink with a lime garnish and a red drink behind, in a dim bar with warm lights",
+    "category": "food",
+    "place": "Skyhouse Bar & Kitchen",
+    "date": "2026-10-02",
+    "city": "Noida",
+    "region": "Uttar Pradesh",
+    "country": "India",
+    "sample": false,
+    "cafe": "skyhouse-bar-and-kitchen",
+    "tags": [
+      "skyhouse",
+      "noida",
+      "drinks"
+    ]
+  },
+  {
+    "slug": "random-spider-man-brand-new-day",
+    "title": "Spider-Man: Brand New Day",
+    "caption": "On the big screen.",
+    "note": "We went to watch movies after a day at my cousin's in Noida, and this title lit up the screen.",
+    "image": "/images/random-clicks/spider-man-brand-new-day.jpg",
+    "alt": "The Marvel Studios title card for Spider-Man: Brand New Day glowing in red, blue and yellow on a dark cinema screen, tilted in the frame",
+    "category": "random",
+    "date": "2026-10-02",
+    "city": "Noida",
+    "region": "Uttar Pradesh",
+    "country": "India",
+    "sample": false,
+    "tags": [
+      "movies",
+      "spider-man",
+      "cinema",
+      "noida"
+    ]
   }
 ]

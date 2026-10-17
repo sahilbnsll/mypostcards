@@ -72,10 +72,11 @@ public/images/
     ny-united-cafe/     samosa-chaat.jpg and the two paintings (camera-and-cup.jpg, heart-latte.jpg)
     shikarbagh/         seven shots from Hotel Narain Niwas Palace, Jaipur (fountain-in-the-dark.jpg, courtyard-fountain.jpg ...)
     punjab-grill/       iced-tea-and-cold-coffee.jpg, malai-chaap.jpg
+    skyhouse/           dinner.jpg, drinks.jpg
   art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
   city/                 empty-metro-platform.jpg (street, skyline and transit shots that are not a trip)
   food/                 chole-bhature.jpg (food you ordered in, not from a café you visited)
-  random-clicks/        lamp-over-the-pothos.jpg, batman-doll.jpg, veni-vidi-vici-tattoo.jpg, kitkat-f1-car.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), m3m-urbana/ (heart-in-the-sky.jpg)
+  random-clicks/        lamp-over-the-pothos.jpg, batman-doll.jpg, veni-vidi-vici-tattoo.jpg, kitkat-f1-car.jpg, spider-man-brand-new-day.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), m3m-urbana/ (heart-in-the-sky.jpg)
   trips/<trip>/         photos from a trip (when there are trips)
   destinations/<place>/ photos from a place that belong to no café or trip
 private-originals/      the same folders, holding your untouched originals (git-ignored, never published)

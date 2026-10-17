@@ -6,6 +6,8 @@ updated: 2026-10-17
 
 # Quality and verification
 
+- Skyhouse (2026-10-17): content validates (45 postcards, 7 cafés, 4 places); the café page shows its rating, the map link and both photos with none broken; Noida is listed on Places under Delhi NCR. Not checked: axe, a phone width, whether the long Google Maps link opens the venue on a phone.
+
 - Punjab Grill and KitKat F1 car (2026-10-17): content validates (42 postcards, 6 cafés); the Punjab Grill page and the KitKat postcard render with no broken images. The restaurant address comes from listings on district.in and an Amex partner list; I did not open Google Maps. Not checked: axe, a phone width, the faces of the small crowd in the KitKat photo (none is prominent, none is blurred).
 
 - Shikarbagh (2026-10-17): content validates (39 postcards, 5 cafés, 3 places); the café page renders with its rating, map link and all seven photos (none broken); /destinations lists Jaipur with 7 postcards. The two face blurs were checked by eye. Not checked: axe, a phone width, every postcard page.

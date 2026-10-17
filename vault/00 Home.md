@@ -30,7 +30,7 @@ Personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal
 
 ## Status (2026-10-10)
 
-- Content is authored in `content/` and `public/images/` (see `content/README.md`); 42 postcards (all the author's own: P.F. Chang's, Daksina Bhawan, Costa Coffee, NY United Cafe, Shikarbagh in Jaipur, Punjab Grill, art including a friend's drawing, random clicks and a Delhi Metro city shot), 3 places (Gurugram, Delhi and Jaipur, made automatically from the postcards), 6 cafés, 1 story ("The emptiest metro") and no trips yet. All the stand-in sample content was removed on 2026-10-14. Supabase is used only for the visitor guest desk and is **not yet connected** ([[06 Supabase Setup]]); the desk shows "being set up" until then.
+- Content is authored in `content/` and `public/images/` (see `content/README.md`); 45 postcards (all the author's own: P.F. Chang's, Daksina Bhawan, Costa Coffee, NY United Cafe, Shikarbagh in Jaipur, Punjab Grill, Skyhouse in Noida, art including a friend's drawing, random clicks and a Delhi Metro city shot), 4 places (Gurugram, Delhi, Noida and Jaipur, made automatically from the postcards), 7 cafés, 1 story ("The emptiest metro") and no trips yet. All the stand-in sample content was removed on 2026-10-14. Supabase is used only for the visitor guest desk and is **not yet connected** ([[06 Supabase Setup]]); the desk shows "being set up" until then.
 - Typecheck, lint and production build pass (59 static pages). Work since the last push (the whole pivot: repo content, visitors, postcard pages, itineraries, search, flat map, dark theme, cursor) is **not committed**.
 - axe on the new pages, Lighthouse and real devices are **not** done. See [[08 Quality and Verification]].
 
