@@ -6,6 +6,8 @@ updated: 2026-10-17
 
 # Quality and verification
 
+- The emptiest metro (2026-10-17): content validates (26 postcards, 1 story); the story page and the postcard page render, the postcard shows the "Story" link. News facts were read from two fetched articles (The Daily Jagran, Republic); the Business Standard page returned 403 and NewsBytes was only seen as a search result. Not checked: the exact opening time of the closure on 9 October, the exact reopening time, axe, a phone width check of the story page.
+
 - Office café photos (2026-10-17): content validates (25 postcards); both appear on /random-clicks with no broken images. Not checked: axe, how the small second photo looks in the lightbox on a large screen (it is only 322 pixels wide).
 
 - Shorter home gallery (2026-10-17): in the browser at 1440px the section shows 8 postcards from all four kinds, no filter chips, and the "View all 23 postcards" button. At 375px it has no horizontal overflow and the button sits under the gallery. Typecheck, lint and the production build pass. Not checked: axe, the keyboard path to the button.

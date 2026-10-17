@@ -8,6 +8,11 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): The emptiest metro, a story
+- New postcard "The emptiest metro" (10 October 2026, kind City) with the first story on the site, **The emptiest metro**: the author's own account of crossing an almost empty Delhi Metro platform on the way from Delhi to Gurugram, plus context from the news. Photo in `city/` (cleaned, no metadata), original in the git-ignored `private-originals/city/`.
+- Context checked against reports by The Daily Jagran and Republic (and search results from Business Standard and NewsBytes): the CJP protest at Jantar Mantar on 10 October; Delhi Police asked DMRC to close gates at 57 stations; DMRC cut that to 45; closures were due to end at 6 pm and were extended to 10 pm. The story says the gates were closed by DMRC at the police's request (not "the Delhi government").
+- A postcard that has a `story` now shows a "Story" link on its back. The home page now shows "From the stories".
+
 ## 2026-10-17 (last): Two random clicks from the office café
 - Added "A camera, a cup and an old newspaper" (an illustrated still life) and "A heart in the foam" (a painted latte), both from 13 October 2026, under Random clicks. Place is "The café at my office" with no city or coordinates (none were given, so they stay off the map). Photos in `random-clicks/office-cafe/`, cleaned (no metadata); originals in the git-ignored `private-originals/random-clicks/office-cafe/`. The second photo is small (322 by 536) and is shown as it is, not enlarged.
 

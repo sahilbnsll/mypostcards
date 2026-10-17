@@ -21,6 +21,7 @@ public/images/
     pf-changs/          blossom-ceiling.jpg, spring-rolls.jpg ...
     costa-coffee/       mural-wall.jpg, serene-caramel-frappe.jpg, cheesecake.jpg ...
   art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
+  city/                 empty-metro-platform.jpg (street, skyline and transit shots that are not a trip)
   random-clicks/        lamp-over-the-pothos.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), office-cafe/ (camera-and-cup.jpg, heart-latte.jpg)
   trips/<trip>/         photos from a trip (when there are trips)
   destinations/<place>/ photos from a place that belong to no café or trip
@@ -112,7 +113,7 @@ In `destinations.json` set `"status": "planned"`. A planned place needs no cover
 
 ## Stories
 
-Add a Markdown file to `content/stories/`; the file name is the slug. It starts with a front matter block between `---` lines (`title`, `subtitle`, `excerpt`, `date`, `cover`, `coverAlt`, optional `trip`, `destination`, `featured`, as in the existing files), then the story in Markdown. A story with a local cover needs no width or height.
+Add a Markdown file to `content/stories/`; the file name is the slug. It starts with a front matter block between `---` lines (`title`, `subtitle`, `excerpt`, `date`, `cover`, `coverAlt`, optional `trip`, `destination`, `featured`, as in the existing files), then the story in Markdown. To tie a postcard to a story, give the postcard `"story": "<story file name>"`; its back then links to the story. A story with a local cover needs no width or height.
 
 ## Photographs and the repository
 

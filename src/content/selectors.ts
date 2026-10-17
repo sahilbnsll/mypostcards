@@ -90,11 +90,13 @@ export function toViews(journal: Journal, postcards: readonly Postcard[]): Postc
   const trips = new Map(journal.trips.map((t) => [t.slug, t.title]));
   const places = new Map(journal.destinations.map((d) => [d.slug, d.name]));
   const cafes = new Map(journal.cafes.map((c) => [c.slug, c.name]));
+  const stories = new Map(journal.stories.map((s) => [s.slug, s.title]));
   return postcards.map((card) => ({
     ...card,
     tripTitle: card.tripSlug ? trips.get(card.tripSlug) : undefined,
     destinationName: card.destinationSlug ? places.get(card.destinationSlug) : undefined,
     cafeName: card.cafeSlug ? cafes.get(card.cafeSlug) : undefined,
+    storyTitle: card.storySlug ? stories.get(card.storySlug) : undefined,
     related: relatedPostcards(journal.postcards, card).map((r) => ({ slug: r.slug, title: r.title })),
   }));
 }

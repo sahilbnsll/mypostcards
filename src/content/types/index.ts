@@ -190,6 +190,7 @@ export interface PostcardView extends Postcard {
   tripTitle?: string;
   destinationName?: string;
   cafeName?: string;
+  storyTitle?: string;
   /** Up to four related postcards, best match first. */
   related: Array<{ slug: string; title: string }>;
 }

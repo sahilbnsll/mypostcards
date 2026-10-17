@@ -573,5 +573,26 @@
       "painting",
       "latte"
     ]
+  },
+  {
+    "slug": "city-empty-metro",
+    "title": "The emptiest metro",
+    "caption": "A Delhi Metro platform with one person on a bench and nobody else, the day the gates were shut.",
+    "note": "10 October 2026. Entry and exit gates were closed at 45 stations for a protest in central Delhi, and the platforms emptied. I was on my way from Delhi to Gurugram, and it was the first time I had seen a Delhi metro station this empty.",
+    "image": "/images/city/empty-metro-platform.jpg",
+    "alt": "A long, almost empty Delhi Metro platform under a slatted wooden ceiling, with closed glass platform doors on the right, a steel pillar wrapped in a line map and a sign reading Platform 1 towards Botanical Garden, a floor striped in pink and green with yellow tactile paving, and one passenger sitting on a round bench at the left edge",
+    "category": "city",
+    "place": "Delhi Metro",
+    "city": "Delhi",
+    "country": "India",
+    "date": "2026-10-10",
+    "story": "the-emptiest-metro",
+    "tags": [
+      "metro",
+      "delhi",
+      "empty",
+      "protest"
+    ],
+    "sample": false
   }
 ]

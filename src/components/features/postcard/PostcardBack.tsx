@@ -51,6 +51,9 @@ export function PostcardBack({ item, as: Heading = "h2", variant = "panel" }: Po
         {item.cafeName && item.cafeSlug && (
           <Fact label="Café" value={<Link href={`/cafes/${item.cafeSlug}`} className="text-link">{item.cafeName}</Link>} />
         )}
+        {item.storyTitle && item.storySlug && (
+          <Fact label="Story" value={<Link href={`/stories/${item.storySlug}`} className="text-link">{item.storyTitle}</Link>} />
+        )}
         {item.location.coordinates && (
           <Fact label="Coordinates" value={formatCoordinates(item.location.coordinates.lat, item.location.coordinates.lng)} />
         )}

@@ -1,7 +1,7 @@
 ---
 title: Components
 tags: [engineering, components]
-updated: 2026-10-14
+updated: 2026-10-17
 ---
 
 # Components
@@ -70,6 +70,10 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 ## ViewAllButton
 
 `ui/ViewAllButton`: the call to action at the foot of a preview section (used under the home gallery). An airmail envelope: `--print` face (light in both themes) inside `--air-stripe`, lifts and tilts a little on hover (not with reduced motion).
+
+## Postcard back
+
+`postcard/PostcardBack`: title, caption, handwritten note and a list of facts (where, when, kind, artist, rating, trip, place, café, story, coordinates, camera). A postcard that has a `story` shows a "Story" link to it.
 
 ## Footer
 
