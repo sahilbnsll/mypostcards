@@ -14,7 +14,7 @@ import {
 } from "@/content/selectors";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
 import { Itinerary } from "@/components/features/trips/Itinerary";
-import { TripTimeline } from "@/components/features/trips/TripTimeline";
+import { TripDiary } from "@/components/features/trips/TripDiary";
 import { StoryCard } from "@/components/features/stories/StoryCard";
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { CollectionHero } from "@/components/ui/CollectionHero";
@@ -93,18 +93,19 @@ async function TripContent({ params }: { params: Params }) {
         <section className="wrap section--tight" aria-labelledby="trip-timeline">
           <SectionHeader
             id="trip-timeline"
-            title="Travel diary timeline"
-            intro="Flipping through the journey in chronological order."
-            badge={`${postcards.length} entries`}
+            title="Travel diary"
+            intro="Every postcard from the trip, day by day. Open one for its note and details."
           />
-          <TripTimeline postcards={postcards} tripTitle={trip.title} />
+          <TripDiary postcards={postcards} days={trip.days} tripTitle={trip.title} />
         </section>
       )}
 
-      <section className="wrap section--tight" aria-labelledby="trip-postcards">
-        <SectionHeader id="trip-postcards" title="Postcards from this trip" />
-        <BloomGallery items={postcards} filterable={false} />
-      </section>
+      {postcards.length === 1 && (
+        <section className="wrap section--tight" aria-labelledby="trip-postcards">
+          <SectionHeader id="trip-postcards" title="Postcards from this trip" />
+          <BloomGallery items={postcards} filterable={false} />
+        </section>
+      )}
 
       {stories.length > 0 && (
         <section className="wrap section--tight" aria-labelledby="trip-stories">

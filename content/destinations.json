@@ -3,6 +3,7 @@
     "slug": "gurugram",
     "name": "Gurugram",
     "country": "India",
+    "region": "Haryana",
     "description": "Dinners, cafés, a mall at Navratri and a few pieces of art.",
     "lat": 28.495,
     "lng": 77.089,
@@ -17,6 +18,72 @@
     "description": "My hometown, in Dholpur district, Rajasthan.",
     "lat": 26.65,
     "lng": 77.62,
+    "status": "visited",
+    "sample": false
+  },
+  {
+    "slug": "kasol",
+    "name": "Kasol",
+    "country": "India",
+    "region": "Himachal Pradesh",
+    "description": "A village on the banks of the Parvati river in Kullu district, at about 1,580 m, and a base for treks to Malana and Kheerganga.",
+    "lat": 32.0104,
+    "lng": 77.3166,
+    "status": "visited",
+    "sample": false
+  },
+  {
+    "slug": "manikaran",
+    "name": "Manikaran",
+    "country": "India",
+    "region": "Himachal Pradesh",
+    "description": "A pilgrimage town on the Parvati river, about 4 km from Kasol, known for hot springs at 64 to 80 °C and for its gurdwara and its Shiva and Rama temples.",
+    "lat": 32.0273,
+    "lng": 77.3464,
+    "status": "visited",
+    "sample": false
+  },
+  {
+    "slug": "manali",
+    "name": "Manali",
+    "country": "India",
+    "region": "Himachal Pradesh",
+    "description": "A town in the Kullu valley on the Beas river, at the southern end of the Atal Tunnel and the starting point for the road north into Lahaul.",
+    "lat": 32.2455,
+    "lng": 77.1873,
+    "status": "visited",
+    "sample": false
+  },
+  {
+    "slug": "sissu",
+    "name": "Sissu",
+    "country": "India",
+    "region": "Himachal Pradesh",
+    "description": "A village in Lahaul on the Chandra river, at about 3,120 m, just north of the Atal Tunnel, with a lake and a waterfall of about 50 m across the river.",
+    "lat": 32.4689,
+    "lng": 77.1323,
+    "status": "visited",
+    "sample": false
+  },
+  {
+    "slug": "jispa",
+    "name": "Jispa",
+    "country": "India",
+    "region": "Himachal Pradesh",
+    "description": "A village in Lahaul on the Bhaga river, at about 3,200 m, 22 km north of Keylong and 7 km south of Darcha: a favourite overnight stop on the Manali–Leh highway.",
+    "lat": 32.6354,
+    "lng": 77.1768,
+    "status": "visited",
+    "sample": false
+  },
+  {
+    "slug": "shinku-la",
+    "name": "Shinku La",
+    "country": "India",
+    "region": "Himachal Pradesh",
+    "description": "A high pass at about 5,091 m on the border between Lahaul in Himachal Pradesh and Zanskar in Ladakh. The road up to it leaves the Manali–Leh highway near Darcha. It is snowbound from about October to April, and a tunnel under it has been under construction since 2024.",
+    "lat": 32.9089,
+    "lng": 77.1997,
     "status": "visited",
     "sample": false
   }

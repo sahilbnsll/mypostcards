@@ -31,6 +31,93 @@
   opacity: 0.7;
 }
 
+/* A zoomed route has no coastline in view, so it gets a printed-map grid: faint dotted lines, the
+   degrees, a scale bar and a north arrow */
+.map[data-fit] {
+  background: var(--map-land);
+}
+
+.gridLine {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 1 5;
+  stroke-linecap: round;
+  opacity: 0.55;
+  vector-effect: non-scaling-stroke;
+}
+
+.survey {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gridLabel {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(0.55rem, 1.9cqw, 0.7rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.gridLabel[data-axis="lng"] {
+  top: 0.4rem;
+  translate: 0.3rem 0;
+}
+
+.gridLabel[data-axis="lat"] {
+  left: 0.5rem;
+  translate: 0 -125%;
+}
+
+.scale {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  height: 0.45rem;
+  border: 1.5px solid var(--ink-soft);
+  border-top: 0;
+}
+
+.scaleLabel {
+  position: absolute;
+  bottom: calc(100% + 0.1rem);
+  left: 0;
+  font-family: var(--font-display);
+  font-size: clamp(0.6rem, 2cqw, 0.75rem);
+  font-weight: 700;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.north {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: grid;
+  place-items: end center;
+  width: 1.4rem;
+  height: 2rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+
+.north::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  border: 0.4rem solid transparent;
+  border-bottom: 0.8rem solid var(--air-red);
+  border-top: 0;
+}
+
 .route {
   fill: none;
   stroke: var(--air-red);
@@ -185,4 +272,64 @@
 
 .link:focus-visible {
   outline-offset: 0;
+}
+
+/* A route stop with no photograph: a numbered marker on its spot, with its name beside it */
+.stopMark {
+  position: absolute;
+  translate: -50% -50%;
+  z-index: 2;
+}
+
+.stopMark:hover,
+.stopMark:focus-within {
+  z-index: 7;
+}
+
+.stopLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+}
+
+.stopNum {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--air-red);
+  color: #0f1a2b;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 0 0 2px var(--print), 0 4px 10px -3px rgb(0 0 0 / 0.55);
+}
+
+.stopName {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 0.05rem);
+  translate: 0 -50%;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-card);
+  background: var(--print);
+  color: var(--print-ink);
+  font-family: var(--font-display);
+  font-size: clamp(0.6rem, 2cqw, 0.72rem);
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
+}
+
+.stopMark[data-flip] .stopName {
+  left: auto;
+  right: calc(100% + 0.05rem);
+}
+
+.stopLink:is(a):hover .stopNum,
+.stopLink:is(a):focus-visible .stopNum {
+  scale: 1.2;
 }

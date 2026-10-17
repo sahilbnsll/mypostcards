@@ -1,0 +1,114 @@
+/* Markers on the live Places map. MapLibre positions each one (absolute), so no `position` here. */
+.place {
+  display: block;
+  padding: 0;
+  color: var(--ink);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.place:hover,
+.place:focus-visible {
+  z-index: 5;
+}
+
+.place:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.bubble {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #14213a;
+  background: #fbfaf5;
+  border: 3px solid #fbfaf5;
+  border-radius: 50%;
+  box-shadow: 0 6px 14px -4px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(0 0 0 / 0.08);
+  transition: transform var(--d-fast) var(--ease-out);
+}
+
+.bubble img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.place:hover .bubble,
+.place:focus-visible .bubble {
+  transform: scale(1.18);
+}
+
+/* A place still on the list: a dashed ring instead of a photograph */
+.place[data-planned] .bubble {
+  color: #1f4da6;
+  background: #fbfaf5;
+  border: 2px dashed #1f4da6;
+  box-shadow: none;
+}
+
+/* Several towns close together: one dark marker with their number */
+.place[data-cluster] .bubble {
+  width: 54px;
+  height: 54px;
+  font-size: 1.15rem;
+  color: #fff;
+  background: #14213a;
+  border-color: #fbfaf5;
+}
+
+.count {
+  position: absolute;
+  right: -8px;
+  bottom: -6px;
+  display: grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding-inline: 4px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: #d23a30;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.35);
+  pointer-events: none;
+}
+
+.name {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  translate: -50% 6px;
+  padding: 2px 8px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: #14213a;
+  background: #fbfaf5;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble {
+    transition: none;
+  }
+}

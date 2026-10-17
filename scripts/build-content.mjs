@@ -30,7 +30,7 @@ const CATEGORIES = ["travel", "city", "cafe", "food", "getaway", "art", "random"
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 const KEYS = {
-  postcard: ["slug", "title", "caption", "note", "image", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "artist", "artistUrl", "credit", "creditUrl", "rating", "featured", "sample"],
+  postcard: ["slug", "title", "caption", "note", "image", "video", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "artist", "artistUrl", "credit", "creditUrl", "rating", "featured", "sample"],
   trip: ["slug", "title", "summary", "story", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "destination", "start", "end", "period", "featured", "sample", "days"],
   day: ["title", "stops"],
   stop: ["place", "time", "note", "tip", "lat", "lng", "postcard"],
@@ -193,6 +193,18 @@ export async function buildContent({ quiet = false } = {}) {
       fail(where, `"category" must be one of: ${CATEGORIES.join(", ")}`);
       continue;
     }
+    let video;
+    if (raw.video !== undefined) {
+      const rel = (str(raw.video, where, "video") ?? "").replace(/^\/?(images\/)?/, "");
+      const file = resolve(imagesDir, rel);
+      if (!file.startsWith(imagesDir + sep) || !/\.(mp4|webm)$/i.test(rel)) {
+        fail(where, `"video" must be an .mp4 or .webm file inside public/images (and "image" is its poster frame)`);
+      } else if (!existsSync(file)) {
+        fail(where, `video file not found: public/images/${rel}`);
+      } else {
+        video = { src: `/images/${rel}` };
+      }
+    }
     if (raw.date && !DATE.test(raw.date)) fail(where, `"date" must look like 2024-11-15`);
     const location = {
       placeName: str(raw.place, where, "place"),
@@ -207,6 +219,7 @@ export async function buildContent({ quiet = false } = {}) {
       caption: str(raw.caption, where, "caption"),
       note: str(raw.note, where, "note"),
       image,
+      ...(video ? { video } : {}),
       category: raw.category,
       location: Object.fromEntries(Object.entries(location).filter(([, v]) => v !== undefined)),
       takenOn: raw.date,

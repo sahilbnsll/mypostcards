@@ -5,6 +5,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { PostcardBack } from "@/components/features/postcard/PostcardBack";
 import { Photo } from "@/components/ui/Photo";
+import { PostcardMedia } from "@/components/ui/PostcardMedia";
 import { pad2 } from "@/lib/utils";
 import type { LightboxItem } from "./types";
 import styles from "./Lightbox.module.css";
@@ -164,7 +165,7 @@ export function Lightbox({ list, index, origin, onIndexChange, onClose }: Lightb
                 className={styles.print}
                 style={{ "--ratio": item.image.width / item.image.height } as CSSProperties}
               >
-                <Photo image={item.image} sizes={PHOTO_SIZES} eager />
+                <PostcardMedia card={item} sizes={PHOTO_SIZES} eager />
               </div>
             </div>
           </div>

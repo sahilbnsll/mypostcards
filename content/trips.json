@@ -1,1 +1,144 @@
-[]
+[
+  {
+    "slug": "kasol-to-jispa",
+    "title": "Kasol to Jispa",
+    "summary": "A car trip from Jaipur to the Parvati valley and on into Lahaul: Kasol, Manikaran, Manali, Sissu and Jispa, with snow on the road up to Shinku La. 17 to 20 May 2026.",
+    "story": "A car trip from Jaipur into the Himalaya, in May 2026: the Parvati valley around Kasol and Manikaran, then Manali, the Atal Tunnel and Lahaul for Sissu and Jispa, and up the road towards the Shinku La pass until it started to snow. These are the photographs, the route and the details worth knowing.\n\n## The route\n\nFour days, 17 to 20 May 2026, by the dates in the photographs. The first two were in the Parvati valley: a camp about 3 km west of Kasol village, and Manikaran, 3.5 km further up the valley. By the evening of the 18th the photographs are on the Manali side, at Koshla and in Solang Valley. Then came the long day north on the 19th: Manali to Sissu is 41 km through the Atal Tunnel, Sissu to Jispa is another 52 km, and the afternoon went on up the Shinku La road until the snow. Jispa was where the night of the 19th was spent, and the last morning went back down to Sissu.\n\nThe climb is steady. The camp is at about 1,470 m by the photographs' GPS, Kasol village at about 1,580 m, Sissu at about 3,120 m and Jispa at about 3,200 m. On the last stretch the phone logged about 4,030 m, 4,190 m and, with snow falling, 4,877 m, roughly 2 km short of Shinku La (5,091 m).\n\n## Getting there from Jaipur\n\nBy road Jaipur to Kasol is roughly 780 to 800 km, which is about 15 to 17 hours of driving with halts. That figure is an estimate: Jaipur to Manali is listed at about 800 to 820 km, and the Kasol road leaves the Manali highway at Bhuntar.\n\nThe usual way is NH-48 from Jaipur to Delhi, NH-44 on to Chandigarh (three to four hours from Delhi), then the hill road through Kiratpur Sahib, Bilaspur, Mandi and the Aut Tunnel to Bhuntar. From Bhuntar the Kasol road runs about 30 km up the Parvati valley. It is narrow, so it is worth driving in daylight.\n\n## Over to Lahaul\n\nFrom Kasol the way north is back down to Bhuntar, through Kullu and on to Manali (about 75 km, two and a half to three hours). Then comes the Atal Tunnel, 9.02 km long and opened in 2020. It replaced the climb over the Rohtang Pass and drops you into Lahaul, with Sissu just beyond the north portal. From Manali, Keylong is 71 km, Jispa 93 km and Darcha 99 km.\n\n## The Shinku La road\n\nAt Darcha the road to the Shinku La pass leaves the Manali–Leh highway (it starts at Barsi Bridge, near Darcha Sumdol). The pass, at 5,091 m by Wikipedia (other sources say 4,900 to 5,100 m), is on the border between Lahaul and Zanskar, and the road over it leads to Padum. It is not an all-weather road: the pass is usually snowbound from October to April and prone to avalanches, and a 4.1 km tunnel under it has been under construction since July 2024. The photographs show the road at about 4,030 m, 4,190 m and, with snow falling, 4,877 m.\n\n## Good to know\n\nThe Manali–Leh highway usually opens for the season in the first weeks of May and stays open until October. At this height the weather can close a road at any time, so check the BRO or Lahaul and Spiti road status before heading up. Jispa is cold even in summer, with nights of 3 to 5 °C. Above 4,000 m, go slowly and drink plenty of water.\n\nThe way back is the same road in reverse: Sissu to Manali is 41 km, then Jaipur is another 800 to 820 km.",
+    "start": "2026-05-17",
+    "end": "2026-05-20",
+    "featured": true,
+    "sample": false,
+    "days": [
+      {
+        "title": "Sunday 17 May: Jaipur to Kasol",
+        "stops": [
+          {
+            "place": "The drive from Jaipur",
+            "note": "Roughly 780 to 800 km by road, about 15 to 17 hours with halts: NH-48 to Delhi, NH-44 to Chandigarh, then Kiratpur Sahib, Bilaspur, Mandi and the Aut Tunnel to Bhuntar.",
+            "tip": "From Bhuntar the Kasol road is about 30 km and narrow. Drive it in daylight."
+          },
+          {
+            "place": "The Parvati valley, early",
+            "time": "7:25 am",
+            "note": "The first photographs of the trip, in the valley before Kasol. The phone put them near Bhuntar, about 15 km short of the village, with a margin of about 1.4 km.",
+            "lat": 31.9444,
+            "lng": 77.1778,
+            "postcard": "kasol-parvati-river-morning"
+          },
+          {
+            "place": "The camp by the river, near Kasol",
+            "time": "Morning, and from about 5:50 pm",
+            "note": "About 3 km west of Kasol village and about 1,470 m up, by the photographs' GPS. Kasol itself sits on the Parvati at about 1,580 m, 30 km from Bhuntar and 3.5 km from Manikaran. Boulders in the river, a small cairn, and a pine forest for the last light.",
+            "lat": 32.0075,
+            "lng": 77.2826,
+            "postcard": "kasol-sitting-by-the-river"
+          }
+        ]
+      },
+      {
+        "title": "Monday 18 May: Manikaran, then on to Manali",
+        "stops": [
+          {
+            "place": "Manikaran",
+            "time": "About 1 pm",
+            "note": "3.5 km up the valley from Kasol, about 15 minutes. A pilgrimage town for Hindus and Sikhs: the Manikaran Sahib gurdwara and a Shiva temple sit side by side, with hot springs at 64 to 80 °C.",
+            "tip": "Cover your head and take off your shoes at the gurdwara and the temples. Keep clear of the hot water.",
+            "lat": 32.0269,
+            "lng": 77.3451,
+            "postcard": "manikaran-shiva-statue"
+          },
+          {
+            "place": "Koshla, near Manali",
+            "time": "About 5:30 pm",
+            "note": "By the evening the photographs are on the Manali side: this one is at Koshla, just north of the town, about 75 km from Kasol by road. A roadside stop at dusk was in Solang Valley, about 9 km further north (that photo has no time, so it is placed by its position in the camera's numbering).",
+            "lat": 32.2552,
+            "lng": 77.1889,
+            "postcard": "manali-bike-at-golden-hour"
+          }
+        ]
+      },
+      {
+        "title": "Tuesday 19 May: Over the Atal Tunnel to Lahaul",
+        "stops": [
+          {
+            "place": "Manali and the Atal Tunnel",
+            "time": "Morning",
+            "note": "The Atal Tunnel runs 9.02 km under the Pir Panjal range and opened in 2020, so the Rohtang Pass is no longer in the way.",
+            "tip": "Check the road status for Lahaul and Spiti before leaving Manali. Snow and landslides can close the road beyond Keylong.",
+            "lat": 32.2455,
+            "lng": 77.1873
+          },
+          {
+            "place": "North of the Atal Tunnel, near Sissu",
+            "time": "About 11 am",
+            "note": "Out of the tunnel at about 3,120 m, with Sissu village about 7 km to the north-west. Sissu is 41 km from Manali, on the Chandra river.",
+            "lat": 32.4339,
+            "lng": 77.1921,
+            "postcard": "sissu-flag-over-the-peaks"
+          },
+          {
+            "place": "Jispa",
+            "time": "About 1:45 pm",
+            "note": "52 km on from Sissu, at about 3,200 m on the Bhaga river. 22 km north of Keylong and 7 km south of Darcha.",
+            "lat": 32.6307,
+            "lng": 77.1695,
+            "postcard": "jispa-karma-cottage"
+          },
+          {
+            "place": "On the road up to Shinku La",
+            "time": "About 3 pm",
+            "note": "Past Darcha the road leaves the Manali–Leh highway and climbs the side valley towards the Shinku La pass, which leads over to Zanskar. The mountains turn white. The phone logged about 4,030 m here.",
+            "lat": 32.8081,
+            "lng": 77.1134,
+            "postcard": "shinku-la-snow-peaks"
+          },
+          {
+            "place": "Snow on the Shinku La road",
+            "time": "About 3:45 pm",
+            "note": "Snow was falling at about 4,877 m, roughly 2 km short of the pass (5,091 m).",
+            "tip": "At this height, go slowly and drink plenty of water. Altitude sickness is real.",
+            "lat": 32.8909,
+            "lng": 77.1909,
+            "postcard": "shinku-la-snowfall"
+          },
+          {
+            "place": "Golden light near Darcha",
+            "time": "6:30 pm",
+            "note": "On the way back down from the Shinku La road, a few km north of Jispa, with the last sun on the peaks.",
+            "lat": 32.6717,
+            "lng": 77.1974,
+            "postcard": "jispa-golden-hour-peaks"
+          },
+          {
+            "place": "Blue hour in Jispa",
+            "time": "About 7 pm",
+            "note": "Back in Jispa for the night, with the blue hour over the rooftops. Nights here are cold even in summer.",
+            "lat": 32.6327,
+            "lng": 77.1719,
+            "postcard": "jispa-blue-hour"
+          }
+        ]
+      },
+      {
+        "title": "Wednesday 20 May: Jispa to Sissu",
+        "stops": [
+          {
+            "place": "Jispa, in the morning",
+            "time": "9 am",
+            "postcard": "jispa-morning-mountain",
+            "lat": 32.6326,
+            "lng": 77.1719
+          },
+          {
+            "place": "The Sissu waterfall",
+            "time": "Around noon",
+            "note": "About 50 m high, across the Chandra river from the village, and fed by the snow above it. Sissu is 41 km from Manali, and from there Jaipur is another 800 to 820 km by road.",
+            "lat": 32.4743,
+            "lng": 77.1301,
+            "postcard": "sissu-waterfall"
+          }
+        ]
+      }
+    ]
+  }
+]

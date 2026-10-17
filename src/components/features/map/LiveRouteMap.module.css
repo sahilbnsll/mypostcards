@@ -1,0 +1,177 @@
+.wrap {
+  position: relative;
+  /* Taller than the server-drawn map, so a long north-south route has room for its postcards */
+  min-height: var(--live-map-min, min(34rem, calc(100svh - var(--header-h) - var(--s-8))));
+}
+
+/* The server-drawn map sets the size, so nothing shifts when the live map arrives. */
+.fallback {
+  transition: opacity var(--d-slow) var(--ease-out);
+}
+
+.wrap[data-ready] .fallback {
+  opacity: 0;
+  visibility: hidden;
+  transition-property: opacity, visibility;
+  transition-delay: 0s, var(--d-slow);
+}
+
+.host {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--paper-deep);
+  box-shadow: var(--shadow-print);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--d-slow) var(--ease-out);
+}
+
+.wrap[data-ready] .host {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* The tiles are a light style; in the dark theme the base map is inverted, the markers are not. */
+:global([data-theme="dark"]) .host :global(.maplibregl-canvas) {
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fallback,
+  .host,
+  .wrap[data-ready] .fallback {
+    transition: none;
+  }
+}
+
+/* Markers ------------------------------------------------------------------------------------ */
+
+/* MapLibre positions the marker (absolute); this class must not set `position` */
+.marker {
+  display: block;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s var(--ease-out);
+}
+
+/* The stop the reader is on (or is pointing at in the list) stands out; other days fade back */
+.marker:hover,
+.marker:focus-visible,
+.marker[data-active],
+.marker[data-hover] {
+  z-index: 6;
+  opacity: 1;
+}
+
+.marker[data-dim] {
+  opacity: 0.4;
+}
+
+.marker:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.card {
+  display: block;
+  width: 46px;
+  padding: 3px 3px 7px;
+  background: #fbfaf5;
+  box-shadow: 0 6px 14px -4px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(0 0 0 / 0.08);
+  transition:
+    scale var(--d-fast) var(--ease-out),
+    box-shadow var(--d-fast) var(--ease-out);
+}
+
+/* the card's tilt is its `rotate`, so lifting it with `scale` keeps both */
+.marker:hover .card,
+.marker:focus-visible .card,
+.marker[data-active] .card,
+.marker[data-hover] .card {
+  scale: 1.35;
+}
+
+.marker[data-active] .card,
+.marker[data-hover] .card {
+  box-shadow:
+    0 0 0 2px #d23a30,
+    0 10px 22px -6px rgb(0 0 0 / 0.5);
+}
+
+.marker[data-active] .name,
+.marker[data-hover] .name {
+  color: #fff;
+  background: #d23a30;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  user-select: none;
+}
+
+.badge {
+  display: grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding-inline: 4px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: #d23a30;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.35);
+}
+
+.marker[data-kind="photo"] .badge {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+}
+
+.marker[data-kind="plain"] {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.name {
+  padding: 3px 8px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: #14213a;
+  background: #fbfaf5;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+
+/* MapLibre's own controls sit on the paper tones of the site */
+.host :global(.maplibregl-ctrl-group) {
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.25);
+}
+
+.host :global(.maplibregl-ctrl-attrib) {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+}

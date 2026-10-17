@@ -28,7 +28,15 @@ export function formatWhen(item: Pick<Postcard, "takenOn" | "periodLabel">): str
 }
 
 export function formatRange(start?: string, end?: string, label?: string): string | undefined {
-  if (start && end) return `${formatDate(start, "month")} to ${formatDate(end, "month")}`;
+  if (start && end) {
+    // A trip inside one month reads "17 to 20 May 2026"; longer ones stay month to month
+    const a = parseDate(start);
+    const b = parseDate(end);
+    if (a && b && a.getUTCFullYear() === b.getUTCFullYear() && a.getUTCMonth() === b.getUTCMonth()) {
+      return a.getUTCDate() === b.getUTCDate() ? formatDate(end) : `${a.getUTCDate()} to ${formatDate(end)}`;
+    }
+    return `${formatDate(start, "month")} to ${formatDate(end, "month")}`;
+  }
   if (start) return formatDate(start, "month");
   return label || undefined;
 }

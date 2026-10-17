@@ -1,12 +1,52 @@
 ---
 title: Changelog
 tags: [changelog]
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # Changelog
 
 Newest first.
+
+## 2026-10-18: A compact diary, an interactive itinerary and a Skyhouse video
+- **Every postcard now has a note**, all four videos included. Eleven were added from what is known: the time, altitude and place from the photograph or clip itself, or a fact already researched for the trip; none tells a story the author has not told. The two sky photographs, "Golden clouds" and "The moon through the clouds", have notes written from what can be seen plus one general fact (cloud iridescence), since they have no place or story ([[10 Backlog]]).
+- **Skyhouse**: the café's key image is now the video's frame (set with `cover` and `coverAlt` in `content/cafes.json`; before, it fell back to the first postcard), and its rating note and the video's note read "A good day, and Skyhouse was a big part of it. The ambience is great and the food is also good."
+- **The trip diary is compact** ([[09 Decisions]] D41): one panel per day with a date slip that stays in view and a grid of small prints, instead of one card per postcard. All 27 postcards fit in about 2,000 px (were about 16,000), each opens the viewer with its note, and the duplicate gallery below it is gone.
+- **The itinerary follows the map and the map follows it** ([[09 Decisions]] D42): day buttons, the stop you have scrolled to is lit on the map, the map can follow your scrolling (switch), pointing at a stop previews it, a stop's number and the map's markers take you to each other. Stops are cards now, with the time and the postcard as small handwritten slips and prints. Fixed a case where a quick scroll skipped stop 12.
+- **All stops are on the map** except the drive: 14 stops now (the Jispa evening was split into "Golden light near Darcha" and "Blue hour in Jispa"), and photographs taken at nearly the same place fan out instead of stacking.
+- **New video postcard "Inside Skyhouse"** (6 seconds, re-encoded to a silent 2.5 MB MP4 like the others; the original is in the git-ignored `private-originals/cafes/skyhouse/`). It has no date because the file only records when it was last saved; the other Skyhouse postcards are from 2 October 2026 ([[10 Backlog]]).
+
+## 2026-10-17 (last of all): Real positions, a Places map and a tidier diary
+- **Correction: the "Baralacha La" photographs were on the road to Shinku La.** Their GPS (4,034 to 4,877 m, 15 to 30 km from Baralacha La, about 2 km below the Shinku La pass) and OpenStreetMap say so. The place, its three postcards, folder and the trip's stops and story are now "Shinku La" (5,091 m, on the Lahaul and Zanskar border). Earlier entries below still say Baralacha La as they were written ([[09 Decisions]] D39).
+- **Other places corrected from the photographs' GPS:** the bike and roadside photos are in Manali (Koshla, Solang Valley), not the Parvati valley; the Jägermeister photo is at the Atal Tunnel's north end on 19 May (was Kasol, 18 May); the first morning photo is before Kasol; the camp is 3 km west of the village. The itinerary now has Manali as a stop and the route follows where the photographs were taken. **Manali** is a new place.
+- **Coordinates checked against OpenStreetMap:** Sissu, Jispa, Kasol, Manikaran, Manali and Jaipur updated. Every trip postcard now has its own position from its photo's GPS (rounded to about 100 m).
+- **The globe now shows where you have been** ([[09 Decisions]] D40): a red dot for every place you have a postcard from (Jaipur, Delhi, Gurugram, Noida, Bari, Manali, Kasol, Manikaran, Sissu, Jispa, Shinku La), and one small postcard per state (Himachal Pradesh, Haryana, Rajasthan, Uttar Pradesh, Delhi) with its postcard count, laid out so none covers another or a dot. Point at a postcard or a dot (or tap) and the globe stops, that state's postcard is lifted and ringed, its dots are ringed, its name appears on a paper slip and one dashed red arc joins them. No place names sit under the postcards, and there are no lines until you point. Gurugram and Delhi now have a state recorded.
+- **The live places map is on the home page (under the globe) and on Places ("On the map")**, showing every place with a postcard, with towns that are close together grouped into one marker (click to zoom in).
+- **Removed** the "27 entries" badge, the "Open on a map" links and the "1." before "Day 1". **Dates and badges** are now small paper slips written by hand, with an airmail edge.
+
+## 2026-10-17 (very late): A live map and notes on every trip card
+- **The trip's route map is now a real map** (OpenStreetMap through MapLibre GL and OpenFreeMap, as in the author's portfolio): streets, rivers and place names, the route as a dashed line, each stop's postcard or numbered dot on its spot, zoom buttons, and the OpenStreetMap credit. The old drawn map shows while it loads and stays if the live one cannot run ([[09 Decisions]] D38). Works at 340 px wide and in the dark theme.
+- **Every card in the trip diary now has handwriting**: captions use the same hand font as notes (cards without a note used to show an italic caption).
+- **Ten more trip cards gained a note**, written only from the researched facts and what the author told me (the Parvati joins the Beas at Bhuntar, nights in Jispa at 3 to 5 °C, Jispa to Baralacha La is 53 km, and so on). Cards that are personal (the arms-out boulder, the cairn, the bike, the Jägermeister, the camp, the roadside) have **no** note on purpose: those need the author's own words.
+- `maplibre-gl` is a dependency again, at 6.14 (the earlier 5.x was removed for its advisory); `npm audit --omit=dev` reports 0 vulnerabilities.
+
+## 2026-10-17 (late): Videos on postcards
+- **Three silent clips and a camp photo join the Kasol to Jispa trip** (now 27 postcards, 76 in all): "Morning in the valley" (17 May), "Rapids" (17 May, the 88 MB clip), "The hot spring" at Manikaran (18 May) and "At the camp" (18 May). The clips have no sound, as asked.
+- **New `video` field** on postcards ([[05 Content Model]], [[09 Decisions]] D37). The postcard's `image` is the clip's poster frame. The postcard page and the lightbox play it **automatically**, muted and looping, with controls; with reduced motion it waits for play. Gallery tiles show a play mark and are labelled "video".
+- Reverted the globe changes (zoom, extra dots) at the author's request; the globe is as it was.
+- Route maps: a coordinate grid with degree labels, a scale bar and a north arrow, numbered markers for stops that have no photo, and "17 to 20 May 2026" date ranges.
+- Tried `maplibre-gl` for a live map and removed it again: it was not used and the installed version has a critical advisory (see [[10 Backlog]]).
+
+## 2026-10-17 (night): The Kasol to Jispa trip
+- **New trip "Kasol to Jispa"**, 17 to 20 May 2026, a car trip from Jaipur: 23 photographs as postcards, a day-by-day itinerary (4 days, 13 stops at the time, 14 now) with a route map, and a trip story with the route, directions from Jaipur (about 780 to 800 km, 15 to 17 hours, an estimate built from published figures), the Atal Tunnel, the distances between Kasol, Manali, Sissu, Jispa and Baralacha La, and what to check before going.
+- **Five new places**, each with a description and coordinates: Kasol, Manikaran, Sissu, Jispa and Baralacha La. They are grouped into two areas on the globe and map, **Parvati Valley** (Kasol, Manikaran) and **Lahaul** (Sissu, Jispa, Baralacha La), the same way Delhi NCR groups its cities. The mountain towns were added to `scripts/gazetteer.json`.
+- **Facts checked on the web** (Wikipedia, Outlook Traveller, TravelTriangle and trip guides): Kasol 1,580 m on the Parvati river; Manikaran about 4 km away with hot springs at 64 to 80 °C, a gurdwara and a Shiva temple; the Atal Tunnel (9.02 km, opened 2020); Sissu 41 km from Manali, about 3,120 m, with a waterfall of about 50 m; Jispa 93 km from Manali, about 3,200 m, on the Bhaga; Baralacha La 146 km from Manali, about 4,850 m. Sources disagree by a few km or metres in places, and the text says "about".
+- **Dates and times come from the photos' own metadata** (local time, +05:30). Three photos with no metadata were dated by their place in the camera's numbering: the roadside photo and the Jägermeister (18 May evening) and "Arms out" (17 May evening, same spot and clothes as the photo before it).
+- **Route maps zoom to the route** and a long north-south route gets a taller map ([[09 Decisions]] D36). A trip inside one month now reads "17 to 20 May 2026" instead of "May 2026 to May 2026".
+- **The globe's list** now counts a photo under its place's own name, so a photo with only a spot name still counts under its town.
+- The 88 MB, 5-second video was held back at first ([[09 Decisions]] D35) and published later the same day (D37). Originals (with their GPS) are in the git-ignored `private-originals/trips/kasol-to-jispa/`; the published copies carry no metadata and no coordinates.
+- Three postcards are featured, so the home page hero now leads with the Parvati river, the Sissu waterfall and Jispa's prayer flags.
+- Fixed an assumption in an alt text: "a man's neck" is now "a person's neck" on the tattoo postcard.
 
 ## 2026-10-17 (last): A langur that wasn't, a brutality and two skies
 - New Random clicks postcards: "The langur that wasn't" (a langur cutout in Bari, 30 July 2026, with the story of the chai and the zoom in the note), "Brutality" (Mortal Kombat on the PS5), and two skies: "Golden clouds" (undated) and "The moon through the clouds" (30 July 2026; first called the sun, the author corrected it). The PS5 postcard has no place; the author said only that it is at home.

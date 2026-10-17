@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
 import { Photo } from "@/components/ui/Photo";
+import { PlayBadge } from "@/components/ui/PostcardMedia";
 import { CATEGORIES, CATEGORY_BY_ID } from "@/content/categories";
 import type { Category } from "@/content/types";
 import { Lightbox } from "@/components/features/lightbox/Lightbox";
@@ -210,7 +211,7 @@ export function BloomGallery({ items, filterable = true, stickyFilters = false }
           data-on={bloomed || undefined}
           data-dim={filtering && !bloomed ? true : undefined}
           data-grey={filtering || undefined}
-          aria-label={`Open ${label}`}
+          aria-label={`Open ${label}${item.video ? ", video" : ""}`}
           onClick={(e) => lightbox.open(item.slug, e.currentTarget, matching.length > 0 && on ? matching : sortedItems)}
           onPointerEnter={(e) => onEnter(e, item.slug)}
           onPointerLeave={() => setHover((h) => (h?.slug === item.slug ? null : h))}
@@ -225,6 +226,7 @@ export function BloomGallery({ items, filterable = true, stickyFilters = false }
         >
           <Photo image={item.image} sizes={SIZES} className={styles.base} />
           {prepared && filterable && <Photo image={item.image} sizes={SIZES} decorative className={styles.bloom} />}
+          {item.video && <PlayBadge />}
           <span className={styles.caption} aria-hidden>
             <span className={styles.captionTitle}>{item.title}</span>
             <span className={styles.captionMeta}>{formatLocation(item.location, ["city", "country"]) || CATEGORY_BY_ID[item.category].label}</span>

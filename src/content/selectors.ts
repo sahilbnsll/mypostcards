@@ -168,12 +168,13 @@ export interface GlobePlace {
 const unitOf = (card: Postcard) => card.location.area ?? card.location.city ?? card.location.placeName;
 
 /** The distinct areas or cities among some postcards, most postcards first. */
-function placesOf(cards: readonly Postcard[]): GlobePlace[] {
+function placesOf(cards: readonly Postcard[], names?: ReadonlyMap<string, string>): GlobePlace[] {
   const found = new Map<string, GlobePlace>();
   for (const card of cards) {
     const name = unitOf(card);
     if (!name) continue;
-    const city = card.location.city ?? card.location.placeName ?? name;
+    // The place's own name wins, so a photo with only a spot name (a viewpoint, a road) still counts under its place
+    const city = (card.destinationSlug ? names?.get(card.destinationSlug) : undefined) ?? card.location.city ?? card.location.placeName ?? name;
     const href = card.destinationSlug ? `/destinations/${card.destinationSlug}` : "/destinations";
     const entry = found.get(name) ?? { name, href, count: 0, places: [] };
     entry.count += 1;
@@ -189,6 +190,7 @@ function placesOf(cards: readonly Postcard[]): GlobePlace[] {
   }
   return [...found.values()].sort((x, y) => y.count - x.count);
 }
+
 /** Great-circle distance in radians between two lat/lng points. */
 function angularDistance(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
   const rad = Math.PI / 180;
@@ -219,7 +221,7 @@ function pinLabel(cards: readonly Postcard[], withCountry = true): string {
  * pile on top of each other (each at least `minSeparationDeg` from the others). Featured first.
  * A pin is named after every place close enough to share it.
  */
-export function globePins(postcards: readonly Postcard[], max = 7, minSeparationDeg = 20): GlobePin[] {
+export function globePins(postcards: readonly Postcard[], max = 7, minSeparationDeg = 20, placeNames?: ReadonlyMap<string, string>): GlobePin[] {
   const tilts = [-5, 4, -3, 6, -4, 3, -6, 5];
   const limit = (minSeparationDeg * Math.PI) / 180;
   const ordered = featuredFirst(postcards);
@@ -235,13 +237,92 @@ export function globePins(postcards: readonly Postcard[], max = 7, minSeparation
       lat: point.lat,
       lng: point.lng,
       label: pinLabel(sharing),
-      places: placesOf(sharing),
+      places: placesOf(sharing, placeNames),
       title: card.title,
       image: card.image,
       rotate: tilts[chosen.length % tilts.length],
     });
   }
   return chosen;
+}
+
+/** One place on the live Places map: where it is, how many postcards it has and a photo of it. */
+export interface PlacePin {
+  id: string;
+  name: string;
+  lat: number;
+  lng: number;
+  count: number;
+  href: string;
+  image?: ImageAsset;
+  /** The named area it belongs to (Delhi NCR), used to name a group of nearby places. */
+  area?: string;
+  /** The state it is in, used to give the globe one postcard per state. */
+  region?: string;
+  planned?: boolean;
+}
+
+/** Every place that has coordinates, visited or planned, for the live map. */
+export function placePins(journal: Journal): PlacePin[] {
+  // A featured postcard first, so a place's photo is one the author chose to show
+  const ordered = featuredFirst(journal.postcards);
+  return journal.destinations
+    .filter((place) => place.coordinates)
+    .map((place) => {
+      const count = postcardCount(journal, "destinationSlug", place.slug);
+      const firstCard = ordered.find((card) => card.destinationSlug === place.slug);
+      return {
+        id: place.slug,
+        name: place.name,
+        ...place.coordinates!,
+        count,
+        href: `/destinations/${place.slug}`,
+        image: place.coverImage ?? firstCard?.image,
+        area: place.area,
+        region: place.region,
+        planned: place.status === "planned" || undefined,
+      };
+    });
+}
+
+/** Every visited place with postcards, for the globe: a dot at its position. */
+export function globePlaces(journal: Journal): PlacePin[] {
+  return placePins(journal).filter((place) => !place.planned && place.count > 0);
+}
+
+/** One state on the globe: a single postcard standing for all the places in it. */
+export interface GlobeGroup {
+  id: string;
+  /** The state (or, for a place with no state recorded, the place itself). */
+  name: string;
+  count: number;
+  /** The photograph of the place in it with the most postcards. */
+  image?: ImageAsset;
+  /** Where the postcard leads: the place itself when the state holds only one. */
+  href?: string;
+  placeIds: string[];
+}
+
+/** The visited places grouped by state, most postcards first, so the globe can show one postcard per state. */
+export function globeGroups(journal: Journal): GlobeGroup[] {
+  const byState = new Map<string, PlacePin[]>();
+  for (const place of globePlaces(journal)) {
+    const key = place.region ?? place.name;
+    byState.set(key, [...(byState.get(key) ?? []), place]);
+  }
+  return [...byState.entries()]
+    .map(([name, members]) => {
+      const biggest = [...members].sort((a, b) => b.count - a.count)[0];
+      return {
+        id: `state-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+        name,
+        count: members.reduce((n, m) => n + m.count, 0),
+        image: biggest.image,
+        href: members.length === 1 ? biggest.href : undefined,
+        placeIds: members.map((m) => m.id),
+      };
+    })
+    .sort((a, b) => b.count - a.count);
 }
 
 export interface MapPin {
@@ -255,6 +336,8 @@ export interface MapPin {
   planned?: boolean;
   /** The number shown on a route map. Defaults to the pin's position in the list. */
   number?: number;
+  /** The itinerary day a route stop belongs to, so one day can be picked out on the map. */
+  day?: number;
   /** A photograph for the pin: it is drawn as a small postcard. */
   image?: ImageAsset;
 }

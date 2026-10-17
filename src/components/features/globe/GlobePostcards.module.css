@@ -28,51 +28,154 @@
 }
 
 /*
- * Polaroids pinned to their markers with CSS Anchor Positioning (Chromium, Safari 26+).
- * Where it is unsupported they are simply not shown; the globe and the place list remain.
+ * Every place has a small postcard of its own, laid out by script (see arrange() in the component)
+ * so that none covers another or a dot. The script sets each card's position with `translate`;
+ * the tilt, the lift and the fade use the other transform properties, so they never fight it.
  */
-.polaroid {
-  display: none;
+.arcs {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
 }
 
-@supports (anchor-name: --a) {
-  .polaroid {
-    display: block;
-    position: absolute;
-    bottom: anchor(top);
-    left: anchor(center);
-    translate: -50% 0;
-    margin-bottom: 0.5rem;
-    width: clamp(3.4rem, 15cqw, 4.75rem);
-    padding: 0.3rem 0.3rem 0;
-    background: var(--print);
-    box-shadow: var(--shadow-print);
-    pointer-events: none;
-    opacity: var(--vis);
-    filter: blur(calc((1 - var(--vis)) * 8px));
-    transition:
-      opacity 0.3s,
-      filter 0.3s;
-  }
+/* The link between a postcard and its dot is drawn only for the one being pointed at: a dashed
+   airmail-red arc, like the route lines on the trip maps */
+.arc {
+  fill: none;
+  stroke: var(--air-red);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 5.5;
+  opacity: 0;
+  transition: opacity 0.18s var(--ease-out);
 }
 
-.caption {
+.arc[data-active] {
+  opacity: 1;
+}
+
+.arc[data-facing="false"],
+.card[data-facing="false"],
+.hit[data-facing="false"] {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* The mouse target around a dot, so a dot can be pointed at or tapped */
+.hit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  /* just under the cards, so a card is never blocked by a neighbour's target */
+  z-index: 1;
+}
+
+/* A small red ring on the dot of the place being pointed at */
+.hit::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 2px solid var(--air-red);
+  border-radius: 50%;
+  opacity: 0;
+  scale: 0.5;
+  transition:
+    opacity 0.15s var(--ease-out),
+    scale 0.18s var(--ease-out);
+}
+
+.hit[data-active]::after {
+  opacity: 1;
+  scale: 1;
+}
+
+.card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
   display: block;
-  padding: 0.2rem 0 0.3rem;
+  width: clamp(2.6rem, 9.4cqw, 3.5rem);
+  padding: 0.18rem 0.18rem 0.32rem;
+  background: var(--print);
+  box-shadow: var(--shadow-print);
+  transition:
+    scale 0.18s var(--ease-out),
+    opacity 0.2s var(--ease-out),
+    box-shadow 0.18s var(--ease-out);
+}
+
+/* The one being pointed at: a little larger, on top of the rest, and ringed */
+.card[data-active] {
+  z-index: 10;
+  scale: 1.38;
+  box-shadow:
+    0 0 0 2px var(--air-red),
+    0 10px 22px -6px rgb(0 0 0 / 0.5);
+}
+
+/* How many postcards the state has, the same red number as on the maps */
+.count {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  display: grid;
+  place-items: center;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding-inline: 3px;
   font-family: var(--font-display);
-  font-size: clamp(0.5rem, 2.2cqw, 0.66rem);
-  font-weight: 600;
-  text-align: center;
-  color: var(--print-ink);
-  line-height: 1.25;
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: var(--air-red);
+  border: 1.5px solid var(--print);
+  border-radius: 999px;
 }
 
-/* One line per place when several share a pin (Gurugram, Delhi) */
-.captionName {
-  display: block;
+/* The state's name, shown only for the one being pointed at, as a slip of paper under its postcard */
+.tag {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  translate: -50% 0.3rem;
+  padding: 0.1rem 0.5rem 0;
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  line-height: 1.1;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--print-ink);
+  background: var(--print);
+  box-shadow: var(--shadow-print);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s var(--ease-out);
+}
+
+.card[data-active] .tag {
+  opacity: 1;
+}
+
+/* While one is lifted, the others step back a little */
+.card[data-dim] {
+  opacity: 0.72;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .tag,
+  .arc,
+  .hit::after {
+    transition: none;
+  }
 }
 
 .pause {

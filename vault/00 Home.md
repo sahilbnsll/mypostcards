@@ -1,7 +1,7 @@
 ---
 title: My Postcards, project vault
 tags: [index]
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # My Postcards
@@ -28,9 +28,9 @@ Personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal
 | See what changed and when | [[11 Changelog]] |
 | Check where the sample photographs came from | [[12 Sample Content and Credits]] |
 
-## Status (2026-10-10)
+## Status (2026-10-17)
 
-- Content is authored in `content/` and `public/images/` (see `content/README.md`); 49 postcards (all the author's own: P.F. Chang's, Daksina Bhawan, Costa Coffee, NY United Cafe, Shikarbagh in Jaipur, Punjab Grill, Skyhouse in Noida, art including a friend's drawing, random clicks and a Delhi Metro city shot), 5 places (Gurugram, Delhi, Noida, Jaipur and Bari, made automatically from the postcards), 7 cafés, 2 stories ("The emptiest metro" and "The langur that wasn't") and no trips yet. All the stand-in sample content was removed on 2026-10-14. Supabase is used only for the visitor guest desk and is **not yet connected** ([[06 Supabase Setup]]); the desk shows "being set up" until then.
+- Content is authored in `content/` and `public/images/` (see `content/README.md`); 77 postcards, four of them silent videos (all the author's own: P.F. Chang's, Daksina Bhawan, Costa Coffee, NY United Cafe, Shikarbagh in Jaipur, Punjab Grill, Skyhouse in Noida, the Kasol to Jispa trip, art including a friend's drawing, random clicks and a Delhi Metro city shot), 11 places (Gurugram, Delhi, Noida, Jaipur, Bari, Kasol, Manikaran, Manali, Sissu, Jispa and Shinku La, made automatically from the postcards), 7 cafés, 2 stories ("The emptiest metro" and "The langur that wasn't"), and 1 trip ("Kasol to Jispa"). All the stand-in sample content was removed on 2026-10-14. Supabase is used only for the visitor guest desk and is **not yet connected** ([[06 Supabase Setup]]); the desk shows "being set up" until then.
 - Typecheck, lint and production build pass (59 static pages). Work since the last push (the whole pivot: repo content, visitors, postcard pages, itineraries, search, flat map, dark theme, cursor) is **not committed**.
 - axe on the new pages, Lighthouse and real devices are **not** done. See [[08 Quality and Verification]].
 

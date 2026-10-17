@@ -1,7 +1,7 @@
 ---
 title: Components
 tags: [engineering, components]
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # Components
@@ -49,20 +49,25 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 | `StoryFeature`, `StoryCard` | Home feature and list cards. `as="h2"` on index pages for correct heading order |
 | `CafeCard` | Photo, name, location, vibe tags, usual order |
 | `StatsBar` | Scale indicator under the hero: horizontal paper strip displaying postcard, place, trip, and story counts with quick links |
-| `TripTimeline` | Travel diary vertical timeline for trips with multiple postcards: numbered nodes on a dotted spine, date stamps, tilted postcard cards, and handwritten notes (`--font-hand`) |
+| `TripDiary` **client** | The trip's postcards day by day: a date slip and day name that stay in view, a grid of small prints (handwritten titles, play mark on videos), a spine drawn over in red as each day scrolls past; a print opens the viewer ([[09 Decisions]] D41) |
+| `ItineraryExplorer` **client** | The itinerary list with day buttons, a follow-the-scroll switch, stop cards (time slip, tip, postcard print) and the route map beside it ([[09 Decisions]] D42) |
 | `VisitorCardSkeleton`, `VisitorWallSkeleton` | Postcard-shaped loading placeholders with paper backgrounds, dashed stamp frames, ruled drawing blocks, and shimmer pulses |
 
 ## Added with the pivot and journal polish
 
 - `StatsBar`: subtle scale strip under the hero showing total postcards, places, trips, and stories.
-- `TripTimeline`: travel diary view for multi-postcard trips, displaying entries chronologically with date stamps, location, and handwritten diary notes.
+- `TripDiary`: the compact diary for multi-postcard trips (see the table above). Replaces the old one-card-per-postcard timeline.
 - `VisitorWallSkeleton` / `VisitorCardSkeleton`: postcard loading skeletons supporting both standard masonry and scattered table variants.
 - `BloomGallery` enhancements: curated mood filter pills (max 6 prominent moods, no hashtag clutter), non-persistent collapsible search button, and sort dropdown (default, newest first, oldest first, by place).
 - `StoryCard` / `StoryFeature`: added prominent "3 min read" estimate badge and clean meta formatting.
 - `Footer` upgrade: 12-postcard thumbnail mosaic with hover spring, an `airmail-edge` stripe visual divider, and social links (`siteConfig.socials`).
 - `SectionHeader`: added support for an optional `badge` prop (e.g. "23 cards on the wall", "10 entries").
-- `SvgMap`: server-drawn flat map (world or fit-to-pins). Pins are real links drawn as small postcards (`MapPin.image`), spread apart server-side with a thread to the true spot; `route` numbers them and draws the route.
-- `Itinerary`: day-by-day timeline plus sticky route map. `CafeGuide`: a postal-slip card shown **above** the cover photograph (via `CollectionHero`'s `aside` slot): airmail edge, details cut apart by perforations, your rating and a handwritten line; compact when it holds only one or two things. `MapLink`: an "Open in Maps" text link with a small arrow in the details row under the café's name, right after the place link. `Rating` (`ui/`): five hand-drawn stars in marker yellow (each star wobbles a little and differs from its neighbours, the pen line overshoots where it started, the fill sits a hair off the line; each star filled by the exact amount (a 4.8 is four full stars and a fifth filled to 80%); only a faint pen line when empty) plus the number; theme-aware through the `--star-fill` and `--star-edge` tokens; used in the guide, on café cards and on postcard backs.
+- `SvgMap`: server-drawn flat map (world or fit-to-pins). Pins are real links drawn as small postcards (`MapPin.image`), spread apart server-side with a thread to the true spot; `route` numbers them and draws the route. In `fit` mode it zooms to the route (`routeBox`, taller for a north-south route), draws a coordinate grid with degree labels, a scale bar and a north arrow, and shows stops without a photo as numbered, named markers at their true spot ([[09 Decisions]] D36).
+- `LivePlacesMap` (`features/map/`, **client**): the live map under the globe on the home page and in the Places page's "On the map": one marker per place (photo, postcard count, name; dashed ring if planned) on the same live map, nearby places merged into one marker that zooms in when clicked ([[09 Decisions]] D39). Fed by `placePins()` in `selectors.ts`. `maplibre.ts` holds the shared loader, style and worker setup. `SectionHeader`'s badge and the trip diary's date are small handwritten paper slips with an airmail edge.
+- `LiveRouteMap` (`features/map/`, **client**): takes `activeNumber`, `hoverNumber`, `focusDay`, `follow`, `focusRequest` and `onSelect` from the itinerary; draws the route as one leg per day-tagged piece, a dot at every stop, fans out photos that would overlap, and eases or fits the camera (instant with reduced motion). Base behaviour: the trip route on a real OpenStreetMap map (MapLibre GL, OpenFreeMap "positron"), wrapped around the server-drawn `SvgMap`, which it uses as placeholder and fallback. Starts when near the screen, `cooperativeGestures`, zoom buttons, compact credit, re-fits on resize until the visitor moves it, markers are real links to the itinerary stops ([[09 Decisions]] D38).
+- `Itinerary`: day-by-day timeline plus sticky route map (`LiveRouteMap` around `SvgMap`). `CafeGuide`: a postal-slip card shown **above** the cover photograph (via `CollectionHero`'s `aside` slot): airmail edge, details cut apart by perforations, your rating and a handwritten line; compact when it holds only one or two things. `MapLink`: an "Open in Maps" text link with a small arrow in the details row under the café's name, right after the place link. `Rating` (`ui/`): five hand-drawn stars in marker yellow (each star wobbles a little and differs from its neighbours, the pen line overshoots where it started, the fill sits a hair off the line; each star filled by the exact amount (a 4.8 is four full stars and a fifth filled to 80%); only a faint pen line when empty) plus the number; theme-aware through the `--star-fill` and `--star-edge` tokens; used in the guide, on café cards and on postcard backs.
+- `PostcardMedia` (`ui/`, **client**): the picture of a postcard on its page and in the lightbox. A photo through `Photo`, or, with a `video`, a muted looping `<video>` with controls and the poster, started on mount unless reduced motion is set. `PlayBadge` is the small play mark on gallery tiles. Clips have no audio track ([[09 Decisions]] D37).
+- `GlobePostcards` / `PlacesGlobe`: take `places` (`globePlaces()`, a dot each) and `groups` (`globeGroups()`, one small postcard per state). `arrange()` lays the postcards out every frame from cobe's own marker elements; hover, tap and Escape behaviour and the arc are described in [[09 Decisions]] D40.
 - `PostcardBack` / `RelatedPostcards`: shared by the lightbox and `/postcards/[slug]`.
 - `SearchPalette`, `ThemeToggle`, `Cursor`. `Header`: plain links with a sweeping underline (CSS only) and `NavIcon` line icons from 75rem, frosted bar when scrolled, mobile menu with page hints (`siteConfig.navLinks[].icon` and `.hint`).
 - Visitors: `CardComposer`, `DrawingPad` (marked `data-native-cursor`), `VisitorWall` / `VisitorCardView`, `DrawingSvg`.

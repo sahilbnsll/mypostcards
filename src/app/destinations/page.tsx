@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getJournal } from "@/content";
-import { globePins, mapPins, plannedPlaces, postcardCount, visitedPlaces } from "@/content/selectors";
+import { globePins, globeGroups, globePlaces, mapPins, placePins, plannedPlaces, postcardCount, visitedPlaces } from "@/content/selectors";
 import { PlacesGlobe } from "@/components/features/globe/PlacesGlobe";
+import { LivePlacesMap } from "@/components/features/map/LivePlacesMap";
 import { SvgMap } from "@/components/features/map/SvgMap";
 import { PlacesIndex } from "@/components/features/places/PlacesIndex";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -29,12 +30,18 @@ export default async function DestinationsPage() {
       <section className="wrap" aria-label="Places">
         {journal.destinations.length > 0 ? (
           <>
-            <PlacesGlobe pins={globePins(journal.postcards)} />
+            <PlacesGlobe
+              pins={globePins(journal.postcards, 7, 20, new Map(journal.destinations.map((d) => [d.slug, d.name])))}
+              places={globePlaces(journal)}
+              groups={globeGroups(journal)}
+            />
 
             {pins.length > 0 && (
               <div style={{ marginBottom: "var(--s-8)" }}>
-                <SectionHeader id="flat-map" title="On the map" intro="The same places, laid flat. Dashed pins are still on the list." />
-                <SvgMap pins={pins} label="Map of every place with a postcard, and the places still planned" />
+                <SectionHeader id="flat-map" title="On the map" intro="Every place with a postcard, on a real map. Towns close together share a marker: click it to zoom in. Dashed rings are still on the list." />
+                <LivePlacesMap places={placePins(journal)} label="Map of every place with a postcard, and the places still planned">
+                  <SvgMap pins={pins} label="Map of every place with a postcard, and the places still planned" />
+                </LivePlacesMap>
               </div>
             )}
 

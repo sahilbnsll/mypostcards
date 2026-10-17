@@ -5,6 +5,10 @@ import {
   balancedSample,
   featuredFirst,
   globePins,
+  globeGroups,
+  globePlaces,
+  mapPins,
+  placePins,
   postcardCount,
   toViews,
   visitedPlaces,
@@ -16,6 +20,8 @@ import { BloomGallery } from "@/components/features/gallery/BloomGallery";
 import { TripStack } from "@/components/features/trips/TripStack";
 import { ZoomGallery } from "@/components/features/zoom/ZoomGallery";
 import { PlacesGlobe } from "@/components/features/globe/PlacesGlobe";
+import { LivePlacesMap } from "@/components/features/map/LivePlacesMap";
+import { SvgMap } from "@/components/features/map/SvgMap";
 import { StoryFeature } from "@/components/features/stories/StoryFeature";
 import { PlacesIndex } from "@/components/features/places/PlacesIndex";
 import { VisitorWall, VisitorWallSkeleton } from "@/components/features/visitors/VisitorWall";
@@ -77,7 +83,7 @@ export default async function HomePage() {
   const recent = toViews(journal, postcards.slice(0, CAROUSEL_COUNT));
   const preview = toViews(journal, balancedSample(postcards, GALLERY_PREVIEW));
   const zoomCards = featuredFirst(postcards).slice(5, 12);
-  const pins = globePins(postcards);
+  const pins = globePins(postcards, 7, 20, new Map(destinations.map((d) => [d.slug, d.name])));
   const featuredTrips = featuredFirst(trips).slice(0, 3);
   const featuredStory = featuredFirst(stories)[0];
 
@@ -177,7 +183,12 @@ export default async function HomePage() {
                   intro="Where the postcards were sent from."
                   action={{ href: "/destinations", label: "All places" }}
                 />
-                <PlacesGlobe pins={pins} />
+                <PlacesGlobe pins={pins} places={globePlaces(journal)} groups={globeGroups(journal)} />
+                <div style={{ marginBottom: "var(--s-8)" }}>
+                  <LivePlacesMap places={placePins(journal)} label="Map of every place with a postcard">
+                    <SvgMap pins={mapPins(journal)} label="Map of every place with a postcard" />
+                  </LivePlacesMap>
+                </div>
                 <PlacesIndex places={visitedPlaces(journal).slice(0, 6)} counts={placeCounts} />
               </div>
             </section>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { GlobePin } from "@/content/selectors";
+import type { GlobeGroup, GlobePin, PlacePin } from "@/content/selectors";
 import { plural } from "@/lib/utils";
 import { GlobePostcards } from "./GlobePostcards";
 import styles from "./PlacesGlobe.module.css";
@@ -8,16 +8,16 @@ import styles from "./PlacesGlobe.module.css";
  * The globe plus a plain list of the places pinned on it, one row per place or named area (Delhi
  * NCR). The globe is decorative; the list is the accessible version of the same information.
  * A row for a single place opens that place; a row for an area lists the places inside it, each
- * with its own link, so nearby cities share one dot but none is hidden.
+ * with its own link.
  */
-export function PlacesGlobe({ pins }: { pins: GlobePin[] }) {
+export function PlacesGlobe({ pins, places, groups }: { pins: GlobePin[]; places: PlacePin[]; groups: GlobeGroup[] }) {
   if (pins.length === 0) return null;
   const rows = pins.flatMap((pin) => pin.places.map((place) => ({ ...place, key: `${pin.id}-${place.name}` })));
   return (
     <div className={styles.band}>
       <div className={styles.text}>
         <p className={styles.lede}>
-          Every place with a postcard is on the globe. Turn it by dragging, or pick a place from the list.
+          Every place with a postcard has a dot on the globe, and every state has a postcard. Point at a dot or a postcard to hold the globe still and see which places it covers, drag to turn it, or pick a place from the list.
         </p>
         <ul role="list" className={styles.list} aria-label="Places with postcards">
           {rows.map((row) => (
@@ -49,7 +49,7 @@ export function PlacesGlobe({ pins }: { pins: GlobePin[] }) {
           ))}
         </ul>
       </div>
-      <GlobePostcards pins={pins} />
+      <GlobePostcards places={places} groups={groups} />
     </div>
   );
 }

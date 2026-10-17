@@ -111,6 +111,8 @@
     "city": "Noida",
     "country": "India",
     "neighborhood": "Logix City Centre, Sector 32",
+    "cover": "cafes/skyhouse/inside-video.jpg",
+    "coverAlt": "The ceiling and bar of a dark venue: beams and ducts lit blue, clusters of glowing glass cubes hanging at the left, two small Indian flags above a black espresso machine, and shelves of bottles lit amber at the right, over a wooden panel with a warm strip of light",
     "vibes": [
       "fancy dinner",
       "after the movies"
@@ -119,6 +121,6 @@
     "map": "https://maps.google.com/maps?vet=10CAAQoqAOahcKEwjYtZOj-sCXAxUAAAAAHQAAAAAQFg..i&rlz=1C1CHBF_enIN1227IN1227&sca_esv=8b817fadbfcf6ab7&udm&fvr=1&pvq=Cg0vZy8xMWhiMDM3eG5tIhkKE3NreWhvdXNlIGJhciAmIGNhZmUQAhgD&lqi=CiFza3lob3VzZSBiYXIgJiBjYWZlIG5vaWRhIGFkZHJlc3MiAkgBSJPlz4Gor4CACFo5EAAQARACEAMYABgBGAIYAxgEIhlza3lob3VzZSBiYXIgJiBjYWZlIG5vaWRhKgoIAhAAEAEQAhADkgEEY2FmZQ&cs=1&um=1&ie=UTF-8&fb=1&gl=in&sa=X&ftid=0x390ce5bde9b87069:0x5d2d9aae65e02870",
     "sample": false,
     "rating": 4.2,
-    "ratingNote": "The food is a 4.5 out of 5 and the ambience is great. It was a good day, and Skyhouse is so good too."
+    "ratingNote": "A good day, and Skyhouse was a big part of it. The ambience is great and the food is also good."
   }
 ]

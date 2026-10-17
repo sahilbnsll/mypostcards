@@ -7,7 +7,7 @@ import { EMPTY_SLUG, findBySlug, relatedPostcards, staticSlugs, toViews } from "
 import { PostcardBack } from "@/components/features/postcard/PostcardBack";
 import { RelatedPostcards } from "@/components/features/postcard/RelatedPostcards";
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
-import { Photo } from "@/components/ui/Photo";
+import { PostcardMedia } from "@/components/ui/PostcardMedia";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { siteConfig } from "@/config/site";
 import { formatLocation } from "@/lib/utils";
@@ -80,7 +80,7 @@ async function PostcardContent({ params }: { params: Params }) {
 
       <div className={`wrap ${styles.layout}`}>
         <div className={styles.photo}>
-          <Photo image={card.image} sizes="(min-width: 62rem) 58vw, 100vw" priority />
+          <PostcardMedia card={card} sizes="(min-width: 62rem) 58vw, 100vw" priority />
         </div>
 
         <div className={styles.back}>

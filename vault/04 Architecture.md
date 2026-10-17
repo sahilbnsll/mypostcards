@@ -57,11 +57,11 @@ content/*.json + content/stories/*.md + public/images/**
 
 ## Client boundaries (kept small)
 
-`Header`, `ThemeToggle`, `SearchPalette`, `Cursor`, `MotionController`, `BloomGallery`, `Lightbox` + `useLightbox`, `PrintCarousel`, the visitor composer and drawing pad, `error.tsx`. The flat map (`SvgMap`) is a server component that ships no JavaScript. Everything else is server components. Large data crosses the boundary only as `PostcardView[]`.
+`Header`, `ThemeToggle`, `SearchPalette`, `Cursor`, `MotionController`, `BloomGallery`, `Lightbox` + `useLightbox`, `PrintCarousel`, the visitor composer and drawing pad, `error.tsx`. The flat map (`SvgMap`) is a server component that ships no JavaScript; the trip route map adds `LiveRouteMap`, which loads `maplibre-gl` (and its worker, as a static asset) only when the map is near the screen. Everything else is server components. Large data crosses the boundary only as `PostcardView[]`.
 
 ## Images
 
-`Photo` wraps `next/image` with a frame whose aspect ratio comes from the stored width/height and a background of the photo's average colour. Always passes `sizes`. Above the fold uses `fetchPriority="high"`; lightbox images are `eager`; everything else lazy. Local photos are served from `public/images/`; sample photos are Unsplash URLs (pinned query, allow-listed in `next.config.ts`). AVIF then WebP, 31-day optimizer cache.
+Postcards with a `video` use `PostcardMedia`, which plays the MP4 from `public/images/` directly (the poster is the optimised `image`; the clip is fetched when it plays). `Photo` wraps `next/image` with a frame whose aspect ratio comes from the stored width/height and a background of the photo's average colour. Always passes `sizes`. Above the fold uses `fetchPriority="high"`; lightbox images are `eager`; everything else lazy. Local photos are served from `public/images/`; sample photos are Unsplash URLs (pinned query, allow-listed in `next.config.ts`). AVIF then WebP, 31-day optimizer cache.
 
 ## Lightbox and URLs
 

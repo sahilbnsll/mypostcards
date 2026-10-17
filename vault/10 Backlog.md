@@ -1,12 +1,21 @@
 ---
 title: Backlog
 tags: [backlog]
-updated: 2026-10-17
+updated: 2026-10-18
 ---
 
 # Backlog and known limitations
 
 ## Do next
+
+- [x] ~~Video on postcards~~ done 2026-10-17 ([[09 Decisions]] D37). Left: the clips were encoded in the browser at a fixed bitrate and are not fast-start optimised; re-encode with ffmpeg (`-movflags +faststart`, CRF about 26) if the files ever matter, and show a duration on the play mark.
+- [x] ~~Live map for the trip route~~ done 2026-10-17 ([[09 Decisions]] D38). Left: the same live map for the Places "On the map" world view (it is still the SVG map), photo postcards that overlap where stops are a few km apart (Kasol and Manikaran; zooming apart works, clustering or fanning out would be better), and a purpose-made dark style instead of inverting the light one.
+- [ ] Confirm with the author: the date of the Skyhouse video (it is undated; the other Skyhouse postcards are 2 October 2026), and what to write about it (its title and caption say only where it is).
+- [ ] Confirm with the author: the roadside photo's date (placed on 18 May by the camera's numbering and its dusk light), where they slept on 18 May (the photographs put them near Manali that evening), and whether they meant to go up the Shinku La road rather than to Baralacha La.
+- [ ] The author's own words for the postcards whose notes are only facts and times (the trip photographs and videos, the two sky photographs).
+- [ ] Write the author's own notes for the personal trip cards that have none (arms-out boulder, cairn, bike, Jägermeister, camp tent, roadside, the Manikaran flags and the "Divine vibes" photo).
+- [ ] The globe pins all of India as one dot (places within 20 degrees merge). The author did not want the zoom or extra dots tried, so the list beside the globe is the current answer.
+- [ ] Kasol to Jispa: the Manikaran evening, the Jägermeister photo and the roadside photo have no exact place or date from the photos; tell me what they are and I will place them.
 
 - [ ] **Connect the guest desk**: run `supabase/schema.sql`, set `SUPABASE_URL`, `SUPABASE_ANON_KEY` (and optionally `VISITOR_SALT`) on Vercel; cards go live at once, hide one with the `hidden` column if needed ([[06 Supabase Setup]]). Delete the old unused tables and storage bucket.
 - [x] ~~Add the first real postcards and remove the sample entries~~ done 2026-10-14 ([[12 Sample Content and Credits]]). Next: add trips and stories when there are some; both pages are ready and show empty states until then.

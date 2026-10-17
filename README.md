@@ -77,7 +77,7 @@ public/images/
   city/                 empty-metro-platform.jpg (street, skyline and transit shots that are not a trip)
   food/                 chole-bhature.jpg (food you ordered in, not from a café you visited)
   random-clicks/        lamp-over-the-pothos.jpg, batman-doll.jpg, veni-vidi-vici-tattoo.jpg, kitkat-f1-car.jpg, spider-man-brand-new-day.jpg, ps5-brutality.jpg, golden-clouds.jpg, moon-through-the-clouds.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), m3m-urbana/ (heart-in-the-sky.jpg), bari/ (langur-scarecrow.jpg)
-  trips/<trip>/         photos from a trip (when there are trips)
+  trips/kasol-to-jispa/ one folder per place on the trip: kasol/, manikaran/, sissu/, jispa/, manali/, shinku-la/
   destinations/<place>/ photos from a place that belong to no café or trip
 private-originals/      the same folders, holding your untouched originals (git-ignored, never published)
 ```

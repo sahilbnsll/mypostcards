@@ -28,7 +28,7 @@ public/images/
   city/                 empty-metro-platform.jpg (street, skyline and transit shots that are not a trip)
   food/                 chole-bhature.jpg (food you ordered in, not from a café you visited)
   random-clicks/        lamp-over-the-pothos.jpg, batman-doll.jpg, veni-vidi-vici-tattoo.jpg, kitkat-f1-car.jpg, spider-man-brand-new-day.jpg, ps5-brutality.jpg, golden-clouds.jpg, moon-through-the-clouds.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), m3m-urbana/ (heart-in-the-sky.jpg), bari/ (langur-scarecrow.jpg)
-  trips/<trip>/         photos from a trip (when there are trips)
+  trips/kasol-to-jispa/ one folder per place on the trip: kasol/, manikaran/, sissu/, jispa/, manali/, shinku-la/
   destinations/<place>/ photos from a place that belong to no café or trip
 private-originals/      the same folders, holding your untouched originals (git-ignored, never published)
 ```
@@ -66,7 +66,7 @@ Required: `slug`, `title`, `image`, `alt`, `category`. Everything else is option
 
 `sample: true` marks a stand-in photo. The site is open about those. Leave it out (or `false`) for your own photographs, and delete the sample entries when you no longer need them.
 
-Other optional fields: `caption`, `note` (the text on the back of the postcard), `place` (the spot, such as a street or a viewpoint), `region`, `period` (such as `"Spring 2025"` when there is no exact date), `cafe`, `story`, `camera`, `credit`, `creditUrl`, `featured` (appears first on the home page and gallery).
+Other optional fields: `video` (a short silent `.mp4` in `public/images/`; the postcard's `image` is then its poster frame, and the clip plays on its own, muted, on the postcard page and in the viewer; keep it under about 5 MB and strip the sound), `caption`, `note` (the text on the back of the postcard), `place` (the spot, such as a street or a viewpoint), `region`, `period` (such as `"Spring 2025"` when there is no exact date), `cafe`, `story`, `camera`, `credit`, `creditUrl`, `featured` (appears first on the home page and gallery).
 
 Categories: `travel`, `city`, `cafe`, `food`, `getaway`, `art`, `random` (shown as "Random clicks"; the Art and Random clicks pages list these). For art, add `"artist": "Their Name"` to credit whoever made the piece, and optionally `"artistUrl": "https://www.instagram.com/their.handle/"` to link them (the back of the postcard then shows their name and `@handle`): it shows as "Artist" on the back of the postcard (`credit` is for a photographer who is not you).
 
@@ -95,7 +95,7 @@ In `trips.json`, add `days` to a trip. Every field of a stop except `place` is o
 ]
 ```
 
-Stops with `lat` and `lng` are drawn on the route map beside the timeline, numbered in order. A stop with `postcard` shows that photograph on its map pin and in the timeline.
+Stops with `lat` and `lng` are drawn on the route map beside the timeline, numbered in order. The map zooms to the route itself (a long route such as Kasol to Shinku La gets a taller map), and only stops that are really close together fall back to a wide regional view. A stop without coordinates is still listed, it just has no pin: use that for a second photo at a place you already pinned. A trip inside one month is shown as "17 to 20 May 2026". A stop with `postcard` shows that photograph on its map pin and in the timeline.
 
 ## A café or food spot
 

@@ -52,6 +52,11 @@ export interface CameraMetadata {
   shutterSpeed?: string;
 }
 
+/** A short silent clip. The postcard's `image` is its poster frame, so the frame size is known. */
+export interface VideoAsset {
+  src: string;
+}
+
 export interface Postcard {
   slug: string;
   title: string;
@@ -60,6 +65,8 @@ export interface Postcard {
   /** The handwritten message on the back of the card. Optional and short. */
   note?: string;
   image: ImageAsset;
+  /** A clip for this postcard. Plays muted and only when asked to (no autoplay). */
+  video?: VideoAsset;
   category: Category;
   location: LocationInfo;
   /** ISO date (YYYY-MM-DD) when known. */

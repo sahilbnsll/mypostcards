@@ -20,20 +20,30 @@
   letter-spacing: -0.035em;
 }
 
+/* A slip of paper with an airmail edge, written by hand: the same mark as a trip's date */
 .badge {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.65rem;
-  font-family: var(--font-display);
-  font-size: var(--step--1);
-  font-weight: 600;
-  color: var(--air-blue);
-  background: color-mix(in srgb, var(--air-blue) 9%, var(--card));
-  border: 1px solid color-mix(in srgb, var(--air-blue) 22%, transparent);
-  border-radius: var(--radius-pill);
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  padding: 0.2rem 0.8rem 0.1rem 1.05rem;
+  overflow: hidden;
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: var(--print-ink);
+  background: var(--print);
+  border-radius: 3px;
+  box-shadow: var(--shadow-print);
+  rotate: -1.5deg;
+}
+
+.badge::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6px;
+  background: var(--air-stripe);
+  background-size: 44px 44px;
 }
 
 .intro {
