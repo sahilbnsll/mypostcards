@@ -90,5 +90,19 @@
     "sample": false,
     "rating": 4.8,
     "ratingNote": "All the food is so good, the drinks are good too, and the ambience is so good, especially at night."
+  },
+  {
+    "slug": "punjab-grill",
+    "name": "Punjab Grill",
+    "city": "Gurugram",
+    "country": "India",
+    "neighborhood": "DLF Cyberhub",
+    "vibes": [
+      "north-west frontier food",
+      "malai chaap",
+      "peach iced tea"
+    ],
+    "notes": "Shop 19, Ground Floor, DLF Cyberhub, Gurugram. A North-West Frontier and Punjabi restaurant.",
+    "sample": false
   }
 ]

@@ -8,6 +8,11 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): Punjab Grill and KitKat's F1 car
+- New café **Punjab Grill** (Shop 19, Ground Floor, DLF Cyberhub, Gurugram; a North-West Frontier and Punjabi restaurant; address and cuisine from restaurant listings, corrected from "Cyber City" to Cyberhub by the author) with two postcards, a peach iced tea and a cold coffee, and malai chaap on a hanging stand (first described wrongly as drinks and kebabs; the author corrected both). No map link or rating yet.
+- New Random clicks postcard "KitKat's own F1 car": a KitKat-red Formula 1 style car with "Have a break" on it, at a KitKat showcase. The banner in the photo says Official Partner of Formula 1, which matches KitKat's partnership as Formula 1's Official Chocolate Bar (announced by Nestlé on 12 November 2024). It is a show car, not the life-size chocolate car KitKat unveiled at Silverstone, and the postcard does not say otherwise. The place is unknown, so it has none.
+- None of the three photos has a date or other metadata, so none of the postcards has a date. Originals are in the git-ignored `private-originals/`.
+
 ## 2026-10-17 (last): Shikarbagh, Jaipur
 - New café **Shikarbagh Restaurant** (Hotel Narain Niwas Palace, Rambagh, Jaipur, Rajasthan 302004), with your map link and a rating of 4.8/5. Seven postcards: the vine-covered verandah, the garden lanterns, the fountain taken "in absolute dark" with the iPhone 17 Pro (the camera is shown on its back), the tented dining area, the courtyard fountain, the creamy pasta and the peach and lemon mocktail. The café note records that it is where you met your bhabhi in person for the first time.
 - Jaipur appeared on the Places page, the globe and its own page automatically (it is listed beside Delhi NCR on the globe), with no edit to `destinations.json`.

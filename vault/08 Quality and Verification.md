@@ -6,6 +6,8 @@ updated: 2026-10-17
 
 # Quality and verification
 
+- Punjab Grill and KitKat F1 car (2026-10-17): content validates (42 postcards, 6 cafés); the Punjab Grill page and the KitKat postcard render with no broken images. The restaurant address comes from listings on district.in and an Amex partner list; I did not open Google Maps. Not checked: axe, a phone width, the faces of the small crowd in the KitKat photo (none is prominent, none is blurred).
+
 - Shikarbagh (2026-10-17): content validates (39 postcards, 5 cafés, 3 places); the café page renders with its rating, map link and all seven photos (none broken); /destinations lists Jaipur with 7 postcards. The two face blurs were checked by eye. Not checked: axe, a phone width, every postcard page.
 
 - Chole bhature, Batman doll, tattoo (2026-10-17): content validates (32 postcards, 5 cafés); the café page for Pind Bhaturas was removed afterwards, since it is an order-in place; the chole bhature postcard has no place or café. Not checked: the two Random clicks pages, axe, a phone width.

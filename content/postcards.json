@@ -889,5 +889,64 @@
       "drinks"
     ],
     "sample": false
+  },
+  {
+    "slug": "punjab-grill-iced-tea-and-cold-coffee",
+    "title": "Peach iced tea and cold coffee",
+    "caption": "Peach iced tea and cold coffee at Punjab Grill.",
+    "note": "A peach iced tea and a cold coffee at Punjab Grill, DLF Cyberhub.",
+    "image": "/images/cafes/punjab-grill/iced-tea-and-cold-coffee.jpg",
+    "alt": "Two tall glasses on a wooden table: a peach iced tea with a thick pale foam and a paper straw in front, and a cold coffee dusted with brown powder behind it, with a hand holding a phone out of focus above",
+    "category": "food",
+    "place": "Punjab Grill, DLF Cyberhub",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "cafe": "punjab-grill",
+    "tags": [
+      "punjab-grill",
+      "drinks",
+      "iced-tea",
+      "cold-coffee",
+      "cyberhub"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "punjab-grill-malai-chaap",
+    "title": "Malai chaap, on a stand",
+    "caption": "Malai chaap at Punjab Grill.",
+    "note": "Malai chaap, served hanging off a stand at Punjab Grill.",
+    "image": "/images/cafes/punjab-grill/malai-chaap.jpg",
+    "alt": "Pieces of grilled malai chaap on two skewers hanging from a metal stand over a cast-iron tray of charred peppers, with a drizzle of white cream sauce, and a tall cold coffee behind",
+    "category": "food",
+    "place": "Punjab Grill, DLF Cyberhub",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "cafe": "punjab-grill",
+    "tags": [
+      "punjab-grill",
+      "malai-chaap",
+      "chaap",
+      "cyberhub"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "random-kitkat-f1-car",
+    "title": "KitKat's own F1 car",
+    "caption": "KitKat's Formula 1 car, in KitKat red.",
+    "note": "KitKat showed off this F1 car, built around their own brand, and it looks so cool. The banner behind it says KitKat is an official partner of Formula 1.",
+    "image": "/images/random-clicks/kitkat-f1-car.jpg",
+    "alt": "A bright red Formula 1 style car on a display stage, with the KitKat logo and the words Have a break along its nose and sides, in front of a backdrop of a race track and a red banner reading Official Partner of Formula 1, with rope barriers and staff in red shirts at the left",
+    "category": "random",
+    "tags": [
+      "kitkat",
+      "f1",
+      "formula-1",
+      "showcase"
+    ],
+    "sample": false
   }
 ]
