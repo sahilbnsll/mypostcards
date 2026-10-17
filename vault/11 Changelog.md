@@ -8,6 +8,10 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (night): Two random clicks from Ambience Mall
+- Added "Durga Maa, for Navratri" (a white and gold idol in a mall pandal) and "Flowers at the crossing" (a floral centrepiece), both from 14 October 2026, under Random clicks. Photos are in `random-clicks/ambience-mall/`, cleaned (upright, no metadata), originals in the git-ignored `private-originals/random-clicks/ambience-mall/`.
+- Place is Ambience Mall, Gurugram, Haryana (from the author's address); the pin uses the same city-level coordinates as the other Gurugram postcards.
+
 ## 2026-10-17 (evening): Staircase photo replaced
 - Swapped the Daksina Bhawan staircase photo for a new version and renamed the file to `wooden-stairs.jpg` so no cache (Next's 31-day image cache, browsers) keeps serving the old picture. The published copy was cleaned again (upright, no metadata, 1125 by 2000), and the raw file is kept in the git-ignored `private-originals/cafes/daksina-bhawan/`.
 

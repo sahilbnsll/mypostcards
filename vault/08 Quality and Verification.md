@@ -6,6 +6,8 @@ updated: 2026-10-17
 
 # Quality and verification
 
+- Ambience Mall photos (2026-10-17): content validates (19 postcards); both appear on /random-clicks with no broken images. Not checked: axe, the lightbox view of the tall Durga photo on a phone. Typecheck, lint and the production build pass.
+
 - Photo reorganisation (2026-10-17): content validates (17 postcards, every image path resolves); originals were matched to their published photos by comparing thumbnails, and the one weak match (the soup-and-sauces shot, a crop) was confirmed by eye. In the browser the gallery loaded all 68 image tiles (every photo, repeated across the column layouts) from the new folders with none broken and none left at the old path. Not checked: the other pages one by one.
 
 - Daksina Bhawan front view (2026-10-17): content validates (17 postcards); the postcard page and the café page render it. Not checked: axe on the postcard page, the photo's crop in the gallery tiles on a phone.

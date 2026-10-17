@@ -16,7 +16,7 @@ public/images/
     daksina-bhawan/     one folder per café: front-view.jpg, temple-bells.jpg, dosa.jpg ...
     pf-changs/          blossom-ceiling.jpg, spring-rolls.jpg ...
   art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
-  random-clicks/        lamp-over-the-pothos.jpg
+  random-clicks/        lamp-over-the-pothos.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg)
   trips/<trip>/         photos from a trip (when there are trips)
   destinations/<place>/ photos from a place that belong to no café or trip
 private-originals/      the same folders, holding your untouched originals (git-ignored, never published)

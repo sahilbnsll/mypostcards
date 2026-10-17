@@ -390,5 +390,53 @@
       "fortune-cookie"
     ],
     "sample": false
+  },
+  {
+    "slug": "random-durga-pandal",
+    "title": "Durga Maa, for Navratri",
+    "caption": "A white and gold Durga on her lion, lit up inside the mall for Navratri.",
+    "note": "A pandal in the middle of the mall, put up for Navratri. Durga Maa stands tall in white with golden faces and hands, a halo of lace-like white behind her, and her family around her. Gold screens frame her and a ring of light glows at her feet.",
+    "image": "/images/random-clicks/ambience-mall/durga-pandal.jpg",
+    "alt": "A large white idol of the goddess Durga with many raised arms, standing on a lion above a buffalo, with four smaller figures around her including Ganesha, in front of a white lace-like arch and between two golden patterned screens, on a round stage ringed with light behind red rope barriers and potted plants, in a mall atrium",
+    "category": "random",
+    "place": "Ambience Mall",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "lat": 28.495,
+    "lng": 77.089,
+    "date": "2026-10-14",
+    "destination": "gurugram",
+    "tags": [
+      "navratri",
+      "durga",
+      "festival",
+      "ambience-mall"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "random-flower-display",
+    "title": "Flowers at the crossing",
+    "caption": "Pink orchids and chrysanthemums in tall white vases, ringed by potted plants on a marble floor.",
+    "note": "A tall bunch of pink orchids rises over green and magenta chrysanthemums, all in white vases on a round table with a twisting gold base. Potted plants circle it, and the polished marble floor doubles everything.",
+    "image": "/images/random-clicks/ambience-mall/flower-display.jpg",
+    "alt": "A round table with a twisting rose-gold base holding tall white vases of pink orchids, green and magenta chrysanthemums, ringed by black pots of variegated green plants on a polished marble floor, with shop fronts and hanging festive decorations in the mall behind",
+    "category": "random",
+    "place": "Ambience Mall",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "lat": 28.495,
+    "lng": 77.089,
+    "date": "2026-10-14",
+    "destination": "gurugram",
+    "tags": [
+      "flowers",
+      "orchids",
+      "plants",
+      "ambience-mall"
+    ],
+    "sample": false
   }
 ]
