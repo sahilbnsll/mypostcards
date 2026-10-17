@@ -9,7 +9,7 @@ updated: 2026-10-17
 Newest first.
 
 ## 2026-10-17 (last): Chole bhature, a Batman doll and a tattoo
-- New food spot **Pind Bhaturas** (Gurugram; no map link or rating yet) with the postcard "The one thing between me and my six pecs", the author's usual Sunday chole bhature order.
+- New food spot **Pind Bhaturas** (Gurugram; no map link or rating yet) with the postcard "The one thing between me and my six pecs", the author's usual Sunday chole bhature order, with a bottle of sweet lassi.
 - New Random clicks postcards: "Batman, on guard at my desk" (a crocheted Batman from the author's sister, bought on a trip to Jaipur; dated 22 September 2026 from the laptop's lock screen in the photo) and "Veni, vidi, vici" (the author's recent tattoo; the spelling in the text is the correct Latin, vidi, not vedi). The photo of the tattoo is a pencil-shaded image, and its alt text says so.
 - None of the three photo files carries a date, so the chole bhature and tattoo postcards are undated. Cleaned photos are in `cafes/pind-bhaturas/` and `random-clicks/`; originals are in the git-ignored `private-originals/`.
 
