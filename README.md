@@ -47,7 +47,8 @@ Runbook: `vault/06 Supabase Setup.md`.
 
 ```text
 content/          authored data (postcards, trips, destinations, cafés, stories)
-public/images/    your photographs
+public/images/    your photographs, in folders by café, kind or trip (see below)
+private-originals/ your untouched originals, same folders (git-ignored)
 src/app/          routes and metadata
 src/components/   layout, ui primitives, feature components
 src/content/      types, selectors, generated journal (not committed)
@@ -57,6 +58,36 @@ scripts/          build-content.mjs, dev.mjs
 vault/            project documentation (Obsidian)
 design-reference/ supplied UI component references
 ```
+
+## Finding things
+
+**Photographs** are filed by what they belong to, and the originals mirror them:
+
+```text
+public/images/
+  cafes/
+    daksina-bhawan/     one folder per café: front-view.jpg, temple-bells.jpg, dosa.jpg ...
+    pf-changs/          blossom-ceiling.jpg, spring-rolls.jpg ...
+  art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
+  random-clicks/        lamp-over-the-pothos.jpg
+  trips/<trip>/         photos from a trip (when there are trips)
+  destinations/<place>/ photos from a place that belong to no café or trip
+private-originals/      the same folders, holding your untouched originals (git-ignored, never published)
+```
+
+**Code** is filed by what it is for:
+
+| Looking for | Go to |
+|---|---|
+| a page or its address | `src/app/<route>/page.tsx` |
+| the header, footer, theme toggle | `src/components/layout/` |
+| a small reusable piece (photo, rating, page title) | `src/components/ui/` |
+| a whole feature (gallery, globe, trips, cafés, visitors, search) | `src/components/features/<feature>/` |
+| the logo and stamp | `src/components/brand/` (drawn from `stampGeometry.ts`) |
+| nav links, site name, socials | `src/config/site.ts` |
+| colours, type, spacing, dark mode | `src/styles/tokens.css` |
+| the shape of the data | `src/content/types/index.ts` |
+| how photos and entries are checked | `scripts/build-content.mjs` |
 
 ## Scope
 

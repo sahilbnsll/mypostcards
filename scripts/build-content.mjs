@@ -177,7 +177,7 @@ export async function buildContent({ quiet = false } = {}) {
     const title = str(raw.title, where, "title", { required: true });
     const image = await resolveImage(raw, where, postcardKeys);
     if (!image) {
-      if (!raw.image) fail(where, `"image" is required (a file in public/images, e.g. "postcards/${slug}.jpg")`);
+      if (!raw.image) fail(where, `"image" is required (a file in public/images, e.g. "cafes/daksina-bhawan/front-view.jpg")`);
       continue;
     }
     if (!CATEGORIES.includes(raw.category)) {

@@ -1,12 +1,16 @@
 ---
 title: Decisions
 tags: [decisions]
-updated: 2026-10-14
+updated: 2026-10-17
 ---
 
 # Decisions log
 
 Newest first. Format: decision, why, trade-off.
+
+### D32. Photos are filed in folders by what they belong to
+- **Why:** one flat `public/images/postcards/` folder with prefixes in the names (`daksina-`, `pf-changs-`) made it hard to see what belonged to what. Now each café has a folder (`cafes/daksina-bhawan/`), and art and random clicks have theirs, with short names inside. `private-originals/` mirrors the same folders, and each original is renamed `<shot>__IMG_nnnn` so it traces back to its published copy.
+- **Trade-off:** the folder is part of the photo's address (`/images/cafes/pf-changs/two-drinks.jpg`), so moving a photo means updating its entry in `content/postcards.json`; the build stops with a clear message if they disagree.
 
 ### D31. Art and Random clicks live in the footer's Explore list, not the header
 - **Why:** the header already carries seven links plus search, theme and menu, and two more would crowd it. They are also smaller sections than Gallery or Cafés. They are listed after Cafés in the footer's Explore list (`siteConfig.collections`, merged in `Footer.tsx`), are filter chips in the gallery, show up in search, and have their own pages (`/art`, `/random-clicks`). "Random clicks" is a real category (`random`) rather than a tag, so it filters like every other kind. The lamp postcard moved there and was renamed `random-lamp-over-the-pothos`.

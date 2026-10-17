@@ -9,21 +9,37 @@ content/
   destinations.json   places (visited or planned)
   cafes.json          cafés and food spots, with optional guide details
   stories/*.md        longer pieces
-public/images/        your own photographs (see below)
+public/images/        your own photographs, one folder per café, trip or kind (see below)
 ```
+
+The photo folders follow what the photo belongs to, so you can tell at a glance what is what:
+
+```text
+public/images/
+  cafes/
+    daksina-bhawan/     one folder per café: front-view.jpg, temple-bells.jpg, dosa.jpg ...
+    pf-changs/          blossom-ceiling.jpg, spring-rolls.jpg ...
+  art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
+  random-clicks/        lamp-over-the-pothos.jpg
+  trips/<trip>/         photos from a trip (when there are trips)
+  destinations/<place>/ photos from a place that belong to no café or trip
+private-originals/      the same folders, holding your untouched originals (git-ignored, never published)
+```
+
+The file name is the short name of the shot (`front-view.jpg`), because the folder already says where it is from. The postcard's slug stays unique across the site (`daksina-front-view`), and its entry points at the file.
 
 Slugs (`"slug"`) are lowercase words joined by single hyphens, for example `kyoto-morning`. They become URLs and are how files point at each other (`"trip": "paper-lanterns"`).
 
 ## Adding a postcard
 
-1. Copy the photo into `public/images/postcards/`, for example `public/images/postcards/kyoto-morning.jpg`. Resize it to about 2400 px on the long edge first (smaller is fine) so the repo and the site stay light.
+1. Copy the photo into the folder it belongs to, for example `public/images/trips/paper-lanterns/kyoto-morning.jpg` (a café: `public/images/cafes/<cafe>/`; art: `public/images/art/`; anything else: `public/images/random-clicks/`). Keep the untouched original in the matching folder under `private-originals/`, named like `kyoto-morning__IMG_1234.JPEG`. Resize it to about 2400 px on the long edge first (smaller is fine) so the repo and the site stay light.
 2. Add an entry to `postcards.json`:
 
 ```json
 {
   "slug": "kyoto-morning",
   "title": "Kyoto, early",
-  "image": "/images/postcards/kyoto-morning.jpg",
+  "image": "/images/trips/paper-lanterns/kyoto-morning.jpg",
   "alt": "A narrow street in Gion before the shops open, wet from rain",
   "category": "city",
   "place": "Gion",

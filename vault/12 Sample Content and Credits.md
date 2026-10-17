@@ -1,7 +1,7 @@
 ---
 title: Sample Content and Credits
 tags: [content, credits]
-updated: 2026-10-14
+updated: 2026-10-17
 ---
 
 # Sample content and credits
@@ -26,6 +26,6 @@ Photographer names were not retrievable, so the credit reads "Unsplash". Before 
 
 ## When real photographs arrive
 
-1. Copy the photo (cleaned of location data) into `public/images/postcards/`.
+1. Copy the photo (cleaned of location data) into the matching folder under `public/images/` (see [[05 Content Model]]).
 2. Add an entry to `content/postcards.json` with `sample` left out or false and real alt text (see `content/README.md`).
 3. Delete the sample entries. The notices disappear automatically.

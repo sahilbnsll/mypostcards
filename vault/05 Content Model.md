@@ -1,19 +1,36 @@
 ---
 title: Content Model
 tags: [data]
-updated: 2026-10-14
+updated: 2026-10-17
 ---
 
 # Content model
 
 Authoring guide with examples: `content/README.md`. Types: `src/content/types/index.ts`. Validator and generator: `scripts/build-content.mjs`. Visitor cards (the only database table): [[06 Supabase Setup]].
 
+## Photo folders
+
+```text
+public/images/
+  cafes/
+    daksina-bhawan/     one folder per café: front-view.jpg, temple-bells.jpg, dosa.jpg ...
+    pf-changs/          blossom-ceiling.jpg, spring-rolls.jpg ...
+  art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
+  random-clicks/        lamp-over-the-pothos.jpg
+  trips/<trip>/         photos from a trip (when there are trips)
+  destinations/<place>/ photos from a place that belong to no café or trip
+private-originals/      the same folders, holding your untouched originals (git-ignored, never published)
+```
+
+Short file names inside the folder (the folder says which café), the postcard slug stays globally unique ([[09 Decisions]] D32). Originals are named `<shot>__IMG_1234.JPEG` so each one can be traced to its published photo.
+
 ## Where content lives
 
 ```text
 content/postcards.json  trips.json  destinations.json  cafes.json   authored data
 content/stories/*.md                                                 stories (front matter + Markdown, file name is the slug)
-public/images/**                                                     the author's photographs
+public/images/**                                                     the author's photographs, one folder per café, trip or kind
+private-originals/**                                                 untouched originals, same folders, git-ignored
    -> scripts/build-content.mjs -> src/content/generated/journal.json (gitignored)
 ```
 

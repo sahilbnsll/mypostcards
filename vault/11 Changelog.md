@@ -1,12 +1,19 @@
 ---
 title: Changelog
 tags: [changelog]
-updated: 2026-10-14
+updated: 2026-10-17
 ---
 
 # Changelog
 
 Newest first.
+
+## 2026-10-17 (later): Photos filed by café and kind
+- Moved every photo out of the flat `public/images/postcards/` folder into `cafes/daksina-bhawan/`, `cafes/pf-changs/`, `art/` and `random-clicks/`, with short names (`front-view.jpg`). The git-ignored `private-originals/` now mirrors the same folders, each original renamed `<shot>__IMG_nnnn`. No postcard slug or URL changed. [[09 Decisions]] D32.
+- Added a "Finding things" section to the README (where photos and code live).
+
+## 2026-10-17: Daksina Bhawan front view
+- One more Daksina Bhawan postcard, "The carved front door" (taken 15 October 2026, date from the photo's own metadata). Published copy cleaned (upright, no metadata, under 2000px); the original is in the git-ignored `private-originals/daksina-bhawan/`. The café page now shows 7 postcards and "First visited 12 October 2026".
 
 ## 2026-10-14 (latest): Art and Random clicks
 - Two new sections, `/art` and `/random-clicks`, linked from the footer's Explore list (the header is unchanged: [[09 Decisions]] D31). New category `random` ("Random clicks"). The house piece and its signed back are under Art; the lamp-lit pothos moved to Random clicks and was renamed `random-lamp-over-the-pothos`.

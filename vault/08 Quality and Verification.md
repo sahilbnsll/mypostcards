@@ -1,10 +1,14 @@
 ---
 title: Quality and Verification
 tags: [quality]
-updated: 2026-10-14
+updated: 2026-10-17
 ---
 
 # Quality and verification
+
+- Photo reorganisation (2026-10-17): content validates (17 postcards, every image path resolves); originals were matched to their published photos by comparing thumbnails, and the one weak match (the soup-and-sauces shot, a crop) was confirmed by eye. In the browser the gallery loaded all 68 image tiles (every photo, repeated across the column layouts) from the new folders with none broken and none left at the old path. Not checked: the other pages one by one.
+
+- Daksina Bhawan front view (2026-10-17): content validates (17 postcards); the postcard page and the café page render it. Not checked: axe on the postcard page, the photo's crop in the gallery tiles on a phone.
 
 - Art and Random clicks (2026-10-14): both pages, the footer group (desktop and 375px, no horizontal overflow) and the gallery chips (Art 2, Random clicks 1) checked in the browser. Not checked: axe on the two new pages, the mobile menu (does not list them by design).
 

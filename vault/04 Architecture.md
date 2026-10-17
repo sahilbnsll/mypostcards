@@ -1,7 +1,7 @@
 ---
 title: Architecture
 tags: [engineering]
-updated: 2026-10-14
+updated: 2026-10-17
 ---
 
 # Architecture
@@ -14,7 +14,8 @@ Next.js **16.4** (App Router, React 19.3, **Cache Components** + Partial Prefetc
 
 ```text
 content/                 authored data: postcards, trips, destinations, cafes (JSON), stories (Markdown), README
-public/images/           the author's photographs
+public/images/           the author's photographs, in folders by café, kind or trip (see [[05 Content Model]])
+private-originals/       untouched originals, same folders (git-ignored)
 scripts/                 build-content.mjs (validate + generate), dev.mjs (dev server + watcher)
 src/app/                 routes: / /gallery /postcards/[slug] /trips[/slug] /destinations[/slug] /cafes[/slug] /art /random-clicks
                          /stories[/slug] /visitors /about /search-index.json + not-found, error, icon, manifest, robots, sitemap
