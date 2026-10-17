@@ -8,6 +8,13 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): A langur that wasn't, a brutality and two skies
+- New Random clicks postcards: "The langur that wasn't" (a langur cutout in Bari, 30 July 2026, with the story of the chai and the zoom in the note), "Brutality" (Mortal Kombat on the PS5), and two skies: "Golden clouds" (undated) and "The moon through the clouds" (30 July 2026; first called the sun, the author corrected it). The PS5 postcard has no place; the author said only that it is at home.
+- **Bari**, the author's hometown, is now a place (`destinations.json`, with a description and coordinates of about 26.65 N, 77.62 E from Wikipedia and WorldAtlas) and appears on Places and the globe with its first postcard.
+- The "Golden clouds" photo arrived sideways and was turned upright (the golden bank of cloud is now at the bottom). Originals are in the git-ignored `private-originals/random-clicks/`.
+- The two undated photos are the PS5 and the golden clouds; the langur and the moon carry the date in their metadata.
+- The langur postcard now has a story page, **The langur that wasn't** (the chai, the zoom and the scarecrow, in the author's words; place Bari), and its back links to it. The postcard's own note was cut down to a line so the two do not repeat each other.
+
 ## 2026-10-17 (last): Skyhouse, Noida
 - New café **Skyhouse Bar & Kitchen** (Logix City Centre, Sector 32, Noida; address from restaurant listings, map link as given) with a rating of 4.2/5 and a note that the food is a 4.5 and the ambience great. Three postcards from 2 October 2026, the day at the author's cousin's in Noida: the dinner, the drinks, and the Spider-Man: Brand New Day title card on the cinema screen (under Random clicks).
 - Noida appeared on Places by itself and joined Delhi NCR on the globe and map, next to Gurugram and Delhi.

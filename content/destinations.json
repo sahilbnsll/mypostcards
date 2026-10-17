@@ -8,5 +8,16 @@
     "lng": 77.089,
     "status": "visited",
     "sample": false
+  },
+  {
+    "slug": "bari",
+    "name": "Bari",
+    "country": "India",
+    "region": "Rajasthan",
+    "description": "My hometown, in Dholpur district, Rajasthan.",
+    "lat": 26.65,
+    "lng": 77.62,
+    "status": "visited",
+    "sample": false
   }
 ]

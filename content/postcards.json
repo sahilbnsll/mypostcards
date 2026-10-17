@@ -1010,5 +1010,72 @@
       "cinema",
       "noida"
     ]
+  },
+  {
+    "slug": "random-langur-scarecrow",
+    "title": "The langur that wasn't",
+    "caption": "A langur that turned out to be a cutout.",
+    "note": "A langur, some way off, that never moved. I zoomed in with my phone, and it was a kind of scarecrow. We all laughed so much.",
+    "image": "/images/random-clicks/bari/langur-scarecrow.jpg",
+    "alt": "What looks at first like a grey langur sitting upright in front of a yellow-framed wire mesh, next to a large tree trunk; it is actually a cutout scarecrow, photographed zoomed in",
+    "category": "random",
+    "place": "Bari",
+    "city": "Bari",
+    "region": "Rajasthan",
+    "country": "India",
+    "date": "2026-07-30",
+    "tags": [
+      "bari",
+      "langur",
+      "scarecrow",
+      "chai",
+      "friends"
+    ],
+    "sample": false,
+    "story": "the-langur-that-wasnt"
+  },
+  {
+    "slug": "random-ps5-brutality",
+    "title": "Brutality",
+    "caption": "Sub-Zero wins, flawlessly.",
+    "note": "Me at home on the PS5, playing Mortal Kombat and hitting a brutality.",
+    "image": "/images/random-clicks/ps5-brutality.jpg",
+    "alt": "A blurred PS5 controller in the foreground and a wall-mounted TV behind it showing the Mortal Kombat Brutality screen, with Sub-Zero holding two ice axes and the words Sub-Zero wins",
+    "category": "random",
+    "tags": [
+      "ps5",
+      "mortal-kombat",
+      "gaming",
+      "home"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "random-golden-clouds",
+    "title": "Golden clouds",
+    "caption": "A sky of golden clouds.",
+    "image": "/images/random-clicks/golden-clouds.jpg",
+    "alt": "A sunset sky with a golden-lit cumulus tower rising from a bank of peach clouds at the bottom, under long streaks of grey and blue cloud",
+    "category": "random",
+    "tags": [
+      "sky",
+      "clouds"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "random-moon-through-the-clouds",
+    "title": "The moon through the clouds",
+    "caption": "The moon, glowing through a patch of clouds.",
+    "image": "/images/random-clicks/moon-through-the-clouds.jpg",
+    "alt": "The moon as a bright disc behind thin clouds that glow peach and pale rainbow colours against dark blue clouds, with the silhouettes of tree branches at the right and bottom",
+    "category": "random",
+    "date": "2026-07-30",
+    "tags": [
+      "sky",
+      "clouds",
+      "moon"
+    ],
+    "sample": false
   }
 ]

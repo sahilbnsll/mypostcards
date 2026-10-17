@@ -6,6 +6,8 @@ updated: 2026-10-17
 
 # Quality and verification
 
+- Langur, PS5 and skies (2026-10-17): content validates (49 postcards, 5 places); the Bari place page lists its postcard, and /random-clicks shows 14 postcards with no broken images. Not checked: axe, a phone width, whether turning the golden-clouds photo upright is what the author intended (it is easy to undo). The langur story page and the postcard's Story link were checked in the browser and work.
+
 - Skyhouse (2026-10-17): content validates (45 postcards, 7 cafés, 4 places); the café page shows its rating, the map link and both photos with none broken; Noida is listed on Places under Delhi NCR. Not checked: axe, a phone width, whether the long Google Maps link opens the venue on a phone.
 
 - Punjab Grill and KitKat F1 car (2026-10-17): content validates (42 postcards, 6 cafés); the Punjab Grill page and the KitKat postcard render with no broken images. The restaurant address comes from listings on district.in and an Amex partner list; I did not open Google Maps. Not checked: axe, a phone width, the faces of the small crowd in the KitKat photo (none is prominent, none is blurred).
