@@ -8,6 +8,10 @@ updated: 2026-10-17
 
 Newest first. Format: decision, why, trade-off.
 
+### D33. The home page shows eight postcards, then a button to the gallery
+- **Why:** the "collection" section on the home page listed up to 16 postcards with filters, which made the page very long as the journal grew. It now shows 8, chosen by `balancedSample`: turns across categories (so every kind appears), and within a kind across cafés, trips and places (so one spot does not fill it), featured first. A "View all N postcards" button leads to `/gallery`, which keeps the filters, tags and search. The home preview has no filter bar.
+- **Trade-off:** the preview is a fixed size, so it stays short however many postcards there are, but a visitor has to go to the gallery to filter. The footer mosaic uses the same selection.
+
 ### D32. Photos are filed in folders by what they belong to
 - **Why:** one flat `public/images/postcards/` folder with prefixes in the names (`daksina-`, `pf-changs-`) made it hard to see what belonged to what. Now each café has a folder (`cafes/daksina-bhawan/`), and art and random clicks have theirs, with short names inside. `private-originals/` mirrors the same folders, and each original is renamed `<shot>__IMG_nnnn` so it traces back to its published copy.
 - **Trade-off:** the folder is part of the photo's address (`/images/cafes/pf-changs/two-drinks.jpg`), so moving a photo means updating its entry in `content/postcards.json`; the build stops with a clear message if they disagree.

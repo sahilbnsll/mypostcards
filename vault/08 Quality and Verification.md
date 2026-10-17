@@ -6,6 +6,8 @@ updated: 2026-10-17
 
 # Quality and verification
 
+- Shorter home gallery (2026-10-17): in the browser at 1440px the section shows 8 postcards from all four kinds, no filter chips, and the "View all 23 postcards" button. At 375px it has no horizontal overflow and the button sits under the gallery. Typecheck, lint and the production build pass. Not checked: axe, the keyboard path to the button.
+
 - Costa Coffee (2026-10-17): content validates (23 postcards, 3 cafés); the café page renders with its rating, usual order and map link and none of its photos are broken. Not checked: axe or the café page on a phone. Typecheck, lint and the production build pass.
 
 - Ambience Mall photos (2026-10-17): content validates (19 postcards); both appear on /random-clicks with no broken images. Not checked: axe, the lightbox view of the tall Durga photo on a phone. Typecheck, lint and the production build pass.

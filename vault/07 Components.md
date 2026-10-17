@@ -67,6 +67,10 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 - `SearchPalette`, `ThemeToggle`, `Cursor`. `Header`: plain links with a sweeping underline (CSS only) and `NavIcon` line icons from 75rem, frosted bar when scrolled, mobile menu with page hints (`siteConfig.navLinks[].icon` and `.hint`).
 - Visitors: `CardComposer`, `DrawingPad` (marked `data-native-cursor`), `VisitorWall` / `VisitorCardView`, `DrawingSvg`.
 
+## ViewAllButton
+
+`ui/ViewAllButton`: the call to action at the foot of a preview section (used under the home gallery). An airmail envelope: `--print` face (light in both themes) inside `--air-stripe`, lifts and tilts a little on hover (not with reduced motion).
+
 ## Footer
 
 `layout/Footer`: the postcard mosaic, the airmail stripe, then four open columns (logo and tagline, Explore, Connect, credit). Explore merges the header links with `siteConfig.collections` (Art, Random clicks). Dark in both themes.

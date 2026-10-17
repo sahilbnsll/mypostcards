@@ -1,0 +1,59 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--s-7);
+}
+
+/* An airmail envelope: a postcard-stock face inside the site's red, white and blue stripe.
+   --print stays light in both themes (it is a physical card), so this reads the same in each. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 0.8rem 1.6rem;
+  border: 6px solid transparent;
+  border-radius: var(--radius-card);
+  background:
+    linear-gradient(var(--print), var(--print)) padding-box,
+    var(--air-stripe) border-box;
+  background-size: auto, 62px 62px;
+  color: var(--print-ink);
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  box-shadow: var(--shadow-print);
+  transition:
+    transform var(--d-base) var(--ease-spring),
+    box-shadow var(--d-base);
+}
+
+.button:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  box-shadow: var(--shadow-lift);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.arrow {
+  transition: transform var(--d-base) var(--ease-spring);
+}
+
+.button:hover .arrow {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .arrow {
+    transition: none;
+  }
+
+  .button:hover,
+  .button:hover .arrow {
+    transform: none;
+  }
+}

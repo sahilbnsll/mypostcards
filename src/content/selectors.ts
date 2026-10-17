@@ -102,17 +102,32 @@ export function toViews(journal: Journal, postcards: readonly Postcard[]): Postc
 export const visitedPlaces = (journal: Journal) => journal.destinations.filter((d) => d.status === "visited");
 export const plannedPlaces = (journal: Journal) => journal.destinations.filter((d) => d.status === "planned");
 
+/** Where a postcard was taken: its café, trip or place, so a sample can spread across them. */
+const contextOf = (card: Postcard) => card.cafeSlug ?? card.tripSlug ?? card.destinationSlug ?? "none";
+
+/** Interleave groups: first of each, then second of each, so neighbours rarely share a context. */
+function interleave<T>(groups: T[][]): T[] {
+  const out: T[] = [];
+  for (let i = 0; groups.some((g) => i < g.length); i++) for (const g of groups) if (i < g.length) out.push(g[i]);
+  return out;
+}
+
 /**
- * Up to `n` postcards, taking turns across categories so every kind shows up. Order within a
- * category is preserved (featured first). Used for the home page preview of the gallery.
+ * Up to `n` postcards, taking turns across categories so every kind shows up, and within a kind
+ * across cafés, trips and places so one spot does not fill it. Featured first. Used for the home
+ * page preview of the gallery and the footer mosaic.
  */
 export function balancedSample(postcards: readonly Postcard[], n: number): Postcard[] {
   const lanes = new Map<Category, Postcard[]>();
+  const byKind = new Map<Category, Map<string, Postcard[]>>();
   for (const card of featuredFirst(postcards)) {
-    const lane = lanes.get(card.category) ?? [];
-    lane.push(card);
-    lanes.set(card.category, lane);
+    const contexts = byKind.get(card.category) ?? new Map<string, Postcard[]>();
+    const group = contexts.get(contextOf(card)) ?? [];
+    group.push(card);
+    contexts.set(contextOf(card), group);
+    byKind.set(card.category, contexts);
   }
+  for (const [category, contexts] of byKind) lanes.set(category, interleave([...contexts.values()]));
   const out: Postcard[] = [];
   while (out.length < n && [...lanes.values()].some((lane) => lane.length > 0)) {
     for (const lane of lanes.values()) {

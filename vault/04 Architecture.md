@@ -22,7 +22,7 @@ src/app/                 routes: / /gallery /postcards/[slug] /trips[/slug] /des
                          (per-route opengraph-image for postcards, trips, places, cafés, stories)
 src/components/
   layout/                Header, Footer, ThemeToggle
-  ui/                    Photo, Stamp/Postmark, PageHead, CollectionHero, SectionHeader, Prose, EmptyState,
+  ui/                    Photo, Stamp/Postmark, PageHead, CollectionHero, SectionHeader, ViewAllButton, Prose, EmptyState,
                          DetailSkeleton, MotionController, Cursor
   features/              hero, gallery, lightbox, carousel, trips (TripCards, TripStack, Itinerary), places, globe,
                          map (SvgMap), zoom, stories, cafes (CafeGuide), postcard (PostcardBack, RelatedPostcards),

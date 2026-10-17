@@ -21,8 +21,9 @@ import { PlacesIndex } from "@/components/features/places/PlacesIndex";
 import { VisitorWall, VisitorWallSkeleton } from "@/components/features/visitors/VisitorWall";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ViewAllButton } from "@/components/ui/ViewAllButton";
 
-const GALLERY_PREVIEW = 16;
+const GALLERY_PREVIEW = 8;
 const CAROUSEL_COUNT = 10;
 
 async function HomeVisitorSection() {
@@ -131,10 +132,12 @@ export default async function HomePage() {
               <SectionHeader
                 id="collection-title"
                 title="The collection"
-                intro="Pick a kind of postcard and the matching photographs return to colour."
-                action={{ href: "/gallery", label: `Open the full gallery (${postcards.length})` }}
+                intro="A few favourites from every kind of postcard and every place I have been."
               />
-              <BloomGallery items={preview} />
+              <BloomGallery items={preview} filterable={false} />
+              {postcards.length > preview.length && (
+                <ViewAllButton href="/gallery">View all {postcards.length} postcards</ViewAllButton>
+              )}
             </div>
           </section>
 

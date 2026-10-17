@@ -8,6 +8,9 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): A shorter home page
+- The home page "The collection" now shows 8 postcards instead of 16 (a few favourites from every kind and place), without the filter bar, and ends with a "View all 23 postcards" button that opens the gallery. The button is drawn as an airmail envelope (postcard-stock face inside the red, white and blue stripe), so it reads the same in light and dark mode. `balancedSample` also spreads picks across cafés and places within a kind. [[09 Decisions]] D33.
+
 ## 2026-10-17 (last): Daksina Bhawan usual order
 - Added the usual order to Daksina Bhawan: benne dosa and filter coffee (shown on its café page and card).
 
