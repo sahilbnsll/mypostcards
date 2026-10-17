@@ -75,18 +75,20 @@
     "ratingNote": "The samosa chaat is so tasty, and the walking tacos are so good."
   },
   {
-    "slug": "pind-bhaturas",
-    "name": "Pind Bhaturas",
-    "city": "Gurugram",
+    "slug": "shikarbagh",
+    "name": "Shikarbagh Restaurant",
+    "city": "Jaipur",
     "country": "India",
-    "neighborhood": "Ordered in, every Sunday",
-    "destination": "gurugram",
+    "neighborhood": "Hotel Narain Niwas Palace, Rambagh",
     "vibes": [
-      "chole bhature",
-      "Sunday order"
+      "fairy lights",
+      "garden dining",
+      "tented dining"
     ],
-    "notes": "My go-to place in Gurugram for chole bhature. I usually order from them, and I order chole bhature every Sunday: their chole bhature are so good, so tasty.",
-    "order": "Chole bhature",
-    "sample": false
+    "notes": "At Hotel Narain Niwas Palace, Rambagh, Jaipur, Rajasthan 302004. We ordered so much food and drinks here, and all of it was so good. It is also where I met my bhabhi in person for the first time.",
+    "map": "https://maps.app.goo.gl/CtfEwCEbtXz4PtaL9",
+    "sample": false,
+    "rating": 4.8,
+    "ratingNote": "All the food is so good, the drinks are good too, and the ambience is so good, especially at night."
   }
 ]

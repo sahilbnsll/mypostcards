@@ -8,8 +8,17 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): Shikarbagh, Jaipur
+- New café **Shikarbagh Restaurant** (Hotel Narain Niwas Palace, Rambagh, Jaipur, Rajasthan 302004), with your map link and a rating of 4.8/5. Seven postcards: the vine-covered verandah, the garden lanterns, the fountain taken "in absolute dark" with the iPhone 17 Pro (the camera is shown on its back), the tented dining area, the courtyard fountain, the creamy pasta and the peach and lemon mocktail. The café note records that it is where you met your bhabhi in person for the first time.
+- Jaipur appeared on the Places page, the globe and its own page automatically (it is listed beside Delhi NCR on the globe), with no edit to `destinations.json`.
+- Dated 19 September 2026: three of the photos carry that date and the other four have no metadata, so they take the visit's date. The faces of two strangers (in the tent and in the mocktail photo) are softly blurred; originals are in the git-ignored `private-originals/cafes/shikarbagh/`.
+- Wording to check: "peach and lemon mocktail" (written "peace" in the message) and "especially at night" (written "specially at time").
+
+## 2026-10-17 (last): Shorter captions and notes
+- Trimmed the captions and notes on 31 of the 32 postcards so they say what the picture is and carry the moment, instead of listing what is visible (the full description stays in the alt text). Nothing factual changed: ratings, orders, names and dates are as before. The lamp postcard was already short and was left alone.
+
 ## 2026-10-17 (last): Chole bhature, a Batman doll and a tattoo
-- New food spot **Pind Bhaturas** (Gurugram; no map link or rating yet) with the postcard "The one thing between me and my six pecs", the author's usual Sunday chole bhature order, with a bottle of sweet lassi.
+- New postcard "The one thing between me and my six pecs" (chole bhature with sweet lassi, the author's Sunday order from Pind Bhaturas). It has no café page and no place: the author orders in and has never been there, so the photo is filed under `food/` (the page was removed the same day).
 - New Random clicks postcards: "Batman, on guard at my desk" (a crocheted Batman from the author's sister, bought on a trip to Jaipur; dated 22 September 2026 from the laptop's lock screen in the photo) and "Veni, vidi, vici" (the author's recent tattoo; the spelling in the text is the correct Latin, vidi, not vedi). The photo of the tattoo is a pencil-shaded image, and its alt text says so.
 - None of the three photo files carries a date, so the chole bhature and tattoo postcards are undated. Cleaned photos are in `cafes/pind-bhaturas/` and `random-clicks/`; originals are in the git-ignored `private-originals/`.
 

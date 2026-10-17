@@ -6,7 +6,9 @@ updated: 2026-10-17
 
 # Quality and verification
 
-- Chole bhature, Batman doll, tattoo (2026-10-17): content validates (32 postcards, 5 cafés); the Pind Bhaturas page renders without a rating or map link (it shows the usual order). Not checked: the two Random clicks pages, axe, a phone width.
+- Shikarbagh (2026-10-17): content validates (39 postcards, 5 cafés, 3 places); the café page renders with its rating, map link and all seven photos (none broken); /destinations lists Jaipur with 7 postcards. The two face blurs were checked by eye. Not checked: axe, a phone width, every postcard page.
+
+- Chole bhature, Batman doll, tattoo (2026-10-17): content validates (32 postcards, 5 cafés); the café page for Pind Bhaturas was removed afterwards, since it is an order-in place; the chole bhature postcard has no place or café. Not checked: the two Random clicks pages, axe, a phone width.
 
 - Love is in the air (2026-10-17): content validates (29 postcards); the postcard page loads with the photo, date and place, and its coordinates are marked approximate (hidden). Not checked: axe, the Random clicks page, a phone width.
 
