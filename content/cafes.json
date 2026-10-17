@@ -30,9 +30,29 @@
       "warm lanterns"
     ],
     "notes": "A South Indian restaurant where the ceiling is hung with brass temple bells, a mural of a temple and an elephant fills one wall, and the dosa comes with sambar and a row of chutneys.",
+    "order": "Benne dosa and filter coffee",
     "map": "https://maps.app.goo.gl/4YwK4vV8ceokmjQy7",
     "sample": false,
     "rating": 4.8,
     "ratingNote": "The benne dosa is the star. The idli is good too, and the filter coffee is great."
+  },
+  {
+    "slug": "costa-coffee",
+    "name": "Costa Coffee",
+    "city": "Gurugram",
+    "country": "India",
+    "neighborhood": "Ambience Mall, third floor",
+    "destination": "gurugram",
+    "vibes": [
+      "coffee mural",
+      "warm lamps",
+      "oval mirrors"
+    ],
+    "notes": "On the third floor of Ambience Mall (NH8, Ambience Island, DLF Phase 3, Sector 24, Gurugram). A long wall with a big coffee mural, oval mirrors glowing yellow, and a cold serene caramel frappe with a slice of cheesecake.",
+    "order": "Serene caramel frappe and cheesecake",
+    "map": "https://maps.app.goo.gl/XDrLAE5dMHe7hKAN9",
+    "sample": false,
+    "rating": 4.5,
+    "ratingNote": "The coffee is great, the cheesecake is good, and the ambience and café theme are both good."
   }
 ]

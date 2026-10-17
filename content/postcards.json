@@ -438,5 +438,104 @@
       "ambience-mall"
     ],
     "sample": false
+  },
+  {
+    "slug": "costa-coffee-mural-wall",
+    "title": "A wall of mural and mirrors",
+    "caption": "A cream plaster wall with a coffee mural, glowing oval mirrors and round white lamps.",
+    "note": "The wall does all the talking: plaster the colour of milky coffee, a big framed mural in reds and oranges, and tall oval mirrors with a warm halo behind them. Wooden chairs with plum seats wait along the aisle.",
+    "image": "/images/cafes/costa-coffee/mural-wall.jpg",
+    "alt": "A long café wall of cream plaster under a terracotta ceiling with black track lights and round white globe lamps, holding a large framed mural in red and orange, two tall oval mirrors edged with yellow light, wooden chairs with plum seats, a brown leather bench and a planter of green leaves, with a tray of red Costa cups on a table at the right",
+    "category": "cafe",
+    "place": "Costa Coffee",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "lat": 28.495,
+    "lng": 77.089,
+    "date": "2026-10-14",
+    "destination": "gurugram",
+    "cafe": "costa-coffee",
+    "tags": [
+      "costa-coffee",
+      "interior",
+      "mural",
+      "ambience-mall"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "costa-coffee-coffee-mural",
+    "title": "Coffee, from bean to cup",
+    "caption": "A red, pink and orange mural that follows coffee from blossom and bean to roaster and cup.",
+    "note": "Up close, the mural tells the whole story of coffee: a pale blossom, ripe cherries, a hand full of beans, a roaster with a small figure sitting on top, and steam curling into the sky.",
+    "image": "/images/cafes/costa-coffee/coffee-mural.jpg",
+    "alt": "A close view of a framed wall mural in red, pink and orange showing a coffee plant with a white blossom and berries, a large circle of coffee beans, a roasting machine with a small seated figure holding a cup, and curling steam, beside a round white lamp under a terracotta ceiling",
+    "category": "cafe",
+    "place": "Costa Coffee",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "lat": 28.495,
+    "lng": 77.089,
+    "date": "2026-10-14",
+    "destination": "gurugram",
+    "cafe": "costa-coffee",
+    "tags": [
+      "costa-coffee",
+      "interior",
+      "mural",
+      "coffee"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "costa-coffee-serene-caramel-frappe",
+    "title": "Serene caramel frappe",
+    "caption": "A tall cold coffee under a dome lid, topped with cream and caramel, held up against the mural.",
+    "note": "The signature serene caramel frappe: a cold coffee piled with cream and caramel sauce under a clear dome lid. The coffee is great.",
+    "image": "/images/cafes/costa-coffee/serene-caramel-frappe.jpg",
+    "alt": "A hand holding a tall red and pale blue paper cup marked COLD COFFEE, topped with whipped cream and caramel under a clear dome lid, in front of a colourful coffee mural and a brown leather booth",
+    "category": "food",
+    "place": "Costa Coffee",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "lat": 28.495,
+    "lng": 77.089,
+    "date": "2026-10-14",
+    "destination": "gurugram",
+    "cafe": "costa-coffee",
+    "tags": [
+      "costa-coffee",
+      "coffee",
+      "frappe",
+      "caramel"
+    ],
+    "sample": false
+  },
+  {
+    "slug": "costa-coffee-cheesecake",
+    "title": "A slice of cheesecake",
+    "caption": "A pale slice of cheesecake on a biscuit base, on a gold cake board.",
+    "note": "A smooth, creamy slice with a golden top and a thin crumb base, served on a gold card. Simple, and good.",
+    "image": "/images/cafes/costa-coffee/cheesecake.jpg",
+    "alt": "A triangular slice of plain baked cheesecake with a pale golden top and a biscuit crumb base, on a gold cake board on a beige tray",
+    "category": "food",
+    "place": "Costa Coffee",
+    "city": "Gurugram",
+    "region": "Haryana",
+    "country": "India",
+    "lat": 28.495,
+    "lng": 77.089,
+    "date": "2026-10-14",
+    "destination": "gurugram",
+    "cafe": "costa-coffee",
+    "tags": [
+      "costa-coffee",
+      "dessert",
+      "cheesecake"
+    ],
+    "sample": false
   }
 ]

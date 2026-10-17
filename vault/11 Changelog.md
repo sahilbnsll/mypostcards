@@ -8,6 +8,13 @@ updated: 2026-10-17
 
 Newest first.
 
+## 2026-10-17 (last): Daksina Bhawan usual order
+- Added the usual order to Daksina Bhawan: benne dosa and filter coffee (shown on its café page and card).
+
+## 2026-10-17 (late): Costa Coffee, Ambience Mall
+- New café **Costa Coffee** (third floor, Ambience Mall, Gurugram) with four postcards from 14 October 2026: the mural wall, a close-up of the coffee mural, the serene caramel frappe and a slice of cheesecake. Your map link, the usual order (serene caramel frappe and cheesecake) and a rating of 4.5/5 with a line about the coffee, cheesecake and ambience.
+- Photos are in `cafes/costa-coffee/` (cleaned, upright, no metadata); originals in the git-ignored `private-originals/cafes/costa-coffee/`. Café and pins use the same city-level Gurugram coordinates as the other Gurugram entries.
+
 ## 2026-10-17 (night): Two random clicks from Ambience Mall
 - Added "Durga Maa, for Navratri" (a white and gold idol in a mall pandal) and "Flowers at the crossing" (a floral centrepiece), both from 14 October 2026, under Random clicks. Photos are in `random-clicks/ambience-mall/`, cleaned (upright, no metadata), originals in the git-ignored `private-originals/random-clicks/ambience-mall/`.
 - Place is Ambience Mall, Gurugram, Haryana (from the author's address); the pin uses the same city-level coordinates as the other Gurugram postcards.
