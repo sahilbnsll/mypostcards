@@ -8,6 +8,10 @@ updated: 2026-10-18
 
 Newest first.
 
+## 2026-10-18 (later still, 2): Mobile menu and screen sizes
+- **The mobile menu** now slides in and out smoothly in every browser (the exit used newer CSS that older phones lack), locks the page behind it, and no longer leaves the Menu button looking pressed after a tap. On 320 px screens the Menu button shows only its icon so the header fits ([[09 Decisions]] D46).
+- **Screen sizes**: at 768 px the trip highlights stack instead of squeezing the caption off the edge; the footer has a proper tablet layout (it overflowed at about 1000 px); the café prints no longer add sideways scroll at 1024 px.
+
 ## 2026-10-18 (later still): Punjab Grill rating
 - **Punjab Grill** now has your rating, 4.8/5, with a line about it (the food is crazy good, the ambience decent, and a refreshing pan shot at the end was the cherry on top), and the café note lists what you had: soya chaap, garlic naan, butter naan, paneer lababdar, and the peach iced tea and cold coffee from the postcards. Still no map link.
 

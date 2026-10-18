@@ -1,3 +1,11 @@
+/* The prints behind a cover peek out a little to the sides; this keeps them from adding sideways
+   scroll at the page edge, with room left so they are not cut off between cards */
+.root {
+  margin-inline: -1rem;
+  padding-inline: 1rem;
+  overflow-x: clip;
+}
+
 .bar {
   display: flex;
   flex-wrap: wrap;

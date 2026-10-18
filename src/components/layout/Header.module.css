@@ -178,9 +178,31 @@
   transition: background-color var(--d-fast), color var(--d-fast);
 }
 
-.pill:hover {
+/* Hover only where there is a pointer: on a phone a tap would leave the pill stuck dark */
+@media (hover: hover) {
+  .pill:hover {
+    background: var(--ink);
+    color: var(--card);
+  }
+}
+
+.pill:active {
   background: var(--ink);
   color: var(--card);
+  transition-duration: 0ms;
+}
+
+/* On the narrowest phones the button is just its icon, so the brand and the three buttons fit */
+@media (max-width: 24rem) {
+  .menuLabel {
+    display: none;
+  }
+
+  .menuButton {
+    width: 2.5rem;
+    justify-content: center;
+    padding: 0;
+  }
 }
 
 @media (min-width: 62rem) {
@@ -194,10 +216,10 @@
 }
 
 /*
- * Mobile menu. A modal <dialog> that slides in from the right over a fading backdrop and slides
- * back out on close. Enter and exit are both plain CSS transitions (@starting-style for the way
- * in, "allow-discrete" so the dialog stays displayed while it animates out), so they can be
- * interrupted mid-flight and need no timers. Browsers without support just show and hide it.
+ * Mobile menu. A modal <dialog> whose panel slides in from the right over a fading backdrop and
+ * slides back out on close. Both directions are plain keyframe animations (no @starting-style, no
+ * display transitions), so they behave the same in every browser, including older phones: the
+ * header script marks the dialog data-closing, waits for the slide-out, then closes it.
  */
 .menu {
   position: fixed;
@@ -211,21 +233,11 @@
   border: 0;
   background: transparent;
   color: var(--ink);
-  transition:
-    display 340ms allow-discrete,
-    overlay 340ms allow-discrete;
-}
-
-.menu::backdrop {
-  background: rgb(12 20 36 / 0);
-  transition:
-    background-color 300ms ease,
-    display 340ms allow-discrete,
-    overlay 340ms allow-discrete;
 }
 
 .menu[open]::backdrop {
   background: rgb(12 20 36 / 0.55);
+  animation: backdrop-in 300ms ease both;
 }
 
 .menuPanel {
@@ -237,25 +249,72 @@
   padding: var(--s-4) var(--gutter) 0;
   background: var(--paper);
   box-shadow: -24px 0 48px -24px rgb(12 20 36 / 0.45);
-  /* Out: quick and decisive */
-  transform: translate3d(100%, 0, 0);
-  transition: transform 240ms cubic-bezier(0.4, 0, 1, 1);
 }
 
 .menu[open] .menuPanel {
-  /* In: settles gently */
-  transform: none;
-  transition: transform 340ms var(--ease-out);
+  animation: panel-in 340ms var(--ease-out) both;
 }
 
-@starting-style {
-  .menu[open]::backdrop {
-    background: rgb(12 20 36 / 0);
-  }
+.menu[open] .menuList li {
+  animation: item-in 300ms var(--ease-out) both;
+  animation-delay: calc(110ms + var(--i) * 40ms);
+}
 
-  .menu[open] .menuPanel {
+/* Out: quick and decisive */
+.menu[data-closing]::backdrop {
+  animation: backdrop-out 220ms ease both;
+}
+
+.menu[data-closing] .menuPanel {
+  animation: panel-out 220ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+.menu[data-closing] .menuList li {
+  animation: item-out 120ms ease both;
+  animation-delay: 0ms;
+}
+
+@keyframes panel-in {
+  from {
     transform: translate3d(100%, 0, 0);
   }
+}
+
+@keyframes panel-out {
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    background: rgb(12 20 36 / 0);
+  }
+}
+
+@keyframes backdrop-out {
+  to {
+    background: rgb(12 20 36 / 0);
+  }
+}
+
+@keyframes item-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+@keyframes item-out {
+  to {
+    opacity: 0;
+    translate: 0 6px;
+  }
+}
+
+/* The page behind a modal menu stays put */
+:global(html):has(#site-menu[open]) {
+  overflow: hidden;
 }
 
 .menuTop {
@@ -271,26 +330,6 @@
 
 .menuList li {
   border-bottom: 1px solid var(--rule);
-  opacity: 0;
-  translate: 0 10px;
-  transition:
-    opacity 150ms ease,
-    translate 150ms ease;
-}
-
-.menu[open] .menuList li {
-  opacity: 1;
-  translate: 0 0;
-  transition:
-    opacity 300ms var(--ease-out) calc(110ms + var(--i) * 40ms),
-    translate 300ms var(--ease-out) calc(110ms + var(--i) * 40ms);
-}
-
-@starting-style {
-  .menu[open] .menuList li {
-    opacity: 0;
-    translate: 0 10px;
-  }
 }
 
 .menuLink {

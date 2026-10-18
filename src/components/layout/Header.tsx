@@ -35,14 +35,27 @@ export function Header() {
     return () => observer.disconnect();
   }, []);
 
-  // Mobile menu: a modal <dialog> gives focus trapping and Escape for free.
-  const closeMenu = useCallback(() => setMenuPath(null), []);
-  useEffect(() => {
+  // Mobile menu: a modal <dialog> gives focus trapping and Escape for free. Closing is animated by
+  // marking it data-closing (CSS slides the panel out), then closing it when that has played.
+  const closeTimer = useRef<number | undefined>(undefined);
+  const finishClose = useCallback(() => {
+    window.clearTimeout(closeTimer.current);
     const dialog = dialogRef.current;
-    if (!dialog) return;
-    if (menuOpen && !dialog.open) dialog.showModal();
-    if (!menuOpen && dialog.open) dialog.close();
-  }, [menuOpen]);
+    if (dialog?.open) dialog.close();
+    dialog?.removeAttribute("data-closing");
+    setMenuPath(null);
+  }, []);
+  const closeMenu = useCallback(() => {
+    const dialog = dialogRef.current;
+    if (!dialog?.open || dialog.hasAttribute("data-closing")) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      finishClose();
+      return;
+    }
+    dialog.setAttribute("data-closing", "");
+    closeTimer.current = window.setTimeout(finishClose, 220);
+  }, [finishClose]);
+  useEffect(() => () => window.clearTimeout(closeTimer.current), []);
 
   return (
     <>
@@ -80,19 +93,22 @@ export function Header() {
             <button
               type="button"
               className={cn(styles.pill, styles.menuButton)}
+              aria-label="Menu"
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
               aria-controls="site-menu"
               onClick={() => {
                 // Open in the same tick as the tap so the slide starts on the very next frame.
-                dialogRef.current?.showModal();
+                window.clearTimeout(closeTimer.current);
+                dialogRef.current?.removeAttribute("data-closing");
+                if (!dialogRef.current?.open) dialogRef.current?.showModal();
                 setMenuPath(pathname);
               }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
                 <path d="M4 8h16M4 16h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
-              Menu
+              <span className={styles.menuLabel}>Menu</span>
             </button>
           </div>
         </div>
@@ -103,8 +119,12 @@ export function Header() {
         id="site-menu"
         className={styles.menu}
         aria-label="Site menu"
-        onClose={closeMenu}
-        onCancel={closeMenu}
+        onClose={() => setMenuPath(null)}
+        onCancel={(e) => {
+          // Escape: slide out first, then close
+          e.preventDefault();
+          closeMenu();
+        }}
         onClick={(e) => {
           if (e.target === e.currentTarget) closeMenu();
         }}

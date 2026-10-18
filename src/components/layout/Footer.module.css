@@ -198,9 +198,54 @@
   box-shadow: none;
 }
 
-@media (min-width: 58rem) {
+/* Tablet: the logo and the lamp across the top, then the links, then the connect list */
+@media (min-width: 40rem) and (max-width: 74.99rem) {
   .inner {
-    grid-template-columns: 1.3fr 1.5fr 0.8fr 0.8fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .about {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .by {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    text-align: right;
+  }
+
+  .links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .socials {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .links ul {
+    grid-template-columns: repeat(3, max-content);
+  }
+
+  .socialList {
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: var(--s-5);
+  }
+
+  .lampWrap {
+    justify-items: end;
+  }
+}
+
+/* Wide: four open columns */
+@media (min-width: 75rem) {
+  .inner {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr) minmax(0, 0.8fr) minmax(0, 0.8fr);
     align-items: start;
   }
 

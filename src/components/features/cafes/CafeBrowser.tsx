@@ -45,7 +45,7 @@ export function CafeBrowser({ entries }: { entries: CafeEntry[] }) {
   const visible = shown.slice(0, limit);
 
   return (
-    <div>
+    <div className={styles.root}>
       <div className={styles.bar}>
         {cities.length > 1 && (
           <ChipGroup
