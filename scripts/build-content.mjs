@@ -30,7 +30,7 @@ const CATEGORIES = ["travel", "city", "cafe", "food", "getaway", "art", "random"
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 const KEYS = {
-  postcard: ["slug", "title", "caption", "note", "image", "video", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "artist", "artistUrl", "credit", "creditUrl", "rating", "featured", "sample"],
+  postcard: ["slug", "title", "caption", "note", "image", "video", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "artist", "artistUrl", "credit", "creditUrl", "rating", "featured", "pinned", "sample"],
   trip: ["slug", "title", "summary", "story", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "destination", "start", "end", "period", "featured", "sample", "days"],
   day: ["title", "stops"],
   stop: ["place", "time", "note", "tip", "lat", "lng", "postcard"],
@@ -97,6 +97,16 @@ export async function buildContent({ quiet = false } = {}) {
     if (value === undefined || value === null) return undefined;
     if (typeof value !== "number" || value < 0.5 || value > 5 || Math.round(value * 10) / 10 !== value) {
       fail(where, `"rating" must be a number from 0.5 to 5 with at most one decimal, for example 4, 4.5 or 4.8`);
+      return undefined;
+    }
+    return value;
+  };
+
+  /** Where a postcard sits on the home page's pinned line: a whole number from 1 (first). Left out when it is not pinned. */
+  const pinned = (value, where) => {
+    if (value === undefined || value === null) return undefined;
+    if (!Number.isInteger(value) || value < 1) {
+      fail(where, `"pinned" must be a whole number from 1, the postcard's place on the pinned line on the home page, for example 1 or 3`);
       return undefined;
     }
     return value;
@@ -237,6 +247,7 @@ export async function buildContent({ quiet = false } = {}) {
       rating: rating(raw.rating, where),
       isSample: raw.sample === true,
       featured: raw.featured === true,
+      pinned: pinned(raw.pinned, where),
       sortOrder: index + 1,
     });
   }

@@ -91,6 +91,8 @@ export interface Postcard {
   /** True while a photo is stand-in content rather than one of my own. */
   isSample: boolean;
   featured: boolean;
+  /** Place on the home page's pinned line (1 is first). Absent when the postcard is not pinned. */
+  pinned?: number;
   sortOrder: number;
 }
 

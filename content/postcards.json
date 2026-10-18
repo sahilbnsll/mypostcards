@@ -26,6 +26,7 @@
   },
   {
     "slug": "daksina-temple-bells",
+    "pinned": 6,
     "title": "Under the temple bells",
     "caption": "Brass temple bells hang over the dining room.",
     "note": "Look up first. The bells are the first thing you notice here.",
@@ -52,6 +53,7 @@
   },
   {
     "slug": "daksina-dosa",
+    "pinned": 2,
     "title": "A dosa, folded in half",
     "caption": "A crisp dosa, with sambar and chutneys.",
     "note": "It arrived golden and folded like a half moon. The dosa is why I keep going back.",
@@ -827,6 +829,7 @@
   },
   {
     "slug": "shikarbagh-courtyard",
+    "pinned": 4,
     "title": "The courtyard fountain",
     "caption": "A fountain in the courtyard, after dark.",
     "note": "Shikarbagh is inside Hotel Narain Niwas Palace in Rambagh, Jaipur. It is also where I met my bhabhi in person for the first time.",
@@ -1105,6 +1108,7 @@
   },
   {
     "slug": "kasol-parvati-river-morning",
+    "pinned": 10,
     "title": "The Parvati, early",
     "caption": "The Parvati river, early in the morning.",
     "note": "The valley road follows the Parvati river up to Kasol, which sits at about 1,580 m in Kullu district.",
@@ -1470,6 +1474,7 @@
   },
   {
     "slug": "sissu-waterfall",
+    "pinned": 5,
     "title": "The Sissu waterfall",
     "caption": "The waterfall at Sissu, still fed by the snow.",
     "note": "The fall drops about 50 m and sits across the Chandra river from the village.",
@@ -1496,6 +1501,7 @@
   },
   {
     "slug": "jispa-karma-cottage",
+    "pinned": 1,
     "title": "Prayer flags over Jispa",
     "caption": "Prayer flags over Karma Cottage & Camp in Jispa.",
     "note": "Jispa is a village on the Bhaga river at about 3,200 m, a favourite overnight stop on the Manali–Leh highway.",
@@ -1595,6 +1601,7 @@
   },
   {
     "slug": "shinku-la-snow-peaks",
+    "pinned": 8,
     "title": "Snow peaks, on the way up",
     "caption": "The first of the big snow peaks on the road to Shinku La.",
     "image": "/images/trips/kasol-to-jispa/shinku-la/snow-peaks-on-the-way-up.jpg",
@@ -1956,6 +1963,7 @@
   },
   {
     "slug": "ujjain-the-shikhara",
+    "pinned": 3,
     "title": "Mahakaleshwar",
     "caption": "The Mahakaleshwar temple, from the courtyard.",
     "note": "The temple stands near the Shipra river and its lingam is said to be self-manifested, svayambhu. Behind the courtyard the Mahakal Lok corridor runs about 900 m.",
@@ -2208,6 +2216,7 @@
   },
   {
     "slug": "ujjain-the-gate",
+    "pinned": 9,
     "title": "Kaal Bhairav",
     "caption": "The gate of the Kaal Bhairav temple at night.",
     "note": "Kaal Bhairav is regarded as the guardian of Ujjain, its kotwal. The offering here is alcohol, which is one of the five tantric offerings; today it is the only one actually made.",
@@ -2531,6 +2540,7 @@
   },
   {
     "slug": "omkareshwar-the-ghats",
+    "pinned": 7,
     "title": "Omkareshwar",
     "caption": "The ghats and the temples on the hill, across the Narmada.",
     "note": "Omkareshwar is on Mandhata island in the Narmada, which is said to be shaped like the sign Om. The Jyotirlinga temple is here.",

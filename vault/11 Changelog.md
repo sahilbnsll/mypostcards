@@ -8,6 +8,9 @@ updated: 2026-10-18
 
 Newest first.
 
+## 2026-10-18 (later still, 3): The pinned line shows the best photographs
+- The home page's "Pinned up" line now hangs ten chosen postcards instead of the first ten in the file: Prayer flags over Jispa, the dosa, Mahakaleshwar, the Shikarbagh courtyard fountain, the Sissu waterfall, Daksina's temple bells, the Omkareshwar ghats, the Shinku La snow peaks, Kaal Bhairav and the Parvati at dawn. New optional postcard field `pinned` (a whole number, the order on the line) in `content/postcards.json` ([[09 Decisions]] D47, [[05 Content Model]]).
+
 ## 2026-10-18 (later still, 2): Mobile menu and screen sizes
 - **The mobile menu** now slides in and out smoothly in every browser (the exit used newer CSS that older phones lack), locks the page behind it, and no longer leaves the Menu button looking pressed after a tap. On 320 px screens the Menu button shows only its icon so the header fits ([[09 Decisions]] D46).
 - **Screen sizes**: at 768 px the trip highlights stack instead of squeezing the caption off the edge; the footer has a proper tablet layout (it overflowed at about 1000 px); the café prints no longer add sideways scroll at 1024 px.

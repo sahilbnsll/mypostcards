@@ -28,7 +28,7 @@ const VISITOR_PREVIEW = 6;
 
 /** The home page's sections, in order, for the index down the edge of the screen. */
 const CHAPTERS = [
-  { id: "lately", label: "Lately" },
+  { id: "lately", label: "Pinned" },
   { id: "look-closer", label: "Look closer" },
   { id: "collection", label: "Collection" },
   { id: "trips", label: "Trips" },
@@ -85,7 +85,13 @@ export default async function HomePage() {
   const { postcards, trips, destinations, stories } = journal;
 
   const heroCards = featuredFirst(postcards).slice(0, 5);
-  const recent = toViews(journal, postcards.slice(0, CAROUSEL_COUNT));
+  // The line of prints: the ones I pinned, in the order I gave them; the newest ones until some are pinned
+  const pinnedCards = postcards
+    .filter((p) => p.pinned !== undefined)
+    .sort((a, b) => (a.pinned ?? 0) - (b.pinned ?? 0))
+    .slice(0, CAROUSEL_COUNT);
+  const hasPinned = pinnedCards.length >= 3;
+  const recent = toViews(journal, hasPinned ? pinnedCards : postcards.slice(0, CAROUSEL_COUNT));
   const preview = toViews(journal, balancedSample(postcards, GALLERY_PREVIEW));
   const zoomCards = featuredFirst(postcards).slice(5, 12);
   const featuredTrips = featuredFirst(trips).slice(0, 3);
@@ -118,11 +124,11 @@ export default async function HomePage() {
               <div className="wrap">
                 <SectionHeader
                   id="lately-title"
-                  title="Pinned up lately"
-                  intro="The newest prints on the line. Drag, scroll or use the arrows."
+                  title={hasPinned ? "Pinned up" : "Pinned up lately"}
+                  intro={hasPinned ? "My favourites, hung on the line. Drag, scroll or use the arrows." : "The newest prints on the line. Drag, scroll or use the arrows."}
                 />
               </div>
-              <PrintCarousel items={recent} label="Recent postcards" />
+              <PrintCarousel items={recent} label={hasPinned ? "Pinned postcards" : "Recent postcards"} />
             </section>
           )}
 
