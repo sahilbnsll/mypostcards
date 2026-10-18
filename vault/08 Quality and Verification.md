@@ -6,6 +6,8 @@ updated: 2026-10-18
 
 # Quality and verification
 
+- Brunatos, Bento B and Agra (2026-10-19): content validates (134 postcards, 15 places, 9 cafés); the Bento B page shows its rating, note and map link, the Agra place page lists its three postcards, and both clips load, are silent (no audio track) and decode (3.0 s and 20.5 s). Typecheck, lint, the production build (323 pages) and audit pass. **Not checked:** every new postcard page in the browser, and the clips' look on a phone. The Brunatos clip came out about 0.4 s longer than the source because the recording stops after the last frame.
+
 - Pinned line (2026-10-18): content validates (123 postcards); the home page's "Pinned up" section lists the ten pinned postcards in the chosen order in the browser. Typecheck and lint pass. **Not checked:** the production build for this change, and the line on a phone and in dark theme.
 
 - Mobile and screen sizes (2026-10-18): typecheck, lint, build and audit pass. Sideways scroll measured (page scroll width against the viewport) at 320, 375, 768, 1000, 1024 and 1920 px on the main pages: home, gallery, trips and a trip, places and a place, cafés, stories, visitors, about. Three problems found and fixed (trip highlights at 768, footer at about 1000, café prints at 1024). The menu's slide-in and slide-out animations were confirmed to run (animation names present on open and on close), and the dialog, scroll lock and button state return to normal after closing. **Not checked:** 1280 to 1440 px for every page, 600 and 900 px, a real iPhone or Android phone (only the in-app pane at emulated sizes, with animation timing measured by listing the running animations, not by eye), touch gestures, landscape phones, and browser zoom.

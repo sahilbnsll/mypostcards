@@ -8,6 +8,8 @@ updated: 2026-10-18
 
 ## Do next
 
+- [ ] Brunatos, Bento B and Agra, for the author to check: dates for the new postcards (none of the photographs has one), whether the Agra clicks 1898 and 1900 were taken at Belgian Waffle or elsewhere in the market (the notes only say "near Shah Market"), and the exact wording of the dish names (Bianca al Formaggio).
+
 - [ ] Real URL pagination for the gallery (so a page of results can be linked and shared) would need the page to read search params, which makes it dynamic under Cache Components; the current "show more" keeps the instant filters. Revisit if the collection passes a few hundred postcards.
 
 - [ ] New references: look at `MorphReel`, `PostcardFolder`, the story covers and the lamp on a real phone and in Safari and Firefox; the reel loads up to seven textures per trip page, so measure it on a slow connection. A reel on place pages is a possible follow-up.

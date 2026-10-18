@@ -8,6 +8,12 @@ updated: 2026-10-18
 
 Newest first.
 
+## 2026-10-19: Two Jaipur restaurants and a few clicks from Agra
+- **Brunatos** (hand crafted pizza, Queens Corner, Vaishali Nagar, Jaipur; your map link; rated 4.9/5): the Bianca al Formaggio pizza with the berry mojito, a selfie with the mojito (the brown story bars cropped off), and a silent video of the inside. Your words about the pizza, the mojito and the ambience are the notes and the rating line.
+- **Bento B** (1st Floor, KK Square, C Scheme, Jaipur, beside the Crossword bookstore; your map link; rated 4.9/5): dumpling soup, creamy miso ramen, the katsu curry bento box (turned the right way up) with the ramen, Japanese cheesecake, and a silent 20 second video of the box being unwrapped. The bookstore story is on the café page and the video.
+- **Agra** is a new place (made from three random clicks near Shah Market): flowers round a window mirror, teal and yellow chairs in a small café (the staff's faces blurred), and a waffle at Belgian Waffle.
+- Every new postcard has a note and the photographs' own GPS, rounded to about 100 m. None has a date: the photographs carry none, and the videos' file dates are only when they were saved. Originals are in the git-ignored `private-originals/cafes/` and `private-originals/random-clicks/agra/`. Nothing else changed: 134 postcards, 15 places, 9 cafés.
+
 ## 2026-10-18 (later still, 3): The pinned line shows the best photographs
 - The home page's "Pinned up" line now hangs ten chosen postcards instead of the first ten in the file: Prayer flags over Jispa, the dosa, Mahakaleshwar, the Shikarbagh courtyard fountain, the Sissu waterfall, Daksina's temple bells, the Omkareshwar ghats, the Shinku La snow peaks, Kaal Bhairav and the Parvati at dawn. New optional postcard field `pinned` (a whole number, the order on the line) in `content/postcards.json` ([[09 Decisions]] D47, [[05 Content Model]]).
 

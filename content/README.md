@@ -24,10 +24,12 @@ public/images/
     shikarbagh/         seven shots from Hotel Narain Niwas Palace, Jaipur (fountain-in-the-dark.jpg, courtyard-fountain.jpg ...)
     punjab-grill/       iced-tea-and-cold-coffee.jpg, malai-chaap.jpg
     skyhouse/           dinner.jpg, drinks.jpg
+    brunatos/           pizza-and-mojito.jpg, mojito-selfie.jpg, inside.mp4 (and its poster inside-video.jpg), Jaipur
+    bento-b/            dumpling-soup.jpg, miso-ramen.jpg, bento-box-and-ramen.jpg, japanese-cheesecake.jpg, unwrapping.mp4 (and its poster), Jaipur
   art/                  house-on-the-hill.jpg, signed-on-the-back.jpg
   city/                 empty-metro-platform.jpg (street, skyline and transit shots that are not a trip)
   food/                 chole-bhature.jpg (food you ordered in, not from a café you visited)
-  random-clicks/        lamp-over-the-pothos.jpg, batman-doll.jpg, veni-vidi-vici-tattoo.jpg, kitkat-f1-car.jpg, spider-man-brand-new-day.jpg, ps5-brutality.jpg, golden-clouds.jpg, moon-through-the-clouds.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), m3m-urbana/ (heart-in-the-sky.jpg), bari/ (langur-scarecrow.jpg)
+  random-clicks/        lamp-over-the-pothos.jpg, batman-doll.jpg, veni-vidi-vici-tattoo.jpg, kitkat-f1-car.jpg, spider-man-brand-new-day.jpg, ps5-brutality.jpg, golden-clouds.jpg, moon-through-the-clouds.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), m3m-urbana/ (heart-in-the-sky.jpg), bari/ (langur-scarecrow.jpg), agra/ (flowers-round-a-mirror.jpg, teal-and-yellow-chairs.jpg, waffle.jpg)
   trips/kasol-to-jispa/ one folder per place on the trip: kasol/, manikaran/, sissu/, jispa/, manali/, shinku-la/
   trips/ujjain/         ram-ghat/, mahakaleshwar/, siddhavat/, kaal-bhairav/, barwaha/, omkareshwar/, mahakal-lok/, stay/ and videos/ (the silent clips; each clip's poster frame is its postcard image)
   destinations/<place>/ photos from a place that belong to no café or trip

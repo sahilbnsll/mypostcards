@@ -124,5 +124,41 @@
     "sample": false,
     "rating": 4.2,
     "ratingNote": "A good day, and Skyhouse was a big part of it. The ambience is great and the food is also good."
+  },
+  {
+    "slug": "brunatos",
+    "name": "Brunatos",
+    "city": "Jaipur",
+    "country": "India",
+    "neighborhood": "Queens Corner, Vaishali Nagar",
+    "vibes": [
+      "hand crafted pizza",
+      "modern",
+      "aesthetic"
+    ],
+    "notes": "LG shop no. 28, 29, Queens Corner, 30, Queens Rd, D Block, Vaishali Nagar, Jaipur, Rajasthan 302021. Hand crafted pizza. We had the Bianca al Formaggio pizza and the all fruit and berries mojito.",
+    "map": "https://maps.app.goo.gl/j8jGZv8Wi4yvWowU7",
+    "sample": false,
+    "rating": 4.9,
+    "ratingNote": "The Bianca al Formaggio is so tasty that I can't forget it yet: the cheese, the bake, everything about it. The all fruit and berries mojito is tasty and refreshing, and the ambience is modern and aesthetic."
+  },
+  {
+    "slug": "bento-b",
+    "name": "Bento B",
+    "city": "Jaipur",
+    "country": "India",
+    "neighborhood": "KK Square, C Scheme",
+    "cover": "cafes/bento-b/bento-box-and-ramen.jpg",
+    "coverAlt": "A table seen from above: a black bento box of small bowls beside a white tray of rice, fritters and watermelon, a bowl of dark curry, two red drinks, and a bowl of ramen with two fried eggs at the right",
+    "vibes": [
+      "Japanese",
+      "bento box",
+      "next to a bookstore"
+    ],
+    "notes": "1st Floor, KK Square, C-11, Prithviraj Rd, C Scheme, Ashok Nagar, Jaipur, Rajasthan 302001. Right beside the Crossword bookstore, so I went into the store first, had something to read for a while, and then enjoyed the meal. We had dumpling soup, a Japanese katsu curry bento box, creamy miso ramen and Japanese cheesecake.",
+    "map": "https://maps.app.goo.gl/65Uuy8tiw1iDzZQ97",
+    "sample": false,
+    "rating": 4.9,
+    "ratingNote": "The bento box is a 5/5, the noodles are very tasty and authentic, and so is the dumpling soup. The Japanese cheesecake at the end is so soft and so good. A must try."
   }
 ]
