@@ -86,5 +86,38 @@
     "lng": 77.1997,
     "status": "visited",
     "sample": false
+  },
+  {
+    "slug": "ujjain",
+    "name": "Ujjain",
+    "description": "An old city on the Shipra river in Madhya Pradesh, one of India's seven sacred cities. It has the Mahakaleshwar Jyotirlinga, the Kaal Bhairav temple, Ram Ghat and the Siddhavat banyan, and the Simhastha Kumbh is held on the Shipra here every twelve years (the next is in 2028).",
+    "lat": 23.1885,
+    "lng": 75.7717,
+    "country": "India",
+    "region": "Madhya Pradesh",
+    "status": "visited",
+    "sample": false
+  },
+  {
+    "slug": "omkareshwar",
+    "name": "Omkareshwar",
+    "description": "A temple town on Mandhata island in the Narmada river, in Khandwa district of Madhya Pradesh, with a Jyotirlinga temple. The island is said to be shaped like the sign Om. It is about 140 km from Ujjain by road (sources say 135 to 150 km).",
+    "lat": 22.243,
+    "lng": 76.1496,
+    "country": "India",
+    "region": "Madhya Pradesh",
+    "status": "visited",
+    "sample": false
+  },
+  {
+    "slug": "barwaha",
+    "name": "Barwaha",
+    "description": "A town on the Narmada in Khargone district of Madhya Pradesh, with ghats on the river, about 11 km from Omkareshwar in a straight line.",
+    "lat": 22.2543,
+    "lng": 76.0372,
+    "country": "India",
+    "region": "Madhya Pradesh",
+    "status": "visited",
+    "sample": false
   }
 ]

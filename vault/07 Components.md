@@ -49,7 +49,7 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 | `StoryFeature`, `StoryCard` | Home feature and list cards. `as="h2"` on index pages for correct heading order |
 | `CafeCard` | Photo, name, location, vibe tags, usual order |
 | `StatsBar` | Scale indicator under the hero: horizontal paper strip displaying postcard, place, trip, and story counts with quick links |
-| `TripDiary` **client** | The trip's postcards day by day: a date slip and day name that stay in view, a grid of small prints (handwritten titles, play mark on videos), a spine drawn over in red as each day scrolls past; a print opens the viewer ([[09 Decisions]] D41) |
+| `TripDiary` **client** | The trip's postcards day by day: a date slip and day name that stay in view, a grid of small prints (handwritten titles, play mark on videos), a spine drawn over in red as each day scrolls past; photographs with no date go in a last "More photos" group; a print opens the viewer ([[09 Decisions]] D41) |
 | `ItineraryExplorer` **client** | The itinerary list with day buttons, a follow-the-scroll switch, stop cards (time slip, tip, postcard print) and the route map beside it ([[09 Decisions]] D42) |
 | `VisitorCardSkeleton`, `VisitorWallSkeleton` | Postcard-shaped loading placeholders with paper backgrounds, dashed stamp frames, ruled drawing blocks, and shimmer pulses |
 

@@ -8,6 +8,14 @@ updated: 2026-10-18
 
 Newest first.
 
+## 2026-10-18 (later): The Ujjain and Omkareshwar family trip
+- **New trip "Ujjain and Omkareshwar"**, 25 to 27 January 2026, a family trip over the Republic Day long weekend (with the author's parents, bhua and a friend of the father's family): 46 postcards (39 photographs and 7 silent videos; an eighth, "Under the pergola" at Mahakal Lok, was deleted at the author's request), a 3 day itinerary with 9 stops and a route map, and a trip story with the route, the long weekend, Mahakaleshwar and Mahakal Lok, the Siddhavat, Kaal Bhairav, Omkareshwar and what to know ([[09 Decisions]] D43).
+- **Three new places** on the globe, the maps and the Places list: Ujjain (34 postcards), Omkareshwar (9) and Barwaha (3). Madhya Pradesh is a new postcard on the globe (46).
+- **Every postcard has a note** drawn from the photographs' times and places and from researched facts (and the author's own stories for the banyan, the crowd, the auto and the river).
+- **Three new stories**: "The tree Parvati planted" (the Siddhavat banyan, with the legends and where each comes from), "All of us in one auto" (the long weekend crowd) and "A dip in the Narmada".
+- **Photographs with no date** now go in a last "More photos" group in the trip diary, not in a numbered day.
+- One face at the edge of the Ram Ghat crowd photograph is blurred; the originals (with their GPS) are in the git-ignored `private-originals/trips/ujjain/`.
+
 ## 2026-10-18: A compact diary, an interactive itinerary and a Skyhouse video
 - **Every postcard now has a note**, all four videos included. Eleven were added from what is known: the time, altitude and place from the photograph or clip itself, or a fact already researched for the trip; none tells a story the author has not told. The two sky photographs, "Golden clouds" and "The moon through the clouds", have notes written from what can be seen plus one general fact (cloud iridescence), since they have no place or story ([[10 Backlog]]).
 - **Skyhouse**: the café's key image is now the video's frame (set with `cover` and `coverAlt` in `content/cafes.json`; before, it fell back to the first postcard), and its rating note and the video's note read "A good day, and Skyhouse was a big part of it. The ambience is great and the food is also good."

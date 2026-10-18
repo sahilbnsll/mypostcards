@@ -34,47 +34,57 @@ export function TripDiary({ postcards, days = [], tripTitle }: TripDiaryProps) {
     () =>
       [...postcards].sort((a, b) => {
         if (a.takenOn && b.takenOn) return a.takenOn.localeCompare(b.takenOn);
+        // photographs with no date come last, in the order they were added
+        if (a.takenOn) return -1;
+        if (b.takenOn) return 1;
         return a.sortOrder - b.sortOrder;
       }),
     [postcards],
   );
 
+  // One group per day, then one last group for photographs with no date (they are not given a day)
   const groups = useMemo(() => {
     const byDay = new Map<string, LightboxItem[]>();
+    const undated: LightboxItem[] = [];
     for (const card of sorted) {
-      const key = card.takenOn ?? card.periodLabel ?? "undated";
-      byDay.set(key, [...(byDay.get(key) ?? []), card]);
+      if (!card.takenOn) {
+        undated.push(card);
+        continue;
+      }
+      byDay.set(card.takenOn, [...(byDay.get(card.takenOn) ?? []), card]);
     }
-    return [...byDay.entries()].map(([key, cards]) => ({ key, cards }));
+    const days = [...byDay.entries()].map(([key, cards]) => ({ key, cards, dayless: false }));
+    return undated.length > 0 ? [...days, { key: "undated", cards: undated, dayless: true }] : days;
   }, [sorted]);
+  const dayCount = groups.filter((group) => !group.dayless).length;
 
   const lightbox = useLightbox(sorted);
 
   if (sorted.length === 0) return null;
-  const named = days.length === groups.length;
+  const named = days.length === dayCount;
 
   return (
     <div className={styles.diary}>
       <ol role="list" className={styles.days} aria-label={`Postcards from ${tripTitle}, day by day`}>
         {groups.map((group, dayIndex) => {
           const first = group.cards[0];
-          const dated = first.takenOn !== undefined;
-          const place = named ? placeOf(days[dayIndex]?.title) : undefined;
+          const dated = !group.dayless;
+          const place = named && dated ? placeOf(days[dayIndex]?.title) : undefined;
           return (
             <li key={group.key} className={styles.day}>
               <span className={styles.fill} aria-hidden />
               <span className={styles.dot} aria-hidden>
-                {dayIndex + 1}
+                {dated ? dayIndex + 1 : "+"}
               </span>
 
               <div className={styles.rail}>
-                <h3 className={styles.dayNumber}>Day {dayIndex + 1}</h3>
+                <h3 className={styles.dayNumber}>{dated ? `Day ${dayIndex + 1}` : "More photos"}</h3>
                 {dated ? (
                   <time className={styles.slip} dateTime={first.takenOn}>
                     {formatDate(first.takenOn!)}
                   </time>
                 ) : (
-                  <span className={styles.slip}>{first.periodLabel ?? "Undated"}</span>
+                  <span className={styles.slip}>No date</span>
                 )}
                 {place && <p className={styles.place}>{place}</p>}
                 <p className={styles.count}>{plural(group.cards.length, "postcard")}</p>

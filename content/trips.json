@@ -140,5 +140,101 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "ujjain-and-omkareshwar",
+    "title": "Ujjain and Omkareshwar",
+    "summary": "A family trip over the Republic Day long weekend, 25 to 27 January 2026: Ram Ghat, Mahakaleshwar, the Siddhavat banyan and Kaal Bhairav in Ujjain, the Narmada, Omkareshwar and Mahakal Lok.",
+    "story": "A family trip to Ujjain and Omkareshwar in Madhya Pradesh over the Republic Day long weekend, 25 to 27 January 2026. I went with my parents, my bhua (my father's sister) and a friend of my father's with his family. We went to the Mahakaleshwar Jyotirlinga, the Kaal Bhairav temple and the Siddhavat banyan in Ujjain, then to Omkareshwar on the Narmada, and finished back in Ujjain at Mahakal Lok. These are the photographs, the videos and what I found out about each place.\n\n## The route\n\nThree days, 25 to 27 January 2026. The first was all Ujjain: Ram Ghat on the Shipra in the morning, the Mahakaleshwar temple around noon, then the Siddhavat banyan and the Kaal Bhairav temple after dark. On the Monday, which was Republic Day, we went to Omkareshwar, about 140 km south by road (sources say 135 to 150 km). We stopped at the Narmada at Barwaha on the way, reached Omkareshwar in the afternoon and stayed until the evening lights were on. On the Tuesday we were back in Ujjain, in Mahakal Lok, by about noon.\n\n## The long weekend\n\nRepublic Day fell on a Monday in 2026, so it was a long weekend, and the crowds showed it. At 10:23 on the Sunday morning the road towards Ram Ghat was one slow stream of people. The line at Mahakaleshwar took about 45 minutes: the photograph of the rose is from 11:40 and the one inside the hall is from 12:24. At Kaal Bhairav the line climbed the steps to the gate in the dark. At Omkareshwar the crowd was so heavy that all of us had to sit inside one single auto.\n\n## Mahakaleshwar and Mahakal Lok\n\nMahakaleshwar is one of the twelve Jyotirlingas and the only one that faces south. The lingam is said to be self-manifested, svayambhu, and the temple stands near the Shipra river and the Rudrasagar lake. Mahakal Lok is the pedestrian corridor of about 900 m that leads from a visitor plaza to the temple. It opened on 11 October 2022 and is lined with sandstone pillars, murals and statues telling the stories of Shiva. Reports disagree about how many statues there are (figures from 76 to 200 appear), so I have not counted them.\n\n## Siddhavat\n\nThe Siddhavat is a sacred banyan on the bank of the Shipra at Bhairavgarh. It is believed that Mata Parvati planted it for Bar Amavasya pooja, and it is still there. Other stories are told about it too: one says Lord Ram performed the last rites for his father Dasharatha under it, and another says a ruler once had it cut down and covered the stump with iron plates, after which it grew back. At night the trees are lit green.\n\n## Kaal Bhairav\n\nThe Kaal Bhairav temple is regarded as the guardian temple of Ujjain, and Kaal Bhairav as the city's kotwal. Alcohol is offered to the deity here. It is one of five tantric offerings, and today it is the only one actually made. Temple tradition puts the age of the temple at around 6,000 years; the original temple is believed to have been built by a king named Bhadrasen, and it is mentioned in the Skanda Purana.\n\n## Omkareshwar\n\nOmkareshwar is on Mandhata island in the Narmada. The island is said to be shaped like the sign Om when seen from above, which is a tradition and not a surveyed fact. There is a Jyotirlinga temple here, and Mamleshwar is across the river (sources disagree on which bank each is on, so I have not said). Boats run along the ghat, and a suspension bridge crosses the river.\n\n## Good to know\n\nThe Simhastha Kumbh is held on the Shipra at Ujjain every twelve years, with Ram Ghat as the main bathing ghat, and the next one is in 2028. The aarti times and the length of the lines change from day to day, so check locally. On a holiday weekend expect long lines and slow roads, and plan the day around them.",
+    "start": "2026-01-25",
+    "end": "2026-01-27",
+    "featured": true,
+    "sample": false,
+    "days": [
+      {
+        "title": "Sunday 25 January: Ujjain",
+        "stops": [
+          {
+            "place": "Ram Ghat",
+            "time": "9 to 10:30 am",
+            "note": "The main bathing ghat on the Shipra, where the Simhastha Kumbh bathing is held every twelve years (the next is in 2028). The road towards it was packed on the long weekend.",
+            "lat": 23.1845,
+            "lng": 75.7672,
+            "postcard": "ujjain-the-crowd"
+          },
+          {
+            "place": "Mahakaleshwar",
+            "time": "11:40 am to about 1 pm",
+            "note": "One of the twelve Jyotirlingas, and the only one that faces south. We were in the line from about 11:40 and inside the hall by 12:24.",
+            "tip": "Expect a long line on weekends and holidays. We waited about 45 minutes.",
+            "lat": 23.183,
+            "lng": 75.7684,
+            "postcard": "ujjain-the-shikhara"
+          },
+          {
+            "place": "Siddhavat",
+            "time": "From about 7:30 pm",
+            "note": "The sacred banyan on the bank of the Shipra at Bhairavgarh. It is believed that Mata Parvati planted it for Bar Amavasya pooja. The trees are lit green at night.",
+            "lat": 23.225,
+            "lng": 75.7772,
+            "postcard": "ujjain-the-banyan-at-night"
+          },
+          {
+            "place": "Kaal Bhairav",
+            "time": "About 8:30 to 9:15 pm",
+            "note": "The guardian temple of Ujjain. The line climbs the steps to the gate, and the offering here is alcohol.",
+            "lat": 23.2181,
+            "lng": 75.7683,
+            "postcard": "ujjain-the-gate"
+          }
+        ]
+      },
+      {
+        "title": "Monday 26 January: Omkareshwar",
+        "stops": [
+          {
+            "place": "The road to Omkareshwar",
+            "note": "About 140 km south from Ujjain by road (sources say 135 to 150 km). It was Republic Day, and the roads were busy."
+          },
+          {
+            "place": "The Narmada at Barwaha",
+            "time": "About 1:30 to 2:30 pm",
+            "note": "A stop at the river, about 11 km from Omkareshwar in a straight line. I went into the water, and the video is among the postcards.",
+            "lat": 22.2281,
+            "lng": 76.0475,
+            "postcard": "barwaha-by-the-river"
+          },
+          {
+            "place": "Omkareshwar, in the afternoon",
+            "time": "From about 4 pm",
+            "note": "Omkareshwar is on Mandhata island in the Narmada, said to be shaped like the sign Om. We got there through a heavy crowd, all of us in one auto.",
+            "lat": 22.2436,
+            "lng": 76.1505,
+            "postcard": "omkareshwar-the-ghats"
+          },
+          {
+            "place": "Omkareshwar, after dark",
+            "time": "From about 6:50 pm",
+            "note": "The bridges, the ghats and the crowd, all lit up and reflected in the Narmada.",
+            "lat": 22.2457,
+            "lng": 76.1505,
+            "postcard": "omkareshwar-the-river-at-night"
+          }
+        ]
+      },
+      {
+        "title": "Tuesday 27 January: Back in Ujjain",
+        "stops": [
+          {
+            "place": "Mahakal Lok",
+            "time": "About noon",
+            "note": "The corridor of about 900 m from the visitor plaza to the temple, opened on 11 October 2022, with statues and murals of the stories of Shiva.",
+            "lat": 23.182,
+            "lng": 75.7673,
+            "postcard": "mahakal-lok-shiva-on-the-serpent"
+          }
+        ]
+      }
+    ]
   }
 ]
