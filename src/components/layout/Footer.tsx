@@ -5,6 +5,7 @@ import { getJournal, hasSampleContent } from "@/content";
 import { balancedSample } from "@/content/selectors";
 import { LogoMark } from "@/components/brand/LogoMark";
 import { Photo } from "@/components/ui/Photo";
+import { PullLamp } from "./PullLamp";
 import styles from "./Footer.module.css";
 
 const TILTS = [-2.5, 1.8, -1.2, 2.2, -1.8, 1.5, -2.1, 2.4, -1.4, 1.9, -2.0, 1.6];
@@ -91,6 +92,10 @@ export async function Footer() {
         </div>
 
         <div className={styles.by}>
+          <div className={styles.lampWrap}>
+            <PullLamp className={styles.lamp} />
+            <p className={styles.lampNote}>Pull the cord for day or night.</p>
+          </div>
           <p>
             Made by{" "}
             <a href={siteConfig.author.website} className="text-link" rel="noopener">

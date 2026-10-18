@@ -28,9 +28,11 @@ Personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal
 | See what changed and when | [[11 Changelog]] |
 | Check where the sample photographs came from | [[12 Sample Content and Credits]] |
 
-## Status (2026-10-17)
+## Status (2026-10-18)
 
 - Content is authored in `content/` and `public/images/` (see `content/README.md`); 123 postcards, eleven of them silent videos (all the author's own: P.F. Chang's, Daksina Bhawan, Costa Coffee, NY United Cafe, Shikarbagh in Jaipur, Punjab Grill, Skyhouse in Noida, the Kasol to Jispa trip, art including a friend's drawing, random clicks and a Delhi Metro city shot), 14 places (Gurugram, Delhi, Noida, Jaipur, Bari, Kasol, Manikaran, Manali, Sissu, Jispa, Shinku La, Ujjain, Omkareshwar and Barwaha, made automatically from the postcards), 7 cafés, 5 stories ("The emptiest metro", "The langur that wasn't", "The tree Parvati planted", "All of us in one auto" and "A dip in the Narmada"), and 2 trips ("Kasol to Jispa" and "Ujjain and Omkareshwar"). All the stand-in sample content was removed on 2026-10-14. Supabase is used only for the visitor guest desk and is **not yet connected** ([[06 Supabase Setup]]); the desk shows "being set up" until then.
+- Pages made shorter (gallery paging, tabbed places, a shorter home page with a chapter index) and cafés, visitors and about reworked: [[09 Decisions]] D45.
+- UI upgrade from the eight newest design references (trip card folders, a highlights reel, story covers, café print stacks, the footer lamp): see [[09 Decisions]] D44 and [[11 Changelog]]. Typecheck, lint, production build and audit pass. Not yet committed.
 - Typecheck, lint and production build pass (59 static pages). Work since the last push (the whole pivot: repo content, visitors, postcard pages, itineraries, search, flat map, dark theme, cursor) is **not committed**.
 - axe on the new pages, Lighthouse and real devices are **not** done. See [[08 Quality and Verification]].
 

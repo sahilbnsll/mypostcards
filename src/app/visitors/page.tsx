@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { getVisitorWall } from "@/content/visitors";
 import { CardComposer } from "@/components/features/visitors/CardComposer";
-import { VisitorWall } from "@/components/features/visitors/VisitorWall";
+import { VisitorBoard } from "@/components/features/visitors/VisitorBoard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { PageHead } from "@/components/ui/PageHead";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Visitors",
@@ -33,7 +34,20 @@ export default async function VisitorsPage() {
               : "The guest desk is still being set up, so cards can not be sent just yet. You can already try the pen."}
           </p>
         )}
-        <CardComposer />
+        <div className={styles.desk}>
+          <CardComposer />
+          <aside className={styles.aside} aria-label="How the guest desk works">
+            <h2 className={styles.asideTitle}>How the desk works</h2>
+            <ul role="list" className={styles.points}>
+              <li>Write it, draw it, or do both on the same card.</li>
+              <li>A name is optional. Leave it out and the card says a visitor.</li>
+              <li>It goes up on the wall right away.</li>
+            </ul>
+            <a href="#on-the-wall" className={`text-link ${styles.jump}`}>
+              {wall.cards.length > 0 ? `See the ${wall.cards.length} cards on the wall` : "Jump to the wall"}
+            </a>
+          </aside>
+        </div>
       </section>
 
       <section className="wrap section--tight" aria-labelledby="on-the-wall">
@@ -44,7 +58,7 @@ export default async function VisitorsPage() {
           badge={wall.cards.length > 0 ? `${wall.cards.length} cards on the wall` : undefined}
         />
         {wall.cards.length > 0 ? (
-          <VisitorWall cards={wall.cards} />
+          <VisitorBoard cards={wall.cards} />
         ) : (
           <EmptyState
             title={wall.status === "unavailable" ? "The wall could not be loaded" : "The wall is empty"}

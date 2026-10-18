@@ -1,34 +1,27 @@
-import Link from "next/link";
-import { reveal } from "@/lib/reveal";
-import { Photo } from "@/components/ui/Photo";
+import { StoryCard } from "./StoryCard";
 import type { Story } from "@/content/types";
-import { formatDate } from "@/lib/utils";
 import styles from "./StoryFeature.module.css";
 
-/** One story, given room: a tall photograph that drifts slightly as it scrolls, and the start of the text. */
-export function StoryFeature({ story }: { story: Story }) {
+/**
+ * The home page's stories: the featured one as a wide lead, with up to two more beside it. Each is
+ * a cover card (see StoryCard); with one story the lead simply takes the whole row.
+ */
+export function StoryFeature({ stories }: { stories: Story[] }) {
+  const [lead, ...rest] = stories;
+  if (!lead) return null;
+  const side = rest.slice(0, 2);
   return (
-    <article className={styles.feature}>
-      <Link href={`/stories/${story.slug}`} className={styles.media} aria-hidden tabIndex={-1} {...reveal("photo")}>
-        <span className={styles.drift} data-drift>
-          <Photo image={story.coverImage} ratio="4 / 5" sizes="(min-width: 62rem) 42vw, 100vw" />
-        </span>
-      </Link>
-      <div className={styles.text} {...reveal("text")}>
-        <h3 className={styles.title}>
-          <Link href={`/stories/${story.slug}`}>{story.title}</Link>
-        </h3>
-        {story.subtitle && <p className={styles.subtitle}>{story.subtitle}</p>}
-        <p className={styles.excerpt}>{story.excerpt}</p>
-        <p className={styles.meta}>
-          {[story.publishedAt ? formatDate(story.publishedAt) : undefined, `${story.readingTimeMinutes ?? 3} min read`]
-            .filter(Boolean)
-            .join(" · ")}
-        </p>
-        <Link href={`/stories/${story.slug}`} className={`text-link ${styles.more}`}>
-          Read the story
-        </Link>
+    <div className={styles.shelf} data-side={side.length}>
+      <div className={styles.lead}>
+        <StoryCard story={lead} variant="lead" />
       </div>
-    </article>
+      {side.length > 0 && (
+        <div className={styles.side}>
+          {side.map((story, index) => (
+            <StoryCard key={story.slug} story={story} index={index + 1} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

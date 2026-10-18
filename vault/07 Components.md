@@ -13,6 +13,7 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 | Component | Notes |
 |---|---|
 | `Header` **client** | Fixed bar; wordmark with a CSS-drawn stamp; sliding underline; opaque after scroll (IntersectionObserver sentinel); below 62rem a **Menu** button opens a modal `<dialog>` with staggered links. The menu is tied to the pathname it was opened on, so navigating closes it without an effect |
+| `PullLamp` (`layout`) | Footer desk lamp; dragging or tapping its cord flips the theme through `theme.ts` (`useTheme`, `setTheme`), shared with `ThemeToggle`. The cord's spring is written straight to the SVG |
 | `Footer` | Night-blue, airmail edge on top, nav links, credit line, and the sample-content notice when any sample row exists |
 
 ## Primitives (`ui/`)
@@ -38,16 +39,21 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 | `BloomGallery` **client** | Category chips (radiogroup, arrow keys), live status, CSS-columns grid with true ratios, bloom filter, hover caption, lightbox. `filterable={false}` for trip/place/café/story pages; `stickyFilters` on `/gallery` |
 | `Lightbox` **client** + `useLightbox` | Native dialog; FLIP open; arrows, swipe, buttons; wrap-around; neighbour preloading; postcard-back metadata panel; hash deep link; focus returns to the opener |
 | `PrintCarousel` **client** | Pegged prints on a string; native scroll-snap; pendulum swing; mouse-drag; back/forward buttons with edge states; opens the lightbox |
-| `TripCards` | Focus-card grid (used on `/trips` and place pages) |
-| `TripStack` | Sticky stacking cards for the home page's featured trips; whole card is a link; text on a scrim |
+| `LoadMore`, `Tabs`, `ChipGroup` (`ui`) | Shared controls for shorter pages: the foot of a paged list (how far through, next batch, show all), a row of tabs where only the open panel is mounted, and a one-of-many pill row (arrow keys) |
+| `PlacesExplorer` | Globe, map and list as tabs (home and `/destinations`) |
+| `CafeBrowser`, `VisitorBoard` | The cafés page (city filter, sort, six at a time) and the guest wall (kind filter, twelve at a time) |
+| `ChapterRail` | Home page index down the right edge; appears while scrolling, minimises after about 1.8 s of stillness |
+| `TripCards`, `PostcardFolder` | Trips as card folders in a focus-card grid (used on `/trips` and place pages). `PostcardFolder`: cover as back panel, up to three prints inside, frosted-glass front; one link, CSS only ([[09 Decisions]] D44) |
+| `MorphReel` (`features/reel`) | Highlights on a trip page: a WebGL noise dissolve between up to seven photographs (`dissolve.ts`), a print on the desk with its caption beside it; arrows, ticks, arrow keys, swipe; fade fallback, instant with reduced motion |
+| `TripStack` | Removed in D45 (the home page uses `TripCards` folders now) |
 | `GlobePostcards` **client** | cobe globe with pins and anchored polaroids; drag to turn; pause button; WebGL failure hides it; reduced motion holds it still |
 | `PlacesGlobe` | Globe plus the visible list of pinned postcards (links to `/gallery#p=slug`); on home and `/destinations` |
 | `ZoomGallery` | Seven-photo collage; scroll-linked zoom on wide screens, a plain columns grid elsewhere. Needs exactly 7 postcards |
 | `FeaturedBento` **client** | Five selected postcards in a bento on `/gallery`; opens the lightbox for just those five (no hash sync, so it never fights the main gallery) |
 | `PhotoSpread` | Five postcards in an overlapping row that springs apart on scroll; reuses `DeckDrag`; used on About |
 | `PlacesIndex` | Typographic list with a sliding print |
-| `StoryFeature`, `StoryCard` | Home feature and list cards. `as="h2"` on index pages for correct heading order |
-| `CafeCard` | Photo, name, location, vibe tags, usual order |
+| `StoryFeature`, `StoryCard`, `StoryGrid` | Stories as covers: photograph, read-time postmark, title, excerpt revealed on hover or focus (always shown on touch and on the `lead` variant). `StoryGrid` is the stories page (wide lead plus cards); `StoryFeature` is the home page (lead plus two). `as="h2"` on index pages for correct heading order |
+| `CafeCard` | Photo, name, location, vibe tags, usual order; up to two other prints fan out from behind the cover on hover (`prints`, from `cafePrints`) |
 | `StatsBar` | Scale indicator under the hero: horizontal paper strip displaying postcard, place, trip, and story counts with quick links |
 | `TripDiary` **client** | The trip's postcards day by day: a date slip and day name that stay in view, a grid of small prints (handwritten titles, play mark on videos), a spine drawn over in red as each day scrolls past; photographs with no date go in a last "More photos" group; a print opens the viewer ([[09 Decisions]] D41) |
 | `ItineraryExplorer` **client** | The itinerary list with day buttons, a follow-the-scroll switch, stop cards (time slip, tip, postcard print) and the route map beside it ([[09 Decisions]] D42) |

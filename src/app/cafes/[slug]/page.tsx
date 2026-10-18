@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getJournal } from "@/content";
-import { EMPTY_SLUG, findBySlug, postcardCount, postcardsForCafe, staticSlugs, toViews } from "@/content/selectors";
+import { EMPTY_SLUG, cafePrints, findBySlug, postcardCount, postcardsForCafe, staticSlugs, toViews } from "@/content/selectors";
 import { CafeCard } from "@/components/features/cafes/CafeCard";
 import { CafeGuide } from "@/components/features/cafes/CafeGuide";
 import { MapLink } from "@/components/features/cafes/MapLink";
@@ -57,6 +57,7 @@ async function CafeContent({ params }: { params: Params }) {
     .filter((c) => c.slug !== cafe.slug)
     .sort((a, b) => Number(b.destinationSlug === cafe.destinationSlug) - Number(a.destinationSlug === cafe.destinationSlug))
     .slice(0, 3);
+  const otherPrints = cafePrints(journal, others);
 
   return (
     <article>
@@ -97,7 +98,7 @@ async function CafeContent({ params }: { params: Params }) {
           <SectionHeader id="more-cafes" title="More cafés" action={{ href: "/cafes", label: "All cafés" }} />
           <div className="card-grid">
             {others.map((other, index) => (
-              <CafeCard key={other.slug} cafe={other} count={postcardCount(journal, "cafeSlug", other.slug)} index={index} />
+              <CafeCard key={other.slug} cafe={other} count={postcardCount(journal, "cafeSlug", other.slug)} index={index} prints={otherPrints[other.slug]} />
             ))}
           </div>
         </section>

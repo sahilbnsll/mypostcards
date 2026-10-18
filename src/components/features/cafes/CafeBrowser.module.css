@@ -1,0 +1,37 @@
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-5);
+}
+
+.sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.sort select {
+  min-height: 2.25rem;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.status {
+  margin-block: var(--s-4) var(--s-6);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}

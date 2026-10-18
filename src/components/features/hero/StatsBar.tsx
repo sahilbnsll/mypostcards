@@ -16,9 +16,9 @@ export function StatsBar({
 }: StatsBarProps) {
   const stats = [
     { count: totalPostcards, singular: "postcard", pluralText: "postcards", href: "#collection" },
-    { count: totalPlaces, singular: "place", pluralText: "places", href: "/destinations" },
-    { count: totalTrips, singular: "trip", pluralText: "trips", href: "/trips" },
-    { count: totalStories, singular: "story", pluralText: "stories", href: "/stories" },
+    { count: totalPlaces, singular: "place", pluralText: "places", href: "#places" },
+    { count: totalTrips, singular: "trip", pluralText: "trips", href: "#trips" },
+    { count: totalStories, singular: "story", pluralText: "stories", href: "#stories" },
   ];
 
   return (

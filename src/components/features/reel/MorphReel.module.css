@@ -1,0 +1,203 @@
+/* A print on the desk, with the photograph's own words beside it */
+.reel {
+  display: grid;
+  gap: var(--s-6) clamp(var(--s-6), 6vw, var(--s-9));
+  align-items: center;
+  max-width: 62rem;
+  margin-inline: auto;
+  border-radius: var(--radius-card);
+}
+
+.reel:focus-visible {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 10px;
+}
+
+@media (min-width: 48rem) {
+  .reel {
+    grid-template-columns: minmax(0, 30rem) minmax(0, 1fr);
+  }
+}
+
+.print {
+  position: relative;
+  padding: 0.7rem 0.7rem 2.6rem;
+  background: var(--print);
+  box-shadow: var(--shadow-lift);
+  rotate: -1.4deg;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+/* A strip of tape holds it to the desk */
+.tape {
+  position: absolute;
+  top: -0.9rem;
+  left: 50%;
+  width: 5.5rem;
+  height: 1.7rem;
+  background: color-mix(in srgb, var(--print) 55%, rgb(190 200 215 / 0.55));
+  box-shadow: 0 1px 2px rgb(15 26 43 / 0.18);
+  translate: -50% 0;
+  rotate: 2.5deg;
+  opacity: 0.85;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.plain {
+  position: absolute;
+  inset: 0;
+  animation: develop 700ms var(--ease-out) both;
+}
+
+.plain > span {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+@keyframes develop {
+  from {
+    opacity: 0;
+    filter: brightness(1.7) contrast(0.7);
+  }
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+.canvas[data-on] {
+  visibility: visible;
+}
+
+.side {
+  display: grid;
+  gap: var(--s-3);
+  align-content: center;
+  min-width: 0;
+}
+
+.count {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.title {
+  font-family: var(--font-hand);
+  font-size: clamp(2.6rem, 2rem + 3vw, 4.4rem);
+  font-weight: 400;
+  line-height: 0.95;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.caption {
+  max-width: 36ch;
+  color: var(--ink-soft);
+}
+
+.open {
+  justify-self: start;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--ink);
+  transition:
+    background-color var(--d-fast) var(--ease-out),
+    border-color var(--d-fast) var(--ease-out),
+    translate var(--d-base) var(--ease-spring);
+}
+
+.arrow:hover {
+  border-color: var(--ink);
+  background: var(--paper-deep);
+}
+
+.arrow:active {
+  translate: 0 1px;
+}
+
+.arrow:focus-visible,
+.tick:focus-visible {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 3px;
+}
+
+.ticks {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+/* The tick is a small bar; the button around it is a comfortable target */
+.tick {
+  position: relative;
+  width: 1.5rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: none;
+}
+
+.tick::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.15rem;
+  left: 0.15rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--rule-strong);
+  translate: 0 -50%;
+  transition:
+    background-color var(--d-base) var(--ease-out),
+    height var(--d-base) var(--ease-out);
+}
+
+.tick:hover::after {
+  background: var(--muted);
+}
+
+.tick[aria-current]::after {
+  height: 5px;
+  background: var(--air-red);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plain {
+    animation: none;
+  }
+}

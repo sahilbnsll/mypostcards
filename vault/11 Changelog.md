@@ -8,6 +8,23 @@ updated: 2026-10-18
 
 Newest first.
 
+## 2026-10-18 (later still): Punjab Grill rating
+- **Punjab Grill** now has your rating, 4.8/5, with a line about it (the food is crazy good, the ambience decent, and a refreshing pan shot at the end was the cherry on top), and the café note lists what you had: soya chaap, garlic naan, butter naan, paneer lababdar, and the peach iced tea and cold coffee from the postcards. Still no map link.
+
+## 2026-10-18 (latest, 2): Shorter pages and an easier home page
+- **Gallery** shows 24 postcards first and then "Show 24 more" (with a progress meter), 13,963 px down to 4,847 px. **Places** puts the globe, the map and the list in tabs (4,575 px to 1,694 px). **Home** goes from 12,086 px to 9,251 px: two trip folders, a shorter zoom, six visitor cards and a tabbed places section ([[09 Decisions]] D45).
+- **A chapter index on the home page** (wide screens): ticks for each section, the current one in red, shown while scrolling and tucked away after a moment of stillness.
+- **Cafés**: filter by city, sort (rating, postcards, name), six at a time. **Visitors**: a filter by kind, twelve cards at a time, and a note on how the desk works beside the composer. **About**: five linked cards with live counts, and a "Right now" line written from the data.
+- Fixed a few pixels of sideways scroll on phones (the home page's scattered visitor cards).
+
+## 2026-10-18 (latest): A UI upgrade from eight new design references
+- **Trips are card folders** on `/trips` and on place pages: the cover is the back panel, three of the trip's prints are tucked inside, and a frosted-glass front carries the title, dates and an airmail lip. Point at one (or tab to it) and the glass tips forward while the prints rise and fan ([[09 Decisions]] D44).
+- **A highlights reel on each trip page**: seven frames that develop into each other through a noise dissolve (WebGL), with the postcard's own title and line beside the print. Arrows, ticks, arrow keys and swipe change the frame; nothing plays by itself; reduced motion swaps instantly; without WebGL it fades.
+- **Stories are covers** on the stories page (a wide lead and tall cards), on the home page (a lead and two more) and on trip and place pages: photograph, read-time postmark, title, and the excerpt sliding up on hover or focus.
+- **Cafés have a stack of prints** behind each cover that fans out on hover.
+- **A pull-cord lamp in the footer** switches day and night, the same switch as the header button.
+- Not used from the new references: the scroll-trapping wheel, the 4,200-bird flock, the video hero.
+
 ## 2026-10-18 (later): The Ujjain and Omkareshwar family trip
 - **New trip "Ujjain and Omkareshwar"**, 25 to 27 January 2026, a family trip over the Republic Day long weekend (with the author's parents, bhua and a friend of the father's family): 46 postcards (39 photographs and 7 silent videos; an eighth, "Under the pergola" at Mahakal Lok, was deleted at the author's request), a 3 day itinerary with 9 stops and a route map, and a trip story with the route, the long weekend, Mahakaleshwar and Mahakal Lok, the Siddhavat, Kaal Bhairav, Omkareshwar and what to know ([[09 Decisions]] D43).
 - **Three new places** on the globe, the maps and the Places list: Ujjain (34 postcards), Omkareshwar (9) and Barwaha (3). Madhya Pradesh is a new postcard on the globe (46).

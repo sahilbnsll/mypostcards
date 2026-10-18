@@ -1,4 +1,4 @@
-import type { Category, ImageAsset, Journal, Postcard, PostcardView } from "./types";
+import type { Category, ImageAsset, Journal, Postcard, PostcardView, Trip } from "./types";
 
 type WithSlug = { slug: string };
 
@@ -40,6 +40,37 @@ export function categoryCounts(postcards: readonly Postcard[]): Partial<Record<C
 /** Featured first, then the rest in their saved order. */
 export function featuredFirst<T extends { featured: boolean }>(items: readonly T[]): T[] {
   return [...items.filter((i) => i.featured), ...items.filter((i) => !i.featured)];
+}
+
+/**
+ * A few postcards to show off (tucked into a folder, a stack or a reel): featured ones first, then
+ * the rest spread evenly through the collection so they are not all from one moment. Never the one
+ * whose image is already the cover.
+ */
+export function samplePostcards(postcards: readonly Postcard[], coverSrc: string | undefined, max = 3): Postcard[] {
+  const usable = postcards.filter((p) => p.image.src !== coverSrc);
+  const picked: Postcard[] = usable.filter((p) => p.featured).slice(0, max);
+  const rest = usable.filter((p) => !p.featured);
+  const room = Math.min(max - picked.length, rest.length);
+  if (room > 0) {
+    const step = rest.length / room;
+    for (let i = 0; i < room; i++) picked.push(rest[Math.floor(i * step + step / 2)]);
+  }
+  return picked;
+}
+
+/** The images of a few postcards, for a folder or a stack. */
+export const samplePrints = (postcards: readonly Postcard[], coverSrc: string | undefined, max = 3): ImageAsset[] =>
+  samplePostcards(postcards, coverSrc, max).map((p) => p.image);
+
+/** The prints tucked behind a café's cover, by café slug (never the cover itself). */
+export function cafePrints(journal: Journal, cafes: readonly { slug: string; coverImage: ImageAsset }[], max = 2): Record<string, ImageAsset[]> {
+  return Object.fromEntries(cafes.map((c) => [c.slug, samplePrints(postcardsForCafe(journal, c.slug), c.coverImage.src, max)]));
+}
+
+/** The prints for each trip's folder, by trip slug. */
+export function tripPrints(journal: Journal, trips: readonly Trip[], max = 3): Record<string, ImageAsset[]> {
+  return Object.fromEntries(trips.map((t) => [t.slug, samplePrints(postcardsForTrip(journal, t.slug), t.coverImage.src, max)]));
 }
 
 /** True when any visible content is stand-in sample content. */

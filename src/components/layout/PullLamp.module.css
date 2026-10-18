@@ -1,0 +1,46 @@
+/* The lamp is drawn in a 480 x 560 box; --light (0 to 1) is how much of it is glowing */
+.lamp {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 480 / 560;
+  --light: 0;
+  isolation: isolate;
+}
+
+.art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.lit {
+  opacity: var(--light);
+}
+
+/* A 48px target that rides on the cord's knob */
+.handle {
+  position: absolute;
+  left: calc(350 / 480 * 100%);
+  top: calc(329 / 560 * 100%);
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  translate: -50% -50%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.handle:active {
+  cursor: grabbing;
+}
+
+.handle:focus-visible {
+  outline: 2px solid var(--on-night);
+  outline-offset: 2px;
+  background: rgb(255 224 160 / 0.12);
+}

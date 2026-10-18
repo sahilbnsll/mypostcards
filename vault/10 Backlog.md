@@ -8,6 +8,10 @@ updated: 2026-10-18
 
 ## Do next
 
+- [ ] Real URL pagination for the gallery (so a page of results can be linked and shared) would need the page to read search params, which makes it dynamic under Cache Components; the current "show more" keeps the instant filters. Revisit if the collection passes a few hundred postcards.
+
+- [ ] New references: look at `MorphReel`, `PostcardFolder`, the story covers and the lamp on a real phone and in Safari and Firefox; the reel loads up to seven textures per trip page, so measure it on a slow connection. A reel on place pages is a possible follow-up.
+
 - [x] ~~Video on postcards~~ done 2026-10-17 ([[09 Decisions]] D37). Left: the clips were encoded in the browser at a fixed bitrate and are not fast-start optimised; re-encode with ffmpeg (`-movflags +faststart`, CRF about 26) if the files ever matter, and show a duration on the play mark.
 - [x] ~~Live map for the trip route~~ done 2026-10-17 ([[09 Decisions]] D38). Left: the same live map for the Places "On the map" world view (it is still the SVG map), photo postcards that overlap where stops are a few km apart (Kasol and Manikaran; zooming apart works, clustering or fanning out would be better), and a purpose-made dark style instead of inverting the light one.
 - [ ] Ujjain trip, for the author to check: the three stories and the trip story (written from the photographs, the web and what the author said); that the river video was at the Barwaha ghat (about 11 km from Omkareshwar) and not at Omkareshwar itself, and whether to call the river "Ganga ji" as the author did or the Narmada, which is what the text says; where the "lane at night" video was filmed (it is placed from its time); who is in the group photographs (the notes do not name anyone); and dates for the two mirror selfies.

@@ -24,7 +24,7 @@ src/components/
   layout/                Header, Footer, ThemeToggle
   ui/                    Photo, Stamp/Postmark, PageHead, CollectionHero, SectionHeader, ViewAllButton, Prose, EmptyState,
                          DetailSkeleton, MotionController, Cursor
-  features/              hero, gallery, lightbox, carousel, trips (TripCards, TripStack, Itinerary), places, globe,
+  features/              hero, gallery, lightbox, carousel, trips (TripCards, PostcardFolder, Itinerary), reel (MorphReel), places, globe,
                          map (SvgMap), zoom, stories, cafes (CafeGuide), postcard (PostcardBack, RelatedPostcards),
                          search (SearchPalette), visitors (CardComposer, DrawingPad, VisitorWall)
 src/content/             types, selectors, visitors(-shared), generated/journal.json (not committed), index.ts

@@ -4,26 +4,19 @@ import { getVisitorWall } from "@/content/visitors";
 import {
   balancedSample,
   featuredFirst,
-  globePins,
-  globeGroups,
-  globePlaces,
-  mapPins,
-  placePins,
   postcardCount,
   toViews,
-  visitedPlaces,
+  tripPrints,
 } from "@/content/selectors";
 import { Hero } from "@/components/features/hero/Hero";
 import { StatsBar } from "@/components/features/hero/StatsBar";
 import { PrintCarousel } from "@/components/features/carousel/PrintCarousel";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
-import { TripStack } from "@/components/features/trips/TripStack";
+import { TripCards } from "@/components/features/trips/TripCards";
+import { ChapterRail } from "@/components/features/hero/ChapterRail";
 import { ZoomGallery } from "@/components/features/zoom/ZoomGallery";
-import { PlacesGlobe } from "@/components/features/globe/PlacesGlobe";
-import { LivePlacesMap } from "@/components/features/map/LivePlacesMap";
-import { SvgMap } from "@/components/features/map/SvgMap";
+import { PlacesExplorer } from "@/components/features/places/PlacesExplorer";
 import { StoryFeature } from "@/components/features/stories/StoryFeature";
-import { PlacesIndex } from "@/components/features/places/PlacesIndex";
 import { VisitorWall, VisitorWallSkeleton } from "@/components/features/visitors/VisitorWall";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -31,14 +24,26 @@ import { ViewAllButton } from "@/components/ui/ViewAllButton";
 
 const GALLERY_PREVIEW = 8;
 const CAROUSEL_COUNT = 10;
+const VISITOR_PREVIEW = 6;
+
+/** The home page's sections, in order, for the index down the edge of the screen. */
+const CHAPTERS = [
+  { id: "lately", label: "Lately" },
+  { id: "look-closer", label: "Look closer" },
+  { id: "collection", label: "Collection" },
+  { id: "trips", label: "Trips" },
+  { id: "stories", label: "Stories" },
+  { id: "visitors", label: "Visitors" },
+  { id: "places", label: "Places" },
+];
 
 async function HomeVisitorSection() {
-  const wall = await getVisitorWall(11);
-  const hasMoreVisitors = wall.cards.length > 10;
-  const previewCards = wall.cards.slice(0, 10);
+  const wall = await getVisitorWall(VISITOR_PREVIEW + 1);
+  const hasMoreVisitors = wall.cards.length > VISITOR_PREVIEW;
+  const previewCards = wall.cards.slice(0, VISITOR_PREVIEW);
 
   return (
-    <section className="section" aria-labelledby="visitors-title">
+    <section id="visitors" className="section" aria-labelledby="visitors-title">
       <div className="wrap">
         <SectionHeader
           id="visitors-title"
@@ -60,7 +65,7 @@ async function HomeVisitorSection() {
 
 function HomeVisitorFallback() {
   return (
-    <section className="section" aria-labelledby="visitors-title">
+    <section id="visitors" className="section" aria-labelledby="visitors-title">
       <div className="wrap">
         <SectionHeader
           id="visitors-title"
@@ -69,7 +74,7 @@ function HomeVisitorFallback() {
           badge="Gathering cards..."
           action={{ href: "/visitors", label: "Leave a card" }}
         />
-        <VisitorWallSkeleton count={10} scattered />
+        <VisitorWallSkeleton count={VISITOR_PREVIEW} scattered />
       </div>
     </section>
   );
@@ -83,17 +88,14 @@ export default async function HomePage() {
   const recent = toViews(journal, postcards.slice(0, CAROUSEL_COUNT));
   const preview = toViews(journal, balancedSample(postcards, GALLERY_PREVIEW));
   const zoomCards = featuredFirst(postcards).slice(5, 12);
-  const pins = globePins(postcards, 7, 20, new Map(destinations.map((d) => [d.slug, d.name])));
   const featuredTrips = featuredFirst(trips).slice(0, 3);
-  const featuredStory = featuredFirst(stories)[0];
+  const featuredStories = featuredFirst(stories).slice(0, 3);
 
   const tripCounts = Object.fromEntries(trips.map((t) => [t.slug, postcardCount(journal, "tripSlug", t.slug)]));
-  const placeCounts = Object.fromEntries(
-    destinations.map((d) => [d.slug, postcardCount(journal, "destinationSlug", d.slug)]),
-  );
 
   return (
     <>
+      {postcards.length > 0 && <ChapterRail chapters={CHAPTERS} />}
       <Hero cards={heroCards} totalPostcards={postcards.length} totalPlaces={destinations.length} />
       <StatsBar
         totalPostcards={postcards.length}
@@ -112,7 +114,7 @@ export default async function HomePage() {
       ) : (
         <>
           {recent.length >= 3 && (
-            <section className="section" aria-labelledby="lately-title">
+            <section id="lately" className="section" aria-labelledby="lately-title">
               <div className="wrap">
                 <SectionHeader
                   id="lately-title"
@@ -125,7 +127,7 @@ export default async function HomePage() {
           )}
 
           {zoomCards.length === 7 && (
-            <section aria-labelledby="zoom-title">
+            <section id="look-closer" aria-labelledby="zoom-title">
               <div className="wrap section-top">
                 <SectionHeader id="zoom-title" title="Look closer" intro="Seven photographs from the collection." />
               </div>
@@ -148,7 +150,7 @@ export default async function HomePage() {
           </section>
 
           {featuredTrips.length > 0 && (
-            <section className="section" aria-labelledby="trips-title">
+            <section id="trips" className="section" aria-labelledby="trips-title">
               <div className="wrap">
                 <SectionHeader
                   id="trips-title"
@@ -156,16 +158,16 @@ export default async function HomePage() {
                   intro="Photographs grouped around a journey, a place or a weekend."
                   action={{ href: "/trips", label: "All trips" }}
                 />
-                <TripStack trips={featuredTrips} counts={tripCounts} />
+                <TripCards trips={featuredTrips} counts={tripCounts} prints={tripPrints(journal, featuredTrips)} />
               </div>
             </section>
           )}
 
-          {featuredStory && (
-            <section className="section" aria-labelledby="story-title">
+          {featuredStories.length > 0 && (
+            <section id="stories" className="section" aria-labelledby="story-title">
               <div className="wrap">
                 <SectionHeader id="story-title" title="From the stories" action={{ href: "/stories", label: "All stories" }} />
-                <StoryFeature story={featuredStory} />
+                <StoryFeature stories={featuredStories} />
               </div>
             </section>
           )}
@@ -175,7 +177,7 @@ export default async function HomePage() {
           </Suspense>
 
           {destinations.length > 0 && (
-            <section className="section" aria-labelledby="places-title">
+            <section id="places" className="section" aria-labelledby="places-title">
               <div className="wrap">
                 <SectionHeader
                   id="places-title"
@@ -183,13 +185,7 @@ export default async function HomePage() {
                   intro="Where the postcards were sent from."
                   action={{ href: "/destinations", label: "All places" }}
                 />
-                <PlacesGlobe pins={pins} places={globePlaces(journal)} groups={globeGroups(journal)} />
-                <div style={{ marginBottom: "var(--s-8)" }}>
-                  <LivePlacesMap places={placePins(journal)} label="Map of every place with a postcard">
-                    <SvgMap pins={mapPins(journal)} label="Map of every place with a postcard" />
-                  </LivePlacesMap>
-                </div>
-                <PlacesIndex places={visitedPlaces(journal).slice(0, 6)} counts={placeCounts} />
+                <PlacesExplorer journal={journal} listLimit={6} />
               </div>
             </section>
           )}

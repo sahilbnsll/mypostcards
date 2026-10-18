@@ -34,15 +34,15 @@
 /*
  * Enhanced: wide screen, motion allowed, scroll-linked animation supported. The section is tall;
  * a viewport-sized stage sticks while the tiles scale up. The animation range covers exactly the
- * stretch where the stage is stuck: with a 250svh section and a 100svh viewport that is
- * 100/350 to 250/350 of the way through the element's "cover" range.
+ * stretch where the stage is stuck: with a 190svh section and a 100svh viewport that is
+ * 100/290 to 190/290 of the way through the element's "cover" range.
  */
 @media (min-width: 62rem) and (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     .zoom {
       max-width: none;
       padding: 0;
-      height: 250svh;
+      height: 190svh;
       view-timeline-name: --zoom;
       view-timeline-axis: block;
     }
@@ -68,7 +68,7 @@
       margin: 0;
       animation: zoom linear both;
       animation-timeline: --zoom;
-      animation-range: cover 28.57% cover 71.43%;
+      animation-range: cover 34.48% cover 65.52%;
       will-change: transform;
     }
 

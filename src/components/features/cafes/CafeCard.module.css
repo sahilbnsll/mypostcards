@@ -4,9 +4,64 @@
   align-content: start;
 }
 
-.media {
-  display: block;
+/* The cover sits on top of up to two other prints, which peek out a little at rest */
+.stack {
+  position: relative;
   margin-bottom: var(--s-3);
+  --fan: clamp(4px, 1vw, 9px);
+}
+
+.print {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 4px;
+  border-radius: var(--radius-card);
+  background: var(--print);
+  box-shadow: var(--shadow-print);
+  overflow: hidden;
+  transition:
+    translate 520ms var(--ease-spring),
+    rotate 520ms var(--ease-spring);
+}
+
+.print[data-side="left"] {
+  translate: calc(var(--fan) * -1) 3px;
+  rotate: -2.2deg;
+}
+
+.print[data-side="right"] {
+  translate: var(--fan) 5px;
+  rotate: 2.6deg;
+}
+
+/* One print goes to the right only */
+.stack[data-prints="1"] .print[data-side="left"] {
+  translate: var(--fan) 4px;
+  rotate: 2.4deg;
+}
+
+@media (hover: hover) {
+  .card:hover .print[data-side="left"] {
+    translate: calc(var(--fan) * -2.4) -2px;
+    rotate: -6deg;
+  }
+
+  .card:hover .print[data-side="right"] {
+    translate: calc(var(--fan) * 2.4) 0;
+    rotate: 6.5deg;
+  }
+
+  .card:hover .stack[data-prints="1"] .print[data-side="left"] {
+    translate: calc(var(--fan) * 2.4) 0;
+    rotate: 6deg;
+  }
+}
+
+.media {
+  position: relative;
+  z-index: 1;
+  display: block;
   overflow: hidden;
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-print);
@@ -14,6 +69,12 @@
 
 .img {
   transition: scale 900ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .print {
+    transition: none;
+  }
 }
 
 .card:hover .img {

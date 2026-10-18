@@ -1,65 +1,37 @@
-.feature {
+.shelf {
   display: grid;
-  gap: var(--s-6);
+  gap: var(--s-5) var(--gutter);
 }
 
-.media {
-  display: block;
-  overflow: hidden;
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-print);
-}
-
-/* Taller than its frame, so the scroll-linked drift never reveals an edge */
-.drift {
-  display: block;
-  margin-block: -6%;
-}
-
-.text {
+.lead,
+.side {
   display: grid;
-  gap: var(--s-4);
-  align-content: center;
-  justify-items: start;
+  gap: var(--s-5);
 }
 
-.title {
-  font-size: var(--step-3);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  max-width: 14ch;
+.lead > article {
+  min-height: clamp(26rem, 58vw, 38rem);
 }
 
-.subtitle {
-  font-size: var(--step-1);
-  font-style: italic;
-  color: var(--ink-soft);
-}
-
-.excerpt {
-  max-width: 44ch;
-}
-
-.meta {
-  font-family: var(--font-display);
-  font-size: var(--step--1);
-  font-weight: 500;
-  color: var(--muted);
-}
-
-.more {
-  font-family: var(--font-display);
-  font-weight: 600;
+.side > article {
+  min-height: 20rem;
 }
 
 @media (min-width: 62rem) {
-  .feature {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-    gap: var(--s-9);
-    align-items: center;
+  .shelf[data-side="1"],
+  .shelf[data-side="2"] {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
   }
 
-  .media {
-    margin-block: var(--s-4);
+  .lead > article {
+    min-height: 36rem;
+  }
+
+  .side {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .shelf[data-side="1"] .side {
+    grid-template-rows: 1fr;
   }
 }

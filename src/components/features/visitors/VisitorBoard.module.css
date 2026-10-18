@@ -1,0 +1,15 @@
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-5);
+  margin-bottom: var(--s-6);
+}
+
+.status {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}

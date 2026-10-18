@@ -171,6 +171,24 @@
   color: var(--on-night);
 }
 
+.lampWrap {
+  display: grid;
+  gap: var(--s-1);
+  justify-items: start;
+  margin-bottom: var(--s-3);
+}
+
+.lamp {
+  width: 8.5rem;
+}
+
+.lampNote {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--on-night-muted);
+}
+
 .sample {
   max-width: 36ch;
 }
@@ -195,5 +213,9 @@
     justify-self: end;
     text-align: right;
     height: 100%;
+  }
+
+  .lampWrap {
+    justify-items: end;
   }
 }

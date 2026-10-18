@@ -32,7 +32,7 @@ export default async function GalleryPage() {
           All postcards
         </h2>
         {items.length > 0 ? (
-          <BloomGallery items={items} stickyFilters />
+          <BloomGallery items={items} stickyFilters pageSize={24} />
         ) : (
           <EmptyState title="Nothing here yet" body="Postcards will appear here as soon as the first one is added." action={{ href: "/", label: "Back to the start" }} />
         )}

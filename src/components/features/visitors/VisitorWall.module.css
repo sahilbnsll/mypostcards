@@ -119,17 +119,13 @@
   column-count: unset;
   display: grid;
   gap: var(--s-3);
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   padding: var(--s-5) var(--s-2);
+  overflow-x: clip;
 }
 
+/* The home page shows six cards: one row on wide screens, two rows of three, then three of two */
 @media (max-width: 80rem) {
-  .wall[data-scattered] {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 55rem) {
   .wall[data-scattered] {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -139,7 +135,7 @@
   .wall[data-scattered] {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--s-4);
-    padding: var(--s-3) 0;
+    padding: var(--s-3);
   }
 }
 

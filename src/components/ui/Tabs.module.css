@@ -1,0 +1,64 @@
+.list {
+  display: inline-flex;
+  gap: var(--s-1);
+  max-width: 100%;
+  margin-bottom: var(--s-5);
+  padding: 0.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+}
+
+.tab {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-pill);
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background-color var(--d-base) var(--ease-out),
+    color var(--d-base) var(--ease-out);
+}
+
+.tab:hover {
+  color: var(--ink);
+}
+
+.tab[aria-selected="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 2px;
+}
+
+.hint {
+  font-weight: 500;
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+
+.panel {
+  animation: panel-in var(--d-slow) var(--ease-out) both;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}

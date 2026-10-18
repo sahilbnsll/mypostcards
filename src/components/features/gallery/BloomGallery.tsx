@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
+import { LoadMore } from "@/components/ui/LoadMore";
 import { Photo } from "@/components/ui/Photo";
 import { PlayBadge } from "@/components/ui/PostcardMedia";
 import { CATEGORIES, CATEGORY_BY_ID } from "@/content/categories";
@@ -22,6 +23,8 @@ interface BloomGalleryProps {
   filterable?: boolean;
   /** Keep the chips pinned under the header while the gallery scrolls past. */
   stickyFilters?: boolean;
+  /** Show this many photographs first and the rest on request. Filtering shows every match. 0 shows all. */
+  pageSize?: number;
 }
 
 const SIZES = "(min-width: 75rem) 25vw, (min-width: 52rem) 33vw, 50vw";
@@ -47,7 +50,8 @@ function deal<T extends { image: { width: number; height: number } }>(items: rea
   return columns;
 }
 
-export function BloomGallery({ items, filterable = true, stickyFilters = false }: BloomGalleryProps) {
+export function BloomGallery({ items, filterable = true, stickyFilters = false, pageSize = 0 }: BloomGalleryProps) {
+  const [limit, setLimit] = useState(pageSize);
   const [filter, setFilter] = useState<Filter>("all");
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -195,7 +199,10 @@ export function BloomGallery({ items, filterable = true, stickyFilters = false }
     if (matches(item) && hover?.slug !== item.slug) delays.set(item.slug, Math.min(rank++ * 60, 420));
   }
 
-  const layouts = COLUMN_COUNTS.map((count) => ({ count, columns: deal(sortedItems, count) }));
+  // The first batch only, until someone asks for more or starts filtering (a filter must see everything)
+  const paged = pageSize > 0 && !filtering && limit < sortedItems.length;
+  const shown = paged ? sortedItems.slice(0, limit) : sortedItems;
+  const layouts = COLUMN_COUNTS.map((count) => ({ count, columns: deal(shown, count) }));
 
   const cell = (item: LightboxItem, index: number) => {
     const on = matches(item);
@@ -396,6 +403,17 @@ export function BloomGallery({ items, filterable = true, stickyFilters = false }
           ))}
         </div>
       ))}
+
+      {paged && (
+        <LoadMore
+          shown={shown.length}
+          total={sortedItems.length}
+          step={pageSize}
+          noun="postcards"
+          onMore={() => setLimit((n) => n + pageSize)}
+          onAll={() => setLimit(sortedItems.length)}
+        />
+      )}
 
       <Lightbox
         list={lightbox.state?.list ?? null}

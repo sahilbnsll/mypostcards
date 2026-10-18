@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { getJournal } from "@/content";
 import {
   EMPTY_SLUG,
+  cafePrints,
   cafesForDestination,
   findBySlug,
   postcardCount,
@@ -11,6 +12,7 @@ import {
   staticSlugs,
   storiesForDestination,
   toViews,
+  tripPrints,
   tripsForDestination,
 } from "@/content/selectors";
 import { CafeCard } from "@/components/features/cafes/CafeCard";
@@ -58,6 +60,7 @@ async function DestinationContent({ params }: { params: Params }) {
   const cafes = cafesForDestination(journal, place.slug);
   const stories = storiesForDestination(journal, place.slug);
   const tripCounts = Object.fromEntries(trips.map((t) => [t.slug, postcardCount(journal, "tripSlug", t.slug)]));
+  const cafePrintsBySlug = cafePrints(journal, cafes);
   const cafeCounts = Object.fromEntries(cafes.map((c) => [c.slug, postcardCount(journal, "cafeSlug", c.slug)]));
 
   return (
@@ -85,7 +88,7 @@ async function DestinationContent({ params }: { params: Params }) {
       {trips.length > 0 && (
         <section className="wrap section--tight" aria-labelledby="place-trips">
           <SectionHeader id="place-trips" title="Trips here" />
-          <TripCards trips={trips} counts={tripCounts} />
+          <TripCards trips={trips} counts={tripCounts} prints={tripPrints(journal, trips)} />
         </section>
       )}
 
@@ -94,7 +97,7 @@ async function DestinationContent({ params }: { params: Params }) {
           <SectionHeader id="place-cafes" title="Cafés" />
           <div className="card-grid">
             {cafes.map((cafe, index) => (
-              <CafeCard key={cafe.slug} cafe={cafe} count={cafeCounts[cafe.slug] ?? 0} index={index} />
+              <CafeCard key={cafe.slug} cafe={cafe} count={cafeCounts[cafe.slug] ?? 0} index={index} prints={cafePrintsBySlug[cafe.slug]} />
             ))}
           </div>
         </section>

@@ -8,10 +8,12 @@ import {
   EMPTY_SLUG,
   findBySlug,
   postcardsForTrip,
+  samplePostcards,
   staticSlugs,
   storiesForTrip,
   toViews,
 } from "@/content/selectors";
+import { MorphReel } from "@/components/features/reel/MorphReel";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
 import { Itinerary } from "@/components/features/trips/Itinerary";
 import { TripDiary } from "@/components/features/trips/TripDiary";
@@ -53,6 +55,7 @@ async function TripContent({ params }: { params: Params }) {
   const stories = storiesForTrip(journal, trip.slug);
   const place = trip.destinationSlug ? findBySlug(journal.destinations, trip.destinationSlug) : undefined;
   const when = formatRange(trip.startDate, trip.endDate, trip.periodLabel);
+  const reel = samplePostcards(postcardsForTrip(journal, trip.slug), undefined, 7);
 
   return (
     <article>
@@ -79,6 +82,21 @@ async function TripContent({ params }: { params: Params }) {
       {trip.story && (
         <section className="wrap section--tight" aria-label="About this trip" {...reveal("text")}>
           <Prose text={trip.story} />
+        </section>
+      )}
+
+      {reel.length >= 3 && (
+        <section className="wrap section--tight" aria-labelledby="trip-reel">
+          <SectionHeader id="trip-reel" title="Highlights" intro="A few frames from the trip. Use the arrows, the ticks or a swipe." />
+          <MorphReel
+            label={`Highlights from ${trip.title}`}
+            frames={reel.map((card) => ({
+              image: card.image,
+              title: card.title,
+              caption: card.caption,
+              href: `/postcards/${card.slug}`,
+            }))}
+          />
         </section>
       )}
 

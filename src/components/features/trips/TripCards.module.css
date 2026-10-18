@@ -10,60 +10,23 @@
   }
 }
 
+/* One to three folders a row; with only one or two they keep a sensible size instead of stretching */
 @media (min-width: 62rem) {
   .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+    max-width: calc(var(--cols, 3) * 30rem + (var(--cols, 3) - 1) * var(--gutter));
+    margin-inline: auto;
   }
 }
 
 .card {
-  display: grid;
-  gap: var(--s-4);
   transition:
     filter 400ms var(--ease-out),
     opacity 400ms var(--ease-out),
     scale 400ms var(--ease-out);
 }
 
-.photo {
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-print);
-}
-
-.img {
-  transition: scale 900ms var(--ease-out);
-}
-
-.card:hover .img {
-  scale: 1.045;
-}
-
-.text {
-  display: grid;
-  gap: var(--s-2);
-}
-
-.title {
-  font-family: var(--font-display);
-  font-size: var(--step-2);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-}
-
-.summary {
-  max-width: 44ch;
-  color: var(--ink-soft);
-}
-
-.meta {
-  font-family: var(--font-display);
-  font-size: var(--step--1);
-  font-weight: 500;
-  color: var(--muted);
-}
-
-/* Focus: everything except the card in hand steps back */
+/* Focus: everything except the folder in hand steps back */
 @media (hover: hover) {
   .grid:has(.card:hover) .card:not(:hover) {
     filter: blur(2.5px) saturate(0.55);

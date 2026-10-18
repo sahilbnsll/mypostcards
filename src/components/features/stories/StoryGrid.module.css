@@ -1,0 +1,34 @@
+.grid {
+  display: grid;
+  gap: var(--s-6) var(--gutter);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 40rem) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The first story takes the full row on two columns, and two of three on wide screens */
+  .grid > li:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 62rem) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid > li:first-child {
+    grid-column: span 2;
+  }
+}
+
+.grid > li {
+  display: grid;
+}
+
+.grid > li > article {
+  min-height: clamp(26rem, 36vw, 33rem);
+}

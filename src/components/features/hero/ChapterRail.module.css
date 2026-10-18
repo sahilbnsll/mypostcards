@@ -1,0 +1,96 @@
+/* Wide screens only: on a phone the page is short enough to need no index */
+.rail {
+  display: none;
+}
+
+@media (min-width: 80rem) {
+  .rail {
+    position: fixed;
+    top: 50%;
+    right: clamp(0.75rem, 1.4vw, 1.75rem);
+    z-index: 20;
+    display: block;
+    translate: 0 -50%;
+    opacity: 0;
+    transition: opacity var(--d-slow) var(--ease-out);
+  }
+
+  /* Shown while scrolling, and while pointed at or focused. Hidden, it still wakes when you
+     point at the edge where it sits, or tab into it. */
+  .rail[data-show] {
+    opacity: 1;
+  }
+}
+
+.list {
+  display: grid;
+  gap: 0.15rem;
+  justify-items: end;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Labels are there for whoever points at the rail, and for the chapter you are in */
+.label {
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  box-shadow: 0 0 0 1px var(--rule);
+  opacity: 0;
+  translate: 6px 0;
+  transition:
+    opacity var(--d-base) var(--ease-out),
+    translate var(--d-base) var(--ease-out);
+}
+
+.rail:hover .label,
+.link[aria-current] .label,
+.link:focus-visible .label {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.tick {
+  width: 0.9rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--rule-strong);
+  transition:
+    width var(--d-base) var(--ease-out),
+    background-color var(--d-base) var(--ease-out);
+}
+
+.link:hover .tick {
+  background: var(--ink);
+}
+
+.link[aria-current] .tick {
+  width: 1.6rem;
+  background: var(--air-red);
+}
+
+.link[aria-current] {
+  color: var(--ink);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail,
+  .label,
+  .tick {
+    transition: none;
+  }
+}

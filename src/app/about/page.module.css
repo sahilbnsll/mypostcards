@@ -23,3 +23,93 @@
     margin-top: var(--s-4);
   }
 }
+
+.kept {
+  margin-top: var(--s-5);
+}
+
+/* The parts of the journal: a row of small cards, each a way in */
+.parts {
+  display: grid;
+  gap: var(--s-5) var(--s-5);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+}
+
+@media (min-width: 75rem) {
+  .parts {
+    grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr));
+  }
+}
+
+.part {
+  display: grid;
+  gap: var(--s-1);
+  align-content: start;
+  height: 100%;
+  padding: var(--s-3) var(--s-3) var(--s-4);
+  border-radius: var(--radius-card);
+  background: var(--print);
+  color: var(--print-ink);
+  box-shadow: var(--shadow-print);
+  transition:
+    translate var(--d-base) var(--ease-spring),
+    box-shadow var(--d-base) var(--ease-out);
+}
+
+.part:hover {
+  translate: 0 -4px;
+  box-shadow: var(--shadow-lift);
+}
+
+.part:focus-visible {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 3px;
+}
+
+.thumb {
+  display: block;
+  margin-bottom: var(--s-2);
+  overflow: hidden;
+}
+
+.partTitle {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.partCount {
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--air-red);
+}
+
+.partLine {
+  margin-top: var(--s-1);
+  font-size: var(--step--1);
+  line-height: 1.4;
+  color: var(--print-ink);
+}
+
+.kinds {
+  margin-top: var(--s-5);
+  max-width: var(--measure);
+  color: var(--muted);
+}
+
+.open {
+  margin-top: var(--s-5);
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .part {
+    transition: none;
+  }
+
+  .part:hover {
+    translate: none;
+  }
+}
