@@ -16,6 +16,10 @@
   display: block;
 }
 
+:global(html[data-cursor]) .cursor[data-away] {
+  visibility: hidden;
+}
+
 :global(html:has(dialog[open])) .cursor {
   display: none;
 }

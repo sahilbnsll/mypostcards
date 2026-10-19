@@ -8,6 +8,12 @@ updated: 2026-10-18
 
 Newest first.
 
+## 2026-10-19 (latest): Daksina Bhawan map link
+- **Daksina Bhawan** now links to the new map location you gave (`https://maps.app.goo.gl/oYX9EUkKJh863JhB6`); the old link is replaced.
+
+## 2026-10-19 (later): A smoother mouse around the globe
+- **The globe no longer slows the page down.** It was making the browser re-style the whole page about 60 times a second (about 14 ms a frame on the Places page), which made the mouse feel laggy and slow around it, worst on the busier home page and on slower computers. It now does its own cheap maths for where the places are, and the round cursor gives way to the normal pointer over the globe ([[09 Decisions]] D48).
+
 ## 2026-10-19: Two Jaipur restaurants and a few clicks from Agra
 - **Brunatos** (hand crafted pizza, Queens Corner, Vaishali Nagar, Jaipur; your map link; rated 4.9/5): the Bianca al Formaggio pizza with the berry mojito, a selfie with the mojito (the brown story bars cropped off), and a silent video of the inside. Your words about the pizza, the mojito and the ambience are the notes and the rating line.
 - **Bento B** (1st Floor, KK Square, C Scheme, Jaipur, beside the Crossword bookstore; your map link; rated 4.9/5): dumpling soup, creamy miso ramen, the katsu curry bento box (turned the right way up) with the ramen, Japanese cheesecake, and a silent 20 second video of the box being unwrapped. The bookstore story is on the café page and the video.

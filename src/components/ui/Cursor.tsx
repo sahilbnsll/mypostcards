@@ -47,6 +47,9 @@ export function Cursor() {
 
     const setState = (state: "idle" | "grow" | "press" | "hidden") => {
       inner.dataset.state = state;
+      // While it is hidden the circle is taken out of painting altogether, so the blend layer is
+      // not composited over the page (a blend over a moving canvas is expensive) when it is not seen
+      el.toggleAttribute("data-away", state === "hidden");
     };
 
     const onMove = (event: MouseEvent) => {

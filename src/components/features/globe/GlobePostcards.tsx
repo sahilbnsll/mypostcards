@@ -36,6 +36,35 @@ const CARD_GAP = 7;
 
 const markerId = (place: PlacePin) => `place-${place.id}`;
 
+/**
+ * Where a place is on the globe's face, for a given turn, worked out here instead of read back
+ * from cobe. cobe publishes each marker's visibility as a CSS variable on the page root by
+ * rewriting a <style> element every frame, and reading that back forced the browser to recalculate
+ * the style of the whole page 60 times a second (about 14 ms a frame on this page: the cause of the
+ * laggy mouse around the globe). This is the same projection cobe uses (a sphere of radius 0.8 in
+ * a unit box), so the dots and the postcards still line up with the drawn markers.
+ * Returns the position as a fraction of the box, and whether the place is on the visible side.
+ */
+function project(lat: number, lng: number, phi: number, theta: number) {
+  const r = (lat * Math.PI) / 180;
+  const a = (lng * Math.PI) / 180 - Math.PI;
+  const k = Math.cos(r) * 0.8;
+  const t0 = -k * Math.cos(a);
+  const t1 = Math.sin(r) * 0.8;
+  const t2 = k * Math.sin(a);
+  const cp = Math.cos(phi);
+  const sp = Math.sin(phi);
+  const ct = Math.cos(theta);
+  const st = Math.sin(theta);
+  const c = cp * t0 + sp * t2;
+  const s = sp * st * t0 + ct * t1 - cp * st * t2;
+  return {
+    x: (c + 1) / 2,
+    y: (1 - s) / 2,
+    visible: -sp * ct * t0 + st * t1 + cp * ct * t2 >= 0 || c * c + s * s >= 0.64,
+  };
+}
+
 /** Rotation (phi) that brings a longitude to the middle of the globe (cobe's documented focus formula). */
 const phiForLongitude = (lng: number) => Math.PI - ((lng * Math.PI) / 180 - Math.PI / 2);
 
@@ -206,7 +235,6 @@ export function GlobePostcards({ places, groups }: GlobePostcardsProps) {
     const dots: Dot[] = places.map(() => ({ x: 0, y: 0, facing: false }));
     const indexOfPlace = new Map(places.map((place, i) => [place.id, i]));
     const slots: Slot[] = groups.map(() => ({ x: 0, y: 0, cx: 0, cy: 0, placed: false, facing: false }));
-    const markerEls = new Map<string, HTMLElement>();
     const box = { size: 0, cw: 0, ch: 0 };
 
     const measure = () => {
@@ -218,32 +246,20 @@ export function GlobePostcards({ places, groups }: GlobePostcardsProps) {
       }
     };
 
-    // cobe adds one element per marker (inside a wrapper it makes around the canvas), positioned in
-    // percent of the globe's box and named by id
-    const findMarkers = () => {
-      for (const el of Array.from(wrap.querySelectorAll<HTMLElement>("div[style*='anchor-name']"))) {
-        const match = /--cobe-(place-[^;\s]+)/.exec(el.getAttribute("style") ?? "");
-        if (match) markerEls.set(match[1], el);
-      }
-    };
-
     const setFacing = (target: HTMLElement | SVGElement | null | undefined, facing: boolean) => {
       if (target) target.dataset.facing = facing ? "true" : "false";
     };
 
     const place = () => {
       if (box.size === 0 || box.cw === 0) return;
-      if (markerEls.size < places.length) findMarkers();
-      const root = getComputedStyle(document.documentElement);
+      const { phi, theta } = state.current;
 
       places.forEach((p, i) => {
-        const el = markerEls.get(markerId(p));
-        if (!el) return;
         const dot = dots[i];
-        dot.x = (parseFloat(el.style.left) / 100) * box.size;
-        dot.y = (parseFloat(el.style.top) / 100) * box.size;
-        // cobe sets this variable only for markers on the side facing the viewer
-        const facing = root.getPropertyValue(`--cobe-visible-${markerId(p)}`).trim() !== "";
+        const at = project(p.lat, p.lng, phi, theta);
+        dot.x = at.x * box.size;
+        dot.y = at.y * box.size;
+        const facing = at.visible;
         if (facing !== dot.facing) {
           dot.facing = facing;
           setFacing(hitRefs.current[p.id], facing);
@@ -308,6 +324,7 @@ export function GlobePostcards({ places, groups }: GlobePostcardsProps) {
       const size = canvas.offsetWidth;
       if (size === 0 || globe) return;
       try {
+        const stylesBefore = new Set(document.head.querySelectorAll("style"));
         globe = createGlobe(canvas, {
           devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
           width: size,
@@ -325,6 +342,12 @@ export function GlobePostcards({ places, groups }: GlobePostcardsProps) {
           markers: places.map((p) => ({ location: [p.lat, p.lng] as [number, number], size: 0.03, id: markerId(p) })),
           opacity: 1,
         });
+        // cobe keeps a <style> element in the page head and rewrites it every frame (see project()).
+        // Nothing reads it any more, so take it out of the document: rewriting a detached element
+        // costs nothing, where an attached one makes the browser re-style the whole page each frame.
+        for (const style of Array.from(document.head.querySelectorAll("style"))) {
+          if (!stylesBefore.has(style)) style.remove();
+        }
         canvas.style.opacity = "1";
         measure();
         raf = requestAnimationFrame(frame);
@@ -399,7 +422,7 @@ export function GlobePostcards({ places, groups }: GlobePostcardsProps) {
 
   return (
     <div className={styles.root}>
-      <div ref={wrapRef} className={styles.globe} data-supported={supported || undefined} data-active={active !== null || undefined}>
+      <div ref={wrapRef} className={styles.globe} data-native-cursor data-supported={supported || undefined} data-active={active !== null || undefined}>
         <canvas
           ref={canvasRef}
           className={styles.canvas}

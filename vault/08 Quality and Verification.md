@@ -6,6 +6,8 @@ updated: 2026-10-18
 
 # Quality and verification
 
+- Globe performance (2026-10-19): the per-frame cost was measured on `/destinations` (14.3 ms a frame with cobe's `<style>` attached and read back, 0.2 ms detached), cobe's style element is gone from the head after the fix, and all 15 hit dots sit exactly on cobe's markers (0 px difference, also after the globe had turned). **Not checked:** the frame rate and mouse feel on the live site or a real slow machine (this was measured by timing the page work, in an emulated pane), the far side of the globe (the visibility test is cobe's own formula, copied, and was not seen flipping), the home page's globe, and Safari and Firefox.
+
 - Brunatos, Bento B and Agra (2026-10-19): content validates (134 postcards, 15 places, 9 cafés); the Bento B page shows its rating, note and map link, the Agra place page lists its three postcards, and both clips load, are silent (no audio track) and decode (3.0 s and 20.5 s). Typecheck, lint, the production build (323 pages) and audit pass. **Not checked:** every new postcard page in the browser, and the clips' look on a phone. The Brunatos clip came out about 0.4 s longer than the source because the recording stops after the last frame.
 
 - Pinned line (2026-10-18): content validates (123 postcards); the home page's "Pinned up" section lists the ten pinned postcards in the chosen order in the browser. Typecheck and lint pass. **Not checked:** the production build for this change, and the line on a phone and in dark theme.
