@@ -73,6 +73,9 @@ export function PostcardBack({ item, as: Heading = "h2", variant = "panel" }: Po
         {item.location.coordinates && !item.location.approximate && (
           <Fact label="Coordinates" value={formatCoordinates(item.location.coordinates.lat, item.location.coordinates.lng)} />
         )}
+        {item.location.altitude !== undefined && (
+          <Fact label="Altitude" value={`${Math.round(item.location.altitude).toLocaleString("en-GB")} m above sea level`} />
+        )}
         {item.camera && (
           <Fact
             label="Camera"

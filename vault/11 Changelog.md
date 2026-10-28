@@ -1,12 +1,30 @@
 ---
 title: Changelog
 tags: [changelog]
-updated: 2026-10-18
+updated: 2026-10-28
 ---
 
 # Changelog
 
 Newest first.
+
+## 2026-10-28 (latest): A sticker footer
+- The footer now signs off with **"places seen, moments kept"** (your tagline, shortened) written once in a fat single-stroke script as it scrolls into view, with six postal stickers (a paper plane, a postmark, a star, a stamp, a compass and an air mail tag) that slap down as the pen passes. Drag them with a mouse, finger or pen (they lean into a throw), move them with the arrow keys, press Escape or double-click to put one back, and click the writing to see it written again. Nothing touches scrolling and reduced motion shows the finished wall ([[09 Decisions]] D52, [[07 Components]]).
+
+## 2026-10-28 (later): Better search and social sharing for every page
+- **Every page now has its own title, description, canonical link and share card**: the home page, gallery, trips, places, cafés, stories, visitors, about, art and random clicks, and each postcard, trip, place, café and story (the last four now have their own share image, like postcards already did).
+- **Structured data for search engines**: the site and its author, each postcard as an image or video with when and where it was taken (including time zone, height above sea level and camera), trips as itineraries, places, cafés as reviews of a restaurant, stories as articles, and breadcrumbs.
+- **A sitemap with photographs and videos** (304 pages), content-based dates instead of the build date, a `robots.txt` that keeps the search data out, and an **RSS feed** at `/feed.xml` with the newest stories and 40 newest postcards ([[09 Decisions]] D51, [[04 Architecture]]).
+
+## 2026-10-28 (earlier): The Nepal trip, 125 postcards
+- **New trip "Nepal: 26 to 30 December 2025"** with five days (Delhi to Kathmandu, Thamel, Pashupatinath and Boudhanath, the road to Pokhara, Pokhara's caves, falls and pagoda, and Ghandruk), 110 photographs and 15 clips. Three new places: Kathmandu, Pokhara and Ghandruk.
+- **Exact date, time and height for each postcard**, read from the photographs (new optional fields `time` and `altitude`), shown on the back of the postcard. Flight photographs are published without a map pin.
+- **The dancing clip keeps its sound** (new optional postcard field `sound`): it never starts by itself, does not loop, is labelled "Video, with sound", and every other clip is still silent. It has no date and sits at Lakeside, Pokhara, as you chose ([[09 Decisions]] D50, [[05 Content Model]]).
+- The photographs are upright and free of location data; the originals are in the git-ignored `private-originals/trips/nepal/`. `*.zip` is now git-ignored (`nepal.zip`, 450 MB, sits in the project root).
+- Notes are written from the photographs and the web, not your words: see [[10 Backlog]] for what to check.
+
+## 2026-10-28: Complete sentences everywhere
+- Trip folder summaries, story excerpts, visitor card messages, pinned-line captions, search subtitles and diary print titles are no longer cut off with "…": they show in full ([[09 Decisions]] D49).
 
 ## 2026-10-19 (latest): Daksina Bhawan map link
 - **Daksina Bhawan** now links to the new map location you gave (`https://maps.app.goo.gl/oYX9EUkKJh863JhB6`); the old link is replaced.

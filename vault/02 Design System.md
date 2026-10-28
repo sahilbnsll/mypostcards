@@ -1,7 +1,7 @@
 ---
 title: Design System
 tags: [design]
-updated: 2026-10-14
+updated: 2026-10-28
 ---
 
 # Design system
@@ -99,9 +99,14 @@ Reference: `design-reference/Ui-components.md` (five 21st.dev-style components w
 
 **Second round (2026-10-18): the file now has 23 components. The new eight are `glass-folder-cards` (used as `PostcardFolder`), `works-wheel` (not used: it traps the wheel), `murmuration-wordmark` (not used: a constant heavy canvas), `pull-lamp` (used as the footer `PullLamp`), `morph-gallery` (used as `MorphReel`), `card-25` (the print stack behind `CafeCard`), `card-7` (used as the `StoryCard` cover) and `prisma-hero` (not used). Reasons in [[09 Decisions]] D44.**
 
+**Third round (2026-10-28): the file now has 25 components. `sticker-slap-footer` is used as the footer `StickerWall` (hand-lettered "places seen, moments kept", die-cut postal stickers, no framer-motion). `perspective-tunnel-hero` is not used: it hijacks the mouse wheel and is an endless corridor. Reasons in [[09 Decisions]] D52.**
+
 **All 11 references in `design-reference/Ui-components.md` have been read in full** (colour-filter gallery, polaroid line carousel, focus cards, scroll-morph hero, image-stream hero, cobe globe polaroids, drag cards, scroll cards, zoom parallax, gallery, gallery-4). Nine are used, adapted; two are deliberately not (virtual-scroll hero, endless 3D corridor).
 
 Reference notes about "shadcn project structure" and `/components/ui` were not applicable: the project already has its own `components/ui` primitives layer in CSS Modules and no Tailwind. No `framer-motion` was added.
+
+## Text is never clipped
+A sentence is shown whole: no line clamps and no ellipses on prose, captions or titles ([[09 Decisions]] D49). Containers grow to fit instead.
 
 ## Accessibility baked into the system
 

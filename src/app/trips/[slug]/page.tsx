@@ -23,6 +23,9 @@ import { CollectionHero } from "@/components/ui/CollectionHero";
 import { Prose } from "@/components/ui/Prose";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { formatRange, plural } from "@/lib/utils";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { breadcrumbJsonLd, pageMetadata, snippet, tripJsonLd } from "@/lib/seo";
+
 
 type Params = Promise<{ slug: string }>;
 
@@ -35,14 +38,19 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const trip = findBySlug((await getJournal()).trips, slug);
+  const journal = await getJournal();
+  const trip = findBySlug(journal.trips, slug);
   if (!trip) return {};
-  return {
-    title: trip.title,
-    description: trip.summary,
-    alternates: { canonical: `/trips/${trip.slug}` },
-    openGraph: { title: trip.title, description: trip.summary, images: [{ url: trip.coverImage.src, alt: trip.coverImage.alt }] },
-  };
+  const cards = postcardsForTrip(journal, trip.slug);
+  const places = [...new Set(cards.map((c) => c.location.city).filter((c): c is string => Boolean(c)))];
+  const first = cards.find((c) => c.location.coordinates && !c.location.approximate)?.location.coordinates;
+  return pageMetadata({
+    title: `${trip.title}: ${formatRange(trip.startDate, trip.endDate, trip.periodLabel) ?? "a trip"}, ${plural(cards.length, "postcard")}`,
+    description: snippet(trip.summary),
+    path: `/trips/${trip.slug}`,
+    keywords: [trip.title, ...places, "trip", "travel diary", "itinerary"],
+    ...(first ? { geo: { lat: first.lat, lng: first.lng, placeName: places[0] } } : {}),
+  });
 }
 
 async function TripContent({ params }: { params: Params }) {
@@ -57,8 +65,16 @@ async function TripContent({ params }: { params: Params }) {
   const when = formatRange(trip.startDate, trip.endDate, trip.periodLabel);
   const reel = samplePostcards(postcardsForTrip(journal, trip.slug), undefined, 7);
 
+  const stops = trip.days.flatMap((d) => d.stops).map((s) => ({ name: s.place, lat: s.coordinates?.lat, lng: s.coordinates?.lng }));
+
   return (
     <article>
+      <JsonLd
+        data={[
+          tripJsonLd(trip, stops, postcards.length),
+          breadcrumbJsonLd([{ name: "Trips", path: "/trips" }, { name: trip.title, path: `/trips/${trip.slug}` }]),
+        ]}
+      />
       <CollectionHero
         title={trip.title}
         lede={trip.summary}

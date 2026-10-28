@@ -9,8 +9,9 @@ import { RelatedPostcards } from "@/components/features/postcard/RelatedPostcard
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { PostcardMedia } from "@/components/ui/PostcardMedia";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { siteConfig } from "@/config/site";
-import { formatLocation } from "@/lib/utils";
+import { formatLocation, formatWhen } from "@/lib/utils";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { breadcrumbJsonLd, pageMetadata, postcardJsonLd, snippet } from "@/lib/seo";
 import styles from "./page.module.css";
 
 type Params = Promise<{ slug: string }>;
@@ -26,15 +27,27 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const card = findBySlug((await getJournal()).postcards, slug);
   if (!card) return {};
   const where = formatLocation(card.location, ["city", "country"]);
-  const description = card.caption ?? (where ? `A postcard from ${where}.` : `${card.title}, a postcard.`);
-  return {
-    title: card.title,
+  const when = formatWhen(card);
+  // The caption and the note, then where and when: what a search result or a share card should say
+  const description = snippet(
+    [card.caption ?? `${card.title}, a postcard${where ? ` from ${where}` : ""}.`, card.note, where && !card.caption?.includes(where) ? `${where}${when ? `, ${when}` : ""}.` : when ? `${when}.` : undefined]
+      .filter(Boolean)
+      .join(" "),
+    200,
+  );
+  const coords = card.location.coordinates && !card.location.approximate ? card.location.coordinates : undefined;
+  return pageMetadata({
+    title: where && !card.title.includes(where) ? `${card.title}, ${where}` : card.title,
     description,
-    alternates: { canonical: `/postcards/${card.slug}` },
+    path: `/postcards/${card.slug}`,
     // The share image comes from ./opengraph-image.tsx.
-    openGraph: { type: "article", title: card.title, description },
-    twitter: { card: "summary_large_image", title: card.title, description },
-  };
+    type: "article",
+    publishedTime: card.takenOn,
+    tags: card.tags,
+    keywords: [...card.tags, ...(card.location.city ? [card.location.city] : []), ...(card.location.country ? [card.location.country] : [])],
+    ...(card.video ? { videos: [{ url: card.video.src }] } : {}),
+    ...(coords ? { geo: { lat: coords.lat, lng: coords.lng, placeName: card.location.placeName ?? card.location.city, region: card.location.country } } : {}),
+  });
 }
 
 async function PostcardContent({ params }: { params: Params }) {
@@ -52,20 +65,12 @@ async function PostcardContent({ params }: { params: Params }) {
   const previous = all.length > 1 ? all[(at - 1 + all.length) % all.length] : undefined;
   const next = all.length > 1 ? all[(at + 1) % all.length] : undefined;
 
-  const where = formatLocation(card.location, ["city", "country"]);
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ImageObject",
-    name: card.title,
-    description: card.caption ?? card.image.alt,
-    contentUrl: card.image.src.startsWith("http") ? card.image.src : `${siteConfig.url}${card.image.src}`,
-    url: `${siteConfig.url}/postcards/${card.slug}`,
-    width: card.image.width,
-    height: card.image.height,
-    ...(where ? { contentLocation: where } : {}),
-    ...(card.takenOn ? { dateCreated: card.takenOn } : {}),
-    creator: { "@type": "Person", name: siteConfig.author.name, url: siteConfig.author.website },
-  };
+  const trip = card.tripSlug ? findBySlug(journal.trips, card.tripSlug) : undefined;
+  const cafe = card.cafeSlug ? findBySlug(journal.cafes, card.cafeSlug) : undefined;
+  const jsonLd = [
+    postcardJsonLd(card, { tripName: trip?.title, tripPath: trip ? `/trips/${trip.slug}` : undefined, cafeName: cafe?.name }),
+    breadcrumbJsonLd([{ name: "Gallery", path: "/gallery" }, { name: card.title, path: `/postcards/${card.slug}` }]),
+  ];
 
   return (
     <article>
@@ -112,7 +117,7 @@ async function PostcardContent({ params }: { params: Params }) {
         </section>
       )}
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <JsonLd data={jsonLd} />
     </article>
   );
 }

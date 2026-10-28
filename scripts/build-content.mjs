@@ -28,9 +28,10 @@ const outFile = join(root, "src", "content", "generated", "journal.json");
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const CATEGORIES = ["travel", "city", "cafe", "food", "getaway", "art", "random"];
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
+const TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
 
 const KEYS = {
-  postcard: ["slug", "title", "caption", "note", "image", "video", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "artist", "artistUrl", "credit", "creditUrl", "rating", "featured", "pinned", "sample"],
+  postcard: ["slug", "title", "caption", "note", "image", "video", "alt", "width", "height", "color", "category", "place", "city", "region", "country", "lat", "lng", "date", "period", "trip", "destination", "cafe", "story", "tags", "camera", "artist", "artistUrl", "credit", "creditUrl", "rating", "featured", "pinned", "time", "altitude", "sound", "sample"],
   trip: ["slug", "title", "summary", "story", "cover", "coverAlt", "coverWidth", "coverHeight", "coverColor", "destination", "start", "end", "period", "featured", "sample", "days"],
   day: ["title", "stops"],
   stop: ["place", "time", "note", "tip", "lat", "lng", "postcard"],
@@ -212,16 +213,20 @@ export async function buildContent({ quiet = false } = {}) {
       } else if (!existsSync(file)) {
         fail(where, `video file not found: public/images/${rel}`);
       } else {
-        video = { src: `/images/${rel}` };
+        video = { src: `/images/${rel}`, ...(raw.sound === true ? { sound: true } : {}) };
       }
     }
+    if (raw.sound !== undefined && (raw.sound !== true || raw.video === undefined)) fail(where, `"sound": true only goes with a "video" (the clip then keeps its audio; every other clip is silent)`);
     if (raw.date && !DATE.test(raw.date)) fail(where, `"date" must look like 2024-11-15`);
+    if (raw.time !== undefined && (!TIME.test(String(raw.time)) || !raw.date)) fail(where, `"time" is the local time of day the photograph was taken, like 16:58, and needs a "date"`);
+    if (raw.altitude !== undefined && (typeof raw.altitude !== "number" || !Number.isFinite(raw.altitude))) fail(where, `"altitude" is a number of metres above sea level`);
     const location = {
       placeName: str(raw.place, where, "place"),
       city: str(raw.city, where, "city"),
       region: str(raw.region, where, "region"),
       country: str(raw.country, where, "country"),
       coordinates: coordinates(raw.lat, raw.lng, where),
+      altitude: typeof raw.altitude === "number" ? raw.altitude : undefined,
     };
     postcards.push({
       slug,
@@ -233,6 +238,7 @@ export async function buildContent({ quiet = false } = {}) {
       category: raw.category,
       location: Object.fromEntries(Object.entries(location).filter(([, v]) => v !== undefined)),
       takenOn: raw.date,
+      ...(raw.time ? { takenTime: String(raw.time) } : {}),
       periodLabel: str(raw.period, where, "period"),
       tripSlug: raw.trip,
       destinationSlug: raw.destination,

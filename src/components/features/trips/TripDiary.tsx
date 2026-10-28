@@ -97,7 +97,7 @@ export function TripDiary({ postcards, days = [], tripTitle }: TripDiaryProps) {
                       type="button"
                       className={styles.print}
                       style={{ "--tilt": `${index % 2 === 0 ? -1.2 : 1}deg` } as CSSProperties}
-                      aria-label={`Open ${card.title}${card.video ? ", video" : ""}`}
+                      aria-label={`Open ${card.title}${card.video ? (card.video.sound ? ", video with sound" : ", video") : ""}`}
                       onClick={(event) => lightbox.open(card.slug, event.currentTarget, sorted)}
                     >
                       <span className={styles.photo}>

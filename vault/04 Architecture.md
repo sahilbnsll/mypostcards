@@ -1,7 +1,7 @@
 ---
 title: Architecture
 tags: [engineering]
-updated: 2026-10-17
+updated: 2026-10-28
 ---
 
 # Architecture
@@ -49,6 +49,8 @@ content/*.json + content/stories/*.md + public/images/**
 - No secret ever reaches the browser; the site never holds a write key.
 
 ## Rendering decisions
+
+SEO: `lib/seo.ts` holds `pageMetadata` and the JSON-LD builders, `components/ui/JsonLd.tsx` renders them, `lib/og.tsx` draws the share card used by the `opengraph-image.tsx` files (trips, places, cafés, stories, postcards; pre-rendered with `generateStaticParams`), `app/sitemap.ts` lists images and videos with content-based dates, `app/robots.ts` and `app/feed.xml/route.ts` (RSS). Segment config `dynamic = "force-static"` is not allowed under Cache Components ([[09 Decisions]] D51).
 
 - Index pages and the home page are fully static.
 - `[slug]` pages (including `/postcards/[slug]`): `generateStaticParams` prerenders every slug from the journal (133+ static pages). The page default export is a thin `<Suspense>` wrapper with a skeleton around the param-reading content, which is Cache Components' supported shape for dynamic params. See [[09 Decisions]].

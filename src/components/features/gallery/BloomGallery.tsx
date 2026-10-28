@@ -218,7 +218,7 @@ export function BloomGallery({ items, filterable = true, stickyFilters = false, 
           data-on={bloomed || undefined}
           data-dim={filtering && !bloomed ? true : undefined}
           data-grey={filtering || undefined}
-          aria-label={`Open ${label}${item.video ? ", video" : ""}`}
+          aria-label={`Open ${label}${item.video ? (item.video.sound ? ", video with sound" : ", video") : ""}`}
           onClick={(e) => lightbox.open(item.slug, e.currentTarget, matching.length > 0 && on ? matching : sortedItems)}
           onPointerEnter={(e) => onEnter(e, item.slug)}
           onPointerLeave={() => setHover((h) => (h?.slug === item.slug ? null : h))}

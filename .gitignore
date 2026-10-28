@@ -48,3 +48,6 @@ next-env.d.ts
 
 # Original photographs (they carry location data); only the cleaned copies in public/images are published
 /private-originals/
+
+# large originals handed over as archives (the photographs live in public/images and private-originals)
+*.zip

@@ -37,6 +37,8 @@ export interface LocationInfo {
   region?: string;
   country?: string;
   coordinates?: GeoCoordinates;
+  /** Metres above sea level, from the photograph's GPS. */
+  altitude?: number;
   /** True when the coordinates are the place's, not the exact spot the photo was taken. */
   approximate?: boolean;
   /** The named area the place belongs to (Delhi NCR), used to label pins on the globe and the map. */
@@ -55,6 +57,8 @@ export interface CameraMetadata {
 /** A short silent clip. The postcard's `image` is its poster frame, so the frame size is known. */
 export interface VideoAsset {
   src: string;
+  /** True for the one kind of clip that keeps its audio; every other clip is silent. */
+  sound?: boolean;
 }
 
 export interface Postcard {
@@ -71,6 +75,8 @@ export interface Postcard {
   location: LocationInfo;
   /** ISO date (YYYY-MM-DD) when known. */
   takenOn?: string;
+  /** Local time of day on `takenOn`, as 24 hour "HH:MM". */
+  takenTime?: string;
   /** Free-form period for approximate dates, e.g. "Late autumn 2024". */
   periodLabel?: string;
   tripSlug?: string;

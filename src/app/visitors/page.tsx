@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { getVisitorWall } from "@/content/visitors";
 import { CardComposer } from "@/components/features/visitors/CardComposer";
 import { VisitorBoard } from "@/components/features/visitors/VisitorBoard";
@@ -7,11 +8,11 @@ import { PageHead } from "@/components/ui/PageHead";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "Visitors",
-  description: "Leave a card: a thought, a suggestion, a place worth visiting. Write it or draw it.",
-  alternates: { canonical: "/visitors" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Guest desk: leave a card",
+  description: "Leave a card on the wall: a hello, a thought, a suggestion or a place worth visiting. Write it, draw it, or do both, and it goes up right away.",
+  path: "/visitors",
+});
 
 export default async function VisitorsPage() {
   const wall = await getVisitorWall();

@@ -22,8 +22,8 @@ export function formatDate(value: string, style: "month" | "long" = "long"): str
 }
 
 /** Exact date when known, otherwise the free-form period, otherwise nothing. */
-export function formatWhen(item: Pick<Postcard, "takenOn" | "periodLabel">): string | undefined {
-  if (item.takenOn) return formatDate(item.takenOn);
+export function formatWhen(item: Pick<Postcard, "takenOn" | "takenTime" | "periodLabel">): string | undefined {
+  if (item.takenOn) return item.takenTime ? `${formatDate(item.takenOn)}, ${item.takenTime}` : formatDate(item.takenOn);
   return item.periodLabel || undefined;
 }
 

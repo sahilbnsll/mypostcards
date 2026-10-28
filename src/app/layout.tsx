@@ -7,6 +7,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionController } from "@/components/ui/MotionController";
 import { Cursor } from "@/components/ui/Cursor";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { TWITTER_HANDLE, siteJsonLd } from "@/lib/seo";
 import "@/styles/globals.css";
 
 // Display: a quirky variable grotesk with a width axis, set tight and lowercase for the wordmark.
@@ -42,9 +44,22 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  keywords: ["photo journal", "travel photography", "digital postcards", "trips", "cafés", "food", "India", "Nepal"],
   authors: [{ name: siteConfig.author.name, url: siteConfig.author.website }],
   creator: siteConfig.author.name,
-  alternates: { canonical: "/" },
+  publisher: siteConfig.author.name,
+  category: "photography",
+  formatDetection: { telephone: false, email: false, address: false },
+  // Search engines may show full-size image previews: the photographs are the point of the site
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": [{ url: "/feed.xml", title: `${siteConfig.name}: new postcards and stories` }] },
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",
@@ -55,6 +70,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: TWITTER_HANDLE,
+    creator: TWITTER_HANDLE,
     title: siteConfig.name,
     description: siteConfig.description,
   },
@@ -89,6 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        <JsonLd data={siteJsonLd()} />
         <Suspense fallback={null}>
           <MotionController />
           <Cursor />

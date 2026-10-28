@@ -19,6 +19,8 @@ import { CafeCard } from "@/components/features/cafes/CafeCard";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
 import { StoryCard } from "@/components/features/stories/StoryCard";
 import { TripCards } from "@/components/features/trips/TripCards";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { breadcrumbJsonLd, pageMetadata, placeJsonLd, snippet } from "@/lib/seo";
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { CollectionHero } from "@/components/ui/CollectionHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -35,18 +37,18 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const place = findBySlug((await getJournal()).destinations, slug);
+  const journal = await getJournal();
+  const place = findBySlug(journal.destinations, slug);
   if (!place) return {};
-  return {
-    title: place.name,
-    description: place.description,
-    alternates: { canonical: `/destinations/${place.slug}` },
-    openGraph: {
-      title: place.name,
-      description: place.description,
-      ...(place.coverImage ? { images: [{ url: place.coverImage.src, alt: place.coverImage.alt }] } : {}),
-    },
-  };
+  const count = postcardsForDestination(journal, place.slug).length;
+  const where = [place.region, place.country].filter(Boolean).join(", ");
+  return pageMetadata({
+    title: place.status === "planned" ? `${place.name}: on my list` : `${place.name}: ${count} ${count === 1 ? "postcard" : "postcards"} from ${where || place.name}`,
+    description: snippet(place.description && !/^Postcards kept in/.test(place.description) ? place.description : `${count} ${count === 1 ? "postcard" : "postcards"} from ${place.name}${where ? `, ${where}` : ""}: photographs, trips, cafés and stories from there.`),
+    path: `/destinations/${place.slug}`,
+    keywords: [place.name, place.country, ...(place.region ? [place.region] : []), "travel photos"],
+    ...(place.coordinates ? { geo: { lat: place.coordinates.lat, lng: place.coordinates.lng, placeName: place.name, region: place.country } } : {}),
+  });
 }
 
 async function DestinationContent({ params }: { params: Params }) {
@@ -65,6 +67,12 @@ async function DestinationContent({ params }: { params: Params }) {
 
   return (
     <article>
+      <JsonLd
+        data={[
+          placeJsonLd(place, postcards.length),
+          breadcrumbJsonLd([{ name: "Places", path: "/destinations" }, { name: place.name, path: `/destinations/${place.slug}` }]),
+        ]}
+      />
       <CollectionHero
         title={place.name}
         lede={place.description}

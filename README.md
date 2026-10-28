@@ -81,6 +81,8 @@ public/images/
   random-clicks/        lamp-over-the-pothos.jpg, batman-doll.jpg, veni-vidi-vici-tattoo.jpg, kitkat-f1-car.jpg, spider-man-brand-new-day.jpg, ps5-brutality.jpg, golden-clouds.jpg, moon-through-the-clouds.jpg, plus a folder per place: ambience-mall/ (durga-pandal.jpg, flower-display.jpg), m3m-urbana/ (heart-in-the-sky.jpg), bari/ (langur-scarecrow.jpg), agra/ (flowers-round-a-mirror.jpg, teal-and-yellow-chairs.jpg, waffle.jpg)
   trips/kasol-to-jispa/ one folder per place on the trip: kasol/, manikaran/, sissu/, jispa/, manali/, shinku-la/
   trips/ujjain/         ram-ghat/, mahakaleshwar/, siddhavat/, kaal-bhairav/, barwaha/, omkareshwar/, mahakal-lok/, stay/ and videos/ (the silent clips; each clip's poster frame is its postcard image)
+  trips/nepal/          delhi/, flight/, kathmandu/, pashupatinath/, boudhanath/, pokhara places (lakeside/, devis-fall/, peace-pagoda/, caves ...), ghandruk/ and videos/ (the dance clip keeps its sound)
+  (git-ignored)         private-originals/ holds the untouched originals with GPS; *.zip is never committed
   destinations/<place>/ photos from a place that belong to no café or trip
 private-originals/      the same folders, holding your untouched originals (git-ignored, never published)
 ```

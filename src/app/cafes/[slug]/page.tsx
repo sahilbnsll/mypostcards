@@ -8,6 +8,8 @@ import { CafeCard } from "@/components/features/cafes/CafeCard";
 import { CafeGuide } from "@/components/features/cafes/CafeGuide";
 import { MapLink } from "@/components/features/cafes/MapLink";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { breadcrumbJsonLd, cafeJsonLd, pageMetadata, snippet } from "@/lib/seo";
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { CollectionHero } from "@/components/ui/CollectionHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -24,15 +26,17 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const cafe = findBySlug((await getJournal()).cafes, slug);
+  const journal = await getJournal();
+  const cafe = findBySlug(journal.cafes, slug);
   if (!cafe) return {};
-  const description = cafe.notes ?? `Postcards from ${cafe.name}.`;
-  return {
-    title: cafe.name,
-    description,
-    alternates: { canonical: `/cafes/${cafe.slug}` },
-    openGraph: { title: cafe.name, description, images: [{ url: cafe.coverImage.src, alt: cafe.coverImage.alt }] },
-  };
+  const count = postcardsForCafe(journal, cafe.slug).length;
+  const where = [cafe.neighborhood, cafe.city].filter(Boolean).join(", ");
+  return pageMetadata({
+    title: `${cafe.name}${cafe.city ? `, ${cafe.city}` : ""}${cafe.rating ? `: rated ${cafe.rating}/5` : ""}`,
+    description: snippet(`${cafe.rating ? `Rated ${cafe.rating}/5. ` : ""}${cafe.ratingNote ?? cafe.notes ?? `Photographs from ${cafe.name}${where ? `, ${where}` : ""}.`} ${count} ${count === 1 ? "postcard" : "postcards"}.`),
+    path: `/cafes/${cafe.slug}`,
+    keywords: [cafe.name, ...(cafe.city ? [cafe.city] : []), "café review", "restaurant review", ...cafe.vibeTags],
+  });
 }
 
 /** "6 October 2026" from an ISO date, the same on the server and in every time zone. */
@@ -61,6 +65,12 @@ async function CafeContent({ params }: { params: Params }) {
 
   return (
     <article>
+      <JsonLd
+        data={[
+          cafeJsonLd(cafe, postcards.length),
+          breadcrumbJsonLd([{ name: "Cafés", path: "/cafes" }, { name: cafe.name, path: `/cafes/${cafe.slug}` }]),
+        ]}
+      />
       <CollectionHero
         title={cafe.name}
         lede={cafe.notes}

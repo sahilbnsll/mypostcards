@@ -1,12 +1,17 @@
 ---
 title: Backlog
 tags: [backlog]
-updated: 2026-10-18
+updated: 2026-10-28
 ---
 
 # Backlog and known limitations
 
 ## Do next
+
+- [ ] **Next.js security update.** `npm audit --omit=dev` (2026-10-28) reports a critical advisory for `next` 16.0.0 to 16.4.0 (image optimisation with SVG files, server actions, `use cache` typed arrays); the fix is 16.4.3. Not applied yet because it is a dependency change: run the checks after upgrading.
+- [ ] Nepal, for the author to check: the notes are written from the photographs and web facts, not your words; the undated photographs and clips and the places they were put at; "Mount Kailash Resort" (read from signage and OpenStreetMap); that the dance clip is Lakeside, Pokhara; the 4K clips are at full size (large files) and the dance clip is 6.4 MB; flight photographs have no pin; the roast photographs were kept at your choice; the friends are unnamed; and the Instagram-story exports with stickers on them.
+- [ ] The sticker footer: check the writing and slap timing on a real phone, in Safari and in Firefox. Share cards are one layout for every page; a hand-made image for the home page and each trip would look better.
+- [ ] Where `nepal.zip` should live: it is git-ignored in the project root; consider moving it to `private-originals/trips/nepal/`.
 
 - [ ] Brunatos, Bento B and Agra, for the author to check: dates for the new postcards (none of the photographs has one), whether the Agra clicks 1898 and 1900 were taken at Belgian Waffle or elsewhere in the market (the notes only say "near Shah Market"), and the exact wording of the dish names (Bianca al Formaggio).
 

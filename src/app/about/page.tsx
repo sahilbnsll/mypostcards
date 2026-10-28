@@ -12,13 +12,15 @@ import { Prose } from "@/components/ui/Prose";
 import { PageHead } from "@/components/ui/PageHead";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { plural } from "@/lib/utils";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { absoluteUrl, pageMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "What My Postcards is, how it is organised, and who keeps it.",
-  alternates: { canonical: "/about" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "About My Postcards and Sahil Bansal",
+  description: "My Postcards is a personal photo journal by Sahil Bansal: photographs from trips, café afternoons, city streets and good meals, kept like a drawer of postcards.",
+  path: "/about",
+});
 
 const INTRO = `${siteConfig.tagline}
 
@@ -42,6 +44,7 @@ export default async function AboutPage() {
 
   return (
     <>
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "AboutPage", name: "About My Postcards", url: absoluteUrl("/about"), mainEntity: { "@id": `${siteConfig.url}/#author` }, isPartOf: { "@id": `${siteConfig.url}/#website` } }} />
       <PageHead title="About" />
       <section className={`wrap ${styles.about}`} aria-label="About">
         <Seal className={styles.seal} />

@@ -1,7 +1,7 @@
 ---
 title: Motion System
 tags: [design, motion]
-updated: 2026-10-10
+updated: 2026-10-28
 ---
 
 # Motion system
@@ -61,3 +61,7 @@ Reveals observe elements once and unobserve. The pendulum rAF loop starts on scr
 ## Known testing caveat
 
 In a hidden or backgrounded browser pane `requestAnimationFrame` does not fire, which stalls CSS transitions and React's Suspense reveal. If something looks frozen under automation, check `document.visibilityState` before debugging.
+
+## Footer sticker wall
+
+The script is a stroke-dashoffset transition (3.2 s, linear, started once when the footer is 35% in view); each sticker waits for the pen (`--land`) then plays a 0.55 s `slap` keyframe (scale in, a small overshoot). Drag uses the CSS `translate`, `rotate` and `scale` properties so it never fights the keyframe's `transform`. Reduced motion: no write, no slap, the finished wall at once. See [[09 Decisions]] D52.

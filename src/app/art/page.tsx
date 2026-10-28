@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { KindCollection } from "@/components/features/gallery/KindCollection";
 
-export const metadata: Metadata = {
-  title: "Art",
-  description: "Things people make, and the light they sit in.",
-  alternates: { canonical: "/art" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Art: things people make",
+  description: "Paintings, drawings and made things I came across, and the light they sit in, photographed and kept as postcards.",
+  path: "/art",
+});
 
 export default function ArtPage() {
   return (

@@ -17,6 +17,9 @@ import { CollectionHero } from "@/components/ui/CollectionHero";
 import { Prose } from "@/components/ui/Prose";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { formatDate } from "@/lib/utils";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { breadcrumbJsonLd, pageMetadata, snippet, storyJsonLd } from "@/lib/seo";
+
 
 type Params = Promise<{ slug: string }>;
 
@@ -31,17 +34,14 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const story = findBySlug((await getJournal()).stories, slug);
   if (!story) return {};
-  return {
-    title: story.title,
-    description: story.excerpt,
-    alternates: { canonical: `/stories/${story.slug}` },
-    openGraph: {
-      type: "article",
-      title: story.title,
-      description: story.excerpt,
-      images: [{ url: story.coverImage.src, alt: story.coverImage.alt }],
-    },
-  };
+  return pageMetadata({
+    title: story.subtitle ? `${story.title}: ${story.subtitle}` : story.title,
+    description: snippet(story.excerpt),
+    path: `/stories/${story.slug}`,
+    type: "article",
+    publishedTime: story.publishedAt,
+    keywords: [story.title, "story", "travel story"],
+  });
 }
 
 async function StoryContent({ params }: { params: Params }) {
@@ -62,6 +62,12 @@ async function StoryContent({ params }: { params: Params }) {
 
   return (
     <article>
+      <JsonLd
+        data={[
+          storyJsonLd(story),
+          breadcrumbJsonLd([{ name: "Stories", path: "/stories" }, { name: story.title, path: `/stories/${story.slug}` }]),
+        ]}
+      />
       <CollectionHero
         title={story.title}
         lede={story.subtitle}

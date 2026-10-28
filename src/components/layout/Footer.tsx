@@ -6,6 +6,7 @@ import { balancedSample } from "@/content/selectors";
 import { LogoMark } from "@/components/brand/LogoMark";
 import { Photo } from "@/components/ui/Photo";
 import { PullLamp } from "./PullLamp";
+import { StickerWall } from "./StickerWall";
 import styles from "./Footer.module.css";
 
 const TILTS = [-2.5, 1.8, -1.2, 2.2, -1.8, 1.5, -2.1, 2.4, -1.4, 1.9, -2.0, 1.6];
@@ -54,6 +55,9 @@ export async function Footer() {
 
       {/* Airmail stripe visual divider */}
       <div className="airmail-edge" aria-hidden />
+
+      {/* A signature to sign off with: written once, with stickers to move about */}
+      <StickerWall />
 
       <div className={`wrap ${styles.inner}`}>
         <div className={styles.about}>

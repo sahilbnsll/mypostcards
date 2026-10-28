@@ -1,7 +1,7 @@
 ---
 title: Components
 tags: [engineering, components]
-updated: 2026-10-18
+updated: 2026-10-28
 ---
 
 # Components
@@ -14,7 +14,9 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 |---|---|
 | `Header` **client** | Fixed bar; wordmark with a CSS-drawn stamp; sliding underline; opaque after scroll (IntersectionObserver sentinel); below 62rem a **Menu** button opens a modal `<dialog>` with staggered links. The menu is tied to the pathname it was opened on, so navigating closes it without an effect |
 | `PullLamp` (`layout`) | Footer desk lamp; dragging or tapping its cord flips the theme through `theme.ts` (`useTheme`, `setTheme`), shared with `ThemeToggle`. The cord's spring is written straight to the SVG |
+| `StickerWall` (`layout`) | Footer signature: "places seen, moments kept" written once on scroll-in in a single-stroke script (`script.ts`: `SCRIPT`, `layoutScript`), plus six die-cut postal stickers that slap down as the pen passes. Pointer drag with lean, arrow keys, Escape or double click to put back, click the writing to replay; reduced motion shows the finished wall. Positions are written straight to CSS variables |
 | `Footer` | Night-blue, airmail edge on top, nav links, credit line, and the sample-content notice when any sample row exists |
+| `JsonLd` (`ui`) | Renders a JSON-LD graph in a script tag; builders live in `lib/seo.ts` ([[09 Decisions]] D51) |
 
 ## Primitives (`ui/`)
 

@@ -236,5 +236,187 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "nepal-december-2025",
+    "title": "Nepal",
+    "summary": "A trip to Nepal with friends, 26 to 30 December 2025: Thamel, Pashupatinath and Boudhanath, the caves and the pagoda in Pokhara, and Ghandruk.",
+    "story": "A trip to Nepal at the end of December 2025, with friends: Kathmandu, Pokhara and a village in the Annapurna foothills. The dated photographs run from 26 to 30 December.\n\nWe flew from Delhi to Kathmandu on Friday 26 December, with the Himalaya showing along the whole flight. In Kathmandu we stayed in Thamel, the old tourist quarter, and spent Saturday there and at two of the valley's great sites: Pashupatinath, the Shiva temple on the Bagmati, and Boudhanath, the big stupa, at dusk. Both are UNESCO World Heritage Sites.\n\nOn Sunday we drove west out of the valley to Pokhara. Monday was a full day there: Gupteshwor Mahadev Cave and Devi's Fall in the morning, the big Shiva statue at Pumdikot and the World Peace Pagoda in the middle of the day, Mahendra Cave and the Bat Cave in the afternoon, the Bindhyabasini temple at the end of the afternoon, and a night walk by Phewa Lake in Lakeside, with a buffet dinner and a street full of prayer flags.\n\nOn Tuesday we drove up the Pokhara-Baglung highway with the Annapurna range ahead, past a waterfall at Kimche, and walked up the stone steps of Ghandruk, a Gurung village, to see the mountains in the last light.\n\nThe dates, times and places come from the photographs' own metadata. The photographs and clips that carry no date, mostly saved from Instagram stories, are in a last group in the diary and are placed by their GPS or by what they show.",
+    "cover": "trips/nepal/ghandruk/the-annapurnas-from-ghandruk.jpg",
+    "coverAlt": "Snow mountains above a bank of cloud, over terraced golden fields and the roofs of a village, with a blue water tank at the lower left",
+    "start": "2025-12-26",
+    "end": "2025-12-30",
+    "featured": true,
+    "sample": false,
+    "days": [
+      {
+        "title": "Friday 26 December: Delhi to Kathmandu",
+        "stops": [
+          {
+            "place": "Flight to Kathmandu",
+            "time": "About 11:10 to 11:40 am",
+            "note": "The Himalaya showed along the whole of the flight from Delhi to Kathmandu: the snow range at 11,780 m, and then a city under haze as the plane came down.",
+            "postcard": "nepal-flight-the-himalaya"
+          },
+          {
+            "place": "Thamel",
+            "time": "From about 4:58 pm",
+            "note": "The old tourist quarter of Kathmandu, with the cafes and the lanes under prayer flags. The first walk was a quiet lane with a big tree.",
+            "lat": 27.716,
+            "lng": 85.313,
+            "postcard": "nepal-ktm-into-thamel"
+          },
+          {
+            "place": "Asan and Thahity",
+            "time": "About 10:56 to 11 pm",
+            "note": "A night walk to Asan Tol, one of the old market squares, and a small white stupa at a street corner.",
+            "lat": 27.707,
+            "lng": 85.312,
+            "postcard": "nepal-ktm-asan-shrine"
+          }
+        ]
+      },
+      {
+        "title": "Saturday 27 December: Thamel, Pashupatinath and Boudhanath",
+        "stops": [
+          {
+            "place": "Thamel",
+            "time": "From just after midnight; brunch at about 1:45 pm",
+            "note": "A late dinner, then a late brunch and a walk through the shops and lanes: a shop packed with paintings, a restaurant hung with red tassels, an atrium of prayer flags.",
+            "lat": 27.715,
+            "lng": 85.311,
+            "postcard": "nepal-ktm-brunch"
+          },
+          {
+            "place": "Pashupatinath Temple",
+            "time": "About 3:37 to 4 pm",
+            "note": "A Shiva temple complex on the Bagmati, a UNESCO World Heritage Site since 1979. Shoes come off for the stones, and the plaza belongs to the pigeons.",
+            "lat": 27.711,
+            "lng": 85.348,
+            "postcard": "nepal-pashupati-namaste"
+          },
+          {
+            "place": "Boudhanath",
+            "time": "About 5:35 pm, at dusk",
+            "note": "The great stupa, about 36 m tall and one of the largest in Nepal. Tibetan refugees settled around it after 1959, and people walk the circle round it clockwise.",
+            "lat": 27.721,
+            "lng": 85.363,
+            "postcard": "nepal-boudha-at-dusk"
+          }
+        ]
+      },
+      {
+        "title": "Sunday 28 December: Kathmandu to Pokhara",
+        "stops": [
+          {
+            "place": "The road out of the valley",
+            "time": "About 4:13 to 4:22 pm",
+            "note": "Layers of blue hills on the old Tribhuvan Rajpath, heading west out of the Kathmandu valley.",
+            "lat": 27.713,
+            "lng": 85.199,
+            "postcard": "nepal-road-leaving-the-valley"
+          }
+        ]
+      },
+      {
+        "title": "Monday 29 December: Pokhara",
+        "stops": [
+          {
+            "place": "Gupteshwor Mahadev Cave",
+            "time": "About 10 to 10:15 am",
+            "note": "A Shiva shrine in a cave across the road from Devi's Fall. Local tradition dates its discovery to the 16th century.",
+            "tip": "The dry season, October to late May, is the best time to go. In the monsoon the second part of the cave is often closed.",
+            "lat": 28.189,
+            "lng": 83.958,
+            "postcard": "nepal-gupteshwor-shrine"
+          },
+          {
+            "place": "Devi's Fall",
+            "time": "About 10:46 to 10:51 am",
+            "note": "The river drops into a gorge and disappears underground. Its official name is Patale Chhango.",
+            "lat": 28.19,
+            "lng": 83.959,
+            "postcard": "nepal-devis-fall"
+          },
+          {
+            "place": "Pumdikot",
+            "time": "About 11:50 am to 12:05 pm",
+            "note": "A 51 ft statue of Shiva on a white domed base, 108 ft in all, finished in 2021. It looks over the valley and the lake.",
+            "lat": 28.2,
+            "lng": 83.93,
+            "postcard": "nepal-pumdikot-shiva"
+          },
+          {
+            "place": "World Peace Pagoda",
+            "time": "About 1:13 to 1:26 pm",
+            "note": "Built by monks of the Japanese Nipponzan Myohoji order on Anadu Hill, above Phewa Lake. Four niches hold Buddhas given from Japan, Thailand, Sri Lanka and Nepal.",
+            "lat": 28.201,
+            "lng": 83.945,
+            "postcard": "nepal-peace-pagoda"
+          },
+          {
+            "place": "Mahendra Cave",
+            "time": "About 3:54 to 4:11 pm",
+            "note": "A limestone cave with stalactites, rare in Nepal. Locals found it in the early 1950s and it was renamed after King Mahendra's visit in 1959.",
+            "lat": 28.272,
+            "lng": 83.98,
+            "postcard": "nepal-mahendra-cave-inside"
+          },
+          {
+            "place": "Bat Cave",
+            "time": "About 4:32 to 4:38 pm",
+            "note": "A short walk from Mahendra Cave: unlit, narrow in places, and home to thousands of bats.",
+            "lat": 28.268,
+            "lng": 83.976,
+            "postcard": "nepal-bat-cave-bats"
+          },
+          {
+            "place": "Bindhyabasini Temple",
+            "time": "About 5:12 to 5:18 pm",
+            "note": "A hilltop temple complex above the city, with a red-brick pagoda, a white and red shrine and a gold trident.",
+            "lat": 28.238,
+            "lng": 83.984,
+            "postcard": "nepal-bindhyabasini-shrine"
+          },
+          {
+            "place": "Lakeside",
+            "time": "From about 6:13 pm",
+            "note": "Pastel boats on Phewa Lake at dusk, a buffet dinner at a resort from about 7:05 pm, and the street full of people under prayer flags at 8:46 pm.",
+            "lat": 28.206,
+            "lng": 83.961,
+            "postcard": "nepal-lakeside-boats"
+          }
+        ]
+      },
+      {
+        "title": "Tuesday 30 December: Pokhara to Ghandruk",
+        "stops": [
+          {
+            "place": "The Pokhara-Baglung highway",
+            "time": "About 11:56 am to 12:31 pm",
+            "note": "The Annapurna peaks stood over the road from the edge of town, and got closer the further we drove.",
+            "lat": 28.285,
+            "lng": 83.829,
+            "postcard": "nepal-road-the-peaks"
+          },
+          {
+            "place": "Kimche",
+            "time": "About 2 pm",
+            "note": "A thin waterfall down a mossy cliff beside the road up to Ghandruk.",
+            "lat": 28.365,
+            "lng": 83.803,
+            "postcard": "nepal-ghandruk-waterfall"
+          },
+          {
+            "place": "Ghandruk",
+            "time": "From about 2:38 pm",
+            "note": "A Gurung village in the Annapurna foothills, at about 1,940 m (sources give between 1,940 and 2,012 m). It is stone steps most of the way, with terraced fields below and the range above.",
+            "lat": 28.373,
+            "lng": 83.81,
+            "postcard": "nepal-ghandruk-steps"
+          }
+        ]
+      }
+    ]
   }
 ]

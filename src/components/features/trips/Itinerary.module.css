@@ -394,14 +394,10 @@ button.marker:focus-visible {
 }
 
 .printTitle {
-  display: -webkit-box;
-  overflow: hidden;
   padding-inline: 0.1rem;
   font-family: var(--font-hand);
   font-size: 1.1rem;
   line-height: 1;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 }
 
 @media (max-width: 40rem) {

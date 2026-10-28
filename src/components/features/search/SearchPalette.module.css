@@ -179,11 +179,8 @@
 }
 
 .subtitle {
-  overflow: hidden;
   font-size: var(--step--1);
   color: var(--muted);
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .empty {

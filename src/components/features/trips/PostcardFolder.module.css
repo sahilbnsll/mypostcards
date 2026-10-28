@@ -120,12 +120,8 @@
   text-wrap: balance;
 }
 
+/* The whole summary is always shown: the glass panel grows to fit it */
 .summary {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
   max-width: 42ch;
   color: rgb(251 251 248 / 0.86);
   font-size: var(--step--1);

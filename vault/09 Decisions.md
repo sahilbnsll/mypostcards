@@ -1,12 +1,33 @@
 ---
 title: Decisions
 tags: [decisions]
-updated: 2026-10-18
+updated: 2026-10-28
 ---
 
 # Decisions log
 
 Newest first. Format: decision, why, trade-off.
+
+### D52. Design references, round 3: the sticker footer adopted, the tunnel hero not
+- The reference file gained `perspective-tunnel-hero` and `sticker-slap-footer`. The footer's idea was adopted as `StickerWall`: a hand-lettered sign-off with postal stickers drawn in code, with no `framer-motion` and no library.
+- **Not adopted:** the tunnel hero. It calls `preventDefault` on the mouse wheel (scroll hijacking, the same reason as D2), needs `framer-motion` and is an endless corridor of constant motion.
+- **Changed from the reference:** the script writes "places seen, moments kept", a short form of the site tagline, rather than the brand name (the footer already has the wordmark; the script alphabet has no apostrophe or comma, so the line is two phrases); stickers are redrawn as airmail objects in the site palette; everything also works by keyboard; reduced motion shows the finished wall; touch only captures the sticker you touch, so the page still scrolls everywhere else.
+- **Trade-off:** six extra tab stops in the footer, so each sticker has a label and one shared hint.
+
+### D51. One SEO layer: `lib/seo.ts`, JSON-LD, file-based share images, sitemap and feed
+- Every route builds its metadata through `pageMetadata` (title, description, canonical, Open Graph, Twitter, RSS alternate); JSON-LD is rendered by `JsonLd` from builders in `lib/seo.ts`; share images use one `ogCard` in `lib/og.tsx` from per-route `opengraph-image.tsx` files, pre-rendered with `generateStaticParams` and `"use cache"`.
+- Postcard timestamps in JSON-LD carry the real offset (Nepal +05:45, India +05:30); GPS is already rounded to about 100 m in the content.
+- The route segment option `dynamic = "force-static"` is not allowed with Cache Components, so the RSS route has none.
+- **Trade-off:** one fixed share-card layout for all pages rather than a custom image each.
+
+### D50. Nepal trip, and three optional postcard fields: `time`, `altitude`, `sound`
+- `time` ("HH:MM", local, needs `date`) and `altitude` (metres) come from the photographs' own metadata; `sound: true` (video only) keeps a clip's audio. Camera clocks were treated as the phone's wall clock: printed EXIF digits plus 5:30 gave Nepal time (checked against the clips' QuickTime dates).
+- Undated files are left undated (your choice); flight photographs (11,780 m) have no pin; the roast photographs were all kept; friends are not named.
+- The clips were re-encoded in the browser (no ffmpeg here): 1.8 Mbps, the 4K ones kept at full size, the dance clip with 96 kbps audio (6.4 MB).
+
+### D49. Written text is never cut short with an ellipsis
+- **Why:** the trip folders cut their summary to two lines ("…wit…", "…the…") and the author asked for complete sentences always. Removed every line clamp and ellipsis on prose and titles: the trip folder summary (the glass panel now grows to fit), the story cover excerpt, the scattered visitor card messages on the home page, the pinned-line captions (they wrap, balanced), the search result subtitles, and the print titles in the diary and the itinerary. **Rule from now on:** a sentence is shown whole; make room for it rather than clipping it.
+- **Trade-off:** cards in a row can now differ in height, and a long summary covers more of the prints tucked in a folder.
 
 ### D48. The globe no longer makes the whole page re-style itself every frame
 - **Why:** the author found the mouse laggy and slow around the globe on the live site. Cause, measured on the Places page (636 elements): cobe, the globe library, rewrites a `<style>:root{--cobe-visible-...}</style>` element in the page head every frame to publish which markers face the viewer, and the globe code read that back with `getComputedStyle`. Each frame that cost about 14.3 ms of main-thread time (a re-style of the whole document); rewriting the same element while detached cost 0.2 ms. On the home page, which has more elements, and on a slower machine, that left the main thread too busy to move the cursor. The custom round cursor made it worse: its `mix-blend-mode: difference` layer is blended over the moving canvas.

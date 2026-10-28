@@ -1,7 +1,7 @@
 ---
 title: Quality and Verification
 tags: [quality]
-updated: 2026-10-18
+updated: 2026-10-28
 ---
 
 # Quality and verification
@@ -131,6 +131,8 @@ Everything below was actually run on 2026-10-09. Anything not listed was **not**
 - **Not yet verified:** axe on the new pages in light and dark; the rest of the light theme after the latest changes; mobile layouts of the map; search palette keyboard use; theme toggle persistence without flash; lightbox "More like this"; the real Supabase project. The production build ran before the final cursor tweak (CSS only); typecheck and lint were re-run after it and pass.
 
 ## Not verified (be honest)
+
+- **2026-10-28 (Nepal, SEO, sticker footer):** `npx tsc --noEmit`, `npm run lint` and `npm run build` (613 pages) pass; `npm audit --omit=dev` reports one critical advisory in `next` 16.4.0 (see [[10 Backlog]]). In dev: `/robots.txt`, `/feed.xml` (45 items), `/sitemap.xml` (304 pages, 28 videos) and `/trips/nepal-december-2025/opengraph-image` return 200; the Nepal trip page renders (5 days, 40 stops, no broken images); the dance clip is unmuted and does not loop; Devi's Fall shows date, time, altitude, coordinates and camera; JSON-LD and geo meta tags are present; the footer writing renders and the stickers measure correctly. **Not verified:** the footer's scroll-in write and the slap timing and dragging (the embedded browser pane did not run animation frames or intersection observers, so screenshots were blank or stale); the sticker footer on a phone; structured data in Google's Rich Results Test; share cards in the real Facebook, X or WhatsApp previews; axe on the changed pages; every Nepal clip played through.
 
 - **LCP, INP and Lighthouse scores**: the embedded browser exposed no LCP entries. Run Lighthouse on the deployed site.
 - Real devices, Safari, Firefox. Scroll-linked drift is progressive (Chromium and Safari 26+).

@@ -145,12 +145,8 @@
   color: rgb(251 251 248 / 0.92);
 }
 
+/* The whole excerpt is always shown */
 .excerpt {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
-  overflow: hidden;
   max-width: 46ch;
   font-size: var(--step--1);
   line-height: 1.45;
