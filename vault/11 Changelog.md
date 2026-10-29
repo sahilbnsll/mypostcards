@@ -1,12 +1,42 @@
 ---
 title: Changelog
 tags: [changelog]
-updated: 2026-10-28
+updated: 2026-10-30
 ---
 
 # Changelog
 
 Newest first.
+
+## 2026-10-30 (home images): The best photographs on the home page and its share card
+- **The rest of the home page's photographs were refreshed too:** a new "Pinned up" line of ten (Jispa prayer flags, Shiva at Pumdikot, the Kaal Bhairav gate, Lakeside boats, Jispa at blue hour, the Chapter One art wall, the Ghandruk steps, Omkareshwar at night, the Daksina bells and Devi's Fall), a new "Look closer" seven (Mahakaleshwar, the Pashupatinath sign, the Himalaya from the plane, Shiva on the serpent at Mahakal Lok, the Coffee Sutra lamps, the moon through the clouds and the Durga pandal), and the collection preview now skips any photograph already shown higher on the page, so nothing repeats down the page.
+- The home page's table of cards and the link-sharing card now show a chosen set in a chosen order: the Sissu waterfall, the Annapurnas from Ghandruk, Boudhanath at dusk, the World Peace Pagoda and the Omkareshwar ghats. New optional postcard ranking: `"featured": 1` to `5` (a number ranks the favourites; `true` still works) ([[05 Content Model]]).
+- **Sitemap fixed:** a bare "&" in a video's description ("Skyhouse Bar & Kitchen") made `sitemap.xml` invalid XML, which is why Google Search Console said "Couldn't fetch". Video titles and descriptions are now escaped. Needs a deploy to take effect. Also: share images for About, Art, Random clicks and Visitors, a richer home share card (three photographs on prints), shorter titles and descriptions, a second main heading removed from the Visitors loading state, a `global-error` page, and nicer home, story, trip and café descriptions.
+
+## 2026-10-30 (newest): Every caption and note rewritten around how it felt
+- **244 postcards rewritten** (all of Nepal, Kasol to Jispa, Ujjain and Omkareshwar, Chapter One, Coffee Sutra and the P.F. Chang's, Daksina Bhawan and Costa notes): no more times, distances, altitudes or file remarks; each note is a short first-person line about the moment. The 38 postcards in your own words (Skyhouse, Shikarbagh, Brunatos, Bento B, the PS5, Batman doll, tattoo, empty metro and the rest) are untouched ([[09 Decisions]] D58).
+
+## 2026-10-30 (very latest): Two broken videos fixed, and a correction
+- **The cave video showed 1:41 but the clip is 5 seconds.** My first re-encode of `water-in-the-cave` (and `pigeons-at-pashupatinath`, 41 s for an 8 s clip) was recorded while the browser was not painting, so each file held only a few frames and was padded out to a long duration. Both were re-encoded from your originals with ffmpeg (a temporary download, not added to the project): 5 s and 8 s, 1080 x 1920, tone-mapped from HDR so the colours look right, silent, 0.9 MB and 3.8 MB, laid out for fast start. The other 26 clips match their originals' lengths ([[08 Quality and Verification]]).
+- **Coffee Sutra's "back patio" is the outside seating area at the front**, just inside the gate (your correction): the postcard is now "The outside seating", and the café's comment says so.
+
+## 2026-10-30 (latest): No blurred photographs
+- **Every blurred photograph is restored** to the original, exactly as shot ([[09 Decisions]] D57): Shikarbagh's tent and mocktail, the Agra chairs, the Ram Ghat crowd, the Boudhanath crowd, the Lakeside chef and five Coffee Sutra photographs. The notes that said "the faces are blurred" were reworded, and the trip cards no longer blur their neighbours on hover. A scan comparing every published photograph with its original now finds no blurred region.
+
+## 2026-10-30 (latest): Next.js security update
+- **Next.js 16.4.0 to 16.4.3** (and `eslint-config-next`), which fixes the critical advisories for image optimisation with SVG files, server actions and `use cache` typed arrays; a dev-only `zod` advisory fixed with `npm audit fix`. `npm audit` now reports 0 vulnerabilities; typecheck, lint and the production build (665 pages) pass.
+
+## 2026-10-30 (later): Chapter One Café and Coffee Sutra
+- **Chapter One Café** (Lajpat Marg, Adarsh Nagar, Jaipur; your map link; rated 4.6/5): the paintings-covered wall, the wooden tables and wicker lamps, the arch and the arched terrace, the carved door, and the mushroom cream cheese pasta with a frappe. 8 postcards.
+- **Coffee Sutra** (JLN Marg, Jaipur; your map link; rated 4.7/5), visited with your brother and bhabhi: the menu, vanilla affogato, café mocha, coffee frappe, the half Mexican half margherita pizza, alfredo pasta, peri peri fries, the lamps and Hindi signs, the counter, the outside seating by the gate and the front at night. 15 postcards (the "fries and a slice" photograph was removed at your request).
+- Both ratings quote what you said; the comment on the room is written from the photographs. Every postcard has its own date and time (24 October 2026) from the photographs, except one that lost its date when edited. The photographs are published exactly as shot, with nobody blurred (your choice). Originals are in the git-ignored `private-originals/cafes/chapter-one-cafe/` and `coffee-sutra/`. 282 postcards, 11 cafés.
+
+## 2026-10-30: A custom dropdown, café sorts, light by default, page fades
+- **A hand of postcards on place pages** ("A few favourites"): up to seven postcards fanned like a hand of cards; pick one (click, tap or arrow keys) and it lifts out with its title, place and caption beside it and a link to open it. Adapted from the new `card-hand-gallery` reference ([[09 Decisions]] D56).
+- **A dropdown that matches the site** replaces the system menu on the cafés and gallery sorts: a pill button opening a small card, with a tick on the current choice, arrow keys, type-ahead, Escape and click-outside ([[07 Components]], [[09 Decisions]] D53).
+- **Café sorts:** "Most recent" (by the newest date on a café's photographs, undated cafés last) and "City (A to Z)".
+- **Light is always the starting theme**, even when the computer is set to dark; dark applies only when you choose it with the header button or the lamp, and is remembered ([[09 Decisions]] D54).
+- **Speed experiments on the home page:** the globe's WebGL set-up now waits until it is about to scroll into view, heavy lower sections use `content-visibility`, below-the-fold islands hydrate separately, and the hero entrance is shorter. See [[08 Quality and Verification]] for what was and was not measured.
 
 ## 2026-10-28 (latest): A sticker footer
 - The footer now signs off with **"places seen, moments kept"** (your tagline, shortened) written once in a fat single-stroke script as it scrolls into view, with six postal stickers (a paper plane, a postmark, a star, a stamp, a compass and an air mail tag) that slap down as the pen passes. Drag them with a mouse, finger or pen (they lean into a throw), move them with the arrow keys, press Escape or double-click to put one back, and click the writing to see it written again. Nothing touches scrolling and reduced motion shows the finished wall ([[09 Decisions]] D52, [[07 Components]]).

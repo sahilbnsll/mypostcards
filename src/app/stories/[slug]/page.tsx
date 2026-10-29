@@ -35,8 +35,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const story = findBySlug((await getJournal()).stories, slug);
   if (!story) return {};
   return pageMetadata({
-    title: story.subtitle ? `${story.title}: ${story.subtitle}` : story.title,
-    description: snippet(story.excerpt),
+    title: story.title,
+    description: snippet(story.subtitle && !story.excerpt.startsWith(story.subtitle) ? `${story.subtitle.replace(/[.\s]+$/, "")}. ${story.excerpt}` : story.excerpt),
     path: `/stories/${story.slug}`,
     type: "article",
     publishedTime: story.publishedAt,

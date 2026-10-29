@@ -104,7 +104,7 @@
   transform-origin: 50% 60%;
   transform: translate(var(--dx, 0px), var(--dy, 0px));
   animation: deal var(--d-hero) var(--ease-out) both;
-  animation-delay: calc(var(--k) * 120ms);
+  animation-delay: calc(var(--k) * 70ms);
   transition:
     rotate var(--d-slow) var(--ease-out),
     translate var(--d-slow) var(--ease-out);

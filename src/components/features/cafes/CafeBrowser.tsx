@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { ChipGroup } from "@/components/ui/ChipGroup";
 import { LoadMore } from "@/components/ui/LoadMore";
+import { Select } from "@/components/ui/Select";
 import type { Cafe, ImageAsset } from "@/content/types";
 import { plural } from "@/lib/utils";
 import { CafeCard } from "./CafeCard";
@@ -11,10 +12,12 @@ import styles from "./CafeBrowser.module.css";
 export interface CafeEntry {
   cafe: Cafe;
   count: number;
+  /** The newest date on any of the café's photographs, "YYYY-MM-DD", or "" when none has one. */
+  latest: string;
   prints: ImageAsset[];
 }
 
-type Sort = "rating" | "postcards" | "name";
+type Sort = "rating" | "recent" | "postcards" | "name" | "city";
 
 const PAGE = 6;
 
@@ -36,7 +39,11 @@ export function CafeBrowser({ entries }: { entries: CafeEntry[] }) {
   const shown = useMemo(() => {
     const list = entries.filter(({ cafe }) => city === "all" || cafe.city === city);
     return list.sort((a, b) => {
+      // By the date of the photographs, newest first; cafés whose photographs have no date go last
+      if (sort === "recent") return (b.latest ?? "").localeCompare(a.latest ?? "") || b.cafe.sortOrder - a.cafe.sortOrder;
       if (sort === "name") return a.cafe.name.localeCompare(b.cafe.name);
+      // By city, and by name within a city; a café with no city goes last
+      if (sort === "city") return (a.cafe.city ?? "￿").localeCompare(b.cafe.city ?? "￿") || a.cafe.name.localeCompare(b.cafe.name);
       if (sort === "postcards") return b.count - a.count || a.cafe.sortOrder - b.cafe.sortOrder;
       return (b.cafe.rating ?? 0) - (a.cafe.rating ?? 0) || b.count - a.count;
     });
@@ -58,14 +65,18 @@ export function CafeBrowser({ entries }: { entries: CafeEntry[] }) {
             options={[{ id: "all", label: "All", count: entries.length }, ...cities.map(([name, count]) => ({ id: name, label: name, count }))]}
           />
         )}
-        <div className={styles.sort}>
-          <label htmlFor="cafe-sort">Sort by</label>
-          <select id="cafe-sort" value={sort} onChange={(event) => setSort(event.target.value as Sort)}>
-            <option value="rating">Highest rated</option>
-            <option value="postcards">Most postcards</option>
-            <option value="name">Name (A to Z)</option>
-          </select>
-        </div>
+        <Select
+          label="Sort by"
+          value={sort}
+          onChange={setSort}
+          options={[
+            { value: "rating", label: "Highest rated" },
+            { value: "recent", label: "Most recent" },
+            { value: "postcards", label: "Most postcards" },
+            { value: "name", label: "Name (A to Z)" },
+            { value: "city", label: "City (A to Z)" },
+          ]}
+        />
       </div>
       <p className={styles.status} aria-live="polite">
         {plural(shown.length, "café")}

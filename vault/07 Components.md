@@ -1,7 +1,7 @@
 ---
 title: Components
 tags: [engineering, components]
-updated: 2026-10-28
+updated: 2026-10-30
 ---
 
 # Components
@@ -17,6 +17,8 @@ Server components unless marked **client**. Styles are co-located CSS Modules.
 | `StickerWall` (`layout`) | Footer signature: "places seen, moments kept" written once on scroll-in in a single-stroke script (`script.ts`: `SCRIPT`, `layoutScript`), plus six die-cut postal stickers that slap down as the pen passes. Pointer drag with lean, arrow keys, Escape or double click to put back, click the writing to replay; reduced motion shows the finished wall. Positions are written straight to CSS variables |
 | `Footer` | Night-blue, airmail edge on top, nav links, credit line, and the sample-content notice when any sample row exists |
 | `JsonLd` (`ui`) | Renders a JSON-LD graph in a script tag; builders live in `lib/seo.ts` ([[09 Decisions]] D51) |
+| `Select` (`ui`) | A dropdown: pill button, card of choices, tick on the current one. Arrow keys, Home and End, Enter or Space, Escape (returns focus), type-ahead, click outside; opens upwards near the bottom of the screen. Used for the café and gallery sorts |
+| `PostcardHand` (`features/hand`) | A fan of up to seven postcards: pick one and it lifts out with its title, place, caption and an "Open this postcard" link. Click, tap or arrow keys; hover rise with neighbours stepping aside; reduced motion removes the transitions. Used on place pages ([[09 Decisions]] D56) |
 
 ## Primitives (`ui/`)
 

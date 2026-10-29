@@ -6,6 +6,7 @@ export default function VisitorsLoading() {
   return (
     <>
       <PageHead
+        as="p"
         title="Visitors"
         lede="Leave a card: a hello, a thought, a place I should go. Write it, draw it, or both. It goes up on the wall right away."
       />

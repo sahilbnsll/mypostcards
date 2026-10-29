@@ -252,7 +252,9 @@ export async function buildContent({ quiet = false } = {}) {
       creditUrl: str(raw.creditUrl, where, "creditUrl"),
       rating: rating(raw.rating, where),
       isSample: raw.sample === true,
-      featured: raw.featured === true,
+      // `featured` is true, or a whole number from 1 that ranks the favourites (1 is first)
+      featured: raw.featured === true || (Number.isInteger(raw.featured) && raw.featured >= 1),
+      ...(Number.isInteger(raw.featured) && raw.featured >= 1 ? { featuredRank: raw.featured } : {}),
       pinned: pinned(raw.pinned, where),
       sortOrder: index + 1,
     });

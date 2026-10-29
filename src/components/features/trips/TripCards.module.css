@@ -29,7 +29,7 @@
 /* Focus: everything except the folder in hand steps back */
 @media (hover: hover) {
   .grid:has(.card:hover) .card:not(:hover) {
-    filter: blur(2.5px) saturate(0.55);
+    filter: saturate(0.55);
     opacity: 0.7;
     scale: 0.985;
   }

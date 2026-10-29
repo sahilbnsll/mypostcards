@@ -45,8 +45,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const places = [...new Set(cards.map((c) => c.location.city).filter((c): c is string => Boolean(c)))];
   const first = cards.find((c) => c.location.coordinates && !c.location.approximate)?.location.coordinates;
   return pageMetadata({
-    title: `${trip.title}: ${formatRange(trip.startDate, trip.endDate, trip.periodLabel) ?? "a trip"}, ${plural(cards.length, "postcard")}`,
-    description: snippet(trip.summary),
+    title: `${trip.title}: ${formatRange(trip.startDate, trip.endDate, trip.periodLabel) ?? "a trip"}`,
+    description: snippet(trip.summary.length > 110 ? trip.summary : `${trip.summary} ${plural(cards.length, "postcard")}.`),
     path: `/trips/${trip.slug}`,
     keywords: [trip.title, ...places, "trip", "travel diary", "itinerary"],
     ...(first ? { geo: { lat: first.lat, lng: first.lng, placeName: places[0] } } : {}),

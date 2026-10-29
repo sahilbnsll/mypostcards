@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const where = [cafe.neighborhood, cafe.city].filter(Boolean).join(", ");
   return pageMetadata({
     title: `${cafe.name}${cafe.city ? `, ${cafe.city}` : ""}${cafe.rating ? `: rated ${cafe.rating}/5` : ""}`,
-    description: snippet(`${cafe.rating ? `Rated ${cafe.rating}/5. ` : ""}${cafe.ratingNote ?? cafe.notes ?? `Photographs from ${cafe.name}${where ? `, ${where}` : ""}.`} ${count} ${count === 1 ? "postcard" : "postcards"}.`),
+    description: snippet(`${cafe.rating ? `Rated ${cafe.rating}/5. ` : ""}${(cafe.ratingNote ?? cafe.notes ?? "").split(/(?<=[.!?])\s/)[0] || `Photographs from ${cafe.name}.`} ${cafe.name}${where ? ` in ${where}` : ""}: ${count} ${count === 1 ? "postcard" : "postcards"}.`),
     path: `/cafes/${cafe.slug}`,
     keywords: [cafe.name, ...(cafe.city ? [cafe.city] : []), "café review", "restaurant review", ...cafe.vibeTags],
   });

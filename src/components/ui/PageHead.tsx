@@ -8,10 +8,12 @@ interface PageHeadProps {
   /** Something for a second column beside the text on wide screens (below it on narrow ones). */
   side?: ReactNode;
   children?: ReactNode;
+  /** "p" for a loading skeleton, so the page never has two main headings in its first HTML. */
+  as?: "h1" | "p";
 }
 
 /** The opening block of every inner page: a short title, one line of context, and an optional way back. */
-export function PageHead({ title, lede, back, side, children }: PageHeadProps) {
+export function PageHead({ title, lede, back, side, children, as: Title = "h1" }: PageHeadProps) {
   const text = (
     <>
       {back && (
@@ -22,7 +24,7 @@ export function PageHead({ title, lede, back, side, children }: PageHeadProps) {
           {back.label}
         </Link>
       )}
-      <h1>{title}</h1>
+      <Title className={Title === "p" ? "page-title" : undefined}>{title}</Title>
       {lede && <p className="lede">{lede}</p>}
       {children}
     </>

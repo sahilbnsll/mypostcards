@@ -1,14 +1,22 @@
 ---
 title: Backlog
 tags: [backlog]
-updated: 2026-10-28
+updated: 2026-10-30
 ---
 
 # Backlog and known limitations
 
 ## Do next
+- [ ] **Deploy, then resubmit the sitemap.** The fixed `sitemap.xml` is not live until you push and deploy. After that, in Search Console remove and re-add `/sitemap.xml` (or press retry), then check Facebook's Sharing Debugger and the LinkedIn Post Inspector for the home page so they drop their cached card.
+- [ ] **Read through the rewritten notes.** 244 postcards now have short feeling-led notes that I wrote from the photographs and the trip's context, not from your memories (for example "I was out of breath but happy" on the Ghandruk steps, "I did not want it to end" on the last evening). Change anything that is not how you felt or what happened. The file is `content/postcards.json`; your own earlier words (Skyhouse, Shikarbagh, Brunatos, Bento B and the random clicks) were not touched.
+- [ ] The 4K originals were reduced to 1080 x 1920 for the two re-encoded clips; the other 13 Nepal clips are still the browser-encoded versions (some at full 4K). Re-encoding them all with ffmpeg would make them smaller and faster to start.
+- [ ] Chapter One Café and Coffee Sutra, for the author to check: the names (Google Maps says "Chapter One Café" and "Coffee Sutra JLN Marg"; you wrote "chapter one coffee"); the edited Chapter One pasta and frappe photograph has no date and is left undated although it is plainly from the same visit; the Live Photo clips that came with most photographs were not used; the "Araku Valley" sign reading in the Hindi-signs note; and the room comments, which are written from the photographs.
 
-- [ ] **Next.js security update.** `npm audit --omit=dev` (2026-10-28) reports a critical advisory for `next` 16.0.0 to 16.4.0 (image optimisation with SVG files, server actions, `use cache` typed arrays); the fix is 16.4.3. Not applied yet because it is a dependency change: run the checks after upgrading.
+- [ ] Add dates to the Brunatos, Bento B and Punjab Grill photographs so "Most recent" puts them first (they are last now because they have no date).
+- [ ] Speed: measure the home page properly (several Lighthouse runs, median) after the globe, `content-visibility` and hydration changes; the remaining cost is mostly style and layout work and the framework's hydration. Ideas: fewer images on the first screens, trimming `images.deviceSizes`, inlining CSS.
+- [ ] More of the design-reference ideas for the key pages (trip card to trip page image morph, directional page slides) (page transitions were tried and removed, see D55).
+
+- [x] ~~Next.js security update~~ done 2026-10-30: 16.4.3, `npm audit` 0 ([[11 Changelog]]).
 - [ ] Nepal, for the author to check: the notes are written from the photographs and web facts, not your words; the undated photographs and clips and the places they were put at; "Mount Kailash Resort" (read from signage and OpenStreetMap); that the dance clip is Lakeside, Pokhara; the 4K clips are at full size (large files) and the dance clip is 6.4 MB; flight photographs have no pin; the roast photographs were kept at your choice; the friends are unnamed; and the Instagram-story exports with stickers on them.
 - [ ] The sticker footer: check the writing and slap timing on a real phone, in Safari and in Firefox. Share cards are one layout for every page; a hand-made image for the home page and each trip would look better.
 - [ ] Where `nepal.zip` should live: it is git-ignored in the project root; consider moving it to `private-originals/trips/nepal/`.

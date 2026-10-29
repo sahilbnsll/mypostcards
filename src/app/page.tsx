@@ -92,8 +92,10 @@ export default async function HomePage() {
     .slice(0, CAROUSEL_COUNT);
   const hasPinned = pinnedCards.length >= 3;
   const recent = toViews(journal, hasPinned ? pinnedCards : postcards.slice(0, CAROUSEL_COUNT));
-  const preview = toViews(journal, balancedSample(postcards, GALLERY_PREVIEW));
   const zoomCards = featuredFirst(postcards).slice(5, 12);
+  // The collection preview skips anything already shown higher up, so each part of the page has its own photographs
+  const shownAbove = new Set([...heroCards, ...recent, ...zoomCards].map((p) => p.slug));
+  const preview = toViews(journal, balancedSample(postcards.filter((p) => !shownAbove.has(p.slug)), GALLERY_PREVIEW));
   const featuredTrips = featuredFirst(trips).slice(0, 3);
   const featuredStories = featuredFirst(stories).slice(0, 3);
 
@@ -128,7 +130,9 @@ export default async function HomePage() {
                   intro={hasPinned ? "My favourites, hung on the line. Drag, scroll or use the arrows." : "The newest prints on the line. Drag, scroll or use the arrows."}
                 />
               </div>
-              <PrintCarousel items={recent} label={hasPinned ? "Pinned postcards" : "Recent postcards"} />
+              <Suspense fallback={null}>
+                <PrintCarousel items={recent} label={hasPinned ? "Pinned postcards" : "Recent postcards"} />
+              </Suspense>
             </section>
           )}
 
@@ -137,18 +141,23 @@ export default async function HomePage() {
               <div className="wrap section-top">
                 <SectionHeader id="zoom-title" title="Look closer" intro="Seven photographs from the collection." />
               </div>
-              <ZoomGallery postcards={zoomCards} />
+              <Suspense fallback={null}>
+                <ZoomGallery postcards={zoomCards} />
+              </Suspense>
             </section>
           )}
 
-          <section id="collection" className="section" aria-labelledby="collection-title">
+          <section id="collection" className="section defer" aria-labelledby="collection-title">
             <div className="wrap">
               <SectionHeader
                 id="collection-title"
                 title="The collection"
                 intro="A few favourites from every kind of postcard and every place I have been."
               />
-              <BloomGallery items={preview} filterable={false} />
+              {/* Interactive islands below the first screen hydrate as their own low-priority tasks */}
+              <Suspense fallback={null}>
+                <BloomGallery items={preview} filterable={false} />
+              </Suspense>
               {postcards.length > preview.length && (
                 <ViewAllButton href="/gallery">View all {postcards.length} postcards</ViewAllButton>
               )}
@@ -156,7 +165,7 @@ export default async function HomePage() {
           </section>
 
           {featuredTrips.length > 0 && (
-            <section id="trips" className="section" aria-labelledby="trips-title">
+            <section id="trips" className="section defer" aria-labelledby="trips-title">
               <div className="wrap">
                 <SectionHeader
                   id="trips-title"
@@ -170,7 +179,7 @@ export default async function HomePage() {
           )}
 
           {featuredStories.length > 0 && (
-            <section id="stories" className="section" aria-labelledby="story-title">
+            <section id="stories" className="section defer" aria-labelledby="story-title">
               <div className="wrap">
                 <SectionHeader id="story-title" title="From the stories" action={{ href: "/stories", label: "All stories" }} />
                 <StoryFeature stories={featuredStories} />
@@ -183,7 +192,7 @@ export default async function HomePage() {
           </Suspense>
 
           {destinations.length > 0 && (
-            <section id="places" className="section" aria-labelledby="places-title">
+            <section id="places" className="section defer" aria-labelledby="places-title">
               <div className="wrap">
                 <SectionHeader
                   id="places-title"
@@ -191,7 +200,9 @@ export default async function HomePage() {
                   intro="Where the postcards were sent from."
                   action={{ href: "/destinations", label: "All places" }}
                 />
-                <PlacesExplorer journal={journal} listLimit={6} />
+                <Suspense fallback={null}>
+                  <PlacesExplorer journal={journal} listLimit={6} />
+                </Suspense>
               </div>
             </section>
           )}

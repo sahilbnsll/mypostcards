@@ -5,6 +5,7 @@ import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
 import { LoadMore } from "@/components/ui/LoadMore";
 import { Photo } from "@/components/ui/Photo";
 import { PlayBadge } from "@/components/ui/PostcardMedia";
+import { Select } from "@/components/ui/Select";
 import { CATEGORIES, CATEGORY_BY_ID } from "@/content/categories";
 import type { Category } from "@/content/types";
 import { Lightbox } from "@/components/features/lightbox/Lightbox";
@@ -330,22 +331,18 @@ export function BloomGallery({ items, filterable = true, stickyFilters = false, 
                 </button>
               )}
 
-              <div className={styles.sortBox}>
-                <label htmlFor="gallery-sort" className="visually-hidden">
-                  Sort postcards
-                </label>
-                <select
-                  id="gallery-sort"
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as SortOption)}
-                  className={styles.sortSelect}
-                >
-                  <option value="default">Default order</option>
-                  <option value="newest">Newest first</option>
-                  <option value="oldest">Oldest first</option>
-                  <option value="place">By place (A–Z)</option>
-                </select>
-              </div>
+              <Select
+                label="Sort postcards"
+                hideLabel
+                value={sortBy}
+                onChange={setSortBy}
+                options={[
+                  { value: "default", label: "Default order" },
+                  { value: "newest", label: "Newest first" },
+                  { value: "oldest", label: "Oldest first" },
+                  { value: "place", label: "By place (A–Z)" },
+                ]}
+              />
             </div>
           </div>
 

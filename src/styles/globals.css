@@ -174,7 +174,8 @@ ol[role="list"] {
   padding-block: calc(var(--header-h) + var(--s-8)) var(--s-7);
 }
 
-.page-head h1 {
+.page-head h1,
+.page-head .page-title {
   font-size: var(--step-4);
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -210,6 +211,14 @@ ol[role="list"] {
 
 .section--tight {
   padding-block: var(--s-8);
+}
+
+/* Long sections far below the first screen are not styled, laid out or painted until they are
+   near the viewport; `auto` remembers the real height once seen, so later visits do not jump.
+   Only for sections with no sticky or scroll-linked parts. */
+.defer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 44rem;
 }
 
 /* Reduced motion: anything that moves on its own or on scroll is off */

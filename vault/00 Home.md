@@ -1,7 +1,7 @@
 ---
 title: My Postcards, project vault
 tags: [index]
-updated: 2026-10-28
+updated: 2026-10-30
 ---
 
 # My Postcards
@@ -29,8 +29,10 @@ Personal photo journal for **mypostcards.sahilbansal.net**, kept by Sahil Bansal
 | Check where the sample photographs came from | [[12 Sample Content and Credits]] |
 
 ## Status (2026-10-28)
+- **2026-10-30:** Chapter One Café and Coffee Sutra added: 282 postcards, 11 cafés ([[11 Changelog]]).
+- **2026-10-30 (not committed):** custom dropdown and café sorts, light-by-default theme and speed experiments ([[11 Changelog]], D53 to D55).
 
-- **Latest (2026-10-28, not committed):** the Nepal trip (125 postcards: 259 in all, 28 of them videos, one with sound; 18 places; 3 trips), a full SEO and social sharing layer ([[09 Decisions]] D50, D51) and the footer sticker wall (D52). Typecheck, lint and the production build (613 pages) pass; `npm audit --omit=dev` reports one critical advisory in Next 16.4.0 (fix in 16.4.3, not applied: see [[10 Backlog]]).
+- **Latest (2026-10-28, not committed):** the Nepal trip (125 postcards: 259 in all, 28 of them videos, one with sound; 18 places; 3 trips), a full SEO and social sharing layer ([[09 Decisions]] D50, D51) and the footer sticker wall (D52). Typecheck, lint and the production build (613 pages) pass; Next.js is on 16.4.3 and `npm audit` reports 0.
 
 - Content is authored in `content/` and `public/images/` (see `content/README.md`); 134 postcards, thirteen of them silent videos (all the author's own: P.F. Chang's, Daksina Bhawan, Costa Coffee, NY United Cafe, Shikarbagh, Brunatos and Bento B in Jaipur, Punjab Grill, Skyhouse in Noida, the Kasol to Jispa trip, art including a friend's drawing, random clicks (some from Agra) and a Delhi Metro city shot), 15 places (Gurugram, Delhi, Noida, Jaipur, Agra, Bari, Kasol, Manikaran, Manali, Sissu, Jispa, Shinku La, Ujjain, Omkareshwar and Barwaha, made automatically from the postcards), 9 cafés, 5 stories ("The emptiest metro", "The langur that wasn't", "The tree Parvati planted", "All of us in one auto" and "A dip in the Narmada"), and 2 trips ("Kasol to Jispa" and "Ujjain and Omkareshwar"). All the stand-in sample content was removed on 2026-10-14. Supabase is used only for the visitor guest desk and is **not yet connected** ([[06 Supabase Setup]]); the desk shows "being set up" until then.
 - Pages made shorter (gallery paging, tabbed places, a shorter home page with a chapter index) and cafés, visitors and about reworked: [[09 Decisions]] D45.

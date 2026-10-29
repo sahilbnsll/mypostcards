@@ -305,10 +305,19 @@ export function GlobePostcards({ places, groups }: GlobePostcardsProps) {
       });
     };
 
-    const io = new IntersectionObserver(([entry]) => {
-      state.current.visible = entry.isIntersecting;
-    });
-    io.observe(wrap);
+    // The WebGL context, shader compile and first measurement are the most expensive things on the
+    // page, so they wait until the globe is about to scroll into view (a screen's height early).
+    let begun = false;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        state.current.visible = entry.isIntersecting;
+        if (entry.isIntersecting && !begun) {
+          begun = true;
+          begin();
+        }
+      },
+      { rootMargin: "100% 0px" },
+    );
 
     const frame = () => {
       const s = state.current;
@@ -358,26 +367,32 @@ export function GlobePostcards({ places, groups }: GlobePostcardsProps) {
     };
 
     let ro: ResizeObserver | undefined;
-    if (canvas.offsetWidth > 0) {
-      start();
-    } else {
-      ro = new ResizeObserver(() => {
-        if (canvas.offsetWidth > 0) {
-          ro?.disconnect();
-          start();
-        }
-      });
-      ro.observe(canvas);
+    let sizer: ResizeObserver | undefined;
+    const target = canvas;
+    const box2 = wrap;
+    function begin() {
+      if (target.offsetWidth > 0) {
+        start();
+      } else {
+        ro = new ResizeObserver(() => {
+          if (target.offsetWidth > 0) {
+            ro?.disconnect();
+            start();
+          }
+        });
+        ro.observe(target);
+      }
+      // The cards scale with the globe, so measure again when it changes size
+      sizer = new ResizeObserver(measure);
+      sizer.observe(box2);
     }
-    // The cards scale with the globe, so measure again when it changes size
-    const sizer = new ResizeObserver(measure);
-    sizer.observe(wrap);
+    io.observe(wrap);
 
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
       ro?.disconnect();
-      sizer.disconnect();
+      sizer?.disconnect();
       globe?.destroy();
     };
   }, [places, groups]);

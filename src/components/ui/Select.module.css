@@ -1,0 +1,153 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.anchor {
+  position: relative;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 2.5rem;
+  padding: 0 var(--s-3) 0 var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color var(--d-fast),
+    box-shadow var(--d-fast),
+    background-color var(--d-fast);
+}
+
+.button:hover {
+  border-color: var(--ink-soft);
+}
+
+.root[data-open] .button {
+  border-color: var(--air-blue);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--air-blue) 18%, transparent);
+}
+
+.value {
+  white-space: nowrap;
+}
+
+.chevron {
+  flex: none;
+  color: var(--muted);
+  transition: rotate var(--d-base) var(--ease-spring);
+}
+
+.root[data-open] .chevron {
+  rotate: 180deg;
+}
+
+/* The list ------------------------------------------------------------------------------- */
+
+.list {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  z-index: 40;
+  min-width: 100%;
+  width: max-content;
+  max-width: min(22rem, calc(100vw - 2rem));
+  max-height: min(20rem, 60svh);
+  overflow-y: auto;
+  padding: var(--s-1);
+  margin: 0;
+  list-style: none;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lift);
+  transform-origin: top right;
+  animation: pop var(--d-base) var(--ease-out);
+}
+
+.list[hidden] {
+  display: none;
+}
+
+.root[data-align="end"] .list {
+  right: 0;
+}
+
+.root[data-align="start"] .list {
+  left: 0;
+  transform-origin: top left;
+}
+
+.root[data-up] .list {
+  top: auto;
+  bottom: calc(100% + 0.5rem);
+  transform-origin: bottom right;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  min-height: 2.5rem;
+  padding: 0 var(--s-3);
+  border-radius: 0.65rem;
+  color: var(--ink);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.option[data-active] {
+  background: color-mix(in srgb, var(--air-blue) 11%, transparent);
+}
+
+.option[aria-selected="true"] {
+  font-weight: 700;
+}
+
+.tick {
+  flex: none;
+  color: var(--air-blue);
+  opacity: 0;
+}
+
+.option[aria-selected="true"] .tick {
+  opacity: 1;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .list {
+    animation: none;
+  }
+
+  .chevron {
+    transition: none;
+  }
+}

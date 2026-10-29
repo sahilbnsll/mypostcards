@@ -33,6 +33,8 @@ export default async function CafesPage() {
             entries={journal.cafes.map((cafe) => ({
               cafe,
               count: postcardCount(journal, "cafeSlug", cafe.slug),
+              // The newest date on any of its photographs ("" when none of them has a date)
+              latest: journal.postcards.reduce((newest, p) => (p.cafeSlug === cafe.slug && p.takenOn && p.takenOn > newest ? p.takenOn : newest), ""),
               prints: prints[cafe.slug] ?? [],
             }))}
           />

@@ -27,17 +27,17 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const card = findBySlug((await getJournal()).postcards, slug);
   if (!card) return {};
   const where = formatLocation(card.location, ["city", "country"]);
+  const city = card.location.city;
   const when = formatWhen(card);
   // The caption and the note, then where and when: what a search result or a share card should say
   const description = snippet(
     [card.caption ?? `${card.title}, a postcard${where ? ` from ${where}` : ""}.`, card.note, where && !card.caption?.includes(where) ? `${where}${when ? `, ${when}` : ""}.` : when ? `${when}.` : undefined]
       .filter(Boolean)
       .join(" "),
-    200,
   );
   const coords = card.location.coordinates && !card.location.approximate ? card.location.coordinates : undefined;
   return pageMetadata({
-    title: where && !card.title.includes(where) ? `${card.title}, ${where}` : card.title,
+    title: city && !card.title.includes(city) && card.title.length + city.length < 44 ? `${card.title}, ${city}` : card.title,
     description,
     path: `/postcards/${card.slug}`,
     // The share image comes from ./opengraph-image.tsx.

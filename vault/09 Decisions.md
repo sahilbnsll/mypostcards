@@ -1,12 +1,37 @@
 ---
 title: Decisions
 tags: [decisions]
-updated: 2026-10-28
+updated: 2026-10-30
 ---
 
 # Decisions log
 
 Newest first. Format: decision, why, trade-off.
+
+### D58. Notes carry the feeling, not the facts
+- The author asked for captions and notes that sound like their own memories: simple, first person, about how it felt, with no times, distances or altitudes. Those details still live in the postcard's facts (date, time, coordinates, altitude) and in the itineraries.
+- **Honest limit:** the feelings are written from the photographs, the places, the day and what the author said, not from their actual memories. The lines in the author's own words were left exactly as they wrote them. Anything that does not match what really happened should be corrected, and `10 Backlog` lists this for review.
+
+### D57. Photographs are never blurred
+- No photograph is edited to hide anyone, and no style blurs one: every previously blurred photograph (Agra, Shikarbagh, the Ram Ghat crowd, the Boudhanath crowd, the Lakeside chef, Daksina Bhawan where it applied, and the five Coffee Sutra photographs) is re-exported from its original exactly as shot, and the trip card hover no longer blurs the neighbouring cards. The author's rule, replacing the earlier habit of blurring strangers' faces.
+- The restored files were given new names (`...-2.jpg`) because the image optimiser caches resized copies for 31 days under the old address, which kept serving the blurred versions. Change a file's name when you replace its picture.
+
+### D56. `card-hand-gallery` adopted as `PostcardHand`, on place pages
+- Rebuilt in CSS (no `motion` library): the picked card lifts out, the rest fan below it, and with a mouse the hovered one rises while neighbours step aside via `:has()`. Hover is tracked on the resting slot so a lifted card cannot slide out from under the pointer. Not taken: touch-drag to flick a card up (a finger keeps scrolling); tap and arrow keys instead.
+- The fan's spread is capped to its container so it never widens the page on a phone.
+- Shown on a place page when it has four or more postcards, picking featured ones first and then spreading through the rest (`samplePostcards`).
+
+### D55. No page transitions (tried and removed)
+- A `<ViewTransition>` page fade (140 ms out, 260 ms in, header held still) was built and then removed.
+- **Why:** a view transition waits for a painted frame, and React also uses one to reveal streamed (Suspense) content once any `<ViewTransition>` is on the page. In a surface that is not painting (the preview pane) navigations and streamed pages stayed on their loading skeleton, even with a guard that only enabled the fade after two frames. Not worth risking a stuck page.
+- **Trade-off:** no directional slides or shared-image morphs yet (possible later for trip cards to trip pages).
+
+### D54. Light is the default theme; the system setting is not followed
+- The layout script sets `data-theme` to `dark` only when `localStorage.theme` is `dark`, otherwise `light`; the `prefers-color-scheme` fallback was removed from `tokens.css`, `theme.ts` and `theme-color`.
+- **Why:** the author wants the site to open light for everyone. **Trade-off:** a visitor whose system is dark must press the toggle once.
+
+### D53. One custom `Select` replaces the native dropdowns
+- The system menu cannot be styled and looked out of place. `Select` follows the listbox pattern and is used for the café and gallery sorts. "Most recent" sorts by photo date (the author's choice over order-added), so cafés with undated photos (Brunatos, Bento B, Punjab Grill) come last until dated.
 
 ### D52. Design references, round 3: the sticker footer adopted, the tunnel hero not
 - The reference file gained `perspective-tunnel-hero` and `sticker-slap-footer`. The footer's idea was adopted as `StickerWall`: a hand-lettered sign-off with postal stickers drawn in code, with no `framer-motion` and no library.

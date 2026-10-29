@@ -160,5 +160,43 @@
     "sample": false,
     "rating": 4.9,
     "ratingNote": "The bento box is a 5/5, the noodles are very tasty and authentic, and so is the dumpling soup. The Japanese cheesecake at the end is so soft and so good. A must try."
+  },
+  {
+    "slug": "chapter-one-cafe",
+    "name": "Chapter One Café",
+    "city": "Jaipur",
+    "country": "India",
+    "neighborhood": "Lajpat Marg, Adarsh Nagar",
+    "cover": "cafes/chapter-one-cafe/art-wall-wide.jpg",
+    "coverAlt": "A bright room with wooden tables and bentwood chairs in front of tall glass doors, and a wall covered in small framed paintings in red, yellow, green and blue, with a woven pendant lamp hanging above",
+    "vibes": [
+      "art on the walls",
+      "wooden tables",
+      "arched terrace"
+    ],
+    "notes": "On Lajpat Marg in Adarsh Nagar, Jaipur. I went on 24 October 2026 and had the mushroom cream cheese pasta with a frappe.",
+    "map": "https://maps.app.goo.gl/2FL4wGygNb6ieweG8",
+    "sample": false,
+    "rating": 4.6,
+    "ratingNote": "The ambience was nice and the food was good too: the mushroom cream cheese pasta and the frappe went well together. It is a lovely room to sit in, with paintings hung all along the wall, warm wooden tables, wicker lamps and an arched terrace full of light."
+  },
+  {
+    "slug": "coffee-sutra",
+    "name": "Coffee Sutra",
+    "city": "Jaipur",
+    "country": "India",
+    "neighborhood": "JLN Marg",
+    "cover": "cafes/coffee-sutra/front-at-night-2.jpg",
+    "coverAlt": "The front of a café at night under leafy trees, lit from inside, with a blue Coffee Sutra sign, the words Specialty Roasters across the wall, a valet parking board at the left and motorbikes parked in front",
+    "vibes": [
+      "specialty roasters",
+      "warm lamps",
+      "coffee and pizza"
+    ],
+    "notes": "On JLN Marg, Jaipur. I went on the evening of 24 October 2026 with my brother and bhabhi. We had a vanilla affogato, a coffee frappe, a café mocha, a pizza that was half Mexican and half margherita, alfredo pasta and peri peri fries.",
+    "map": "https://maps.app.goo.gl/Gyfnh8P181vnitnn8",
+    "sample": false,
+    "rating": 4.7,
+    "ratingNote": "The place is nice, the ambience is good and the food is great. It is a warm room lit by woven lamps, with dark arched signs lettered in Hindi on a stepped wall, a counter of croissants and an outside seating area with a tiled floor and cane chairs by the gate."
   }
 ]

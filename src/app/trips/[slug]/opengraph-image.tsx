@@ -22,7 +22,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     kind: "Trip",
     title: trip?.title ?? "Trips",
     line: [when, count ? plural(count, "postcard") : undefined].filter(Boolean).join(", "),
-    blurb: trip?.summary.length && trip.summary.length < 150 ? trip.summary : undefined,
     photo,
     ratio: trip ? trip.coverImage.width / trip.coverImage.height : 1,
   });

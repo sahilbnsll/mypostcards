@@ -9,6 +9,7 @@ import {
   findBySlug,
   postcardCount,
   postcardsForDestination,
+  samplePostcards,
   staticSlugs,
   storiesForDestination,
   toViews,
@@ -17,6 +18,7 @@ import {
 } from "@/content/selectors";
 import { CafeCard } from "@/components/features/cafes/CafeCard";
 import { BloomGallery } from "@/components/features/gallery/BloomGallery";
+import { PostcardHand } from "@/components/features/hand/PostcardHand";
 import { StoryCard } from "@/components/features/stories/StoryCard";
 import { TripCards } from "@/components/features/trips/TripCards";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -24,7 +26,7 @@ import { breadcrumbJsonLd, pageMetadata, placeJsonLd, snippet } from "@/lib/seo"
 import { DetailSkeleton } from "@/components/ui/DetailSkeleton";
 import { CollectionHero } from "@/components/ui/CollectionHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { plural } from "@/lib/utils";
+import { formatLocation, plural } from "@/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
@@ -43,8 +45,12 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const count = postcardsForDestination(journal, place.slug).length;
   const where = [place.region, place.country].filter(Boolean).join(", ");
   return pageMetadata({
-    title: place.status === "planned" ? `${place.name}: on my list` : `${place.name}: ${count} ${count === 1 ? "postcard" : "postcards"} from ${where || place.name}`,
-    description: snippet(place.description && !/^Postcards kept in/.test(place.description) ? place.description : `${count} ${count === 1 ? "postcard" : "postcards"} from ${place.name}${where ? `, ${where}` : ""}: photographs, trips, cafés and stories from there.`),
+    title: place.status === "planned" ? `${place.name}: on my list` : `${place.name}: ${count} ${count === 1 ? "postcard" : "postcards"} from ${place.country ?? (where || place.name)}`,
+    description: snippet(
+      place.description && !/^Postcards kept in/.test(place.description)
+        ? `${place.description}${place.description.length < 90 ? ` ${count} ${count === 1 ? "postcard" : "postcards"}, with the trips, cafés and stories from ${place.name}.` : ""}`
+        : `${count} ${count === 1 ? "postcard" : "postcards"} from ${place.name}${where ? `, ${where}` : ""}: photographs, trips, cafés and stories from there.`,
+    ),
     path: `/destinations/${place.slug}`,
     keywords: [place.name, place.country, ...(place.region ? [place.region] : []), "travel photos"],
     ...(place.coordinates ? { geo: { lat: place.coordinates.lat, lng: place.coordinates.lng, placeName: place.name, region: place.country } } : {}),
@@ -58,6 +64,7 @@ async function DestinationContent({ params }: { params: Params }) {
   if (!place) notFound();
 
   const postcards = toViews(journal, postcardsForDestination(journal, place.slug));
+  const hand = samplePostcards(postcards, undefined, 7);
   const trips = tripsForDestination(journal, place.slug);
   const cafes = cafesForDestination(journal, place.slug);
   const stories = storiesForDestination(journal, place.slug);
@@ -85,6 +92,22 @@ async function DestinationContent({ params }: { params: Params }) {
           </>
         }
       />
+
+      {hand.length >= 4 && (
+        <section className="wrap section--tight" aria-labelledby="place-hand">
+          <SectionHeader id="place-hand" title="A few favourites" intro="Pick one from the hand." />
+          <PostcardHand
+            label={`Favourite postcards from ${place.name}`}
+            cards={hand.map((card) => ({
+              slug: card.slug,
+              title: card.title,
+              image: card.image,
+              meta: formatLocation(card.location, ["placeName", "city"]),
+              caption: card.caption,
+            }))}
+          />
+        </section>
+      )}
 
       {postcards.length > 0 && (
         <section className="wrap section--tight" aria-labelledby="place-postcards">

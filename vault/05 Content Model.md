@@ -1,7 +1,7 @@
 ---
 title: Content Model
 tags: [data]
-updated: 2026-10-28
+updated: 2026-10-30
 ---
 
 # Content model

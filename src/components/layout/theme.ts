@@ -3,24 +3,15 @@
 import { useSyncExternalStore } from "react";
 
 export type Theme = "light" | "dark";
-const QUERY = "(prefers-color-scheme: dark)";
-
 function subscribe(onChange: () => void) {
   const observer = new MutationObserver(onChange);
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-  const media = window.matchMedia(QUERY);
-  media.addEventListener("change", onChange);
-  return () => {
-    observer.disconnect();
-    media.removeEventListener("change", onChange);
-  };
+  return () => observer.disconnect();
 }
 
-/** What is showing now: the explicit choice if there is one, otherwise the system preference. */
+/** What is showing now. Light unless the visitor chose dark (the system setting is not followed). */
 function snapshot(): Theme {
-  const set = document.documentElement.dataset.theme;
-  if (set === "dark" || set === "light") return set;
-  return window.matchMedia(QUERY).matches ? "dark" : "light";
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 
 /** The theme on screen. Every switch (the header button, the lamp) reads and writes the same place. */

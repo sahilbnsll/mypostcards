@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_GB",
     url: siteConfig.url,
-    title: siteConfig.name,
+    title: "My Postcards: a personal photo journal",
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
@@ -72,15 +72,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: TWITTER_HANDLE,
     creator: TWITTER_HANDLE,
-    title: siteConfig.name,
+    title: "My Postcards: a personal photo journal",
     description: siteConfig.description,
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#eceeea" },
-    { media: "(prefers-color-scheme: dark)", color: "#070b14" },
+    { color: "#eceeea" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -88,12 +87,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${text.variable} ${hand.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${text.variable} ${hand.variable}`} data-theme="light" suppressHydrationWarning>
       <head>
         {/* Applies the saved (or system) theme before first paint, so there is no flash. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}`,
+            __html: `try{document.documentElement.dataset.theme=localStorage.getItem("theme")==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}`,
           }}
         />
       </head>

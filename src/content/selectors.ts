@@ -37,9 +37,10 @@ export function categoryCounts(postcards: readonly Postcard[]): Partial<Record<C
   return counts;
 }
 
-/** Featured first, then the rest in their saved order. */
-export function featuredFirst<T extends { featured: boolean }>(items: readonly T[]): T[] {
-  return [...items.filter((i) => i.featured), ...items.filter((i) => !i.featured)];
+/** Featured first (ranked ones in rank order, then the others as saved), then the rest in their saved order. */
+export function featuredFirst<T extends { featured: boolean; featuredRank?: number }>(items: readonly T[]): T[] {
+  const ranked = items.filter((i) => i.featured && i.featuredRank !== undefined).sort((a, b) => (a.featuredRank ?? 0) - (b.featuredRank ?? 0));
+  return [...ranked, ...items.filter((i) => i.featured && i.featuredRank === undefined), ...items.filter((i) => !i.featured)];
 }
 
 /**

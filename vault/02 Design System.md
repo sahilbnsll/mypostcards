@@ -1,7 +1,7 @@
 ---
 title: Design System
 tags: [design]
-updated: 2026-10-28
+updated: 2026-10-30
 ---
 
 # Design system
@@ -87,7 +87,7 @@ Reference: `design-reference/Ui-components.md` (five 21st.dev-style components w
 |---|---|---|
 | `color-filter-gallery` | `BloomGallery`: category filter where non-matching photos go black and white and matching ones bloom into colour from the pointer | Filters by *category*, not hue. **No autoplay** (motion safety). Colour layer mounts lazily. Keeps radiogroup + arrow-key pattern, status live region, pointer-origin bloom |
 | `polaroid-line-carousel` | `PrintCarousel`: prints pegged to a sagging string, pendulum swing on scroll | Native scroll-snap scroller instead of a custom drag sim (touch, keyboard, trackpad for free). Same damped-pendulum constants. **No autoplay, no idle sway.** String is one repeating SVG tile |
-| `focus-cards` | `TripCards`: hover or focus one card, neighbours recede | Pure CSS with `:has()`, zero JS. Blur only under `(hover: hover)` |
+| `focus-cards` | `TripCards`: hover or focus one card, neighbours recede | Pure CSS with `:has()`, zero JS. Dimming (desaturate and fade) only under `(hover: hover)`, never blur |
 | `scroll-morph-hero` | Hero "deal": postcards scatter and settle once on load | **Rejected the virtual-scroll** (`wheel` `preventDefault`) because it hijacks scrolling. Kept the scatter-to-arrangement idea as a one-time CSS entrance |
 | `cobe-globe-polaroids` | `GlobePostcards` + `PlacesGlobe`: a draggable WebGL globe (`cobe`) with postcards pinned where they were taken, on home and Places | Pause button (it auto-rotates), stops with reduced motion and when off screen, a visible list of the same places beside it as the accessible version, pins spread so polaroids do not collide. Polaroids are plain DOM attached by CSS Anchor Positioning (hidden where unsupported) |
 | `drag-cards` | `DeckDrag`: hero postcards can be picked up and moved around the table, and still open on click | Mouse and pen only: a finger must keep scrolling and tapping. Works on server-rendered markup via `data-slot` and CSS variables, keeps the keyboard path (the cards are still links). A drag never counts as a click |
@@ -101,6 +101,8 @@ Reference: `design-reference/Ui-components.md` (five 21st.dev-style components w
 
 **Third round (2026-10-28): the file now has 25 components. `sticker-slap-footer` is used as the footer `StickerWall` (hand-lettered "places seen, moments kept", die-cut postal stickers, no framer-motion). `perspective-tunnel-hero` is not used: it hijacks the mouse wheel and is an endless corridor. Reasons in [[09 Decisions]] D52.**
 
+**Fourth reference (2026-10-30): `card-hand-gallery` is used as `PostcardHand` ([[09 Decisions]] D56). The file now has 26 components.**
+
 **All 11 references in `design-reference/Ui-components.md` have been read in full** (colour-filter gallery, polaroid line carousel, focus cards, scroll-morph hero, image-stream hero, cobe globe polaroids, drag cards, scroll cards, zoom parallax, gallery, gallery-4). Nine are used, adapted; two are deliberately not (virtual-scroll hero, endless 3D corridor).
 
 Reference notes about "shadcn project structure" and `/components/ui` were not applicable: the project already has its own `components/ui` primitives layer in CSS Modules and no Tailwind. No `framer-motion` was added.
@@ -109,5 +111,7 @@ Reference notes about "shadcn project structure" and `/components/ui` were not a
 A sentence is shown whole: no line clamps and no ellipses on prose, captions or titles ([[09 Decisions]] D49). Containers grow to fit instead.
 
 ## Accessibility baked into the system
+
+Theme: light is always the default; dark is an explicit, remembered choice ([[09 Decisions]] D54).
 
 Two-tone focus ring visible on photos and paper, 44px minimum targets on round buttons, contrast checked for text tokens, `prefers-reduced-motion` removes all non-essential motion (see [[03 Motion System]]).

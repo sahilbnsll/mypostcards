@@ -1,0 +1,176 @@
+.hand {
+  display: grid;
+  gap: var(--s-6);
+  align-items: center;
+}
+
+/* The words ------------------------------------------------------------------------------ */
+
+.text {
+  display: grid;
+  gap: var(--s-2);
+  justify-items: start;
+  animation: words var(--d-slow) var(--ease-out) both;
+}
+
+.count {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.meta {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.caption {
+  max-width: 34ch;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.open {
+  margin-top: var(--s-2);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--air-blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@keyframes words {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+/* The fan -------------------------------------------------------------------------------- */
+
+/* The frame is the size container the cards are measured against (a container cannot measure itself) */
+.frame {
+  container-type: inline-size;
+  min-width: 0;
+  /* Nothing in the hand may widen the page; the cards are sized to fit, this is the safety net */
+  overflow-x: clip;
+}
+
+.stage {
+  --w: clamp(7rem, 30cqw, 13.5rem);
+  --h: calc(var(--w) * 1.4);
+  /* Half the room left over once the outermost card's own half width is allowed for */
+  --spread: min(calc(var(--w) * 0.5), calc((50cqw - var(--w) * 0.56) / max(var(--reach), 1)));
+  position: relative;
+  min-height: calc(var(--h) * 1.8);
+}
+
+.slot {
+  --lift: 0;
+  --nudge: 0;
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--h) * 0.06);
+  z-index: var(--z);
+  width: var(--w);
+  margin-left: calc(var(--w) / -2);
+  translate: calc(var(--o) * var(--spread) + var(--nudge) * var(--w) * 0.14)
+    calc(var(--drop) * 1.9px - var(--lift) * var(--h));
+  rotate: calc(var(--r) * 1deg);
+  scale: 0.72;
+  transition:
+    translate var(--d-slow) var(--ease-spring),
+    rotate var(--d-slow) var(--ease-spring),
+    scale var(--d-slow) var(--ease-spring);
+}
+
+.slot[data-active] {
+  --lift: 0.62;
+  scale: 1;
+}
+
+.card {
+  display: block;
+  width: 100%;
+  padding: 3px;
+  background: var(--print);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-print);
+  cursor: pointer;
+  transition:
+    translate var(--d-base) var(--ease-spring),
+    scale var(--d-base) var(--ease-spring);
+}
+
+.slot[data-active] .card {
+  cursor: default;
+}
+
+.image {
+  border-radius: 0.35rem;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--air-blue);
+  outline-offset: 3px;
+}
+
+/* With a mouse the card under the pointer rises and its neighbours step aside. The hit area is the
+   resting slot (which never moves), so a lifted card cannot slide out from under the pointer. */
+@media (hover: hover) {
+  .slot:not([data-active]):hover {
+    z-index: 60;
+  }
+
+  .slot:not([data-active]):hover .card {
+    translate: 0 calc(var(--h) * -0.3);
+    scale: 1.08;
+  }
+
+  .slot:not([data-active]):hover ~ .slot:not([data-active]) {
+    --nudge: 1;
+  }
+
+  .slot:not([data-active]):has(~ .slot:not([data-active]):hover) {
+    --nudge: -1;
+  }
+}
+
+.slot:not([data-active]):focus-within .card {
+  translate: 0 calc(var(--h) * -0.3);
+  scale: 1.08;
+}
+
+@media (min-width: 52rem) {
+  .hand {
+    grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+    gap: var(--s-8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slot,
+  .card {
+    transition: none;
+  }
+
+  .text {
+    animation: none;
+  }
+}
